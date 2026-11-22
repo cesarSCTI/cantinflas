@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -5,84 +14,168 @@
       "settings": {
         "heading": "Cantinflas",
         "subheading": "Tienda oficial",
-        "alignment": "center",
+        "video": "shopify://files/videos/Video 1.mp4",
+        "cover_asset": "",
+        "cover_width": 1920,
+        "cover_height": 1080,
         "autoplay": true,
+        "alignment": "center",
         "background": "#c22921",
+        "text_color": "#ffffff",
+        "overlay": 0,
         "heading_align": "center",
-        "subheading_align": "center"
+        "subheading_align": "center",
+        "heading_color": "",
+        "subheading_color": "",
+        "heading_size": 108,
+        "heading_mobile": 42
       }
     },
     "featured": {
       "type": "featured-collection",
       "settings": {
-        "title": "Lleva un pedacito de Cantinflas contigo",
-        "products_to_show": 4,
-        "hide_empty_section": false,
+        "xd_link_label": "Ir a productos",
+        "xd_link": "",
         "xd_text_controls": true,
         "xd_heading_color": "#2b3d8f",
         "xd_heading_align": "left",
+        "xd_body_color": "",
         "xd_body_align": "left",
-        "show_view_all": true,
-        "button_select": "secondary",
+        "xd_cards_color": "",
+        "xd_cards_align": "inherit",
         "xd_intro": "<p>Los productos más vendidos del universo de Cantinflas</p>",
         "xd_sample_titles": "Agua Premium\nFestival Dunkel\nGorra\nTaza Peltre Azul Chato",
+        "title": "Lleva un pedacito de Cantinflas contigo",
+        "disable_on_mobile": false,
+        "hide_empty_section": false,
+        "collection": "",
+        "product_list": [],
+        "products_to_show": 4,
         "enable_stack_products": true,
+        "show_view_all": true,
+        "button_select": "secondary",
         "number_of_column_desktop": 4,
-        "xd_link_label": "Ir a productos"
+        "spacing_desktop": "16",
+        "make_products_full_width": true,
+        "number_of_column_mobile": 2.1,
+        "spacing_mobile": "16",
+        "text_alignment": "left",
+        "image_ratio": "square",
+        "show_video": false,
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "enable_vendor_link": false,
+        "show_product_rating": true,
+        "enable_quick_add_button": false,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
       }
     },
     "tequilapromo": {
       "type": "cantinflas-product-promo",
       "settings": {
-        "product": "tequila-cantinflas-blanco-100-agave"
+        "buy_text": "",
+        "discover_text": "",
+        "title": "Tequila",
+        "accent": "Cantinflas",
+        "accent_color": "#c22921",
+        "kicker": "Hay historias que se cuentan. Y otras que se coleccionan.",
+        "intro": "<p>Una botella inspirada en una leyenda mexicana.<br>Diseñada para celebrar su historia y conservar un pedacito de su legado.</p>",
+        "product": "tequila-cantinflas-blanco-100-agave",
+        "product_title": "Tequila Cantinflas Blanco",
+        "tagline": "Un legado que se brinda.",
+        "description": "<p>Un tequila elaborado con 100% agave azul Weber, inspirado en el legado de uno de los personajes más queridos de México.</p>",
+        "variant_label": "Presentación",
+        "buy_label": "Comprar ahora",
+        "discover_label": "Descubrir",
+        "discover_link": "",
+        "background": "#ffffff",
+        "buy_color": "#c22921",
+        "discover_color": "#36845d",
+        "button_text": "#ffffff",
+        "button_align": "center",
+        "title_color": "#252525",
+        "title_align": "center",
+        "title_size": 139,
+        "title_mobile": 44,
+        "kicker_color": "#36845d",
+        "kicker_align": "center",
+        "kicker_size": 28,
+        "kicker_mobile": 16,
+        "intro_color": "#252525",
+        "intro_align": "center",
+        "intro_size": 22,
+        "intro_mobile": 14,
+        "product_title_color": "#252525",
+        "product_title_align": "center",
+        "product_title_size": 30,
+        "product_title_mobile": 22,
+        "tagline_color": "#c22921",
+        "tagline_align": "center",
+        "tagline_size": 20,
+        "tagline_mobile": 16,
+        "description_color": "#252525",
+        "description_align": "center",
+        "description_size": 18,
+        "description_mobile": 14
       }
     },
     "story": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "¡Quiubo, Chato!",
-        "layout": "duo",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#c22921",
-        "show_focus": true,
-        "heading_align": "center",
-        "intro_align": "center"
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "Detrás de Cantinflas estaba Mario Moreno",
             "text": "<p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>",
+            "label": "Conoce su historia",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
             "title_align": "center",
             "text_align": "center",
-            "label": "Conoce su historia",
-            "button_align": "center"
+            "button_align": "center",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
       "block_order": [
         "piece1"
-      ]
+      ],
+      "settings": {
+        "heading": "¡Quiubo, Chato!",
+        "intro": "",
+        "layout": "duo",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#c22921",
+        "heading_align": "center",
+        "intro_align": "center",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": true
+      }
     },
     "favorites": {
       "type": "home-product-tabs",
-      "settings": {
-        "heading": "Los consentidos de la casa",
-        "products_to_show": 4,
-        "xd_text_controls": true,
-        "xd_heading_align": "center",
-        "xd_body_align": "center",
-        "xd_tabs_align": "center",
-        "xd_tabs_color": "#36845d",
-        "xd_intro": "<p>Lo que más se antoja de cada rincón del mundo Cantinflas.</p>"
-      },
       "blocks": {
         "piece1": {
           "type": "category",
           "settings": {
             "title": "Bebidas",
+            "collection": "",
             "sample_titles": "Agua Premium\nFestival Dunkel\nTequila Cantinflas"
           }
         },
@@ -90,6 +183,7 @@
           "type": "category",
           "settings": {
             "title": "Promocionales",
+            "collection": "",
             "sample_titles": "Plumas\nVaso\nGorra\nTaza Peltre Azul Chato"
           }
         }
@@ -97,52 +191,216 @@
       "block_order": [
         "piece1",
         "piece2"
-      ]
+      ],
+      "settings": {
+        "xd_text_controls": true,
+        "xd_heading_color": "",
+        "xd_heading_align": "center",
+        "xd_body_color": "",
+        "xd_body_align": "center",
+        "xd_tabs_color": "#36845d",
+        "xd_tabs_align": "center",
+        "xd_cards_color": "",
+        "xd_cards_align": "inherit",
+        "xd_intro": "<p>Lo que más se antoja de cada rincón del mundo Cantinflas.</p>",
+        "heading": "Los consentidos de la casa",
+        "products_to_show": 4
+      }
     },
     "universe": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "Universo Cantinflas",
-        "layout": "collage",
-        "background": "#f2b846",
-        "text_color": "#252525",
-        "accent": "#c22921",
-        "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
-        "heading_align": "center",
-        "intro_align": "center"
-      },
       "blocks": {
         "photo": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo2": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo3": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo4": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo5": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo6": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo7": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         },
         "photo8": {
           "type": "item",
-          "settings": {}
+          "settings": {
+            "heading": "",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
+          }
         }
       },
       "block_order": [
@@ -154,28 +412,46 @@
         "photo6",
         "photo7",
         "photo8"
-      ]
+      ],
+      "settings": {
+        "heading": "Universo Cantinflas",
+        "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
+        "layout": "collage",
+        "background": "#f2b846",
+        "text_color": "#252525",
+        "accent": "#c22921",
+        "heading_align": "center",
+        "intro_align": "center",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "threepieces": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "Tres piezas, un mismo legado",
-        "layout": "cards",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#2b3d8f",
-        "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>"
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "Tequila",
             "text": "<p>Tequila Blanco 100% de Agave</p>",
+            "label": "Comprar",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
             "title_align": "center",
             "text_align": "center",
-            "label": "Comprar",
             "button_align": "center",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
             "product": "tequila-cantinflas-blanco-100-agave"
           }
         },
@@ -184,10 +460,23 @@
           "settings": {
             "heading": "Taza",
             "text": "<p>Taza de peltre azul</p>",
+            "label": "Comprar",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
             "title_align": "center",
             "text_align": "center",
-            "label": "Comprar",
-            "button_align": "center"
+            "button_align": "center",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece3": {
@@ -195,10 +484,23 @@
           "settings": {
             "heading": "Agua",
             "text": "<p>Agua pura de manantial</p>",
+            "label": "Comprar",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
             "title_align": "center",
             "text_align": "center",
-            "label": "Comprar",
-            "button_align": "center"
+            "button_align": "center",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
@@ -206,49 +508,98 @@
         "piece1",
         "piece2",
         "piece3"
-      ]
+      ],
+      "settings": {
+        "heading": "Tres piezas, un mismo legado",
+        "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>",
+        "layout": "cards",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#2b3d8f",
+        "heading_align": "left",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "museum": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "Hay historias que merecen descubrirse a fondo",
-        "layout": "feature",
-        "heading_align": "center",
-        "accent": "#2b3d8f"
-      },
       "blocks": {
         "photo": {
           "type": "item",
           "settings": {
-            "label": "Visita el Museo Cantinflas",
-            "button_align": "center",
+            "heading": "",
             "text": "<p>Descubre la historia, el legado y las diferentes facetas del hombre detrás del personaje en el Museo Mario Moreno Cantinflas.</p><p>Con más de 400 piezas, objetos originales, vestuario, fotografías, material audiovisual y reconocimientos, el museo conserva y comparte la memoria de uno de los grandes íconos de la cultura mexicana.</p>",
-            "text_align": "center"
+            "label": "Visita el Museo Cantinflas",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "center",
+            "button_align": "center",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
       "block_order": [
         "photo"
-      ]
+      ],
+      "settings": {
+        "heading": "Hay historias que merecen descubrirse a fondo",
+        "intro": "",
+        "layout": "feature",
+        "background": "#ffffff",
+        "text_color": "#242424",
+        "accent": "#2b3d8f",
+        "heading_align": "center",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "closing": {
       "type": "rich-text",
-      "settings": {
-        "desktop_text_horizontal_position": "center",
-        "xd_heading_color": "#252525",
-        "xd_heading_align": "center"
-      },
       "blocks": {
         "piece1": {
           "type": "heading",
           "settings": {
-            "heading": "¡Aquí está el Detalle!"
+            "heading": "¡Aquí está el Detalle!",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
           }
         }
       },
       "block_order": [
         "piece1"
-      ]
+      ],
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "xd_heading_color": "#252525",
+        "xd_heading_align": "center",
+        "xd_body_color": "",
+        "xd_body_align": "inherit",
+        "xd_button_color": "",
+        "xd_button_align": "inherit"
+      }
     }
   },
   "order": [
