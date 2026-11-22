@@ -21,6 +21,7 @@
         "autoplay": true,
         "alignment": "left",
         "background": "#252525",
+        "background_gradient": "",
         "text_color": "#ffffff",
         "overlay": 0,
         "heading_align": "left",
@@ -29,6 +30,32 @@
         "subheading_color": "",
         "heading_size": 108,
         "heading_mobile": 42
+      }
+    },
+    "cantinflas_legacy_intro_WgFUcz": {
+      "type": "cantinflas-legacy-intro",
+      "name": "Título y texto del legado",
+      "settings": {
+        "heading": "Recuerdos de Cantinflas",
+        "text": "<p>De sus momentos detrás de cámaras a los personajes que hicieron historia, descubre imágenes que forman parte de la trayectoria de Mario Moreno y Cantinflas.</p>",
+        "heading_color": "#C22921",
+        "text_color": "#000000",
+        "background": "#FFFFFF",
+        "gradient": "",
+        "image_opacity": 50,
+        "heading_alignment": "left",
+        "text_alignment": "right",
+        "vertical_alignment": "start",
+        "stack_order": "heading_first",
+        "heading_width": 54,
+        "heading_size": 64,
+        "heading_mobile": 36,
+        "text_size": 18,
+        "text_mobile": 16,
+        "content_width": 1740,
+        "column_gap": 48,
+        "padding": 72,
+        "mobile_padding": 28
       }
     },
     "main": {
@@ -51,6 +78,8 @@
         "piece1": {
           "type": "media",
           "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas1.png",
             "title": "",
             "caption": "",
             "frame": "#fffaf0",
@@ -64,6 +93,8 @@
         "piece2": {
           "type": "media",
           "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas4.png",
             "title": "",
             "caption": "",
             "frame": "#f2b846",
@@ -77,6 +108,8 @@
         "piece3": {
           "type": "media",
           "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas5.png",
             "title": "",
             "caption": "",
             "frame": "#2b3d8f",
@@ -90,6 +123,8 @@
         "piece4": {
           "type": "media",
           "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas11.png",
             "title": "",
             "caption": "",
             "frame": "#fffaf0",
@@ -99,17 +134,148 @@
             "caption_align": "left",
             "rotation": 5
           }
+        },
+        "media_zQPxWf": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas7.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_3PMx8t": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas2.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_7UmKKb": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas3.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_Tqn8Hk": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas10.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_fQVqmd": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas12.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_MiW46h": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas6.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_BnRQ7k": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas9.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
+        },
+        "media_WnkqbH": {
+          "type": "media",
+          "settings": {
+            "xd_artwork": "none",
+            "image": "shopify://shop_images/mundo-cantinflas8.png",
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         }
       },
       "block_order": [
         "piece1",
         "piece2",
         "piece3",
-        "piece4"
+        "piece4",
+        "media_zQPxWf",
+        "media_3PMx8t",
+        "media_7UmKKb",
+        "media_Tqn8Hk",
+        "media_fQVqmd",
+        "media_MiW46h",
+        "media_BnRQ7k",
+        "media_WnkqbH"
       ],
       "settings": {
-        "heading": "Recuerdos de Cantinflas",
-        "intro": "<p>De sus momentos detrás de cámaras a los personajes que hicieron historia, descubre imágenes que forman parte de la trayectoria de Mario Moreno y Cantinflas.</p>",
+        "xd_centered": false,
+        "xd_initial_slide": 1,
+        "xd_decoration": false,
+        "heading": "",
+        "intro": "",
         "heading_color": "#c22921",
         "intro_color": "#252525",
         "heading_align": "left",
@@ -121,7 +287,12 @@
         "card_width": 420,
         "card_height": 320,
         "gap": 20,
-        "padding": 48
+        "padding": 48,
+        "desktop_count": 0,
+        "mobile_count": 0,
+        "show_navigation": true,
+        "navigation_color": "",
+        "navigation_background": ""
       }
     },
     "reels": {
@@ -181,20 +352,30 @@
       "name": "t:sections.benefits-video.name",
       "settings": {
         "heading": "Cantinflas en Movimiento",
+        "intro": "<p>Sus gestos, sus palabras y su particular manera de hacer reír cobran vida cada vez que volvemos a verlo.</p><p>Revive escenas, fragmentos de películas y otros videos que mantienen vivo el humor de Cantinflas.</p>",
+        "heading_color": "#c22921",
         "video_button": false,
         "text_alignment": "center",
         "text_style": "body",
         "color-body-text": "#252525",
         "background_color": "#ffffff",
         "margin-top": 48,
-        "margin-bottom": 40,
-        "intro": "<p>Sus gestos, sus palabras y su particular manera de hacer reír cobran vida cada vez que volvemos a verlo.</p><p>Revive escenas, fragmentos de películas y otros videos que mantienen vivo el humor de Cantinflas.</p>",
-        "heading_color": "#c22921"
+        "margin-bottom": 40
       }
     },
     "news": {
       "type": "blog-posts",
       "settings": {
+        "xd_news_layout": true,
+        "xd_news_heading_align": "right",
+        "xd_news_surface": "#ffffff",
+        "xd_news_date_color": "#252525",
+        "xd_news_button_color": "#36845d",
+        "xd_news_button_text": "#ffffff",
+        "xd_news_button_label": "Leer más",
+        "xd_news_sample_date": "9 | 10 | 2026",
+        "xd_news_sample_art": true,
+        "xd_news_sample_link": "",
         "xd_sample_title": "inauguramos oficialmente el Museo Mario Moreno “Cantinflas”",
         "xd_title_color": "#ffffff",
         "xd_intro_color": "#ffffff",
@@ -218,15 +399,7 @@
         "color-body-text": "#252525",
         "background_color": "#c22921",
         "margin-top": 20,
-        "margin-bottom": 20,
-        "xd_news_layout": true,
-        "xd_news_heading_align": "right",
-        "xd_news_surface": "#ffffff",
-        "xd_news_button_color": "#36845d",
-        "xd_news_button_text": "#ffffff",
-        "xd_news_sample_date": "9 | 10 | 2026",
-        "xd_news_sample_art": true,
-        "xd_news_date_color": "#252525"
+        "margin-bottom": 20
       }
     },
     "social": {
@@ -293,6 +466,7 @@
   },
   "order": [
     "hero",
+    "cantinflas_legacy_intro_WgFUcz",
     "main",
     "memories",
     "reels",
