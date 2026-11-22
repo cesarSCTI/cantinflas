@@ -1,0 +1,137 @@
+.cantinflas-catalog:not(.section--full) .collection {
+  width: min(100%, 1520px);
+  padding-inline: 16px;
+}
+
+.cantinflas-catalog .collection__grid {
+  row-gap: clamp(24px, 5.2vw, 100px);
+  margin-top: clamp(12px, 2.5vw, 48px);
+}
+
+.cantinflas-catalog .collection__grid__item {
+  margin-bottom: 0;
+}
+
+.cantinflas-catalog .collection__body {
+  padding-bottom: clamp(32px, 5vw, 96px);
+}
+
+.cantinflas-catalog .collection__toolbar--minimal {
+  border-top: 0;
+}
+
+.cantinflas-catalog .card__picture {
+  height: auto;
+  aspect-ratio: var(--aspect-ratio, auto);
+}
+
+.cantinflas-catalog :is(.card__img, .card__video) {
+  border-radius: 0;
+  object-fit: contain;
+}
+
+.cantinflas-catalog .collection__grid__item .card__title {
+  margin-top: clamp(12px, 2.2vw, 42px);
+  color: #252525;
+  font-family: var(--font-headline);
+  font-weight: var(--font-headline-weight, 700);
+  font-size: clamp(14px, 1.35vw, 26px);
+  line-height: 1.15;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.cantinflas-catalog .card__title a {
+  color: inherit;
+}
+
+.cantinflas-catalog .card__price {
+  --color-sale-price: var(--catalog-price);
+  margin-top: 5px;
+  font-family: var(--font-price);
+  font-size: clamp(12px, 1.15vw, 22px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--catalog-price);
+}
+
+.cantinflas-catalog .card__price .price {
+  font-size: inherit;
+  letter-spacing: normal;
+  white-space: normal;
+}
+
+.cantinflas-catalog .card__price .price-item {
+  color: var(--catalog-price);
+}
+
+.cantinflas-catalog .card__quick-add-container--desktop {
+  display: block;
+  position: relative;
+  inset: auto;
+  width: 92%;
+  margin: 0 auto;
+  padding: 0;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  z-index: 1;
+}
+
+.cantinflas-catalog .card__quick-add-container--desktop button {
+  min-height: 44px;
+  height: auto;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--catalog-button);
+  color: var(--catalog-button-text);
+  font-size: clamp(12px, 0.89vw, 17px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.cantinflas-catalog .card__quick-add-container--desktop button:hover:not(:disabled) {
+  background: var(--catalog-button);
+  color: var(--catalog-button-text);
+  filter: brightness(0.9);
+}
+
+@media (min-width: 1200px) {
+  .cantinflas-catalog:not(.section--full) .collection {
+    width: min(79.2%, 1520px);
+    max-width: none;
+    padding-inline: 0;
+  }
+}
+
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .cantinflas-catalog .card__quick-add-container--desktop {
+    position: absolute;
+    inset: auto 4% 0;
+    width: auto;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .cantinflas-catalog .card__container:is(:hover, :focus-within) .card__quick-add-container--desktop {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .cantinflas-catalog .card__quick-add-container--desktop button {
+    min-height: clamp(32px, 2.5vw, 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cantinflas-catalog .card__quick-add-container--desktop {
+    transition: none;
+  }
+}

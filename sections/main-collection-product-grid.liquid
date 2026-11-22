@@ -1,10 +1,14 @@
 {% if section.settings.xd_text_controls %}
   {% style %}
-    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a, #shopify-section-{{ section.id }} .card__price {
+    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a{% unless section.settings.xd_catalog_cards %}, #shopify-section-{{ section.id }} .card__price{% endunless %} {
       {% if section.settings.xd_cards_color != blank %}color: {{ section.settings.xd_cards_color }};{% endif %}
       {% unless section.settings.xd_cards_align == 'inherit' %}text-align: {{ section.settings.xd_cards_align }};{% endunless %}
     }
   {% endstyle %}
+{% endif %}
+
+{% if section.settings.xd_catalog_cards %}
+  {{ 'cantinflas-catalog.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
 <style>
@@ -25,6 +29,11 @@
 
       --grid-gap: {{ section.settings.spacing_desktop }}px;
       --grid-gap-mobile: {{ section.settings.spacing_mobile }}px;
+      {% if section.settings.xd_catalog_cards %}
+        --catalog-price: {{ section.settings.xd_price_color | default: '#2b3d8f' }};
+        --catalog-button: {{ section.settings.xd_buy_background | default: '#c22921' }};
+        --catalog-button-text: {{ section.settings.xd_buy_color | default: '#ffffff' }};
+      {% endif %}
   }
 
   @media (max-width: 899px) {
@@ -46,6 +55,8 @@
 
 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
 {%- assign filters_length = collection.filters | size -%}
+{%- assign catalog_image_blocks = section.blocks | where: 'type', 'catalog_image' -%}
+{%- assign banner_blocks = section.blocks | where: 'type', 'banner-card' -%}
 
 
 {%- capture filters_json -%}
@@ -66,7 +77,7 @@
     {%- endfor -%}
 {%- endfor -%}
 
-<div data-section-id="{{ section.id }}" class="{{ section_variant }}">
+<div data-section-id="{{ section.id }}" class="{{ section_variant }}{% if section.settings.xd_catalog_cards %} cantinflas-catalog{% endif %}">
   <collection-section
     class="collection{% if section.settings.filter_position == "always" %} collection--with-aside{% endif %}"
     data-filter-position="{{ section.settings.filter_position }}"
@@ -178,7 +189,7 @@
                 tabindex="0"
                 role="button"
                 aria-expanded="false"
-                aria-controls="wt-filter-drawer"
+                {% if section.settings.filter_position == 'drawer' %}aria-controls="wt-filters-drawer"{% endif %}
               >
                 {% render 'icons', id: 'filter' %}
                 {{ 'products.facets.filter_button' | t }}
@@ -233,14 +244,42 @@
             {% assign alt = product.featured_image.alt | escape %}
             {% assign uri = product.handle | escape %}
 
-            {% for block in section.blocks %}
+            {% for block in banner_blocks %}
               {% if current_product_index == block.settings.position_before_nth_product %}
                 {% render 'grid-banner', block: block, media_aspect_ratio: section.settings.image_ratio %}
               {% endif %}
             {% endfor %}
 
+            {% liquid
+              assign card_image = product.featured_image
+              assign catalog_image_asset = nil
+              assign catalog_image_block = nil
+              assign show_card_video = section.settings.show_video
+              assign card_form_id = nil
+              assign quick_add_label = nil
+
+              if section.settings.xd_catalog_cards
+                assign card_form_id = 'CatalogForm-' | append: section.id | append: '-' | append: product.id
+                assign quick_add_label = section.settings.xd_buy_label
+
+                for block in catalog_image_blocks
+                  if block.settings.product.id == product.id
+                    assign catalog_image_block = block
+                    if block.settings.image != blank
+                      assign card_image = block.settings.image
+                      assign show_card_video = false
+                    elsif block.settings.reference_art == 'agua'
+                      assign catalog_image_asset = 'cantinflas-xd-catalogo-agua.webp'
+                    endif
+                    break
+                  endif
+                endfor
+              endif
+            %}
+
             <div
               class="collection__grid__item {% if settings.animations %}scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
+              {{ catalog_image_block.shopify_attributes }}
               {% if settings.animations %}
                 data-cascade
                 style="--animation-order: {{ forloop.index }};"
@@ -254,7 +293,7 @@
 
               {% render 'card',
                 card_product: product,
-                img: product.featured_image,
+                img: card_image,
                 image_ratio: section.settings.image_ratio,
                 img_hover: image_hover,
                 alt: alt,
@@ -270,8 +309,12 @@
                 text_alignment: section.settings.text_alignment,
                 media_aspect_ratio: section.settings.image_ratio,
                 enable_quick_add_button: section.settings.enable_quick_add_button,
+                catalog_card: section.settings.xd_catalog_cards,
+                catalog_image_asset: catalog_image_asset,
+                quick_add_label: quick_add_label,
+                product_form_id: card_form_id,
                 enable_vendor_link: section.settings.enable_vendor_link,
-                show_video: section.settings.show_video,
+                show_video: show_card_video,
                 lazy_load: lazy_load,
                 are_filters_active: are_filters_active
               %}
@@ -302,6 +345,11 @@
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_cards_color", "label": "Color · Tarjetas"},
     {"type": "select", "id": "xd_cards_align", "label": "Alineación · Tarjetas", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "checkbox", "id": "xd_catalog_cards", "label": "Usar diseño de tarjetas Cantinflas", "default": false},
+    {"type": "color", "id": "xd_price_color", "label": "Color del precio", "default": "#2b3d8f"},
+    {"type": "text", "id": "xd_buy_label", "label": "Texto del botón de compra", "default": "Comprar"},
+    {"type": "color", "id": "xd_buy_background", "label": "Fondo del botón de compra", "default": "#c22921"},
+    {"type": "color", "id": "xd_buy_color", "label": "Texto del botón de compra · Color", "default": "#ffffff"},
     {
       "type": "range",
       "id": "products_per_page",
@@ -559,6 +607,15 @@
     }
   ],
   "blocks": [
+    {
+      "type": "catalog_image",
+      "name": "Imagen de producto",
+      "settings": [
+        {"type": "product", "id": "product", "label": "Producto"},
+        {"type": "image_picker", "id": "image", "label": "Imagen de la tarjeta"},
+        {"type": "select", "id": "reference_art", "label": "Imagen sin selección", "default": "product", "options": [{"value": "product", "label": "Imagen del producto"}, {"value": "agua", "label": "Agua Cantinflas del diseño"}]}
+      ]
+    },
     {
       "type": "banner-card",
       "name": "t:sections.main-collection-product-grid.blocks.banner-card.name",

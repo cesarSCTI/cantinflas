@@ -32,12 +32,13 @@ if (!customElements.get("switch-column")) {
         this.boundHandleLoad = this.handleLoad.bind(this);
 
         this.addEventListeners();
+        if (document.readyState === "complete") this.handleLoad();
       }
 
       addEventListeners() {
         window.addEventListener("load", this.boundHandleLoad);
         window.addEventListener("resize", this.boundHandleResize);
-        this.sortCustomSelect.addEventListener(
+        this.sortCustomSelect?.addEventListener(
           "wtSelectChange",
           this.boundHandleLoad,
         );
@@ -55,7 +56,7 @@ if (!customElements.get("switch-column")) {
           "click",
           this.boundChangeNumberOfColumns,
         );
-        this.sortCustomSelect.removeEventListener(
+        this.sortCustomSelect?.removeEventListener(
           "wtSelectChange",
           this.boundHandleLoad,
         );

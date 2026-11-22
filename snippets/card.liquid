@@ -32,6 +32,14 @@
   else
     assign card_alt = title | escape
   endif
+
+  assign image_sizes = '(min-width: 1000px) 620px, 100vw'
+  if catalog_card
+    assign image_sizes = '(min-width: 1920px) 380px, (min-width: 1200px) 20vw, (min-width: 900px) 31vw, 50vw'
+    if media_aspect_ratio == 'portrait'
+      assign aspect_ratio = '364 / 466'
+    endif
+  endif
 -%}
 
 {%- assign title_tag = title_tag | default: 'h3' -%}
@@ -56,6 +64,15 @@
         <picture class="card__picture" data-uri="{{uri}}">
           <div class="card__loader hidden"></div>
           {% if img == 'hide' %}
+          {% elsif catalog_image_asset != blank %}
+            <img
+              class="card__img"
+              src="{{ catalog_image_asset | asset_url }}"
+              alt="{{ title | escape }}"
+              loading="{{ loading }}"
+              width="804"
+              height="962"
+            >
           {% elsif img and focal %}
             {% assign card_classes = 'card__img' %}
             {% assign card_alt = img.alt | escape %}
@@ -65,7 +82,7 @@
               | image_url: width: 1000
               | image_tag:
                 loading: loading,
-                sizes: '(min-width: 1000px) 620px, 100vw',
+                sizes: image_sizes,
                 width: null,
                 widths: '375, 750, 1000, 1440',
                 alt: card_alt,
@@ -94,7 +111,7 @@
                   {% if img.width >= 1440 %}{{ img | image_url: width: 1440 }} 1440w, {% endif %}
                   {{ img | image_url: width: 1000 }} 1000w
                 "
-                sizes="(min-width: 1000px) 620px, 100vw"
+                sizes="{{ image_sizes }}"
                 src="{{ img | image_url: width: 1000 }}"
                 alt="{{ card_alt }}"
                 loading="{{ loading }}"
@@ -111,7 +128,7 @@
                   {% if img.width >= 1440 %}{{ img | image_url: width: 1440 }} 1440w, {% endif %}
                   {{ img | image_url: width: 1000 }} 1000w
                 "
-                sizes="(min-width: 1000px) 620px, 100vw"
+                sizes="{{ image_sizes }}"
                 src="{{ img | image_url: width: 1000 }}"
                 alt="{{ card_alt }}"
                 loading="{{ loading }}"
@@ -130,7 +147,7 @@
                   {% if img_hover.width >= 1440 %}{{ img_hover | image_url: width: 1440 }} 1440w, {% endif %}
                   {{ img_hover | image_url: width: 1000 }} 1000w
                 "
-                sizes="(min-width: 1000px) 620px, 100vw"
+                sizes="{{ image_sizes }}"
                 src="{{ img_hover | image_url: width: 1000 }}"
                 alt="{{ card_alt }}"
                 loading="{{ loading }}"
@@ -256,7 +273,13 @@
 
       {% if enable_quick_add_button %}
         <div class="card__quick-add-container--desktop">
-          {% render 'quick-add-button', card_product: product, product: card_product, product_variations: product_variations %}
+          {% render 'quick-add-button',
+            card_product: product,
+            product: card_product,
+            product_variations: product_variations,
+            product_form_id: product_form_id,
+            quick_add_label: quick_add_label
+          %}
         </div>
       {% endif %}
     </div>
@@ -328,7 +351,7 @@
         {% render 'card-color-swatches', product: product, text_alignment: text_alignment, are_filters_active: are_filters_active %}
     {% endif %}
 
-    {% if enable_quick_add_button %}
+    {% if enable_quick_add_button and catalog_card != true %}
       <div class="card__quick-add-container">
         {% render 'quick-add-button', card_product: product, product: card_product, product_variations: product_variations %}
       </div>

@@ -1,10 +1,16 @@
 {% if card_product.variants.size > 1 or settings.enable_product_variations == true and product_variations.count > 0 %}
+  {%- liquid
+    assign button_label = 'products.product.sold_out' | t
+    if card_product.available or settings.enable_product_variations == true and product_variations.count > 0
+      assign choose_option_label = 'products.product.choose_option' | t
+      assign button_label = quick_add_label | default: choose_option_label
+    endif
+  -%}
   <quick-add data-product-handle="{{ card_product.handle }}">
     <button
-      aria-label="{{ 'products.product.choose_option' | t }}"
+      aria-label="{{ button_label | escape }}{% if quick_add_label != blank %} · {{ card_product.title | escape }}{% endif %}"
       class="button--full-width hero__button--secondary"
       type="button"
-      class="form__send__button wt-contact__form__send--{{ block.settings.button_select }}"
       name="commit"
       data-product-url="{{ card_product.url }}"
       tabindex="0"
@@ -15,24 +21,18 @@
       {% elsif card_product.available == false and settings.enable_product_variations == false%}
         disabled
       {% endif %}
-      aria-label="
-        {%- if card_product.available or settings.enable_product_variations == true and product_variations.count > 0 -%}
-          {{ 'products.product.add_to_cart' | t }}
-        {%- else -%}
-          {{ 'products.product.sold_out' | t }}
-        {%- endif -%}
-      "
     >
-      <span>
-        {%- if card_product.available or settings.enable_product_variations == true and product_variations.count > 0 -%}
-          {{ 'products.product.choose_option' | t }}
-        {%- else -%}
-          {{ 'products.product.sold_out' | t }}
-        {%- endif -%}
-      </span>
+      <span>{{ button_label | escape }}</span>
     </button>
   </quick-add>
 {% elsif product %}
+  {%- liquid
+    assign button_label = 'products.product.sold_out' | t
+    if card_product.selected_or_first_available_variant.available
+      assign add_to_cart_label = 'products.product.add_to_cart' | t
+      assign button_label = quick_add_label | default: add_to_cart_label
+    endif
+  -%}
   <product-form class="wt-product__add-to-cart" data-hide-errors="{{ gift_card_recipient_feature_active }}">
     <div class="product-form__error-message-wrapper" role="alert" hidden>
       <span class="product-form__error-message"></span>
@@ -53,14 +53,8 @@
         {% endif %}
         <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
         <button
-          aria-label="
-            {%- if card_product.selected_or_first_available_variant.available -%}
-              {{ 'products.product.add_to_cart' | t }}
-            {%- else -%}
-              {{ 'products.product.sold_out' | t }}
-            {%- endif -%}
-          "
-          id="ProductSubmitButton-{{ section.id }}"
+          aria-label="{{ button_label | escape }}{% if quick_add_label != blank %} · {{ card_product.title | escape }}{% endif %}"
+          id="ProductSubmitButton-{{ product_form_id | default: section.id }}"
           type="submit"
           name="add"
           class="button--full-width hero__button--secondary"
@@ -68,13 +62,7 @@
             disabled
           {% endif %}
         >
-          <span>
-            {%- if card_product.selected_or_first_available_variant.available -%}
-              {{ 'products.product.add_to_cart' | t }}
-            {%- else -%}
-              {{ 'products.product.sold_out' | t }}
-            {%- endif -%}
-          </span>
+          <span>{{ button_label | escape }}</span>
 
           {% render 'button-loading-indicator' %}
         </button>
