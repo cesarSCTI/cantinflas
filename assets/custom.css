@@ -17,7 +17,7 @@
 /* Typography and shared chrome for the Cantinflas redesign. */
 #root.cantinflas-redesign,
 .cantinflas-xd-header,
-.cantinflas-xd-footer {
+.cantinflas-footer {
   --font-base: "Montserrat", sans-serif;
   --font-button: "Montserrat", sans-serif;
   --font-navigation: "Montserrat", sans-serif;
@@ -39,16 +39,6 @@
   margin: 0 auto 2rem;
 }
 
-.cantinflas-xd-footer {
-  --color-background: #252525;
-  background: #252525;
-  color: #fff;
-}
-
-.cantinflas-xd-footer__title {
-  font-family: "baga", sans-serif;
-  font-weight: 700;
-}
 
 @media (min-width: 1200px) {
   .cantinflas-xd-header .wt-header__nav-teaser--full-menu { justify-content: flex-start; }
@@ -62,16 +52,6 @@
   text-align: end;
 }
 
-@media (min-width: 900px) {
-  .cantinflas-xd-footer .first-rd {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1.3fr .85fr .95fr 1.5fr;
-    gap: clamp(1rem, 3vw, 5rem);
-  }
-  .cantinflas-xd-footer .first-rd > .wt-footer__block:nth-child(n) { width: auto !important; min-width: 0; }
-  .cantinflas-xd-footer .second-rd:not(:has(.wt-footer__block)) { display: none; }
-}
 
 .cantinflas-xd-article-sample svg {
   display: block;
@@ -79,4 +59,135 @@
   height: auto;
   aspect-ratio: 16 / 9;
   background: #f4ede1;
+}
+
+
+/* Keep the announcement in flow. Only the navigation layer overlays the hero. */
+.page-header:has(> .cantinflas-xd-header--overlay) {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 17;
+}
+.cantinflas-xd-header--overlay {
+  --color-header-background: var(--xd-header-overlay-bg, transparent);
+  --color-header-text: var(--xd-header-overlay-text, #fff);
+  --color-menu-text: var(--xd-header-overlay-text, #fff);
+  background: var(--xd-header-overlay-bg, transparent);
+  border: 0;
+  box-shadow: none;
+}
+.cantinflas-xd-header--overlay .wt-header__body {
+  background: transparent;
+  color: var(--color-header-text);
+}
+.cantinflas-xd-header--overlay :is(.wt-page-nav-mega__link--parent, .wt-header__panel__link, .wt-localization-trigger, .wt-header__icon, .wt-header__search__form) {
+  color: var(--color-header-text);
+}
+.cantinflas-xd-header--overlay .wt-page-nav-mega__sublist { --color-menu-text: #252525; }
+.cantinflas-xd-header--overlay .wt-header__spacer { display: none; }
+.cantinflas-xd-header--hero-brand .wt-header__logo { display: none; }
+.cantinflas-header-overlay-logo {
+  display: block;
+  width: var(--logo-width, 90px);
+  max-width: 100%;
+  height: auto;
+}
+@media (min-width: 1200px) {
+  .cantinflas-header-overlay-logo { width: var(--logo-width-desk, 180px); }
+  .cantinflas-xd-header--overlay .wt-header__body { padding-inline: clamp(2rem, 5.25vw, 10rem); }
+  .cantinflas-xd-header--overlay .wt-page-nav-mega__link--parent {
+    font-size: clamp(10px, .86vw, 16px);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.cantinflas-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: clamp(13px, .99vw, 18px);
+}
+.cantinflas-footer a { color: inherit; }
+.cantinflas-footer :is(p, ul) { margin: 0; }
+.cantinflas-footer .rte :is(p, a) { color: inherit; }
+.cantinflas-footer__columns, .cantinflas-footer__bottom-inner {
+  width: min(91.5%, 176rem);
+  margin-inline: auto;
+}
+.cantinflas-footer__columns {
+  display: grid;
+  gap: 2.6rem;
+  padding-block: clamp(2rem, 2.7vw, 5.2rem) clamp(3rem, 4.5vw, 8.7rem);
+}
+.cantinflas-footer__column { min-width: 0; text-align: var(--footer-body-align); }
+.cantinflas-footer__column > h2 {
+  margin: 0 0 .7em;
+  color: var(--footer-title);
+  font: 700 clamp(16px, 1.4vw, 25px)/1.1 "baga", sans-serif;
+  text-align: var(--footer-heading-align);
+}
+.cantinflas-footer__brand {
+  padding-bottom: clamp(1rem, 2vw, 3.7rem);
+  margin-bottom: clamp(1rem, 1.4vw, 2.6rem);
+  border-bottom: 1px solid rgb(255 255 255 / .4);
+}
+.cantinflas-footer__brand img { display: block; width: var(--footer-logo); height: auto; }
+.cantinflas-footer__brand-text { font: 700 clamp(24px, 3vw, 56px)/1 "baga", sans-serif; }
+.cantinflas-footer__social { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .8em; }
+.cantinflas-footer__social .social-links { padding: 0; gap: .7rem; }
+.cantinflas-footer__social .social-link { color: var(--footer-accent); }
+.cantinflas-footer__links { list-style: none; padding: 0; display: grid; gap: .62em; }
+.cantinflas-footer__column--newsletter { text-align: var(--footer-newsletter-align); }
+.cantinflas-footer__column--newsletter > h2 {
+  color: var(--footer-accent);
+  text-align: var(--footer-newsletter-align);
+  text-transform: uppercase;
+  font: 750 clamp(17px, 1.75vw, 32px)/1.05 "Montserrat", sans-serif;
+}
+.cantinflas-footer__newsletter-copy { line-height: 1.35; }
+.cantinflas-footer__form { margin-top: clamp(1rem, 1.8vw, 3.4rem); }
+.cantinflas-footer__pill {
+  display: flex;
+  align-items: stretch;
+  padding: .35rem;
+  border-radius: 999px;
+  background: #f4ede1;
+  color: #252525;
+}
+.cantinflas-footer__pill input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  padding-inline: .85em;
+  background: transparent;
+  color: #252525;
+  font: inherit;
+}
+.cantinflas-footer__pill button {
+  min-height: 44px;
+  padding-inline: clamp(.65rem, 1.45vw, 2.8rem);
+  border: 0;
+  border-radius: 999px;
+  background: var(--footer-button);
+  color: var(--footer-button-text);
+  font: inherit;
+  cursor: pointer;
+}
+.cantinflas-footer__privacy { margin: .8em auto 0; max-width: 42ch; font-size: .76em; line-height: 1.45; }
+.cantinflas-footer__bottom { border-top: 1px solid rgb(255 255 255 / .35); }
+.cantinflas-footer__bottom-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; font-size: .85em; }
+.cantinflas-footer__payments { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
+.cantinflas-footer__payments svg { display: block; width: clamp(26px, 2.45vw, 42px); height: auto; }
+.cantinflas-footer__payment-image { width: min(100%, 54rem); height: auto; }
+.cantinflas-footer__column--image :is(img, svg) { width: 100%; height: auto; }
+@media (min-width: 600px) {
+  .cantinflas-footer__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) {
+  .cantinflas-footer__columns {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, .59fr) minmax(0, .9fr) minmax(0, 1.21fr);
+    column-gap: clamp(1.6rem, 5.8vw, 11rem);
+  }
+  .cantinflas-footer__column:not(.cantinflas-footer__column--text) { padding-top: clamp(.8rem, 2.15vw, 4rem); }
+  .cantinflas-footer__column:nth-child(n + 5) { grid-column: 1 / -1; }
 }

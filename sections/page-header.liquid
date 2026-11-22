@@ -1,11 +1,34 @@
+{% liquid
+  assign xd_overlay = false
+  if section.settings.xd_text_controls
+    if section.settings.xd_overlay == 'all'
+      assign xd_overlay = true
+    elsif section.settings.xd_overlay == 'hero'
+      assign xd_template = template.name | append: '.' | append: template.suffix
+      assign xd_hero_templates = 'index.,page.museo,page.mundo,page.contact' | split: ','
+      if xd_hero_templates contains xd_template
+        assign xd_overlay = true
+      endif
+    endif
+  endif
+%}
+{% if xd_overlay %}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --xd-header-overlay-text: {{ section.settings.xd_overlay_text }};
+      --xd-header-overlay-bg: {{ section.settings.xd_overlay_bg }};
+    }
+  {% endstyle %}
+{% endif %}
+
 {% if section.settings.xd_text_controls %}
   {% style %}
     #shopify-section-{{ section.id }} .wt-page-nav-mega__decorated {
-      {% if section.settings.xd_nav_color != blank %}color: {{ section.settings.xd_nav_color }};{% endif %}
+      {% if section.settings.xd_nav_color != blank and xd_overlay == false %}color: {{ section.settings.xd_nav_color }};{% endif %}
       {% unless section.settings.xd_nav_align == 'inherit' %}text-align: {{ section.settings.xd_nav_align }};{% endunless %}
     }
     #shopify-section-{{ section.id }} .wt-header__panel__link, #shopify-section-{{ section.id }} .wt-localization-trigger {
-      {% if section.settings.xd_icons_color != blank %}color: {{ section.settings.xd_icons_color }};{% endif %}
+      {% if section.settings.xd_icons_color != blank and xd_overlay == false %}color: {{ section.settings.xd_icons_color }};{% endif %}
       {% unless section.settings.xd_icons_align == 'inherit' %}text-align: {{ section.settings.xd_icons_align }};{% endunless %}
     }
   {% endstyle %}
@@ -70,7 +93,7 @@
   id="header"
   data-hide-over-selector=".collection__grid"
   class="
-    wt-header{% if section.settings.xd_text_controls %} cantinflas-xd-header{% endif %}
+    wt-header{% if section.settings.xd_text_controls %} cantinflas-xd-header{% endif %}{% if xd_overlay %} cantinflas-xd-header--overlay{% unless section.settings.xd_overlay_logo %} cantinflas-xd-header--hero-brand{% endunless %}{% endif %}
     {% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}mobile-nav{% endif %}
     {% if section.settings.layout == 'option_1' %} wt-header--v1 wt-header--search{% endif %}
     {% if section.settings.layout == 'option_2' %} wt-header--v2{% endif %}
@@ -80,8 +103,8 @@
     {% if section.settings.layout == 'option_5' %}  wt-header--v3 wt-header--fashion wt-header--v5{% endif %}
     {% if section.settings.show_shadow %} wt-header--shadow{% endif %}
     {% if section.settings.show_line_separator %} wt-header--separator{% endif %}
-    {% if section.settings.sticky_header %} wt-header--sticky{% endif %}
-    {% if section.settings.sticky_header_always %} wt-header--sticky-always{% endif %}
+    {% if section.settings.sticky_header and xd_overlay == false %} wt-header--sticky{% endif %}
+    {% if section.settings.sticky_header_always and xd_overlay == false %} wt-header--sticky-always{% endif %}
     {% if section.settings.header_always_blurred %} wt-header--always-blurred{% endif %}
   "
   {% if section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}
@@ -90,10 +113,10 @@
   {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5' %}
     {% unless section.settings.xd_text_controls %}data-transparent="true"{% endunless %}
   {% endif %}
-  {% if section.settings.sticky_header %}
+  {% if section.settings.sticky_header and xd_overlay == false %}
     data-sticky="true"
   {% endif %}
-  {% if section.settings.sticky_header_always %}
+  {% if section.settings.sticky_header_always and xd_overlay == false %}
     data-sticky-always="true"
   {% endif %}
 >
@@ -457,7 +480,9 @@
           {% endif %}
         "
       >
-        {%- if section.settings.logo != blank or section.settings.transparent_logo != blank -%}
+        {%- if xd_overlay and section.settings.transparent_logo != blank -%}
+          {{ section.settings.transparent_logo | image_url: width: 360 | image_tag: class: 'cantinflas-header-overlay-logo', widths: '90, 180, 360', alt: shop.name }}
+        {% elsif section.settings.logo != blank or section.settings.transparent_logo != blank %}
           {% if section.settings.logo != blank %}
             {%- assign large_image_size = section.settings.large_screen_logo_width -%}
             {%- assign large_image_size_double = large_image_size | times: 2 -%}
@@ -664,6 +689,10 @@
   "tag": "header",
   "class": "page-header",
   "settings": [
+    {"type": "select", "id": "xd_overlay", "label": "Superponer encabezado", "default": "hero", "options": [{"value": "hero", "label": "Inicio, Museo, Mundo y Contacto"}, {"value": "all", "label": "Todas las páginas"}, {"value": "off", "label": "Dentro del flujo"}]},
+    {"type": "color", "id": "xd_overlay_bg", "label": "Fondo en modo superpuesto", "default": "transparent"},
+    {"type": "color", "id": "xd_overlay_text", "label": "Texto e iconos superpuestos", "default": "#ffffff"},
+    {"type": "checkbox", "id": "xd_overlay_logo", "label": "Mostrar logo en el encabezado superpuesto", "default": false},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_nav_color", "label": "Color · Navegación"},
     {"type": "select", "id": "xd_nav_align", "label": "Alineación · Navegación", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},

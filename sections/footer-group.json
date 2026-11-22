@@ -57,12 +57,14 @@
         "show-copyright": true,
         "text": "© Copyright 2026 Mundo Cantinflas – Todos los Derechos Reservados.",
         "big-logo": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
-        "big-logo-width": 85,
+        "big-logo-width": 100,
         "margin-top": 0,
         "margin-bottom": 20,
         "xd_text_controls": true,
-        "xd_heading_color": "#f2b846",
-        "xd_body_color": "#ffffff"
+        "xd_heading_color": "#ffffff",
+        "xd_body_color": "#ffffff",
+        "xd_footer_accent": "#f2b846",
+        "xd_privacy": "<p>Al proporcionarnos tu correo electrónico, aceptas recibir nuestros correos electrónicos de marketing, incluidos correos electrónicos exclusivos sobre nuevos lanzamientos, ofertas emblemáticas y otros anuncios interesantes.</p>"
       }
     }
   },

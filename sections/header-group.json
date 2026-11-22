@@ -93,7 +93,10 @@
         "suggestions_menu": "",
         "xd_text_controls": true,
         "xd_nav_color": "#252525",
-        "xd_icons_color": "#252525"
+        "xd_icons_color": "#252525",
+        "xd_overlay": "hero",
+        "xd_overlay_logo": false,
+        "xd_overlay_text": "#ffffff"
       }
     },
     "page_header_logo_banner_DJLpfi": {

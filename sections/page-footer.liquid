@@ -1,4 +1,7 @@
 {% if section.settings.xd_text_controls %}
+  {% render 'cantinflas-footer', footer_section: section %}
+{% else %}
+{% if section.settings.xd_text_controls %}
   {% style %}
     #shopify-section-{{ section.id }} .wt-footer__title {
       {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
@@ -571,6 +574,8 @@
   {% endif %}
 </footer>
 
+{% endif %}
+
 {% schema %}
 {
   "name": "t:sections.footer.name",
@@ -578,6 +583,16 @@
   "tag": "section",
   "max_blocks": 5,
   "settings": [
+    {"type": "color", "id": "xd_footer_bg", "label": "Fondo del pie", "default": "#252525"},
+    {"type": "color", "id": "xd_footer_accent", "label": "Color de suscripción y redes", "default": "#f2b846"},
+    {"type": "color", "id": "xd_footer_button", "label": "Fondo del botón de suscripción", "default": "#c22921"},
+    {"type": "color", "id": "xd_footer_button_text", "label": "Texto del botón de suscripción", "default": "#ffffff"},
+    {"type": "text", "id": "xd_social_label", "label": "Etiqueta de redes", "default": "Redes Sociales"},
+    {"type": "text", "id": "xd_email_label", "label": "Etiqueta del campo de correo", "default": "Tu correo electrónico"},
+    {"type": "text", "id": "xd_subscribe", "label": "Texto de suscripción", "default": "Suscribirme"},
+    {"type": "richtext", "id": "xd_privacy", "label": "Aviso de suscripción"},
+    {"type": "image_picker", "id": "xd_payment_image", "label": "Imagen alternativa para métodos de pago"},
+    {"type": "select", "id": "xd_newsletter_align", "label": "Alineación de suscripción", "default": "center", "options": [{"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
     {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},

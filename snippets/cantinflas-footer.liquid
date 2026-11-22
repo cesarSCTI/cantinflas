@@ -1,0 +1,115 @@
+{%- assign footer_settings = footer_section.settings -%}
+<footer class="cantinflas-footer" style="
+  --footer-bg: {{ footer_settings.xd_footer_bg }};
+  --footer-text: {{ footer_settings.xd_body_color | default: '#f4ede1' }};
+  --footer-title: {{ footer_settings.xd_heading_color | default: '#ffffff' }};
+  --footer-accent: {{ footer_settings.xd_footer_accent }};
+  --footer-button: {{ footer_settings.xd_footer_button }};
+  --footer-button-text: {{ footer_settings.xd_footer_button_text }};
+  --footer-logo: {{ footer_settings['big-logo-width'] }}%;
+  --footer-newsletter-align: {{ footer_settings.xd_newsletter_align }};
+  --footer-heading-align: {{ footer_settings.xd_heading_align }};
+  --footer-body-align: {{ footer_settings.xd_body_align }};
+">
+  <div class="cantinflas-footer__columns">
+    {% for block in footer_section.blocks %}
+      <div class="cantinflas-footer__column cantinflas-footer__column--{{ block.type }}" {{ block.shopify_attributes }}>
+        {% case block.type %}
+          {% when 'text' %}
+            <div class="cantinflas-footer__brand">
+              {% if footer_settings['big-logo'] != blank %}
+                {% assign logo_alt = footer_settings['big-logo'].alt | default: shop.name %}
+                <a href="{{ routes.root_url }}">
+                  {{ footer_settings['big-logo'] | image_url: width: 860 | image_tag: loading: 'lazy', widths: '220, 360, 560, 860', sizes: '(min-width: 900px) 24vw, 60vw', alt: logo_alt }}
+                </a>
+              {% else %}
+                <a class="cantinflas-footer__brand-text" href="{{ routes.root_url }}">{{ shop.name | escape }}</a>
+              {% endif %}
+            </div>
+            {% if block.settings.heading_text != blank %}<h2>{{ block.settings.heading_text | escape }}</h2>{% endif %}
+            <div class="cantinflas-footer__contact rte">{{ block.settings.text }}</div>
+            {% if footer_settings['show-social-media-icons'] %}
+              <div class="cantinflas-footer__social">
+                {% if footer_settings.xd_social_label != blank %}<span>{{ footer_settings.xd_social_label | escape }}</span>{% endif %}
+                {% render 'social-links' %}
+              </div>
+            {% endif %}
+            {% if footer_settings.show_country_selector or footer_settings.show_language_selector %}
+              <div class="cantinflas-footer__social">
+                {% if footer_settings.show_country_selector %}
+                  {% render 'localization-btn-local', show_country_code: footer_settings.show_country_selector_label, show_country_flag: footer_settings.show_country_selector_flag %}
+                {% endif %}
+                {% if footer_settings.show_language_selector %}{% render 'localization-btn-lang' %}{% endif %}
+              </div>
+            {% endif %}
+            {% if shop.features.follow_on_shop? and footer_settings.enable_follow_on_shop %}
+              {{ shop | login_button: action: 'follow' }}
+            {% endif %}
+          {% when 'menu' %}
+            {% if block.settings.heading_links != blank %}<h2>{{ block.settings.heading_links | escape }}</h2>{% endif %}
+            <ul class="cantinflas-footer__links" role="list">
+              {% for link in block.settings.links.links %}
+                <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+              {% endfor %}
+            </ul>
+          {% when 'newsletter' %}
+            {% if block.settings.heading_newsletter != blank %}<h2>{{ block.settings.heading_newsletter | escape }}</h2>{% endif %}
+            <div class="cantinflas-footer__newsletter-copy rte">{{ block.settings.text_newsletter }}</div>
+            {% liquid
+              assign newsletter_id = 'CantinflasFooter-' | append: footer_section.id | append: '-' | append: block.id
+              assign newsletter_email = newsletter_id | append: '-email'
+              assign email_label = footer_settings.xd_email_label
+              if email_label == blank
+                assign email_label = 'newsletter.label' | t
+              endif
+              assign subscribe_label = footer_settings.xd_subscribe
+              if subscribe_label == blank
+                assign subscribe_label = 'newsletter.button_label' | t
+              endif
+            %}
+            {% form 'customer', id: newsletter_id, class: 'cantinflas-footer__form' %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="cantinflas-footer__pill">
+                <input id="{{ newsletter_email }}" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email"
+                  placeholder="{{ email_label | escape }}" aria-label="{{ email_label | escape }}" required>
+                <button type="submit">{{ subscribe_label | escape }}</button>
+              </div>
+              {% if form.errors %}<div role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+              {% if form.posted_successfully? %}<p role="status">{{ 'newsletter.success' | t }}</p>{% endif %}
+            {% endform %}
+            {% if footer_settings.xd_privacy != blank %}
+              <div class="cantinflas-footer__privacy rte">{{ footer_settings.xd_privacy }}</div>
+            {% endif %}
+          {% when 'image' %}
+            {% if block.settings.desktop_image != blank %}
+              {{ block.settings.desktop_image | image_url: width: 750 | image_tag: loading: 'lazy', widths: '240, 480, 750' }}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'cantinflas-footer__sample' }}
+            {% endif %}
+          {% when '@app' %}
+            {% render block %}
+          {% when 'custom_liquid' %}
+            {{ block.settings.custom_liquid }}
+        {% endcase %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if footer_settings['show-copyright'] or footer_settings['show-payments-icons'] %}
+    <div class="cantinflas-footer__bottom">
+      <div class="cantinflas-footer__bottom-inner">
+        {% if footer_settings['show-copyright'] %}<p>{{ footer_settings.text | escape }}</p>{% endif %}
+        {% if footer_settings['show-payments-icons'] %}
+          {% if footer_settings.xd_payment_image != blank %}
+            {{ footer_settings.xd_payment_image | image_url: width: 760 | image_tag: class: 'cantinflas-footer__payment-image', loading: 'lazy', widths: '260, 480, 760' }}
+          {% else %}
+            <ul class="cantinflas-footer__payments" aria-label="{{ 'sections.footer.payment' | t | escape }}" role="list">
+              {% for type in shop.enabled_payment_types %}
+                <li>{{ type | payment_type_svg_tag }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</footer>
