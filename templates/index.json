@@ -21,6 +21,7 @@
         "autoplay": true,
         "alignment": "center",
         "background": "#c22921",
+        "background_gradient": "",
         "text_color": "#ffffff",
         "overlay": 0,
         "heading_align": "center",
@@ -48,7 +49,7 @@
         "title": "Lleva un pedacito de Cantinflas contigo",
         "disable_on_mobile": false,
         "hide_empty_section": false,
-        "collection": "",
+        "collection": "bebidas",
         "product_list": [],
         "products_to_show": 4,
         "enable_stack_products": true,
@@ -125,22 +126,21 @@
     },
     "story": {
       "type": "parallax",
-      "settings": {
-        "desktop_text_horizontal_position": "center",
-        "color-body-text": "#252525",
-        "background_color": "#ffffff"
-      },
       "blocks": {
         "title": {
           "type": "heading",
           "settings": {
-            "heading": "¡Quiubo, Chato!"
+            "heading": "¡Quiubo, Chato!",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
           }
         },
         "copy": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Detrás de Cantinflas estaba Mario Moreno</strong></p><p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>"
+            "text": "<p><strong>Detrás de Cantinflas estaba Mario Moreno</strong></p><p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>",
+            "disable_on_mobile": false
           }
         },
         "button": {
@@ -148,7 +148,8 @@
           "settings": {
             "button_select": "primary",
             "button_label": "Conoce su historia",
-            "button_link": ""
+            "button_link": "",
+            "disable_on_mobile": false
           }
         }
       },
@@ -156,7 +157,17 @@
         "title",
         "copy",
         "button"
-      ]
+      ],
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "rotation": 5,
+        "button_link1": "",
+        "button_link2": "",
+        "color-body-text": "#252525",
+        "background_color": "#ffffff",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
     },
     "favorites": {
       "type": "home-product-tabs",
@@ -407,7 +418,6 @@
         "heading": "Universo Cantinflas",
         "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
         "layout": "collage",
-        "collage_motion": true,
         "background": "#f2b846",
         "text_color": "#252525",
         "accent": "#c22921",
@@ -416,6 +426,9 @@
         "intro_color": "",
         "heading_size": 108,
         "heading_mobile": 32,
+        "hotspot_full_width": false,
+        "hotspot_overlay_copy": false,
+        "hotspot_anatomy_image": false,
         "show_focus": false,
         "collage_label_1": "Ir a Galería",
         "collage_link_1": "",
@@ -424,7 +437,9 @@
         "collage_label_2": "Conoce sus Películas",
         "collage_link_2": "",
         "collage_button_bg_2": "#252525",
-        "collage_button_text_2": "#ffffff"
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": true,
+        "column_order": "alternate"
       }
     },
     "threepieces": {
@@ -520,6 +535,9 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "hotspot_full_width": false,
+        "hotspot_overlay_copy": false,
+        "hotspot_anatomy_image": false,
         "show_focus": false,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -528,7 +546,9 @@
         "collage_label_2": "",
         "collage_link_2": "",
         "collage_button_bg_2": "#252525",
-        "collage_button_text_2": "#ffffff"
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": false,
+        "column_order": "alternate"
       }
     },
     "museum": {
