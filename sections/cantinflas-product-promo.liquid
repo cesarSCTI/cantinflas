@@ -9,6 +9,10 @@
   assign details_url = section.settings.discover_link | default: promo_product.url
   assign product_form_id = 'CantinflasPromo-' | append: section.id
 -%}
+{% if section.settings.video != blank %}
+  <script src="{{ 'video-controls.js' | asset_url }}" defer></script>
+{% endif %}
+
 {% style %}
   #shopify-section-{{ section.id }} {
     --promo-background: {{ section.settings.background }};
@@ -83,7 +87,10 @@
       {% if section.settings.video != blank %}
         {%- assign poster = section.settings.media_image | default: section.settings.video.preview_image -%}
         {%- assign poster_url = poster | image_url: width: 1200 -%}
-        {{ section.settings.video | video_tag: controls: true, playsinline: true, preload: 'none', poster: poster_url }}
+        <video-controls data-video-click="false">
+          {% render 'play-pause-button' %}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, poster: poster_url }}
+        </video-controls>
       {% elsif section.settings.media_image != blank %}
         {{ section.settings.media_image | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1440', sizes: '(min-width: 900px) 50vw, 100vw' }}
       {% else %}
@@ -109,8 +116,27 @@
   .cantinflas-promo__product { width: min(86%, 70rem); margin: auto; }
   .cantinflas-promo__product-image { height: clamp(17rem, 32vw, 63rem); }
   .cantinflas-promo__product-image :is(img, svg) { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .cantinflas-promo__media { aspect-ratio: 900 / 1000; background: #f4ede1; overflow: hidden; }
-  .cantinflas-promo__media :is(img, video, svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-promo__media { position: relative; aspect-ratio: 900 / 1000; background: #f4ede1; overflow: hidden; }
+  .cantinflas-promo__media video-controls { position: absolute; inset: 0; }
+  .cantinflas-promo__media > :is(img, svg), .cantinflas-promo__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-promo__media .shoppable-video__control-button {
+    position: absolute;
+    z-index: 1;
+    inset: auto 2rem 2rem auto;
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: .5rem;
+    border: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #252525;
+    cursor: pointer;
+  }
+  .cantinflas-promo__media .shoppable-video__control-button svg { display: block; margin: auto; }
+  .cantinflas-promo__media .shoppable-video__control-button--play .shoppable-video__icon-play,
+  .cantinflas-promo__media .shoppable-video__control-button--pause .shoppable-video__icon-pause { display: none; }
   .cantinflas-promo__variant { display: block; text-align: var(--promo-actions-align); margin-top: 1rem; }
   .cantinflas-promo__variant select { max-width: 100%; font: inherit; }
   .cantinflas-promo__actions { text-align: var(--promo-actions-align); margin-top: clamp(1rem, 1.8vw, 3.4rem); }
