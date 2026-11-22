@@ -36,6 +36,12 @@
   {% endif %}
     --text-alignment: {{ section.settings.text_alignment }};
   }
+
+  {% if section.settings.heading_color != blank %}
+    [data-section-id="{{ section.id }}"] .headline__title {
+      color: {{ section.settings.heading_color }};
+    }
+  {% endif %}
 </style>
 
 <video-reels
@@ -43,6 +49,9 @@
   class="section-content video-reels video-reels--benefits wt-slider--wrapper {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
 >
   {% render 'headline', title: section.settings.heading %}
+  {% if section.settings.intro != blank %}
+    <div class="video-reels__intro rte">{{ section.settings.intro }}</div>
+  {% endif %}
 
   <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
 
@@ -144,6 +153,19 @@
   </slideshow-section>
 </video-reels>
 
+{% stylesheet %}
+  .video-reels--benefits .video-reels__intro {
+    width: min(90%, 82rem);
+    margin: 0 auto clamp(1.25rem, 3vw, 2.5rem);
+    color: var(--color-custom-text, inherit);
+    text-align: var(--text-alignment);
+  }
+
+  .video-reels--benefits .video-reels__intro :is(p, li) { color: inherit; }
+  .video-reels--benefits .video-reels__intro > :first-child { margin-block-start: 0; }
+  .video-reels--benefits .video-reels__intro > :last-child { margin-block-end: 0; }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:sections.benefits-video.name",
@@ -161,6 +183,16 @@
       "id": "heading",
       "label": "t:sections.settings.settings.heading.label",
       "default": "Shoppable video reels"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introducción"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título"
     },
     {
       "type": "checkbox",

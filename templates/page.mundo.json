@@ -125,82 +125,71 @@
       }
     },
     "reels": {
-      "type": "cantinflas-media-gallery",
+      "type": "benefits-video",
       "blocks": {
-        "piece1": {
-          "type": "media",
+        "video_Yx7gnE": {
+          "type": "video",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "video_hosted": "shopify://files/videos/Elixir Milagroso_ ¡Siempre Funciona Para Pacientes Felices!_ejemplo_crestomatias.mp4",
+            "text": ""
           }
         },
-        "piece2": {
-          "type": "media",
+        "video_a68c6z": {
+          "type": "video",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "video_hosted": "shopify://files/videos/ejemplo_blur.mp4",
+            "text": ""
           }
         },
-        "piece3": {
-          "type": "media",
+        "video_eUhgU3": {
+          "type": "video",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "video_hosted": "shopify://files/videos/FRASES_DE_CANTINFLAS_subsClip Captions.mp4",
+            "text": ""
           }
         },
-        "piece4": {
-          "type": "media",
+        "video_BUmbrt": {
+          "type": "video",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "video_hosted": "shopify://files/videos/videoplayback.mp4",
+            "text": ""
+          }
+        },
+        "video_qGRPDz": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/videoplayback (2).mp4",
+            "text": ""
+          }
+        },
+        "video_pKUmhd": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/videoplayback (1).mp4",
+            "text": ""
           }
         }
       },
       "block_order": [
-        "piece1",
-        "piece2",
-        "piece3",
-        "piece4"
+        "video_Yx7gnE",
+        "video_a68c6z",
+        "video_eUhgU3",
+        "video_BUmbrt",
+        "video_qGRPDz",
+        "video_pKUmhd"
       ],
+      "name": "t:sections.benefits-video.name",
       "settings": {
         "heading": "Cantinflas en Movimiento",
+        "video_button": false,
+        "text_alignment": "center",
+        "text_style": "body",
+        "color-body-text": "#252525",
+        "background_color": "#ffffff",
+        "margin-top": 48,
+        "margin-bottom": 40,
         "intro": "<p>Sus gestos, sus palabras y su particular manera de hacer reír cobran vida cada vez que volvemos a verlo.</p><p>Revive escenas, fragmentos de películas y otros videos que mantienen vivo el humor de Cantinflas.</p>",
-        "heading_color": "#c22921",
-        "intro_color": "#252525",
-        "heading_align": "center",
-        "intro_align": "center",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "layout": "film",
-        "background": "#ffffff",
-        "card_width": 340,
-        "card_height": 520,
-        "gap": 20,
-        "padding": 48
+        "heading_color": "#c22921"
       }
     },
     "news": {
