@@ -181,7 +181,7 @@
           "type": "category",
           "settings": {
             "title": "Bebidas",
-            "collection": "",
+            "collection": "bebidas",
             "sample_titles": "Agua Premium\nFestival Dunkel\nTequila Cantinflas"
           }
         },
@@ -189,7 +189,7 @@
           "type": "category",
           "settings": {
             "title": "Promocionales",
-            "collection": "",
+            "collection": "frontpage",
             "sample_titles": "Plumas\nVaso\nGorra\nTaza Peltre Azul Chato"
           }
         }
@@ -200,7 +200,7 @@
       ],
       "settings": {
         "xd_text_controls": true,
-        "xd_heading_color": "",
+        "xd_heading_color": "#2B3D8F",
         "xd_heading_align": "center",
         "xd_body_color": "",
         "xd_body_align": "center",
