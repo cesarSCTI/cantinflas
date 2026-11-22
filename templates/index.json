@@ -165,7 +165,15 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": true
+        "show_focus": true,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff"
       }
     },
     "favorites": {
@@ -427,7 +435,13 @@
         "heading_mobile": 32,
         "show_focus": false,
         "collage_label_1": "Ir a Galería",
-        "collage_label_2": "Conoce sus Películas"
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "Conoce sus Películas",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff"
       }
     },
     "threepieces": {
@@ -523,17 +537,57 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": false
+        "show_focus": false,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff"
       }
     },
     "museum": {
       "type": "cantinflas-museum-banner",
-      "settings": {}
+      "settings": {
+        "use_collage": true,
+        "image_alt": "Collage del Museo Mario Moreno Cantinflas",
+        "heading": "Hay historias que merecen descubrirse a fondo",
+        "text": "<p>Descubre la historia, el legado y las diferentes facetas del hombre detrás del personaje en el Museo Mario Moreno Cantinflas.</p><p>Con más de 400 piezas, objetos originales, vestuario, fotografías, material audiovisual y reconocimientos, el museo conserva y comparte la memoria de uno de los grandes íconos de la cultura mexicana.</p>",
+        "button_label": "Visita el Museo Cantinflas",
+        "museum_page": "",
+        "button_link": "",
+        "background": "#ffffff",
+        "card_color": "#2b3d8f",
+        "heading_color": "#ffffff",
+        "text_color": "#f4ede1",
+        "accent_color": "#c22921",
+        "button_color": "#ffffff",
+        "button_text_color": "#2b3d8f",
+        "card_position": "flex-start",
+        "text_alignment": "center",
+        "card_width": 64,
+        "overlap": 176
+      }
     },
     "closing": {
       "type": "cantinflas-detail-banner",
       "settings": {
-        "image": "shopify://shop_images/CANTINFLAS_CARTOON.png"
+        "text": "¡Aquí está el",
+        "accent": "Detalle",
+        "suffix": "!",
+        "text_color": "#252525",
+        "accent_color": "#c22921",
+        "background": "#f4ede1",
+        "gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(244, 237, 225, 1) 100%)",
+        "image": "shopify://shop_images/CANTINFLAS_CARTOON.png",
+        "image_position": "right",
+        "alignment": "center",
+        "desktop_size": 70,
+        "mobile_size": 32,
+        "image_width": 128,
+        "vertical_padding": 28
       }
     }
   },
