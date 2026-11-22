@@ -198,6 +198,9 @@
         "piece1",
         "piece2"
       ],
+      "custom_css": [
+        "h2{font-size: 60px; }"
+      ],
       "settings": {
         "xd_text_controls": true,
         "xd_heading_color": "#2B3D8F",
