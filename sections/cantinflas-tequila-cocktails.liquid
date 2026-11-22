@@ -1,0 +1,368 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cantinflas-tequila.js' | asset_url }}" defer></script>
+
+<cantinflas-tequila-cocktails class="ct-tequila ct-cocktails" style="
+      --ct-bg: {{ section.settings.background }};
+      --ct-card-title: {{ section.settings.card_title_color }};
+      --ct-card-size: {{ section.settings.card_title_size }}px;
+      --ct-card-radius: {{ section.settings.radius }}px;
+      --ct-plus-bg: {{ section.settings.plus_background }};
+      --ct-plus-color: {{ section.settings.plus_color }};
+      --ct-heading-color: {{ section.settings.heading_color }};
+      --ct-heading-align: {{ section.settings.heading_align }};
+      --ct-heading-max: {{ section.settings.heading_size }}px;
+      --ct-heading-mobile: {{ section.settings.heading_mobile }}px;
+      --ct-body-color: {{ section.settings.body_color }};
+      --ct-body-align: {{ section.settings.body_align }};
+      --ct-body-size: {{ section.settings.body_size }}px;
+      --ct-pad-top: {{ section.settings.padding_top }}px;
+      --ct-pad-bottom: {{ section.settings.padding_bottom }}px;
+">
+  <div class="ct-tequila__rail">
+    {% if section.settings.heading != blank %}
+      <h2 class="ct-tequila__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="ct-tequila__copy rte">{{ section.settings.body }}</div>
+    {% endif %}
+    <div class="ct-cocktails__grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign fallback = block.settings.reference | replace: 'none', ''
+          assign dialog_id = 'TequilaCocktail-' | append: section.id | append: '-' | append: block.id
+          assign zoom_href = nil
+          if block.settings.image != blank
+            assign zoom_href = block.settings.image | image_url: width: 1600
+          elsif fallback != blank
+            assign zoom_href = 'cantinflas-xd-tequila-' | append: fallback | append: '.webp' | asset_url
+          endif
+        -%}
+        <article class="ct-cocktails__card" {{ block.shopify_attributes }}>
+          <div class="ct-cocktails__media" style="--ct-object-position: {{ block.settings.image_x }}% {{ block.settings.image_y }}%;">
+            {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: block.settings.title, sizes: '(min-width: 750px) 28vw, 90vw' %}
+            {% if zoom_href != blank %}
+              <a class="ct-cocktails__plus" href="{{ zoom_href }}" aria-haspopup="dialog" aria-controls="{{ dialog_id }}" data-tequila-dialog-open>
+                <span aria-hidden="true">+</span>
+                <span class="visually-hidden">{{ section.settings.open_label | escape }} {{ block.settings.title | escape }}</span>
+              </a>
+            {% endif %}
+          </div>
+          {% if block.settings.title != blank %}
+            <h3 style="--ct-note-color: {{ block.settings.title_color | default: section.settings.card_title_color }}">{{ block.settings.title | escape }}</h3>
+          {% endif %}
+          {% if zoom_href != blank %}
+            <dialog id="{{ dialog_id }}" class="ct-cocktails__dialog" aria-labelledby="{{ dialog_id }}-title">
+              <form method="dialog">
+                <button type="submit" aria-label="{{ section.settings.close_label | escape }}" autofocus>×</button>
+              </form>
+              <h3 id="{{ dialog_id }}-title">{{ block.settings.title | default: section.settings.open_label | escape }}</h3>
+              <div class="ct-cocktails__dialog-media">
+                {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: block.settings.title, sizes: '(min-width: 750px) 640px, 90vw' %}
+              </div>
+              {% if block.settings.details != blank %}
+                <div class="rte">{{ block.settings.details }}</div>
+              {% endif %}
+              {% if block.settings.link != blank and block.settings.link_label != blank %}
+                <a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+              {% endif %}
+            </dialog>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</cantinflas-tequila-cocktails>
+
+{% schema %}
+{
+  "name": "Cocteles Tequila",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "A tu manera, para cada ocasión"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 28,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño del texto",
+      "min": 12,
+      "max": 35,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo de la sección",
+      "default": "#36845d"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Color de los nombres",
+      "default": "#f2b846"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Tamaño de los nombres",
+      "min": 14,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Redondeo de la foto",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "plus_background",
+      "label": "Fondo del botón +",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "plus_color",
+      "label": "Color del símbolo +",
+      "default": "#180c09"
+    },
+    {
+      "type": "text",
+      "id": "open_label",
+      "label": "Etiqueta para abrir",
+      "default": "Ver"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Etiqueta para cerrar",
+      "default": "Cerrar"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "cocktail",
+      "name": "Coctel",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fotografía"
+        },
+        {
+          "type": "select",
+          "id": "reference",
+          "label": "Imagen de Adobe XD",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "margarita",
+              "label": "Margarita"
+            },
+            {
+              "value": "paloma",
+              "label": "Paloma"
+            },
+            {
+              "value": "diablo",
+              "label": "Mexican El Diablo"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "range",
+          "id": "image_x",
+          "label": "Posición horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "image_y",
+          "label": "Posición vertical",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del nombre"
+        },
+        {
+          "type": "richtext",
+          "id": "details",
+          "label": "Texto del detalle"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace del detalle"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto del enlace"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cocteles Tequila",
+      "blocks": [
+        {
+          "type": "cocktail",
+          "settings": {
+            "title": "MARGARITA",
+            "reference": "margarita"
+          }
+        },
+        {
+          "type": "cocktail",
+          "settings": {
+            "title": "PALOMA",
+            "reference": "paloma"
+          }
+        },
+        {
+          "type": "cocktail",
+          "settings": {
+            "title": "MEXICAN EL DIABLO",
+            "reference": "diablo"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

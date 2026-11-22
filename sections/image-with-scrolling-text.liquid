@@ -1,3 +1,6 @@
+{% if section.settings.xd_process_design %}
+  {% render 'cantinflas-tequila-process', section: section %}
+{% else %}
 {{ 'swiper.css' | asset_url | stylesheet_tag }}
 
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
@@ -227,12 +230,22 @@
       </div>
     </div>
   </image-with-scrolling-text>
+{% endif %}
 
 {% schema %}
 {
   "name": "t:sections.image_with_scrolling_text.name",
   "tag": "section",
   "settings": [
+    {"type":"checkbox","id":"xd_process_design","label":"Diseño Método de Producción","default":false},
+    {"type":"text","id":"xd_process_heading","label":"Título de la sección","default":"Método de Producción"},
+    {"type":"color","id":"xd_process_heading_color","label":"Color del título","default":"#36845d"},
+    {"type":"select","id":"xd_process_heading_align","label":"Alineación del título","options":[{"value":"left","label":"Izquierda"},{"value":"center","label":"Centro"},{"value":"right","label":"Derecha"}],"default":"left"},
+    {"type":"range","id":"xd_process_heading_size","label":"Tamaño del título en escritorio","min":28,"max":120,"step":1,"unit":"px","default":80},
+    {"type":"range","id":"xd_process_heading_mobile","label":"Tamaño del título en móvil","min":20,"max":60,"step":1,"unit":"px","default":36},
+    {"type":"range","id":"xd_process_body_size","label":"Tamaño del texto de los pasos","min":12,"max":35,"step":1,"unit":"px","default":22},
+    {"type":"range","id":"xd_process_radius","label":"Redondeo de las imágenes","min":0,"max":40,"step":1,"unit":"px","default":16},
+    {"type":"color_background","id":"xd_process_gradient","label":"Degradado de Método de Producción"},
     {
       "type": "header",
       "content": "t:sections.image_with_scrolling_text.settings.important-information.content",
@@ -374,6 +387,9 @@
       "name": "t:sections.image_with_scrolling_text.blocks.type.image",
       "limit": 5,
       "settings": [
+        {"type":"checkbox","id":"xd_process_photo","label":"Usar foto de cocción de XD","default":false},
+        {"type":"richtext","id":"xd_step_text","label":"Descripción del paso"},
+        {"type":"color","id":"xd_step_color","label":"Color del paso"},
         {
           "type": "header",
           "content": "t:sections.global.desktop_version"

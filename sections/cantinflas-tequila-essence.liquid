@@ -1,0 +1,292 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+{%- assign bottle = nil -%}
+{%- if section.settings.use_xd_art -%}
+  {%- assign bottle = 'bottle' -%}
+{%- endif -%}
+
+<div class="ct-tequila ct-essence" style="
+      --ct-bg: {{ section.settings.background }};
+      --ct-circle: {{ section.settings.circle_color }};
+      --ct-note-color: {{ section.settings.note_color }};
+      --ct-note-size: {{ section.settings.note_size }}px;
+      --ct-heading-color: {{ section.settings.heading_color }};
+      --ct-heading-align: {{ section.settings.heading_align }};
+      --ct-heading-max: {{ section.settings.heading_size }}px;
+      --ct-heading-mobile: {{ section.settings.heading_mobile }}px;
+      --ct-body-color: {{ section.settings.body_color }};
+      --ct-body-align: {{ section.settings.body_align }};
+      --ct-body-size: {{ section.settings.body_size }}px;
+      --ct-pad-top: {{ section.settings.padding_top }}px;
+      --ct-pad-bottom: {{ section.settings.padding_bottom }}px;
+">
+  <div class="ct-tequila__rail">
+    {% if section.settings.heading != blank %}
+      <h2 class="ct-tequila__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="ct-tequila__copy rte">{{ section.settings.body }}</div>
+    {% endif %}
+    <div class="ct-essence__grid">
+      <div class="ct-essence__bottle">
+        {% render 'cantinflas-tequila-image', image: section.settings.bottle, fallback: bottle, alt: product.title, sizes: '(min-width: 750px) 30vw, 70vw' %}
+      </div>
+      {% for block in section.blocks %}
+        {% assign fallback = block.settings.reference | replace: 'none', '' %}
+        <div class="ct-essence__note" {{ block.shopify_attributes }}>
+          <div class="ct-essence__icon">
+            {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: '', sizes: '130px' %}
+          </div>
+          <h3>{{ block.settings.title | escape }}</h3>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Esencia del Tequila",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "Nuestra esencia, en cada botella."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#2b3d8f"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 28,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color del texto",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño del texto",
+      "min": 12,
+      "max": 35,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "image_picker",
+      "id": "bottle",
+      "label": "Imagen central de la botella"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_xd_art",
+      "label": "Usar la botella original de XD",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo de la sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "circle_color",
+      "label": "Fondo circular",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Color de los atributos",
+      "default": "#252525"
+    },
+    {
+      "type": "range",
+      "id": "note_size",
+      "label": "Tamaño de los atributos",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "attribute",
+      "name": "Atributo",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Título"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen circular"
+        },
+        {
+          "type": "select",
+          "id": "reference",
+          "label": "Imagen de Adobe XD",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "essence-agave",
+              "label": "Agave azul Weber"
+            },
+            {
+              "value": "essence-process",
+              "label": "Proceso artesanal"
+            },
+            {
+              "value": "essence-tradition",
+              "label": "Tradición tequilera"
+            },
+            {
+              "value": "essence-quality",
+              "label": "Calidad"
+            }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Esencia del Tequila",
+      "blocks": [
+        {
+          "type": "attribute",
+          "settings": {
+            "title": "100% Agave Azul\nWeber",
+            "reference": "essence-agave"
+          }
+        },
+        {
+          "type": "attribute",
+          "settings": {
+            "title": "Respeto por el proceso\nartesanal",
+            "reference": "essence-process"
+          }
+        },
+        {
+          "type": "attribute",
+          "settings": {
+            "title": "Tradición tequilera\nmexicana",
+            "reference": "essence-tradition"
+          }
+        },
+        {
+          "type": "attribute",
+          "settings": {
+            "title": "Compromiso con la\ncalidad",
+            "reference": "essence-quality"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

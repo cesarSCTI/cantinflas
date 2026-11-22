@@ -1,0 +1,319 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+
+<div class="ct-tequila ct-tasting" style="
+      --ct-bg: {{ section.settings.background }};
+      --ct-card-bg: {{ section.settings.card_background }};
+      --ct-card-title: {{ section.settings.card_title_color }};
+      --ct-card-size: {{ section.settings.card_title_size }}px;
+      --ct-card-radius: {{ section.settings.radius }}px;
+      --ct-heading-color: {{ section.settings.heading_color }};
+      --ct-heading-align: {{ section.settings.heading_align }};
+      --ct-heading-max: {{ section.settings.heading_size }}px;
+      --ct-heading-mobile: {{ section.settings.heading_mobile }}px;
+      --ct-body-color: {{ section.settings.body_color }};
+      --ct-body-align: {{ section.settings.body_align }};
+      --ct-body-size: {{ section.settings.body_size }}px;
+      --ct-pad-top: {{ section.settings.padding_top }}px;
+      --ct-pad-bottom: {{ section.settings.padding_bottom }}px;
+">
+  <div class="ct-tequila__rail">
+    {% if section.settings.heading != blank %}
+      <h2 class="ct-tequila__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    <div class="ct-tasting__grid">
+      {% for block in section.blocks %}
+        {% assign fallback = block.settings.reference | replace: 'none', '' %}
+        <article class="ct-tasting__card" {{ block.shopify_attributes }}>
+          <div class="ct-tasting__media" style="--ct-object-position: {{ block.settings.image_x }}% {{ block.settings.image_y }}%;">
+            {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: block.settings.alt, sizes: '(min-width: 750px) 25vw, 95vw' %}
+          </div>
+          <div class="ct-tasting__copy">
+            {% if block.settings.title != blank %}
+              <h3 style="--ct-note-color: {{ block.settings.title_color | default: section.settings.card_title_color }}">{{ block.settings.title | escape }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="ct-tequila__copy rte" style="--ct-body-color: {{ block.settings.text_color | default: section.settings.body_color }}">{{ block.settings.text }}</div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Perfil de cata",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "Un perfil que se disfruta\nen cada sorbo"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#c22921"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 28,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo de la sección",
+      "default": "#f4ede1"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Fondo de las tarjetas",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Color de los títulos",
+      "default": "#252525"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Tamaño de los títulos",
+      "min": 14,
+      "max": 42,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color de las notas",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación de las notas",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño de las notas",
+      "min": 12,
+      "max": 35,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Redondeo de las tarjetas",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Nota de cata",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Descripción"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fotografía"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Texto alternativo"
+        },
+        {
+          "type": "select",
+          "id": "reference",
+          "label": "Imagen de Adobe XD",
+          "options": [
+            {
+              "value": "none",
+              "label": "Ninguna"
+            },
+            {
+              "value": "vista",
+              "label": "Vista"
+            },
+            {
+              "value": "aroma",
+              "label": "Aroma"
+            },
+            {
+              "value": "sabor",
+              "label": "Sabor"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "range",
+          "id": "image_x",
+          "label": "Posición horizontal",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "image_y",
+          "label": "Posición vertical",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del título"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color de la descripción"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Perfil de cata",
+      "blocks": [
+        {
+          "type": "note",
+          "settings": {
+            "title": "VISTA",
+            "text": "<p>Cristalino y brillante.</p>",
+            "reference": "vista",
+            "alt": "Reflejos en el tequila cristalino"
+          }
+        },
+        {
+          "type": "note",
+          "settings": {
+            "title": "AROMA",
+            "text": "<p>Agave cocido, cítricos, notas herbales y fondo especiado.</p>",
+            "reference": "aroma",
+            "alt": "Agave cocido con cítricos y hierbas"
+          }
+        },
+        {
+          "type": "note",
+          "settings": {
+            "title": "SABOR",
+            "text": "<p>Suave, fresco y equilibrado, con agave cocido como protagonista.</p>",
+            "reference": "sabor",
+            "alt": "Fibras de agave cocido"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

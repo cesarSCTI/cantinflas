@@ -21,6 +21,9 @@
 
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
 {{ 'module-product-gallery.css' | asset_url | stylesheet_tag }}
+{% if section.settings.xd_tequila_design %}
+  {{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings.text_color | color_to_rgb %}
@@ -337,7 +340,7 @@
 <section
   data-section-id="{{ section.id }}"
   data-product-handle="{{ product.handle }}"
-  class="wt-product__wrapper {{ wrapper_class }} wt-product__wrapper--{{ section.settings.desktop-layout }}"
+  class="wt-product__wrapper {{ wrapper_class }} wt-product__wrapper--{{ section.settings.desktop-layout }}{% if section.settings.xd_tequila_design %} ct-tequila-main{% endif %}"
   desktop-media-size="{% if section.settings.desktop-layout != 'fashion' %}{{ section.settings.desktop-media-size }}{% else %}normal{% endif %}"
   desktop-layout="{{ section.settings.desktop-layout }}"
   mobile-image-size="{{ section.settings.mobile-image }}"
@@ -928,11 +931,27 @@
               {% render block %}
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
+            {%- when 'xd_tequila_bundles' -%}
+              <div class="ct-tequila-bundles" {{ block.shopify_attributes }}>
+                <h2>{{ block.settings.heading | escape }}</h2>
+                {% assign bundle_names = block.settings.names | newline_to_br | split: '<br />' %}
+                {% for bundle_name in bundle_names %}
+                  {% assign bundle_title = bundle_name | strip %}
+                  {% if bundle_title != blank %}
+                    <div class="ct-tequila-bundles__row">
+                      {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: 'bottle', alt: '', sizes: '34px' %}
+                      <strong>{{ bundle_title | escape }}</strong>
+                      <small>{{ block.settings.status | escape }}</small>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
             {%- when 'title' -%}
               <div
                 data-block-id="{{ block.id }}"
                 class="{% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
               >
+                {% if block.settings.brand != blank %}
                 <div class="wt-product__brand ">
                   {% if block.settings.enable_vendor_link %}
                     <a class="vendor-link" href="/collections/vendors?q={{ product.vendor }}">
@@ -944,7 +963,8 @@
                   </a>
                   {% endif %}
                 </div>
-                <h1 class="wt-product__name">{{ product.title }}</h1>
+                {% endif %}
+                <h1 class="wt-product__name">{{ block.settings.xd_display_title | default: product.title | escape }}</h1>
               </div>
             {%- when 'price' -%}
               <div
@@ -1766,6 +1786,7 @@
               {% render 'popup', product: product, id: block.id, shopify_attributes: block.shopify_attributes, size_icon: block.settings.size_icon, size_link: block.settings.size_link, size_page: block.settings.size_page, size_content: block.settings.size_content, metafield_name: block.settings.metafield, enable-striped-rows: block.settings.enable-striped-rows %}
             {%- when 'buy_buttons' -%}
               <div
+                {% if section.settings.xd_tequila_design %}id="tequila-comprar" tabindex="-1"{% endif %}
                 class="wt-product__add-to-cart_form main-product__buy-buttons--container {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if section.settings.desktop-media-size == 'large' %}large{% endif %}"
                 style="display:flex;justify-content:center;align-items:center"
                 data-block-id="{{ block.id }}"
@@ -2727,6 +2748,7 @@
   "tag": "section",
   "class": "product-section",
   "settings": [
+    {"type":"checkbox","id":"xd_tequila_design","label":"Estilo de ficha Tequila","default":false},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
     {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
@@ -3465,10 +3487,22 @@
       "limit": 1
     },
     {
+      "type": "xd_tequila_bundles",
+      "name": "Llévate el paquete",
+      "limit": 1,
+      "settings": [
+        {"type":"text","id":"heading","label":"Título","default":"Llévate el paquete"},
+        {"type":"textarea","id":"names","label":"Paquetes, uno por línea","default":"Dupacks\nTripacks\nCaja de 6 botellas"},
+        {"type":"text","id":"status","label":"Estado visible","default":"Próximamente"},
+        {"type":"image_picker","id":"image","label":"Imagen de los paquetes"}
+      ]
+    },
+    {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
       "limit": 1,
       "settings": [
+        {"type":"text","id":"xd_display_title","label":"Título visible alternativo"},
         {
           "type": "text",
           "id": "brand",

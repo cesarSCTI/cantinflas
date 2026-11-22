@@ -1,0 +1,283 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign bottle = nil
+  assign signature = nil
+  if section.settings.use_xd_art
+    assign bottle = 'bottle'
+    assign signature = 'signature'
+  endif
+  assign button_link = section.settings.button_link | default: '#tequila-comprar'
+-%}
+
+<div class="ct-tequila ct-tequila-close" style="
+      --ct-bg: {{ section.settings.background }};
+      --ct-button-bg: {{ section.settings.button_background }};
+      --ct-button-color: {{ section.settings.button_color }};
+      --ct-button-align: {{ section.settings.button_align }};
+      --ct-legal-color: {{ section.settings.legal_color }};
+      --ct-legal-align: {{ section.settings.legal_align }};
+      --ct-heading-color: {{ section.settings.heading_color }};
+      --ct-heading-align: {{ section.settings.heading_align }};
+      --ct-heading-max: {{ section.settings.heading_size }}px;
+      --ct-heading-mobile: {{ section.settings.heading_mobile }}px;
+      --ct-body-color: {{ section.settings.body_color }};
+      --ct-body-align: {{ section.settings.body_align }};
+      --ct-body-size: {{ section.settings.body_size }}px;
+      --ct-pad-top: {{ section.settings.padding_top }}px;
+      --ct-pad-bottom: {{ section.settings.padding_bottom }}px;
+">
+  <div class="ct-tequila-close__inner">
+    <div class="ct-tequila-close__bottle">
+      {% render 'cantinflas-tequila-image', image: section.settings.bottle, fallback: bottle, alt: product.title, sizes: '(min-width: 750px) 50vw, 66vw' %}
+    </div>
+    <div class="ct-tequila-close__content">
+      {% if section.settings.body != blank %}
+        <div class="ct-tequila__copy rte">{{ section.settings.body }}</div>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="ct-tequila__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.button_label != blank and button_link != blank %}
+        <div class="ct-tequila-close__action">
+          <a href="{{ button_link }}" class="ct-tequila-close__button">{{ section.settings.button_label | escape }}</a>
+        </div>
+      {% endif %}
+      {% if section.settings.signature != blank or signature != blank %}
+        <div class="ct-tequila-close__signature">
+          {% render 'cantinflas-tequila-image', image: section.settings.signature, fallback: signature, alt: 'Firma de Mario Moreno', sizes: '245px' %}
+        </div>
+      {% endif %}
+      {% if section.settings.legal != blank %}
+        <div class="ct-tequila-close__legal rte">{{ section.settings.legal }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cierre Tequila",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "Más que un tequila,\nun legado que se\ncomparte."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#f2b846"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 28,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 86
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño del texto",
+      "min": 12,
+      "max": 35,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "image_picker",
+      "id": "bottle",
+      "label": "Imagen de la botella"
+    },
+    {
+      "type": "image_picker",
+      "id": "signature",
+      "label": "Imagen de la firma"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_xd_art",
+      "label": "Usar botella y firma de XD",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo de la sección",
+      "default": "#c22921"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Comprar ahora"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace de compra"
+    },
+    {
+      "type": "select",
+      "id": "button_align",
+      "label": "Alineación del botón",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Fondo del botón",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Color del botón",
+      "default": "#ffffff"
+    },
+    {
+      "type": "richtext",
+      "id": "legal",
+      "label": "Aviso inferior"
+    },
+    {
+      "type": "color",
+      "id": "legal_color",
+      "label": "Color del aviso",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "legal_align",
+      "label": "Alineación del aviso",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cierre Tequila"
+    }
+  ]
+}
+{% endschema %}

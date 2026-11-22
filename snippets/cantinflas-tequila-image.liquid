@@ -1,0 +1,55 @@
+{%- assign sizes = sizes | default: '100vw' -%}
+{%- if image != blank -%}
+  {%- assign image_alt = image.alt | default: alt -%}
+  {{-
+    image
+    | image_url: width: 1800
+    | image_tag: class: image_class, loading: 'lazy', widths: '240, 480, 720, 960, 1280, 1800', sizes: sizes, alt: image_alt
+  -}}
+{%- elsif fallback != blank -%}
+  {%- liquid
+    assign filename = 'cantinflas-xd-tequila-' | append: fallback | append: '.webp'
+    case fallback
+      when 'tribute-portrait'
+        assign dimensions = '2048x2048'
+      when 'tribute-bottle'
+        assign dimensions = '1138x1138'
+      when 'bottle'
+        assign dimensions = '1945x3604'
+      when 'coccion'
+        assign dimensions = '2553x1702'
+      when 'essence-agave'
+        assign dimensions = '425x283'
+      when 'essence-process', 'essence-tradition'
+        assign dimensions = '378x252'
+      when 'essence-quality'
+        assign dimensions = '252x378'
+      when 'vista'
+        assign dimensions = '1097x588'
+      when 'aroma'
+        assign dimensions = '1671x941'
+      when 'sabor'
+        assign dimensions = '800x534'
+      when 'margarita'
+        assign dimensions = '2180x1453'
+      when 'paloma'
+        assign dimensions = '2551x1700'
+      when 'diablo'
+        assign dimensions = '1200x800'
+      when 'signature'
+        assign dimensions = '640x182'
+    endcase
+    assign dimensions = dimensions | split: 'x'
+  -%}
+  <img
+    class="{{ image_class }}"
+    src="{{ filename | asset_url }}"
+    alt="{{ alt | escape }}"
+    width="{{ dimensions[0] }}"
+    height="{{ dimensions[1] }}"
+    loading="lazy"
+    decoding="async"
+  >
+{%- else -%}
+  {{- 'image' | placeholder_svg_tag: 'ct-tequila__placeholder' -}}
+{%- endif -%}

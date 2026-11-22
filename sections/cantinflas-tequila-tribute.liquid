@@ -1,0 +1,293 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign portrait = nil
+  assign bottle = nil
+  if section.settings.use_xd_art
+    assign portrait = 'tribute-portrait'
+    assign bottle = 'tribute-bottle'
+  endif
+-%}
+
+<div
+  class="ct-tequila ct-tribute"
+  style="
+      --ct-bg: {{ section.settings.background }};
+      --ct-caption-bg: {{ section.settings.caption_background }};
+      --ct-caption-color: {{ section.settings.caption_color }};
+      --ct-caption-accent: {{ section.settings.caption_accent_color }};
+      --ct-caption-align: {{ section.settings.caption_align }};
+      --ct-caption-size: {{ section.settings.caption_size }}px;
+      --ct-portrait-angle: {{ section.settings.portrait_angle }}deg;
+      --ct-bottle-angle: {{ section.settings.bottle_angle }}deg;
+      --ct-heading-color: {{ section.settings.heading_color }};
+      --ct-heading-align: {{ section.settings.heading_align }};
+      --ct-heading-max: {{ section.settings.heading_size }}px;
+      --ct-heading-mobile: {{ section.settings.heading_mobile }}px;
+      --ct-body-color: {{ section.settings.body_color }};
+      --ct-body-align: {{ section.settings.body_align }};
+      --ct-body-size: {{ section.settings.body_size }}px;
+      --ct-pad-top: {{ section.settings.padding_top }}px;
+      --ct-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="ct-tribute__inner">
+    <div class="ct-tribute__art">
+      <div class="ct-tribute__portrait">
+        {% render 'cantinflas-tequila-image', image: section.settings.portrait, fallback: portrait, alt: 'Mario Moreno Cantinflas', sizes: '(min-width: 750px) 34vw, 55vw' %}
+      </div>
+      <div class="ct-tribute__bottle">
+        {% render 'cantinflas-tequila-image', image: section.settings.bottle, fallback: bottle, alt: 'Tequila Cantinflas Blanco sobre fondo dorado', sizes: '(min-width: 750px) 18vw, 33vw' %}
+      </div>
+    </div>
+    <div class="ct-tribute__panel">
+      <div class="ct-tribute__copy">
+        {% if section.settings.heading != blank %}
+          <h2 class="ct-tequila__heading">{{ section.settings.heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.body != blank %}
+          <div class="ct-tequila__copy rte">{{ section.settings.body }}</div>
+        {% endif %}
+      </div>
+    </div>
+    {% if section.settings.caption != blank or section.settings.caption_accent != blank %}
+      <p class="ct-tribute__caption">
+        <span>{{ section.settings.caption | escape }}</span>
+        <strong>{{ section.settings.caption_accent | escape }}</strong>
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homenaje Tequila",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Título",
+      "default": "Un homenaje al\nhombre que hizo\nsonreír al mundo"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#f2b846"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 28,
+      "max": 120,
+      "step": 1,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación del texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño del texto",
+      "min": 12,
+      "max": 35,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait",
+      "label": "Foto de Cantinflas"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottle",
+      "label": "Foto de la botella"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_xd_art",
+      "label": "Usar imágenes originales de XD",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "portrait_angle",
+      "label": "Rotación de la foto principal",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "°",
+      "default": -6
+    },
+    {
+      "type": "range",
+      "id": "bottle_angle",
+      "label": "Rotación de la foto secundaria",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "°",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo del homenaje",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "caption_background",
+      "label": "Fondo de la franja",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Texto de la franja",
+      "default": "Porque algunos legados no solo se cuentan…"
+    },
+    {
+      "type": "text",
+      "id": "caption_accent",
+      "label": "Remate de la franja",
+      "default": "SE BRINDAN"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Color del texto de la franja",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "caption_accent_color",
+      "label": "Color del remate",
+      "default": "#c22921"
+    },
+    {
+      "type": "select",
+      "id": "caption_align",
+      "label": "Alineación de la franja",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "caption_size",
+      "label": "Tamaño del remate",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 90
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homenaje Tequila"
+    }
+  ]
+}
+{% endschema %}

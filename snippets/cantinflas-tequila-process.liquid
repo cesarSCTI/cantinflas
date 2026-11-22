@@ -1,0 +1,79 @@
+{{ 'cantinflas-tequila.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cantinflas-tequila.js' | asset_url }}" defer></script>
+
+<cantinflas-tequila-process
+  class="ct-tequila ct-process{% if section.settings.layout == 'text_first' %} ct-process--reversed{% endif %}"
+  style="
+    --ct-bg: {{ section.settings.background_color }};
+    --ct-gradient: {{ section.settings.xd_process_gradient | default: 'none' }};
+    --ct-body-color: {{ section.settings['color-body-text'] }};
+    --ct-body-size: {{ section.settings.xd_process_body_size }}px;
+    --ct-body-align: {{ section.settings.desktop_text_horizontal_position }};
+    --ct-mobile-align: {{ section.settings.mobile_text_horizontal_position }};
+    --ct-heading-color: {{ section.settings.xd_process_heading_color }};
+    --ct-heading-max: {{ section.settings.xd_process_heading_size }}px;
+    --ct-heading-mobile: {{ section.settings.xd_process_heading_mobile }}px;
+    --ct-heading-align: {{ section.settings.xd_process_heading_align }};
+    --ct-card-radius: {{ section.settings.xd_process_radius }}px;
+    --ct-pad-top: {{ section.settings.margin-top }}px;
+    --ct-pad-bottom: {{ section.settings.margin-bottom }}px;
+  "
+>
+  <div class="ct-tequila__rail">
+    {% if section.settings.xd_process_heading != blank %}
+      <h2 class="ct-tequila__heading">{{ section.settings.xd_process_heading | escape }}</h2>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="ct-process__layout">
+        <div class="ct-process__gallery">
+          {% for block in section.blocks %}
+            {% assign fallback = nil %}
+            {% if block.settings.xd_process_photo %}
+              {% assign fallback = 'coccion' %}
+            {% endif %}
+            <div class="ct-process__photo" data-tequila-process-photo{% if forloop.first %} data-active{% else %} aria-hidden="true"{% endif %}>
+              {% render 'cantinflas-tequila-image', image: block.settings.desktop_image, fallback: fallback, alt: block.settings.heading, sizes: '40vw' %}
+            </div>
+          {% endfor %}
+        </div>
+        <div class="ct-process__steps">
+          {% for block in section.blocks %}
+            {%- liquid
+              assign mobile_image = block.settings.mobile_image | default: block.settings.desktop_image
+              assign fallback = nil
+              if block.settings.xd_process_photo
+                assign fallback = 'coccion'
+              endif
+            -%}
+            <article
+              class="ct-process__step"
+              data-tequila-step
+              {% if forloop.first %}data-active{% endif %}
+              style="--ct-step-size: {{ block.settings.size_heading | divided_by: 100.0 }}; --ct-step-size-mobile: {{ block.settings.size_heading_mobile | divided_by: 100.0 }}; --ct-body-color: {{ block.settings.xd_step_color | default: section.settings['color-body-text'] }};"
+              {{ block.shopify_attributes }}
+            >
+              <div class="ct-process__photo ct-process__photo--mobile">
+                {% render 'cantinflas-tequila-image', image: mobile_image, fallback: fallback, alt: block.settings.heading, sizes: '90vw' %}
+              </div>
+              <div class="ct-process__step-copy">
+                {% if block.settings.heading != blank %}
+                  <h3>{{ block.settings.heading | escape }}</h3>
+                {% endif %}
+                {% if block.settings.xd_step_text != blank %}
+                  <div class="ct-tequila__copy rte">{{ block.settings.xd_step_text }}</div>
+                {% elsif block.settings.text != blank %}
+                  <div class="ct-tequila__copy"><p>{{ block.settings.text | escape }}</p></div>
+                {% endif %}
+                {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                  <a class="ct-process__link" href="{{ block.settings.button_link }}">
+                    {{ block.settings.button_label | escape }}
+                  </a>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</cantinflas-tequila-process>
