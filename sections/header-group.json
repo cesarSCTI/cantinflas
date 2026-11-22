@@ -76,6 +76,7 @@
       ],
       "settings": {
         "xd_text_controls": true,
+        "xd_overlay_logo": true,
         "xd_nav_color": "#252525",
         "xd_icons_color": "#252525",
         "layout": "option_5",

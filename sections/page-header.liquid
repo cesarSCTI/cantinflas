@@ -471,7 +471,7 @@
         href="{{ routes.root_url }}"
         class="wt-header__logo__link"
         style="
-          {% if section.settings.logo %}
+          {% if section.settings.logo or section.settings.transparent_logo %}
           --logo-width: {{ section.settings.mobile_screen_logo_width }}px;
           --logo-width-desk: {{ section.settings.large_screen_logo_width }}px;
           {% else %}
@@ -480,8 +480,15 @@
           {% endif %}
         "
       >
-        {%- if xd_overlay and section.settings.transparent_logo != blank -%}
-          {{ section.settings.transparent_logo | image_url: width: 360 | image_tag: class: 'cantinflas-header-overlay-logo', widths: '90, 180, 360', alt: shop.name }}
+        {%- if xd_overlay -%}
+          {% assign overlay_logo = section.settings.transparent_logo | default: section.settings.logo %}
+          {% if overlay_logo != blank %}
+            {% assign overlay_logo_width = section.settings.large_screen_logo_width | times: 2 %}
+            {% assign overlay_logo_alt = overlay_logo.alt | default: shop.name %}
+            {{ overlay_logo | image_url: width: overlay_logo_width | image_tag: class: 'cantinflas-header-overlay-logo', alt: overlay_logo_alt }}
+          {% else %}
+            {{ shop.name | escape }}
+          {% endif %}
         {% elsif section.settings.logo != blank or section.settings.transparent_logo != blank %}
           {% if section.settings.logo != blank %}
             {%- assign large_image_size = section.settings.large_screen_logo_width -%}
@@ -692,7 +699,7 @@
     {"type": "select", "id": "xd_overlay", "label": "Superponer encabezado", "default": "hero", "options": [{"value": "hero", "label": "Inicio, Museo, Mundo y Contacto"}, {"value": "all", "label": "Todas las páginas"}, {"value": "off", "label": "Dentro del flujo"}]},
     {"type": "color", "id": "xd_overlay_bg", "label": "Fondo en modo superpuesto", "default": "transparent"},
     {"type": "color", "id": "xd_overlay_text", "label": "Texto e iconos superpuestos", "default": "#ffffff"},
-    {"type": "checkbox", "id": "xd_overlay_logo", "label": "Mostrar logo en el encabezado superpuesto", "default": false},
+    {"type": "checkbox", "id": "xd_overlay_logo", "label": "Mostrar logo en el encabezado superpuesto", "default": true},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_nav_color", "label": "Color · Navegación"},
     {"type": "select", "id": "xd_nav_align", "label": "Alineación · Navegación", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
