@@ -14,6 +14,13 @@
     "footer": {
       "type": "page-footer",
       "blocks": {
+        "text_rBVikd": {
+          "type": "text",
+          "settings": {
+            "heading_text": "Contáctanos",
+            "text": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a><br/><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>"
+          }
+        },
         "menu_TyWCqJ": {
           "type": "menu",
           "settings": {
@@ -26,13 +33,6 @@
           "settings": {
             "heading_links": "Compra con Nosotros",
             "links": "aviso"
-          }
-        },
-        "text_rBVikd": {
-          "type": "text",
-          "settings": {
-            "heading_text": "Contáctanos",
-            "text": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a><br><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>"
           }
         },
         "newsletter": {
@@ -55,9 +55,23 @@
         ".wt-footer__image {margin-bottom: 0px !important;}"
       ],
       "settings": {
+        "xd_footer_logo": "shopify://shop_images/Logo-Cantinflas_Footer.png",
+        "xd_use_design_logo": false,
+        "big-logo-width": 100,
+        "xd_footer_bg": "#252525",
+        "xd_footer_accent": "#f2b846",
+        "xd_footer_button": "#c22921",
+        "xd_footer_button_text": "#ffffff",
+        "xd_social_label": "Redes Sociales",
+        "xd_email_label": "Tu correo electrónico",
+        "xd_subscribe": "Suscribirme",
+        "xd_privacy": "<p>Al proporcionarnos tu correo electrónico, aceptas recibir nuestros correos electrónicos de marketing, incluidos correos electrónicos exclusivos sobre nuevos lanzamientos, ofertas emblemáticas y otros anuncios interesantes.</p>",
+        "xd_newsletter_align": "center",
         "xd_text_controls": true,
         "xd_heading_color": "#ffffff",
+        "xd_heading_align": "left",
         "xd_body_color": "#f4ede1",
+        "xd_body_align": "left",
         "show-scroll-effect": false,
         "show-social-media-icons": true,
         "show_country_selector": false,
@@ -69,13 +83,8 @@
         "show-copyright": true,
         "text": "© Copyright 2026 Mundo Cantinflas – Todos los Derechos Reservados.",
         "big-logo": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
-        "big-logo-width": 100,
         "margin-top": 0,
-        "margin-bottom": 20,
-        "xd_use_design_logo": true,
-        "xd_heading_align": "left",
-        "xd_body_align": "left",
-        "xd_privacy": "<p>Al proporcionarnos tu correo electrónico, aceptas recibir nuestros correos electrónicos de marketing, incluidos correos electrónicos exclusivos sobre nuevos lanzamientos, ofertas emblemáticas y otros anuncios interesantes.</p>"
+        "margin-bottom": 20
       }
     }
   },
