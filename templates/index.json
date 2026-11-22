@@ -124,58 +124,39 @@
       }
     },
     "story": {
-      "type": "cantinflas-editorial",
+      "type": "parallax",
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "#252525",
+        "background_color": "#ffffff"
+      },
       "blocks": {
-        "piece1": {
-          "type": "item",
+        "title": {
+          "type": "heading",
           "settings": {
-            "heading": "Detrás de Cantinflas estaba Mario Moreno",
-            "text": "<p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>",
-            "label": "Conoce su historia",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "center",
-            "text_align": "center",
-            "button_align": "center",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "heading": "¡Quiubo, Chato!"
+          }
+        },
+        "copy": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Detrás de Cantinflas estaba Mario Moreno</strong></p><p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Conoce su historia",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "piece1"
-      ],
-      "settings": {
-        "heading": "¡Quiubo, Chato!",
-        "intro": "",
-        "layout": "duo",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#c22921",
-        "heading_align": "center",
-        "intro_align": "center",
-        "intro_color": "",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "show_focus": true,
-        "collage_label_1": "",
-        "collage_link_1": "",
-        "collage_button_bg_1": "#36845d",
-        "collage_button_text_1": "#ffffff",
-        "collage_label_2": "",
-        "collage_link_2": "",
-        "collage_button_bg_2": "#252525",
-        "collage_button_text_2": "#ffffff"
-      }
+        "title",
+        "copy",
+        "button"
+      ]
     },
     "favorites": {
       "type": "home-product-tabs",
@@ -426,6 +407,7 @@
         "heading": "Universo Cantinflas",
         "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
         "layout": "collage",
+        "collage_motion": true,
         "background": "#f2b846",
         "text_color": "#252525",
         "accent": "#c22921",

@@ -1,4 +1,5 @@
 <section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}"
+  {% if section.settings.layout == 'collage' and section.settings.collage_motion %}data-collage-motion{% endif %}
   style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
   <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
     {% if section.settings.layout == 'collage' %}<div class="cantinflas-editorial__collage-copy">{% endif %}
@@ -302,7 +303,53 @@
   .cantinflas-editorial__hotspot-panel h3 { margin: 0 0 .6rem; color: var(--ce-panel-heading); text-align: start; }
   .cantinflas-editorial__hotspot-panel :is(p, li) { color: inherit; }
   .cantinflas-editorial__hotspot-panel a { color: var(--ce-panel-link); text-decoration: underline; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cantinflas-editorial[data-collage-motion].is-collage-moving .cantinflas-editorial__media :is(img, svg) {
+      animation: cantinflas-collage-float 4.4s ease-in-out var(--ce-float-delay, 0s);
+    }
+    .cantinflas-editorial[data-collage-motion] .cantinflas-editorial__item:nth-child(even) {
+      --ce-float-delay: .24s;
+      --ce-float-x: 4px;
+      --ce-float-y: 6px;
+    }
+    .cantinflas-editorial[data-collage-motion] .cantinflas-editorial__item:nth-child(3n) {
+      --ce-float-delay: .48s;
+      --ce-float-x: -5px;
+      --ce-float-y: -4px;
+    }
+    @keyframes cantinflas-collage-float {
+      0%, 100% { translate: 0 0; }
+      48% { translate: var(--ce-float-x, -3px) var(--ce-float-y, -7px); }
+    }
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  if ('IntersectionObserver' in window) {
+    const collageSelector = '[data-collage-motion]';
+    const collageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) target.classList.add('is-collage-moving');
+        else target.classList.remove('is-collage-moving');
+      });
+    }, { threshold: 0.16 });
+
+    const observeCollages = (root) => {
+      root.querySelectorAll(collageSelector).forEach((section) => collageObserver.observe(section));
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => observeCollages(document), { once: true });
+    } else {
+      observeCollages(document);
+    }
+    document.addEventListener('shopify:section:load', (event) => observeCollages(event.target));
+    document.addEventListener('shopify:section:unload', (event) => {
+      event.target.querySelectorAll(collageSelector).forEach((section) => collageObserver.unobserve(section));
+    });
+  }
+{% endjavascript %}
 
 {% schema %}
 {
@@ -493,6 +540,13 @@
       "id": "collage_button_text_2",
       "label": "Color del texto del botón 2",
       "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "collage_motion",
+      "label": "Animar las imágenes del collage",
+      "default": false,
+      "visible_if": "{{ section.settings.layout == 'collage' }}"
     }
   ],
   "blocks": [
