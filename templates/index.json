@@ -542,6 +542,9 @@
         "piece2",
         "piece3"
       ],
+      "custom_css": [
+        "h3{margin: 16px;}"
+      ],
       "settings": {
         "heading": "Tres piezas, un mismo legado",
         "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>",
