@@ -1,11 +1,33 @@
 <section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}"
   style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
-  <div class="cantinflas-editorial__inner">
+  <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
+    {% if section.settings.layout == 'collage' %}<div class="cantinflas-editorial__collage-copy">{% endif %}
     {% if section.settings.heading != blank %}
       <h2 class="cantinflas-editorial__heading">{{ section.settings.heading | escape }}</h2>
     {% endif %}
     {% if section.settings.intro != blank %}
       <div class="cantinflas-editorial__intro rte">{{ section.settings.intro }}</div>
+    {% endif %}
+    {% if section.settings.layout == 'collage' %}
+        <div class="cantinflas-editorial__collage-actions">
+          {% for number in (1..2) %}
+            {% assign label_setting = 'collage_label_' | append: number %}
+            {% assign link_setting = 'collage_link_' | append: number %}
+            {% assign background_setting = 'collage_button_bg_' | append: number %}
+            {% assign text_setting = 'collage_button_text_' | append: number %}
+            {% assign label = section.settings[label_setting] %}
+            {% assign link = section.settings[link_setting] %}
+            {% if label != blank %}
+              {% capture action_style %}--ce-action-bg: {{ section.settings[background_setting] }}; --ce-action-text: {{ section.settings[text_setting] }};{% endcapture %}
+              {% if link != blank %}
+                <a class="cantinflas-editorial__collage-button" href="{{ link }}" style="{{ action_style }}">{{ label | escape }}</a>
+              {% else %}
+                <button class="cantinflas-editorial__collage-button" type="button" disabled style="{{ action_style }}">{{ label | escape }}</button>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     {% endif %}
     {% if section.settings.show_focus or section.settings.focus_image != blank %}
       <div class="cantinflas-editorial__focus">
@@ -114,9 +136,6 @@
   @media (min-width: 900px) {
     .cantinflas-editorial h2 { font-size: var(--ce-desktop); }
     .cantinflas-editorial--duo .cantinflas-editorial__item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 4vw; align-items: center; }
-    .cantinflas-editorial--collage .cantinflas-editorial__items { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2vw; align-items: center; }
-    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__media { transform: rotate(3deg); }
-    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(odd) .cantinflas-editorial__media { transform: rotate(-3deg); }
     .cantinflas-editorial--orbit .cantinflas-editorial__inner, .cantinflas-editorial--hotspots .cantinflas-editorial__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; column-gap: 4rem; }
     .cantinflas-editorial--orbit :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro), .cantinflas-editorial--hotspots :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro) { grid-column: 1 / -1; }
     .cantinflas-editorial--orbit .cantinflas-editorial__items { grid-template-columns: repeat(2,minmax(0, 1fr)); }
@@ -134,18 +153,6 @@
     .cantinflas-editorial--duo :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro) { grid-column: 1 / -1; }
     .cantinflas-editorial--duo .cantinflas-editorial__item .cantinflas-editorial__media { grid-column: 2; grid-row: 1; }
     .cantinflas-editorial--duo .cantinflas-editorial__item .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
-    .cantinflas-editorial--collage .cantinflas-editorial__inner {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      column-gap: 2vw;
-      row-gap: 2rem;
-      align-items: center;
-    }
-    .cantinflas-editorial--collage .cantinflas-editorial__items { display: contents; }
-    .cantinflas-editorial--collage .cantinflas-editorial__heading { grid-column: 2 / 4; grid-row: 2; align-self: end; }
-    .cantinflas-editorial--collage .cantinflas-editorial__intro { grid-column: 2 / 4; grid-row: 3; align-self: start; }
-    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(-n+4) { grid-row: 1; }
-    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(n+5) { grid-row: 4; }
     .cantinflas-editorial--orbit .cantinflas-editorial__inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); }
     .cantinflas-editorial--orbit .cantinflas-editorial__focus { grid-area: 3 / 2; }
     .cantinflas-editorial--orbit .cantinflas-editorial__items { display: contents; }
@@ -169,6 +176,62 @@
     }
     .cantinflas-editorial--hotspots details { background: var(--ce-background); padding: .75rem; box-shadow: 0 .2rem .7rem #0002; }
   }
+
+  .cantinflas-editorial--collage { padding-block: clamp(2rem, 3vw, 5rem); }
+  .cantinflas-editorial--collage .cantinflas-editorial__inner { width: min(94%, 188rem); }
+  .cantinflas-editorial--collage .cantinflas-editorial__items { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .cantinflas-editorial--collage .cantinflas-editorial__intro p { margin: 0; }
+  .cantinflas-editorial__collage-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .9rem; margin-top: 1.3rem; }
+  .cantinflas-editorial__collage-button {
+    display: inline-flex; justify-content: center; align-items: center;
+    box-sizing: border-box; min-height: 44px; padding: .45rem 1.5rem;
+    border: none; border-radius: 999px; background: var(--ce-action-bg); color: var(--ce-action-text);
+    font: 700 clamp(1.2rem, 1.15vw, 2rem)/1.15 var(--font-base, sans-serif); text-decoration: none;
+  }
+  .cantinflas-editorial__collage-button:disabled { cursor: default; }
+  @media (min-width: 600px) {
+    .cantinflas-editorial--collage .cantinflas-editorial__items { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (min-width: 900px) {
+    .cantinflas-editorial--collage:has(.cantinflas-editorial__inner--framed) { padding: 0; }
+    .cantinflas-editorial--collage .cantinflas-editorial__inner--framed {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+      width: min(100%, 1920px);
+      min-height: max(470px, min(56.8vw, 1090px));
+      box-sizing: border-box;
+    }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__collage-copy { width: 44%; z-index: 1; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__heading { font-size: min(var(--ce-desktop), 6.4vw); text-wrap: balance; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__intro {
+      font-size: clamp(1.3rem, 1.3vw, 2.4rem);
+      line-height: 1.38;
+    }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__items { display: contents; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item {
+      position: absolute;
+      left: var(--ce-slot-x);
+      top: var(--ce-slot-y);
+      width: var(--ce-slot-width);
+    }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__media :is(img, video, svg) {
+      width: 100%;
+      aspect-ratio: var(--ce-slot-ratio);
+      height: auto;
+      object-fit: cover;
+    }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(1) { --ce-slot-x: 6.7%; --ce-slot-y: 17.3%; --ce-slot-width: 16.7%; --ce-slot-ratio: 131 / 186; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(2) { --ce-slot-x: 27.7%; --ce-slot-y: 7.2%; --ce-slot-width: 16.4%; --ce-slot-ratio: 129 / 81; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(3) { --ce-slot-x: 56.9%; --ce-slot-y: 5.6%; --ce-slot-width: 10.4%; --ce-slot-ratio: 81 / 109; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(4) { --ce-slot-x: 72%; --ce-slot-y: 11%; --ce-slot-width: 21.8%; --ce-slot-ratio: 171 / 125; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(5) { --ce-slot-x: 83.5%; --ce-slot-y: 51%; --ce-slot-width: 12.3%; --ce-slot-ratio: 96 / 127; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(6) { --ce-slot-x: 70.3%; --ce-slot-y: 68%; --ce-slot-width: 10.4%; --ce-slot-ratio: 81 / 121; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(7) { --ce-slot-x: 43.5%; --ce-slot-y: 76%; --ce-slot-width: 15.3%; --ce-slot-ratio: 120 / 81; }
+    .cantinflas-editorial__inner--framed .cantinflas-editorial__item:nth-child(8) { --ce-slot-x: 9.4%; --ce-slot-y: 70.5%; --ce-slot-width: 21.1%; --ce-slot-ratio: 165 / 99; }
+  }
+
 {% endstylesheet %}
 
 {% schema %}
@@ -316,6 +379,50 @@
       "id": "show_focus",
       "label": "Mostrar espacio para imagen destacada",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "collage_label_1",
+      "label": "Texto del botón 1 del collage"
+    },
+    {
+      "type": "url",
+      "id": "collage_link_1",
+      "label": "Enlace del botón 1 del collage"
+    },
+    {
+      "type": "color",
+      "id": "collage_button_bg_1",
+      "label": "Fondo del botón 1",
+      "default": "#36845d"
+    },
+    {
+      "type": "color",
+      "id": "collage_button_text_1",
+      "label": "Color del texto del botón 1",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "collage_label_2",
+      "label": "Texto del botón 2 del collage"
+    },
+    {
+      "type": "url",
+      "id": "collage_link_2",
+      "label": "Enlace del botón 2 del collage"
+    },
+    {
+      "type": "color",
+      "id": "collage_button_bg_2",
+      "label": "Fondo del botón 2",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "collage_button_text_2",
+      "label": "Color del texto del botón 2",
+      "default": "#ffffff"
     }
   ],
   "blocks": [

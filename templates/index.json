@@ -423,9 +423,11 @@
         "heading_align": "center",
         "intro_align": "center",
         "intro_color": "",
-        "heading_size": 60,
+        "heading_size": 108,
         "heading_mobile": 32,
-        "show_focus": false
+        "show_focus": false,
+        "collage_label_1": "Ir a Galería",
+        "collage_label_2": "Conoce sus Películas"
       }
     },
     "threepieces": {
