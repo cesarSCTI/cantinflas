@@ -30,7 +30,7 @@
   object-fit: contain;
 }
 
-.cantinflas-catalog .collection__grid__item .card__title {
+.cantinflas-catalog :is(.collection__grid__item, [data-swiper-slide]) .card__title {
   margin-top: clamp(12px, 2.2vw, 42px);
   color: #252525;
   font-family: var(--font-headline);
@@ -39,6 +39,14 @@
   line-height: 1.15;
   letter-spacing: normal;
   text-transform: none;
+}
+
+.cantinflas-related .headline__title {
+  font-size: clamp(29px, 3.45vw, 66px);
+}
+
+.cantinflas-related .headline {
+  margin-bottom: clamp(20px, 5vw, 96px);
 }
 
 .cantinflas-catalog .card__title a {

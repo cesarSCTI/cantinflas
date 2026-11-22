@@ -1087,10 +1087,24 @@
               </div>
             {%- when 'collapsible_tab' -%}
               {%- assign has_variant_metafields = false -%}
+              {%- assign content = block.settings.content -%}
+              {%- if block.settings.xd_product_specs and content == blank -%}
+                {%- assign specifications = product.metafields.custom.specifications -%}
+                {%- if specifications.type == 'rich_text_field' or specifications.type == 'multi_line_text_field' or specifications.type == 'single_line_text_field' -%}
+                  {%- assign content = specifications | metafield_tag -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- if block.settings.xd_shop_shipping and shop.shipping_policy.body != blank -%}
+                {%- assign content = shop.shipping_policy.body -%}
+              {%- endif -%}
               {%- if block.settings.metafield_variables.size > 0 -%}
                 {%- assign has_variant_metafields = true -%}
               {%- endif -%}
-              {% if block.settings.heading != blank or block.settings.content != blank or request.design_mode %}
+              {% assign show_collapsible_tab = true %}
+              {% if block.settings.xd_product_specs and content == blank and block.settings.page == blank and has_variant_metafields == false %}
+                {% assign show_collapsible_tab = false %}
+              {% endif %}
+              {% if request.design_mode or show_collapsible_tab and block.settings.heading != blank or content != blank %}
               <collapsible-section
                 class="wt-collapse wt-collapse--always {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
                 {% comment %}data-accordion-set="pdp"{% endcomment %}
@@ -1130,11 +1144,6 @@
                   </div>
                 </div>
                 <div class="wt-collapse__target" id="CollapsibleTab-{{ block.id }}">
-                  {% assign content = block.settings.content %}
-                  {% if block.settings.xd_shop_shipping and shop.shipping_policy.body != blank %}
-                    {% assign content = shop.shipping_policy.body %}
-                  {% endif %}
-
                   {% if has_variant_metafields %}
                     {% assign variables = block.settings.metafield_variables
                       | downcase
@@ -1144,7 +1153,7 @@
 
                     <script type="application/json" data-variants-metafields>
                       {
-                        "content": {{ block.settings.content | json }},
+                        "content": {{ content | json }},
                         "variants": [
                           {%- for variant in product.variants -%}
                             {
@@ -4254,6 +4263,7 @@
       "name": "t:sections.main-product.blocks.collapsible_tab.name",
       "settings": [
         {"type":"checkbox","id":"xd_shop_shipping","label":"Usar la política de envío de la tienda","default":false},
+        {"type":"checkbox","id":"xd_product_specs","label":"Usar especificaciones del producto","info":"Lee el metafield custom.specifications si el contenido del bloque está vacío.","default":false},
         {
           "type": "text",
           "id": "heading",

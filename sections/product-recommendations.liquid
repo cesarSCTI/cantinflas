@@ -4,7 +4,7 @@
       {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
       {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
     }
-    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a, #shopify-section-{{ section.id }} .card__price {
+    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a{% unless section.settings.xd_catalog_cards %}, #shopify-section-{{ section.id }} .card__price{% endunless %} {
       {% if section.settings.xd_cards_color != blank %}color: {{ section.settings.xd_cards_color }};{% endif %}
       {% unless section.settings.xd_cards_align == 'inherit' %}text-align: {{ section.settings.xd_cards_align }};{% endunless %}
     }
@@ -12,6 +12,10 @@
 {% endif %}
 
 {{ 'swiper.css' | asset_url | stylesheet_tag }}
+<script type="module" src="{{ 'slider.js' | asset_url }}" defer></script>
+{% if section.settings.xd_catalog_cards %}
+  {{ 'cantinflas-catalog.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
@@ -19,6 +23,11 @@
 <style>
   [data-section-id="{{ section.id }}"]
   {
+    {% if section.settings.xd_catalog_cards %}
+      --catalog-price: {{ section.settings.xd_price_color | default: '#2b3d8f' }};
+      --catalog-button: {{ section.settings.xd_buy_color | default: '#c22921' }};
+      --catalog-button-text: #ffffff;
+    {% endif %}
 
     {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-background: {{ section.settings.background_color }};
@@ -41,18 +50,18 @@
 
 <div
   data-section-id="{{ section.id }}"
-  class="wt-featured-collection wt-featured-collection--recommendation wt-slider {% if section.settings.disable_on_mobile %}wt-featured-collection--disable-on-mobile{% endif %}"
+  class="wt-featured-collection wt-featured-collection--recommendation wt-slider{% if section.settings.xd_catalog_cards %} cantinflas-catalog cantinflas-related{% endif %}{% if section.settings.disable_on_mobile %} wt-featured-collection--disable-on-mobile{% endif %}"
 >
   <product-recommendations
-    class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
-    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}"
+    class="related-products page-width section-{{ section.id }}-padding isolate"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show | at_most: 10 }}&intent=related"
   >
+    {% if recommendations.performed? and recommendations.products_count > 0 %}
     {% if section.settings.heading.size > 0 %}
       {% if section.settings.disable_on_mobile %}<div class="disable-on-mobile">{% endif %}
       {% render 'headline', title: section.settings.heading %}
       {% if section.settings.disable_on_mobile %}</div>{% endif %}
     {% endif %}
-    <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
     <!-- Slider main container -->
     <slideshow-section class="wt-slider {% if section.settings.make_products_full_width %} wt-slider--full {% endif %}">
       <div
@@ -62,8 +71,8 @@
         <!-- Additional required wrapper -->
         <div data-swiper-container>
           <!-- Slides -->
-          {% if recommendations.performed and recommendations.products_count > 0 %}
             {% for recommendation in recommendations.products %}
+              {% assign quick_form_id = 'RelatedForm-' | append: section.id | append: '-' | append: recommendation.id %}
               <div
                 data-swiper-slide
                 {% if settings.animations %}
@@ -79,7 +88,7 @@
                 {% endif %}
                 {% render 'card',
                   card_product: recommendation,
-                  img: recommendation.featured_media,
+                  img: recommendation.featured_image,
                   img_hover: image_hover,
                   media_aspect_ratio: section.settings.image_ratio,
                   text_alignment: section.settings.text_alignment,
@@ -92,11 +101,15 @@
                   product_options: recommendation.options,
                   options: false,
                   url: recommendation.url,
+                  catalog_card: section.settings.xd_catalog_cards,
+                  enable_quick_add_button: section.settings.xd_quick_buy,
+                  quick_add_label: section.settings.xd_buy_label,
+                  product_form_id: quick_form_id,
+                  lazy_load: true,
                   enable_vendor_link: section.settings.enable_vendor_link
                 %}
               </div>
             {%- endfor -%}
-          {% endif %}
         </div>
         <!-- Add Arrows -->
         <div class="swiper-button-next wt-slider__nav-btn wt-slider__nav-next wt-slider__nav-next--featured">
@@ -143,8 +156,17 @@
         </script>
       </div>
     </slideshow-section>
+    {% endif %}
   </product-recommendations>
 </div>
+
+{% stylesheet %}
+  .wt-featured-collection--recommendation:not(:has([data-swiper-slide])) {
+    margin: 0;
+    padding: 0;
+  }
+  .wt-featured-collection--recommendation product-recommendations { display: block; }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -152,6 +174,11 @@
   "tag": "section",
   "class": "spaced-section",
   "settings": [
+    {"type":"checkbox","id":"xd_catalog_cards","label":"Usar tarjetas Cantinflas","default":false},
+    {"type":"color","id":"xd_price_color","label":"Color del precio","default":"#2b3d8f"},
+    {"type":"checkbox","id":"xd_quick_buy","label":"Mostrar compra rápida","default":false},
+    {"type":"text","id":"xd_buy_label","label":"Texto de compra rápida","default":"Comprar"},
+    {"type":"color","id":"xd_buy_color","label":"Fondo del botón Comprar","default":"#c22921"},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
     {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
