@@ -14,11 +14,21 @@
       "settings": {
         "heading": "Cantinflas",
         "subheading": "El hombre, el personaje y una forma única de hacer reír.",
-        "alignment": "left",
+        "video": "shopify://files/videos/Video 3.mp4",
+        "cover_asset": "",
+        "cover_width": 1920,
+        "cover_height": 1080,
         "autoplay": true,
+        "alignment": "left",
         "background": "#252525",
+        "text_color": "#ffffff",
+        "overlay": 0,
         "heading_align": "left",
-        "subheading_align": "left"
+        "subheading_align": "left",
+        "heading_color": "",
+        "subheading_color": "",
+        "heading_size": 108,
+        "heading_mobile": 42
       }
     },
     "main": {
@@ -37,44 +47,75 @@
     },
     "person": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "El hombre detrás del personaje",
-        "layout": "alternating",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#c22921"
-      },
       "blocks": {
         "portrait": {
           "type": "item",
           "settings": {
-            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br><br>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>"
+            "heading": "",
+            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br><br>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
       "block_order": [
         "portrait"
-      ]
+      ],
+      "settings": {
+        "heading": "El hombre detrás del personaje",
+        "intro": "",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#c22921",
+        "heading_align": "left",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "origins": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "De las carpas al cine",
-        "layout": "orbit",
-        "background": "#f2b846",
-        "text_color": "#252525",
-        "accent": "#2b3d8f",
-        "show_focus": true,
-        "heading_align": "center",
-        "intro_align": "center"
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "Carpas",
             "text": "<p>Donde todo comenzó</p><p>Entre escenarios itinerantes, personajes y público, Mario Moreno comenzó a encontrar su propia forma de hacer comedia</p>",
-            "hide_media": true
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": true,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece2": {
@@ -82,7 +123,23 @@
           "settings": {
             "heading": "Cine",
             "text": "<p>Cantinflas llegó a la pantalla</p><p>El personaje que nació frente al público encontró un nuevo escenario y llegó a millones de espectadores.</p>",
-            "hide_media": true
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": true,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece3": {
@@ -90,7 +147,23 @@
           "settings": {
             "heading": "Teatro",
             "text": "<p>El personaje tomó forma.</p><p>La experiencia sobre el escenario ayudó a construir la personalidad, los gestos y el lenguaje que harían reconocible a Cantinflas.</p>",
-            "hide_media": true
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": true,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
@@ -98,67 +171,135 @@
         "piece1",
         "piece2",
         "piece3"
-      ]
+      ],
+      "settings": {
+        "heading": "De las carpas al cine",
+        "intro": "",
+        "layout": "orbit",
+        "background": "#f2b846",
+        "text_color": "#252525",
+        "accent": "#2b3d8f",
+        "heading_align": "center",
+        "intro_align": "center",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": true
+      }
     },
     "anatomy": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "El personaje y su anatomía",
-        "layout": "hotspots",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#252525",
-        "intro": "<p>Una apariencia. Una voz. Una personalidad. Un personaje inconfundible.</p>",
-        "show_focus": true
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "Los pantalones",
             "text": "<p>Holgados, sencillos y parte de su estilo.</p>",
-            "hide_media": true
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": true,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
       "block_order": [
         "piece1"
-      ]
+      ],
+      "settings": {
+        "heading": "El personaje y su anatomía",
+        "intro": "<p>Una apariencia. Una voz. Una personalidad. Un personaje inconfundible.</p>",
+        "layout": "hotspots",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525",
+        "heading_align": "left",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": true
+      }
     },
     "films": {
       "type": "cantinflas-media-gallery",
-      "settings": {
-        "heading": "Cantinflas en la Pantalla",
-        "layout": "film",
-        "card_width": 320,
-        "card_height": 420,
-        "background": "#252525",
-        "heading_color": "#f2b846",
-        "intro_color": "#ffffff",
-        "heading_align": "center",
-        "intro_align": "center",
-        "intro": "<p>Después de construir al personaje en los escenarios, Cantinflas llegó al cine en 1936 con No te engañes corazón.</p><p>A partir de entonces comenzó una extensa carrera cinematográfica en la que protagonizó algunas de las películas más recordadas de la comedia mexicana.  En 1940, Ahí está el detalle se convirtió en un éxito decisivo para su carrera y consolidó a Cantinflas como una de las grandes figuras del cine nacional.</p><p>Durante las siguientes décadas, protagonizó numerosas películas y llevó su particular estilo de humor a diferentes historias y personajes, manteniéndose como uno de los actores más populares de México.</p>"
-      },
       "blocks": {
         "piece1": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         },
         "piece2": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         },
         "piece3": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         },
         "piece4": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         },
         "piece5": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#ffffff",
+            "title_color": "#252525",
+            "caption_color": "#252525",
+            "title_align": "left",
+            "caption_align": "left",
+            "rotation": 0
+          }
         }
       },
       "block_order": [
@@ -167,45 +308,121 @@
         "piece3",
         "piece4",
         "piece5"
-      ]
+      ],
+      "settings": {
+        "heading": "Cantinflas en la Pantalla",
+        "intro": "<p>Después de construir al personaje en los escenarios, Cantinflas llegó al cine en 1936 con No te engañes corazón.</p><p>A partir de entonces comenzó una extensa carrera cinematográfica en la que protagonizó algunas de las películas más recordadas de la comedia mexicana.  En 1940, Ahí está el detalle se convirtió en un éxito decisivo para su carrera y consolidó a Cantinflas como una de las grandes figuras del cine nacional.</p><p>Durante las siguientes décadas, protagonizó numerosas películas y llevó su particular estilo de humor a diferentes historias y personajes, manteniéndose como uno de los actores más populares de México.</p>",
+        "heading_color": "#f2b846",
+        "intro_color": "#ffffff",
+        "heading_align": "center",
+        "intro_align": "center",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "layout": "film",
+        "background": "#252525",
+        "card_width": 320,
+        "card_height": 420,
+        "gap": 20,
+        "padding": 48
+      }
     },
     "world": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "De México para el Mundo",
-        "layout": "alternating",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#2b3d8f",
-        "intro": "<p>Lo que comenzó en las carpas de México terminó dando la vuelta al mundo.</p><p>Cantinflas ya era una de las grandes figuras de la comedia mexicana cuando llegó una oportunidad que cambiaría la dimensión de su carrera. En 1956 protagonizó junto a David Niven La vuelta al mundo en 80 días, interpretando a Passepartout.</p><p>La película fue un fenómeno internacional y llevó a Cantinflas a públicos de distintos países. Su interpretación le valió el Globo de Oro como Mejor Actor de Comedia o Musical en 1957.</p>"
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "México",
-            "text": "<p>Cantinflas conquistó al público mexicano con su humor y su estilo inconfundible. Su popularidad sentó las bases para que su trabajo llegara a nuevos públicos.</p>"
+            "text": "<p>Cantinflas conquistó al público mexicano con su humor y su estilo inconfundible. Su popularidad sentó las bases para que su trabajo llegara a nuevos públicos.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece2": {
           "type": "item",
           "settings": {
             "heading": "Estados Unidos",
-            "text": "<p>Su actuación en La vuelta al mundo en 80 días le valió el Globo de Oro como Mejor Actor de Comedia o Musical.</p>"
+            "text": "<p>Su actuación en La vuelta al mundo en 80 días le valió el Globo de Oro como Mejor Actor de Comedia o Musical.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece3": {
           "type": "item",
           "settings": {
             "heading": "Hollywood",
-            "text": "<p>Su trayectoria fue reconocida con una estrella en el Paseo de la Fama de Hollywood.</p>"
+            "text": "<p>Su trayectoria fue reconocida con una estrella en el Paseo de la Fama de Hollywood.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece4": {
           "type": "item",
           "settings": {
             "heading": "El Mundo",
-            "text": "<p>Su humor y su estilo inconfundible cruzaron fronteras, convirtiéndolo en un referente de la comedia internacional.</p>"
+            "text": "<p>Su humor y su estilo inconfundible cruzaron fronteras, convirtiéndolo en un referente de la comedia internacional.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
@@ -214,64 +431,138 @@
         "piece2",
         "piece3",
         "piece4"
-      ]
+      ],
+      "settings": {
+        "heading": "De México para el Mundo",
+        "intro": "<p>Lo que comenzó en las carpas de México terminó dando la vuelta al mundo.</p><p>Cantinflas ya era una de las grandes figuras de la comedia mexicana cuando llegó una oportunidad que cambiaría la dimensión de su carrera. En 1956 protagonizó junto a David Niven La vuelta al mundo en 80 días, interpretando a Passepartout.</p><p>La película fue un fenómeno internacional y llevó a Cantinflas a públicos de distintos países. Su interpretación le valió el Globo de Oro como Mejor Actor de Comedia o Musical en 1957.</p>",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#2b3d8f",
+        "heading_align": "left",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "legacycontext": {
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "Cantinflas había dejado de ser solamente un personaje mexicano",
         "intro": "<p>Su humor, su imagen y su manera de interpretar trascendieron fronteras, llevando una parte de la cultura popular mexicana a millones de espectadores y demostrando hasta dónde puede llegar un personaje cuando conecta con públicos de todo el mundo.</p>",
+        "layout": "alternating",
+        "background": "#f4ede1",
+        "text_color": "#242424",
+        "accent": "#c22921",
         "heading_align": "center",
         "intro_align": "center",
-        "background": "#f4ede1",
-        "accent": "#c22921"
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
       }
     },
     "legacy": {
       "type": "cantinflas-editorial",
-      "settings": {
-        "heading": "Un personaje que trascendió su tiempo",
-        "layout": "alternating",
-        "background": "#c22921",
-        "text_color": "#ffffff",
-        "accent": "#f2b846",
-        "intro": "<p>Su imagen, su humor y su particular manera de hablar forman parte de la cultura popular mexicana. Su nombre incluso llegó al lenguaje cotidiano con el verbo cantinflear, incorporado al diccionario de la Real Academia Española.</p><p>Su legado también vive en la cultura actual.</p>"
-      },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
-            "heading": "En las películas que todavía se recuerdan."
+            "heading": "En las películas que todavía se recuerdan.",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         },
         "piece2": {
           "type": "item",
           "settings": {
-            "heading": "En las frases que seguimos repitiendo."
+            "heading": "En las frases que seguimos repitiendo.",
+            "text": "",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "left",
+            "text_align": "left",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": false,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
       "block_order": [
         "piece1",
         "piece2"
-      ]
+      ],
+      "settings": {
+        "heading": "Un personaje que trascendió su tiempo",
+        "intro": "<p>Su imagen, su humor y su particular manera de hablar forman parte de la cultura popular mexicana. Su nombre incluso llegó al lenguaje cotidiano con el verbo cantinflear, incorporado al diccionario de la Real Academia Española.</p><p>Su legado también vive en la cultura actual.</p>",
+        "layout": "alternating",
+        "background": "#c22921",
+        "text_color": "#ffffff",
+        "accent": "#f2b846",
+        "heading_align": "left",
+        "intro_align": "left",
+        "intro_color": "",
+        "heading_size": 60,
+        "heading_mobile": 32,
+        "show_focus": false
+      }
     },
     "closing": {
       "type": "rich-text",
-      "settings": {
-        "desktop_text_horizontal_position": "center"
-      },
       "blocks": {
         "piece1": {
           "type": "text",
           "settings": {
-            "text": "<p>Legado · Cine · Humor · Cantinflear · Cultura · México · Mundo</p>"
+            "text": "<p>Legado · Cine · Humor · Cantinflear · Cultura · México · Mundo</p>",
+            "disable_on_mobile": false
           }
         }
       },
       "block_order": [
         "piece1"
-      ]
+      ],
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "xd_heading_color": "",
+        "xd_heading_align": "inherit",
+        "xd_body_color": "",
+        "xd_body_align": "inherit",
+        "xd_button_color": "",
+        "xd_button_align": "inherit"
+      }
     }
   },
   "order": [
