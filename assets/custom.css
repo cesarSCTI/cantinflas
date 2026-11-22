@@ -41,7 +41,15 @@
 
 
 @media (min-width: 1200px) {
-  .cantinflas-xd-header .wt-header__nav-teaser--full-menu { justify-content: flex-start; }
+  .cantinflas-xd-header .wt-header__nav-teaser--full-menu {
+    margin-left: 0;
+    margin-right: auto;
+    justify-content: flex-start;
+  }
+  .cantinflas-xd-header .wt-header__nav-teaser--full-menu .wt-page-nav-mega__list {
+    justify-content: flex-start;
+    padding-inline: 0;
+  }
   .cantinflas-xd-header .wt-header__logo-wrapper { position: absolute; left: 50%; transform: translateX(-50%); }
 }
 

@@ -1,0 +1,285 @@
+{% liquid
+  assign button_url = section.settings.button_link | default: section.settings.museum_page.url
+  assign artwork_alt = section.settings.image_alt | default: section.settings.image.alt
+%}
+<div class="cantinflas-museum-banner" style="
+  --museum-bg: {{ section.settings.background }};
+  --museum-card: {{ section.settings.card_color }};
+  --museum-heading: {{ section.settings.heading_color }};
+  --museum-copy: {{ section.settings.text_color }};
+  --museum-stripe: {{ section.settings.accent_color }};
+  --museum-button: {{ section.settings.button_color }};
+  --museum-button-text: {{ section.settings.button_text_color }};
+  --museum-position: {{ section.settings.card_position }};
+  --museum-align: {{ section.settings.text_alignment }};
+  --museum-width: {{ section.settings.card_width }}%;
+  --museum-overlap: {{ section.settings.overlap }}px;
+">
+  <div class="cantinflas-museum-banner__art">
+    <picture>
+      {% if section.settings.mobile_image != blank %}
+        <source media="(max-width: 749px)" srcset="{{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+      {% endif %}
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '480, 750, 1100, 1600, 2000, 2400', sizes: '100vw', alt: artwork_alt }}
+      {% elsif section.settings.mobile_image != blank %}
+        {{ section.settings.mobile_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '480, 750, 1100', sizes: '100vw', alt: artwork_alt }}
+      {% else %}
+        {% if section.settings.use_collage %}
+          <img src="{{ 'cantinflas-xd-museum-collage.webp' | asset_url }}" width="1902" height="827" loading="lazy" alt="{{ artwork_alt | escape }}">
+        {% endif %}
+      {% endif %}
+    </picture>
+    {% if section.settings.image == blank and section.settings.mobile_image == blank and section.settings.use_collage == false %}
+      {{ 'image' | placeholder_svg_tag: 'cantinflas-museum-banner__placeholder' }}
+    {% endif %}
+  </div>
+  <div class="cantinflas-museum-banner__content">
+    <div class="cantinflas-museum-banner__card">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="cantinflas-museum-banner__copy rte">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        {% if button_url != blank %}
+          <a class="cantinflas-museum-banner__button" href="{{ button_url }}">{{ section.settings.button_label | escape }}</a>
+        {% else %}
+          <button class="cantinflas-museum-banner__button" type="button" disabled>{{ section.settings.button_label | escape }}</button>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .cantinflas-museum-banner { background: var(--museum-bg); }
+  .cantinflas-museum-banner__art {
+    width: 100%;
+    aspect-ratio: 1902 / 827;
+    background: var(--museum-bg);
+  }
+  .cantinflas-museum-banner__art picture { display: contents; }
+  .cantinflas-museum-banner__art :is(img, svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-museum-banner__content {
+    position: relative;
+    display: flex;
+    justify-content: var(--museum-position);
+    padding-inline: 5%;
+    padding-bottom: clamp(1.4rem, 2.5vw, 4.8rem);
+    margin-top: calc(-1 * min(9.2vw, var(--museum-overlap)));
+  }
+  .cantinflas-museum-banner__card {
+    position: relative;
+    width: min(100%, var(--museum-width));
+    padding: clamp(2rem, 3vw, 5.8rem) clamp(2rem, 4vw, 7.6rem);
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: clamp(.8rem, 1.2vw, 2rem);
+    background: var(--museum-card);
+    color: var(--museum-copy);
+    text-align: var(--museum-align);
+  }
+  .cantinflas-museum-banner__card::before {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: clamp(.9rem, 2.8vw, 5.4rem);
+    width: clamp(.45rem, 1.15vw, 2.2rem);
+    background: var(--museum-stripe);
+    content: '';
+  }
+  .cantinflas-museum-banner__card h2 {
+    margin: 0 auto .65em;
+    color: var(--museum-heading);
+    font-family: "baga", sans-serif;
+    font-size: clamp(2.6rem, 2.8vw, 5.4rem);
+    line-height: 1.08;
+  }
+  .cantinflas-museum-banner__copy { font-size: clamp(1.3rem, 1.14vw, 2.2rem); line-height: 1.5; }
+  .cantinflas-museum-banner__copy p { color: inherit; font-size: inherit; }
+  .cantinflas-museum-banner__copy p + p { margin-top: 1.1em; }
+  .cantinflas-museum-banner__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: .8em;
+    padding: .4em 1.65em;
+    border: 0;
+    border-radius: 999px;
+    background: var(--museum-button);
+    color: var(--museum-button-text);
+    font: 700 clamp(1.2rem, 1.1vw, 2.1rem)/1.2 var(--font-base, sans-serif);
+    text-decoration: none;
+  }
+  @media (max-width: 749px) {
+    .cantinflas-museum-banner__art { aspect-ratio: 16 / 10; }
+    .cantinflas-museum-banner__card { width: 100%; padding-inline: 2.4rem; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Banner del Museo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen panorámica"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Imagen para móvil (opcional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collage",
+      "label": "Usar el collage del diseño como respaldo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texto alternativo",
+      "default": "Collage del Museo Mario Moreno Cantinflas"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Hay historias que merecen descubrirse a fondo"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Descripción",
+      "default": "<p>Descubre la historia, el legado y las diferentes facetas del hombre detrás del personaje en el Museo Mario Moreno Cantinflas.</p><p>Con más de 400 piezas, objetos originales, vestuario, fotografías, material audiovisual y reconocimientos, el museo conserva y comparte la memoria de uno de los grandes íconos de la cultura mexicana.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Visita el Museo Cantinflas"
+    },
+    {
+      "type": "page",
+      "id": "museum_page",
+      "label": "Página del museo"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace alternativo del botón"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo de la sección",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Fondo de la tarjeta",
+      "default": "#2b3d8f"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de la descripción",
+      "default": "#f4ede1"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color de la franja",
+      "default": "#c22921"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Fondo del botón",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Color del texto del botón",
+      "default": "#2b3d8f"
+    },
+    {
+      "type": "select",
+      "id": "card_position",
+      "label": "Posición de la tarjeta",
+      "default": "flex-start",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "flex-end",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación del texto",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Ancho de la tarjeta",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "default": 64,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "overlap",
+      "label": "Altura superpuesta",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "default": 176,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner del Museo"
+    }
+  ]
+}
+{% endschema %}

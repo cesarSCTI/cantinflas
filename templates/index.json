@@ -525,80 +525,13 @@
       }
     },
     "museum": {
-      "type": "cantinflas-editorial",
-      "blocks": {
-        "photo": {
-          "type": "item",
-          "settings": {
-            "heading": "",
-            "text": "<p>Descubre la historia, el legado y las diferentes facetas del hombre detrás del personaje en el Museo Mario Moreno Cantinflas.</p><p>Con más de 400 piezas, objetos originales, vestuario, fotografías, material audiovisual y reconocimientos, el museo conserva y comparte la memoria de uno de los grandes íconos de la cultura mexicana.</p>",
-            "label": "Visita el Museo Cantinflas",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "center",
-            "button_align": "center",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
-          }
-        }
-      },
-      "block_order": [
-        "photo"
-      ],
-      "settings": {
-        "heading": "Hay historias que merecen descubrirse a fondo",
-        "intro": "",
-        "layout": "feature",
-        "background": "#ffffff",
-        "text_color": "#242424",
-        "accent": "#2b3d8f",
-        "heading_align": "center",
-        "intro_align": "left",
-        "intro_color": "",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "show_focus": false
-      }
+      "type": "cantinflas-museum-banner",
+      "settings": {}
     },
     "closing": {
-      "type": "rich-text",
-      "blocks": {
-        "piece1": {
-          "type": "heading",
-          "settings": {
-            "heading": "¡Aquí está el Detalle!",
-            "disable_on_mobile": false,
-            "size_heading": 100,
-            "size_heading_mobile": 100
-          }
-        }
-      },
-      "block_order": [
-        "piece1"
-      ],
+      "type": "cantinflas-detail-banner",
       "settings": {
-        "section_width": "regular",
-        "desktop_text_horizontal_position": "center",
-        "color-body-text": "rgba(0,0,0,0)",
-        "background_color": "rgba(0,0,0,0)",
-        "margin-top": 20,
-        "margin-bottom": 20,
-        "xd_heading_color": "#252525",
-        "xd_heading_align": "center",
-        "xd_body_color": "",
-        "xd_body_align": "inherit",
-        "xd_button_color": "",
-        "xd_button_align": "inherit"
+        "image": "shopify://shop_images/CANTINFLAS_CARTOON.png"
       }
     }
   },

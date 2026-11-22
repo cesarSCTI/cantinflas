@@ -1,0 +1,204 @@
+<div class="cantinflas-detail-banner" style="
+  --detail-bg: {{ section.settings.gradient | default: section.settings.background }};
+  --detail-text: {{ section.settings.text_color }};
+  --detail-accent: {{ section.settings.accent_color }};
+  --detail-align: {{ section.settings.alignment }};
+  --detail-desktop: {{ section.settings.desktop_size }}px;
+  --detail-mobile: {{ section.settings.mobile_size }}px;
+  --detail-image: {{ section.settings.image_width }}px;
+  --detail-padding: {{ section.settings.vertical_padding }}px;
+">
+  <div class="cantinflas-detail-banner__row{% if section.settings.image_position == 'left' %} cantinflas-detail-banner__row--image-first{% endif %}">
+    {% if section.settings.text != blank or section.settings.accent != blank or section.settings.suffix != blank %}
+      <h2 class="cantinflas-detail-banner__title">
+        {{- section.settings.text | escape -}}
+        {%- if section.settings.accent != blank -%}
+          {% if section.settings.text != blank %}{{ ' ' }}{% endif %}
+          <span>{{ section.settings.accent | escape }}</span>
+        {%- endif -%}
+        {{- section.settings.suffix | escape -}}
+      </h2>
+    {% endif %}
+    {% if section.settings.image != blank %}
+      {% assign image_width = section.settings.image_width | times: 2 %}
+      {% assign image_sizes = section.settings.image_width | append: 'px' %}
+      {{ section.settings.image | image_url: width: image_width | image_tag: class: 'cantinflas-detail-banner__image', loading: 'lazy', sizes: image_sizes }}
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cantinflas-detail-banner {
+    background: var(--detail-bg);
+    padding-block: var(--detail-padding);
+  }
+  .cantinflas-detail-banner__row {
+    display: flex;
+    align-items: center;
+    justify-content: var(--detail-align);
+    gap: clamp(.65rem, 2.4vw, 3.2rem);
+    width: min(90%, 176rem);
+    margin-inline: auto;
+  }
+  .cantinflas-detail-banner__row--image-first .cantinflas-detail-banner__image { order: -1; }
+  .cantinflas-detail-banner .cantinflas-detail-banner__title {
+    min-width: 0;
+    margin: 0;
+    color: var(--detail-text);
+    font-family: "baga", sans-serif;
+    font-size: var(--detail-mobile);
+    font-weight: 700;
+    line-height: 1.08;
+    text-align: var(--detail-align);
+    overflow-wrap: anywhere;
+  }
+  .cantinflas-detail-banner__title span { color: var(--detail-accent); }
+  .cantinflas-detail-banner__image {
+    flex: none;
+    display: block;
+    width: min(var(--detail-image), 18vw);
+    height: auto;
+  }
+  @media (min-width: 750px) {
+    .cantinflas-detail-banner .cantinflas-detail-banner__title {
+      font-size: min(var(--detail-desktop), 7.3vw);
+    }
+    .cantinflas-detail-banner__image { width: min(var(--detail-image), 9.2vw); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cierre con ilustración",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Texto principal",
+      "default": "¡Aquí está el"
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Texto destacado",
+      "default": "Detalle"
+    },
+    {
+      "type": "text",
+      "id": "suffix",
+      "label": "Texto final",
+      "default": "!"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color principal y final",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color destacado",
+      "default": "#c22921"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo sólido",
+      "default": "#f4ede1"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient",
+      "label": "Degradado",
+      "default": "linear-gradient(180deg, #ffffff 0%, #f4ede1 100%)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Ilustración"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posición de la imagen",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alineación",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_size",
+      "label": "Tamaño del texto en escritorio",
+      "min": 28,
+      "max": 150,
+      "step": 2,
+      "default": 110,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_size",
+      "label": "Tamaño del texto en móvil",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Ancho de la ilustración",
+      "min": 36,
+      "max": 200,
+      "step": 2,
+      "default": 128,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Espacio arriba y abajo",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cierre con ilustración"
+    }
+  ]
+}
+{% endschema %}
