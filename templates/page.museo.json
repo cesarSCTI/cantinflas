@@ -52,7 +52,7 @@
           "type": "item",
           "settings": {
             "heading": "",
-            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br><br>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>",
+            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br/>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br/>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br/><br/>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -89,6 +89,15 @@
         "heading_size": 60,
         "heading_mobile": 32,
         "show_focus": false,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": false,
         "column_order": "text_first"
       }
     },
@@ -185,7 +194,17 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": true
+        "show_focus": true,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": false,
+        "column_order": "alternate"
       }
     },
     "anatomy": {
@@ -203,7 +222,9 @@
             "card_color": "",
             "button_color": "",
             "marker_x": 48,
-            "marker_y": 64
+            "marker_y": 64,
+            "marker_color": "#c22921",
+            "marker_text_color": "#ffffff"
           }
         }
       },
@@ -222,7 +243,17 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": true
+        "show_focus": true,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": false,
+        "column_order": "alternate"
       }
     },
     "films": {
@@ -315,7 +346,12 @@
         "card_width": 320,
         "card_height": 420,
         "gap": 20,
-        "padding": 48
+        "padding": 48,
+        "desktop_count": 0,
+        "mobile_count": 0,
+        "show_navigation": true,
+        "navigation_color": "",
+        "navigation_background": ""
       }
     },
     "world": {
@@ -325,56 +361,80 @@
           "type": "stage",
           "settings": {
             "heading": "México",
-            "text": "<p>Cantinflas conquistó al público mexicano con su humor y su estilo inconfundible. Su popularidad sentó las bases para que su trabajo llegara a nuevos públicos.</p>",
-            "image_width": 1280,
-            "image_height": 720,
-            "image_asset": "cantinflas-xd-recorrido-mexico.webp",
-            "image_alt": "Cantinflas con traje de charro",
             "watermark": "México",
+            "text": "<p>Cantinflas conquistó al público mexicano con su humor y su estilo inconfundible. Su popularidad sentó las bases para que su trabajo llegara a nuevos públicos.</p>",
+            "image_alt": "Cantinflas con traje de charro",
             "photo_side": "auto",
-            "rotation": -6
+            "rotation": -6,
+            "title_color": "",
+            "copy_color": "",
+            "watermark_color": "",
+            "label": "",
+            "link": "",
+            "show_sample": true,
+            "image_asset": "cantinflas-xd-recorrido-mexico.webp",
+            "image_width": 1280,
+            "image_height": 720
           }
         },
         "piece2": {
           "type": "stage",
           "settings": {
             "heading": "Estados Unidos",
-            "text": "<p>Su actuación en La vuelta al mundo en 80 días le valió el Globo de Oro como Mejor Actor de Comedia o Musical.</p>",
-            "image_width": 2048,
-            "image_height": 2048,
-            "image_asset": "cantinflas-xd-recorrido-estados-unidos.webp",
-            "image_alt": "Cantinflas con el Globo de Oro",
             "watermark": "Estados Unidos",
+            "text": "<p>Su actuación en La vuelta al mundo en 80 días le valió el Globo de Oro como Mejor Actor de Comedia o Musical.</p>",
+            "image_alt": "Cantinflas con el Globo de Oro",
             "photo_side": "auto",
-            "rotation": 6
+            "rotation": 6,
+            "title_color": "",
+            "copy_color": "",
+            "watermark_color": "",
+            "label": "",
+            "link": "",
+            "show_sample": true,
+            "image_asset": "cantinflas-xd-recorrido-estados-unidos.webp",
+            "image_width": 2048,
+            "image_height": 2048
           }
         },
         "piece3": {
           "type": "stage",
           "settings": {
             "heading": "Hollywood",
-            "text": "<p>Su trayectoria fue reconocida con una estrella en el Paseo de la Fama de Hollywood.</p>",
-            "image_width": 1440,
-            "image_height": 2290,
-            "image_asset": "cantinflas-xd-recorrido-hollywood.webp",
-            "image_alt": "Cantinflas junto a su estrella en Hollywood",
             "watermark": "Hollywood",
+            "text": "<p>Su trayectoria fue reconocida con una estrella en el Paseo de la Fama de Hollywood.</p>",
+            "image_alt": "Cantinflas junto a su estrella en Hollywood",
             "photo_side": "auto",
-            "rotation": -6
+            "rotation": -6,
+            "title_color": "",
+            "copy_color": "",
+            "watermark_color": "",
+            "label": "",
+            "link": "",
+            "show_sample": true,
+            "image_asset": "cantinflas-xd-recorrido-hollywood.webp",
+            "image_width": 1440,
+            "image_height": 2290
           }
         },
         "piece4": {
           "type": "stage",
           "settings": {
             "heading": "El Mundo",
-            "text": "<p>Su humor y su estilo inconfundible cruzaron fronteras, convirtiéndolo en un referente de la comedia internacional.</p>",
-            "image_width": 1728,
-            "image_height": 2304,
-            "image_asset": "cantinflas-xd-recorrido-mundo.webp",
-            "image_alt": "Cantinflas saludando al público",
             "watermark": "El Mundo",
+            "text": "<p>Su humor y su estilo inconfundible cruzaron fronteras, convirtiéndolo en un referente de la comedia internacional.</p>",
+            "image_alt": "Cantinflas saludando al público",
             "photo_side": "auto",
-            "rotation": 6
+            "rotation": 6,
+            "title_color": "",
+            "copy_color": "",
+            "watermark_color": "",
+            "label": "",
+            "link": "",
+            "show_sample": true,
+            "image_asset": "cantinflas-xd-recorrido-mundo.webp",
+            "image_width": 1728,
+            "image_height": 2304
           }
         }
       },
@@ -390,8 +450,8 @@
         "intro_left": "<p>Cantinflas ya era una de las grandes figuras de la comedia mexicana cuando llegó una oportunidad que cambiaría la dimensión de su carrera. En 1956 protagonizó junto a David Niven La vuelta al mundo en 80 días, interpretando a Passepartout.</p>",
         "intro_right": "<p>La película fue un fenómeno internacional y llevó a Cantinflas a públicos de distintos países. Su interpretación le valió el Globo de Oro como Mejor Actor de Comedia o Musical en 1957.</p>",
         "background": "#ffffff",
-        "text_color": "#252525",
         "heading_color": "#36845d",
+        "text_color": "#252525",
         "stage_heading_color": "#2b3d8f",
         "watermark_color": "#e8e8e8",
         "reveal_images": true
@@ -411,7 +471,17 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": false
+        "show_focus": false,
+        "collage_label_1": "",
+        "collage_link_1": "",
+        "collage_button_bg_1": "#36845d",
+        "collage_button_text_1": "#ffffff",
+        "collage_label_2": "",
+        "collage_link_2": "",
+        "collage_button_bg_2": "#252525",
+        "collage_button_text_2": "#ffffff",
+        "collage_motion": false,
+        "column_order": "alternate"
       }
     },
     "legacy_intro": {
@@ -421,7 +491,22 @@
         "text": "<p>Su imagen, su humor y su particular manera de hablar forman parte de la cultura popular mexicana. Su nombre incluso llegó al lenguaje cotidiano con el verbo cantinflear, incorporado al diccionario de la Real Academia Española.</p>",
         "heading_color": "#f2b846",
         "text_color": "#ffffff",
-        "background": "#c22921"
+        "background": "#c22921",
+        "gradient": "",
+        "image_opacity": 50,
+        "heading_alignment": "left",
+        "text_alignment": "right",
+        "vertical_alignment": "start",
+        "stack_order": "heading_first",
+        "heading_width": 54,
+        "heading_size": 64,
+        "heading_mobile": 36,
+        "text_size": 20,
+        "text_mobile": 16,
+        "content_width": 1740,
+        "column_gap": 48,
+        "padding": 72,
+        "mobile_padding": 28
       }
     },
     "legacy": {
@@ -431,18 +516,26 @@
           "type": "image",
           "settings": {
             "heading": "En las películas que todavía se recuerdan.",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
             "text": "Su legado también vive en la cultura actual.",
+            "button_select": "primary",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "disable_on_mobile": false
           }
         },
         "piece2": {
           "type": "image",
           "settings": {
             "heading": "En las frases que seguimos repitiendo.",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
             "text": "",
+            "button_select": "primary",
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "disable_on_mobile": false
           }
         }
       },
@@ -452,10 +545,12 @@
       ],
       "settings": {
         "layout": "image_first",
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
         "desktop_text_horizontal_position": "left",
         "mobile_text_horizontal_position": "left",
-        "background_color": "#c22921",
         "color-body-text": "#ffffff",
+        "background_color": "#c22921",
         "margin-top": 0,
         "margin-bottom": 0
       }
