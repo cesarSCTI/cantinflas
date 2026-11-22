@@ -2,7 +2,7 @@
   assign desktop_count = section.settings.desktop_count | default: 0
   assign mobile_count = section.settings.mobile_count | default: 0
 %}
-<section class="cantinflas-gallery cantinflas-gallery--{{ section.settings.layout }}{% if desktop_count > 0 %} cantinflas-gallery--fixed-desktop{% endif %}{% if mobile_count > 0 %} cantinflas-gallery--fixed-mobile{% endif %}" style="
+<section class="cantinflas-gallery cantinflas-gallery--{{ section.settings.layout }}{% if section.settings.xd_centered %} cantinflas-gallery--centered{% elsif desktop_count > 0 %} cantinflas-gallery--fixed-desktop{% endif %}{% if mobile_count > 0 and section.settings.xd_centered == false %} cantinflas-gallery--fixed-mobile{% endif %}" style="
   --cg-bg: {{ section.settings.background }};
   --cg-title: {{ section.settings.heading_color }};
   --cg-copy: {{ section.settings.intro_color }};
@@ -22,8 +22,13 @@
   <header class="cantinflas-gallery__intro">
     {% if section.settings.heading != blank %}<h2 id="GalleryTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{% endif %}
     {% if section.settings.intro != blank %}<div class="cantinflas-gallery__description rte">{{ section.settings.intro }}</div>{% endif %}
+    {% if section.settings.xd_centered and section.settings.xd_decoration %}
+      <div class="cantinflas-gallery__decoration">
+        {% render 'cantinflas-agua-image', image: section.settings.xd_gallery_image, artwork: 'cartoon', alt: '' %}
+      </div>
+    {% endif %}
   </header>
-  <cantinflas-gallery-track>
+  <cantinflas-gallery-track{% if section.settings.xd_centered %} data-centered="{{ section.settings.xd_initial_slide }}"{% endif %}>
     <div class="cantinflas-gallery__track" data-gallery-track tabindex="0" role="region"
       {% if section.settings.heading != blank %}aria-labelledby="GalleryTitle-{{ section.id }}"{% else %}aria-label="Galería"{% endif %}>
       <ul role="list">
@@ -44,6 +49,8 @@
                   {{ block.settings.video | video_tag: controls: true, playsinline: true, preload: 'none', poster: poster_url }}
                 {% elsif block.settings.image != blank %}
                   {{ block.settings.image | image_url: width: 960 | image_tag: loading: 'lazy', widths: '300, 480, 720, 960', sizes: '(min-width: 900px) 30vw, 80vw' }}
+                {% elsif section.settings.xd_centered and block.settings.xd_artwork != blank and block.settings.xd_artwork != 'none' %}
+                  {% render 'cantinflas-agua-image', artwork: block.settings.xd_artwork, alt: block.settings.title %}
                 {% else %}
                   {% capture sample %}{% cycle 'image', 'lifestyle-1', 'lifestyle-2' %}{% endcapture %}
                   {{ sample | strip | placeholder_svg_tag: 'cantinflas-gallery__placeholder' }}
@@ -96,6 +103,27 @@
   .cantinflas-gallery figcaption h3 { color: var(--cg-card-title); text-align: var(--cg-card-align); font-size: 1.1em; margin: 0; }
   .cantinflas-gallery__controls:not([hidden]) { display: flex; justify-content: center; gap: .7rem; }
   .cantinflas-gallery__controls button { border: 1px solid currentColor; border-radius: 50%; width: 44px; height: 44px; font: inherit; color: var(--cg-navigation-text); background: var(--cg-navigation-bg); }
+  .cantinflas-gallery--centered .cantinflas-gallery__intro { position: relative; width: 90%; max-width: 1720px; padding-inline-end: min(16vw, 250px); }
+  .cantinflas-gallery__decoration { position: absolute; inset: 0 7% auto auto; width: clamp(54px, 9vw, 175px); }
+  .cantinflas-gallery__decoration img { display: block; width: 100%; height: auto; }
+  .cantinflas-gallery--centered cantinflas-gallery-track { display: block; position: relative; }
+  .cantinflas-gallery--centered .cantinflas-gallery__track { --cg-basis: min(var(--cg-width), 26.3vw); --cg-gutter: calc((100% - var(--cg-basis)) / 2); scroll-padding-inline: 0; scrollbar-width: none; }
+  .cantinflas-gallery--centered .cantinflas-gallery__track ul { padding-inline: calc((100cqw - var(--cg-basis)) / 2); align-items: start; padding-block: clamp(28px, 5vw, 96px) 20px; }
+  .cantinflas-gallery--centered .cantinflas-gallery__track li { scroll-snap-align: center; }
+  .cantinflas-gallery--centered figure { padding: 0; box-shadow: none; background: transparent; }
+  .cantinflas-gallery--centered .cantinflas-gallery__media { height: auto; aspect-ratio: 505 / 840; }
+  .cantinflas-gallery--centered .cantinflas-gallery__media :is(img,video,svg) { border-radius: clamp(8px, 1.1vw, 20px); height: 81%; margin-block: 16% 0; transition: height .2s, margin .2s; }
+  .cantinflas-gallery--centered [data-active] .cantinflas-gallery__media :is(img,video,svg) { height: 100%; margin-block: 0; }
+  .cantinflas-gallery--centered figcaption { visibility: hidden; }
+  .cantinflas-gallery--centered [data-active] figcaption { visibility: visible; }
+  .cantinflas-gallery--centered .cantinflas-gallery__controls:not([hidden]) { position: absolute; top: 48%; inset-inline: 3%; justify-content: space-between; pointer-events: none; }
+  .cantinflas-gallery--centered .cantinflas-gallery__controls button { pointer-events: auto; }
+  @media (max-width: 749px) {
+    .cantinflas-gallery--centered .cantinflas-gallery__track { --cg-basis: min(var(--cg-width), 72vw); }
+    .cantinflas-gallery--centered .cantinflas-gallery__intro { padding-inline-end: 16vw; }
+    .cantinflas-gallery__decoration { inset-inline-end: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .cantinflas-gallery--centered .cantinflas-gallery__media :is(img,video,svg) { transition: none; } }
   @media (max-width: 899px) {
     .cantinflas-gallery--fixed-mobile .cantinflas-gallery__track li {
       --cg-basis: calc((100cqw - 2 * var(--cg-gutter) - (var(--cg-visible) - 1) * var(--cg-gap)) / var(--cg-visible));
@@ -123,16 +151,48 @@
         this.addEventListener('shopify:block:select', (event) => {
           event.target.closest('li')?.scrollIntoView({ block: 'nearest', inline: 'center' });
         }, { signal });
-        if (!controls) return;
-        const update = () => { controls.hidden = track.scrollWidth <= track.clientWidth + 2; };
+        const slides = [...track.querySelectorAll('li')];
+        const centered = this.hasAttribute('data-centered');
+        let active = Math.min(slides.length - 1, Math.max(0, (Number(this.dataset.centered) || 1) - 1));
+        const update = () => { if (controls) controls.hidden = track.scrollWidth <= track.clientWidth + 2; };
+        const select = (index, behavior) => {
+          const slide = slides[index];
+          if (!slide) return;
+          const bounds = slide.getBoundingClientRect();
+          const frame = track.getBoundingClientRect();
+          track.scrollBy({ left: bounds.left + bounds.width / 2 - frame.left - frame.width / 2, behavior });
+          slides.forEach((item, position) => item.toggleAttribute('data-active', position === index));
+          active = index;
+        };
+        if (centered && slides.length) {
+          select(active, 'instant');
+          track.addEventListener('scroll', () => {
+            const frame = track.getBoundingClientRect();
+            const center = frame.left + frame.width / 2;
+            let distance = Infinity;
+            slides.forEach((slide, index) => {
+              const bounds = slide.getBoundingClientRect();
+              const delta = Math.abs(bounds.left + bounds.width / 2 - center);
+              if (delta < distance) {
+                active = index;
+                distance = delta;
+              }
+            });
+            slides.forEach((slide, index) => slide.toggleAttribute('data-active', index === active));
+          }, { signal, passive: true });
+        }
         const move = (direction) => {
           const motion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (centered && slides.length) {
+            select((active + direction + slides.length) % slides.length, motion ? 'instant' : 'smooth');
+            return;
+          }
           const step = track.querySelector('li')?.getBoundingClientRect().width || track.clientWidth;
           const gap = parseFloat(getComputedStyle(track.querySelector('ul')).columnGap) || 0;
           track.scrollBy({ left: direction * (step + gap), behavior: motion ? 'auto' : 'smooth' });
         };
-        controls.querySelector('[data-gallery-prev]').addEventListener('click', () => move(-1), { signal });
-        controls.querySelector('[data-gallery-next]').addEventListener('click', () => move(1), { signal });
+        controls?.querySelector('[data-gallery-prev]')?.addEventListener('click', () => move(-1), { signal });
+        controls?.querySelector('[data-gallery-next]')?.addEventListener('click', () => move(1), { signal });
         this.resize = new ResizeObserver(update);
         this.resize.observe(track);
         this.resize.observe(track.querySelector('ul'));
@@ -152,6 +212,10 @@
   "name": "Galería multimedia",
   "max_blocks": 12,
   "settings": [
+    {"type":"checkbox","id":"xd_centered","label":"Destacar la imagen central","default":false},
+    {"type":"range","id":"xd_initial_slide","label":"Imagen inicial","min":1,"max":12,"step":1,"default":1},
+    {"type":"checkbox","id":"xd_decoration","label":"Mostrar ilustración lateral","default":false},
+    {"type":"image_picker","id":"xd_gallery_image","label":"Ilustración lateral"},
     {
       "type": "text",
       "id": "heading",
@@ -333,6 +397,7 @@
       "type": "media",
       "name": "Imagen o vídeo",
       "settings": [
+        {"type":"select","id":"xd_artwork","label":"Imagen original de Agua","options":[{"value":"none","label":"Ninguna"},{"value":"office","label":"Oficina"},{"value":"movement","label":"En movimiento"},{"value":"vintage","label":"Salida vintage"},{"value":"meeting","label":"Reunión"}],"default":"none"},
         {
           "type": "image_picker",
           "id": "image",

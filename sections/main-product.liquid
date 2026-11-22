@@ -1131,6 +1131,9 @@
                 </div>
                 <div class="wt-collapse__target" id="CollapsibleTab-{{ block.id }}">
                   {% assign content = block.settings.content %}
+                  {% if block.settings.xd_shop_shipping and shop.shipping_policy.body != blank %}
+                    {% assign content = shop.shipping_policy.body %}
+                  {% endif %}
 
                   {% if has_variant_metafields %}
                     {% assign variables = block.settings.metafield_variables
@@ -4250,6 +4253,7 @@
       "type": "collapsible_tab",
       "name": "t:sections.main-product.blocks.collapsible_tab.name",
       "settings": [
+        {"type":"checkbox","id":"xd_shop_shipping","label":"Usar la política de envío de la tienda","default":false},
         {
           "type": "text",
           "id": "heading",

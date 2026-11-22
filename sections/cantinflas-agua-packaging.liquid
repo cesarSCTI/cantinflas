@@ -1,0 +1,255 @@
+{{ 'cantinflas-agua.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign artwork = nil
+  assign character = nil
+  if section.settings.original
+    assign artwork = 'packaging'
+    assign character = 'character'
+  endif
+%}
+<div class="ca-agua ca-pack" style="--ca-background: {{ section.settings.background }};
+    --ca-heading: {{ section.settings.heading_color }};
+    --ca-text: {{ section.settings.body_color }};
+    --ca-heading-align: {{ section.settings.heading_align }};
+    --ca-text-align: {{ section.settings.body_align }};
+    --ca-heading-size: {{ section.settings.heading_size }}px;
+    --ca-body-size: {{ section.settings.body_size }}px;
+    --ca-gradient: {{ section.settings.gradient | default: 'none' }};
+    --ca-dot: {{ section.settings.marker_background }};
+    --ca-dot-color: {{ section.settings.marker_color }};
+    --ca-tooltip: {{ section.settings.tooltip_background }};
+    --ca-tooltip-color: {{ section.settings.tooltip_color }};">
+  <div class="ca-pack__picture">
+    {% render 'cantinflas-agua-image', image: section.settings.image, artwork: artwork, alt: 'Envase de Agua Cantinflas', sizes: '(min-width: 800px) 50vw, 100vw' %}
+    {% for block in section.blocks %}
+      <details class="ca-pack__marker" name="AguaMarker-{{ section.id }}" style="--ca-marker-x: {{ block.settings.x }}%; --ca-marker-y: {{ block.settings.y }}%;" {% if section.settings.first_open and forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+        <summary aria-label="{{ block.settings.title | escape }}"><span aria-hidden="true"></span></summary>
+        <div class="ca-pack__popover">
+          {{ block.settings.title | escape }}
+          {% if block.settings.body != blank %}<div class="rte">{{ block.settings.body }}</div>{% endif %}
+          {% if block.settings.link != blank and block.settings.link_label != blank %}<a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>{% endif %}
+        </div>
+      </details>
+    {% endfor %}
+  </div>
+  <div class="ca-pack__copy">
+    {% if section.settings.heading != blank %}<h2 class="ca-agua__heading">{{ section.settings.heading | escape }}</h2>{% endif %}
+    <div class="ca-agua__body rte">{{ section.settings.body }}</div>
+    {% if section.settings.decoration != blank or character != blank %}
+      <div class="ca-pack__decoration{% if section.settings.decoration == blank %} ca-pack__decoration--xd{% endif %}">{% render 'cantinflas-agua-image', image: section.settings.decoration, artwork: character, alt: '', sizes: '160px' %}</div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Envase Agua Cantinflas",
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Un envase pensado para algo más."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#c22921"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Color del texto",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_align",
+      "label": "Alineación del texto",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño máximo del título",
+      "default": 80,
+      "min": 24,
+      "max": 112,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Tamaño máximo del texto",
+      "default": 22,
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "original",
+      "label": "Usar imágenes originales de XD",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Foto principal del envase"
+    },
+    {
+      "type": "image_picker",
+      "id": "decoration",
+      "label": "Ilustración lateral"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient",
+      "label": "Degradado del fondo"
+    },
+    {
+      "type": "color",
+      "id": "marker_background",
+      "label": "Fondo del marcador",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "Color del símbolo",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "tooltip_background",
+      "label": "Fondo del recuadro",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tooltip_color",
+      "label": "Texto del recuadro",
+      "default": "#252525"
+    },
+    {
+      "type": "checkbox",
+      "id": "first_open",
+      "label": "Abrir el primer marcador",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Envase Agua Cantinflas",
+      "blocks": [
+        {
+          "type": "marker"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "marker",
+      "name": "Marcador",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Tapón de origen vegetal"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Descripción"
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "label": "Posición horizontal",
+          "default": 49,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "label": "Posición vertical",
+          "default": 9,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Etiqueta del enlace"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,14 +1,19 @@
-<section class="cantinflas-details"
-  style="--cd-background: {{ section.settings.background }}; --cd-text: {{ section.settings.text_color }}; --cd-title: {{ section.settings.heading_color | default: section.settings.text_color }}; --cd-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --cd-head-align: {{ section.settings.heading_align }}; --cd-intro-align: {{ section.settings.intro_align }};">
+{% if section.settings.xd_water_layout != blank and section.settings.xd_water_layout != 'none' %}
+  {{ 'cantinflas-agua.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<section class="cantinflas-details cantinflas-details--{{ section.settings.xd_water_layout }}"
+  style="--cd-background: {{ section.settings.background }}; --cd-text: {{ section.settings.text_color }}; --cd-title: {{ section.settings.heading_color | default: section.settings.text_color }}; --cd-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --cd-head-align: {{ section.settings.heading_align }}; --cd-intro-align: {{ section.settings.intro_align }}; --cd-faq-bg: {{ section.settings.xd_faq_background | default: '#c22921' }};">
   <div class="cantinflas-details__inner">
-    {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
-    {% if section.settings.intro != blank %}<div class="cantinflas-details__intro rte">{{ section.settings.intro }}</div>{% endif %}
+    <div class="cantinflas-details__heading">
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+      {% if section.settings.intro != blank %}<div class="cantinflas-details__intro rte">{{ section.settings.intro }}</div>{% endif %}
+    </div>
     <div class="cantinflas-details__layout cantinflas-details__layout--{{ section.settings.image_side }}">
       <div>
         {% for block in section.blocks %}
           {% capture row_style %}--cd-row-title: {{ block.settings.heading_color | default: section.settings.text_color }}; --cd-row-text: {{ block.settings.body_color | default: section.settings.text_color }}; --cd-row-head-align: {{ block.settings.heading_align }}; --cd-row-text-align: {{ block.settings.text_align }};{% endcapture %}
           {% if section.settings.presentation == 'steps' and block.settings.text != blank or section.settings.presentation == 'steps' and block.settings.image != blank %}
-            <details class="cantinflas-details__row" style="{{ row_style }}" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+            <details class="cantinflas-details__row" style="{{ row_style }}" {% if forloop.first and section.settings.xd_water_layout != 'water-faq' %}open{% endif %} {% if section.settings.xd_water_layout == 'water-process' %}name="AguaProcess-{{ section.id }}"{% endif %} {{ block.shopify_attributes }}>
               <summary>{{ block.settings.heading | escape }}</summary>
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 1080 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080' }}
@@ -23,7 +28,11 @@
           {% endif %}
         {% endfor %}
       </div>
-      {% if section.settings.image != blank %}
+      {% if section.settings.xd_water_layout == 'water-process' or section.settings.xd_water_layout == 'water-faq' %}
+        <div class="cantinflas-details__art">
+          {% render 'cantinflas-agua-image', image: section.settings.image, artwork: section.settings.xd_artwork, alt: section.settings.heading, sizes: '(min-width: 800px) 50vw, 100vw' %}
+        </div>
+      {% elsif section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1080 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080', sizes: '(min-width: 900px) 40vw, 100vw' }}
       {% elsif section.settings.show_image %}
         {{ 'image' | placeholder_svg_tag: 'cantinflas-details__placeholder' }}
@@ -45,7 +54,7 @@
     .cantinflas-details__layout:has(> :is(img, svg)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
-  .cantinflas-details__inner > h2 { color: var(--cd-title); text-align: var(--cd-head-align); }
+  .cantinflas-details__heading > h2 { color: var(--cd-title); text-align: var(--cd-head-align); }
   .cantinflas-details__intro { color: var(--cd-intro); text-align: var(--cd-intro-align); }
   .cantinflas-details__row :is(summary,h3) { color: var(--cd-row-title); text-align: var(--cd-row-head-align); }
   .cantinflas-details__row .rte { color: var(--cd-row-text); text-align: var(--cd-row-text-align); }
@@ -61,6 +70,9 @@
 {
   "name": "Detalles Cantinflas",
   "settings": [
+    {"type":"select","id":"xd_water_layout","label":"Composición de Agua","options":[{"value":"none","label":"Original del tema"},{"value":"water-composition","label":"Composición mineral"},{"value":"water-process","label":"Proceso en cuatro etapas"},{"value":"water-faq","label":"Preguntas frecuentes"}],"default":"none"},
+    {"type":"select","id":"xd_artwork","label":"Imagen original de XD","options":[{"value":"none","label":"Ninguna"},{"value":"lab","label":"Laboratorio"},{"value":"bottle","label":"Envase de Agua"}],"default":"none"},
+    {"type":"color","id":"xd_faq_background","label":"Fondo de las preguntas","default":"#c22921"},
     {
       "type": "text",
       "id": "heading",

@@ -1,0 +1,38 @@
+{% liquid
+  assign sizes = sizes | default: '100vw'
+  assign image_alt = image.alt | default: alt
+  assign dimensions = nil
+  case artwork
+    when 'intro-bottle'
+      assign dimensions = '1440x2560'
+    when 'portrait'
+      assign dimensions = '848x1507'
+    when 'packaging'
+      assign dimensions = '1664x2496'
+    when 'cartoon'
+      assign dimensions = '479x479'
+    when 'character'
+      assign dimensions = '520x804'
+    when 'lab'
+      assign dimensions = '1916x2874'
+    when 'bottle'
+      assign dimensions = '793x1470'
+    when 'office'
+      assign dimensions = '335x762'
+    when 'movement'
+      assign dimensions = '334x762'
+    when 'vintage'
+      assign dimensions = '335x763'
+    when 'meeting'
+      assign dimensions = '334x763'
+  endcase
+%}
+{% if image != blank %}
+  {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '240, 480, 720, 960, 1200, 1600', sizes: sizes, alt: image_alt }}
+{% elsif dimensions %}
+  {% assign dimensions = dimensions | split: 'x' %}
+  {% assign filename = 'cantinflas-xd-agua-' | append: artwork | append: '.webp' %}
+  <img src="{{ filename | asset_url }}" width="{{ dimensions[0] }}" height="{{ dimensions[1] }}" loading="lazy" alt="{{ alt | escape }}">
+{% else %}
+  {{ 'image' | placeholder_svg_tag }}
+{% endif %}
