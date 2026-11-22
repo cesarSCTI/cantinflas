@@ -1,0 +1,321 @@
+<div class="cantinflas-legacy-intro{% if section.settings.stack_order == 'text_first' %} cantinflas-legacy-intro--text-first{% endif %}" style="
+  --cl-background: {{ section.settings.gradient | default: section.settings.background }};
+  --cl-heading: {{ section.settings.heading_color }};
+  --cl-body: {{ section.settings.text_color }};
+  --cl-heading-align: {{ section.settings.heading_alignment }};
+  --cl-text-align: {{ section.settings.text_alignment }};
+  --cl-vertical: {{ section.settings.vertical_alignment }};
+  --cl-title-size: {{ section.settings.heading_size }}px;
+  --cl-title-mobile: {{ section.settings.heading_mobile }}px;
+  --cl-copy-size: {{ section.settings.text_size }}px;
+  --cl-copy-mobile: {{ section.settings.text_mobile }}px;
+  --cl-title-column: {{ section.settings.heading_width }}fr;
+  --cl-copy-column: {{ 100 | minus: section.settings.heading_width }}fr;
+  --cl-max: {{ section.settings.content_width }}px;
+  --cl-gap: {{ section.settings.column_gap }}px;
+  --cl-padding: {{ section.settings.padding }}px;
+  --cl-mobile-padding: {{ section.settings.mobile_padding }}px;
+  --cl-image-opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};
+">
+  {% if section.settings.background_image != blank %}
+    {{ section.settings.background_image | image_url: width: 2400 | image_tag: class: 'cantinflas-legacy-intro__background', widths: '480, 750, 1100, 1600, 2000, 2400', sizes: '100vw', loading: 'lazy', alt: '' }}
+  {% endif %}
+  <div class="cantinflas-legacy-intro__grid">
+    {% if section.settings.heading != blank %}
+      <h2>{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <div class="cantinflas-legacy-intro__copy rte">{{ section.settings.text }}</div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cantinflas-legacy-intro {
+    position: relative;
+    isolation: isolate;
+    background: var(--cl-background);
+    padding-block: var(--cl-mobile-padding);
+  }
+  .cantinflas-legacy-intro__background {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: var(--cl-image-opacity);
+    pointer-events: none;
+  }
+  .cantinflas-legacy-intro__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: min(var(--cl-gap), 2rem);
+    width: min(91%, var(--cl-max));
+    margin-inline: auto;
+  }
+  .cantinflas-legacy-intro .cantinflas-legacy-intro__grid h2 {
+    min-width: 0;
+    margin: 0;
+    color: var(--cl-heading);
+    text-align: var(--cl-heading-align);
+    font: 700 var(--cl-title-mobile)/1.02 "baga", sans-serif;
+    overflow-wrap: anywhere;
+  }
+  .cantinflas-legacy-intro__copy {
+    min-width: 0;
+    color: var(--cl-body);
+    text-align: var(--cl-text-align);
+    font-size: var(--cl-copy-mobile);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  .cantinflas-legacy-intro__copy :is(p, li) { color: inherit; font-size: inherit; line-height: inherit; }
+  .cantinflas-legacy-intro__copy > :first-child { margin-block-start: 0; }
+  .cantinflas-legacy-intro__copy > :last-child { margin-block-end: 0; }
+  .cantinflas-legacy-intro__grid > :only-child { grid-column: 1 / -1; }
+  @media (max-width: 749px) {
+    .cantinflas-legacy-intro--text-first .cantinflas-legacy-intro__copy { order: -1; }
+  }
+  @media (min-width: 750px) {
+    .cantinflas-legacy-intro { padding-block: var(--cl-padding); }
+    .cantinflas-legacy-intro__grid {
+      grid-template-columns: minmax(0, var(--cl-title-column)) minmax(0, var(--cl-copy-column));
+      align-items: var(--cl-vertical);
+      gap: var(--cl-gap);
+    }
+    .cantinflas-legacy-intro .cantinflas-legacy-intro__grid h2 { font-size: calc(var(--cl-title-size) * .75); }
+    .cantinflas-legacy-intro__copy { font-size: var(--cl-copy-size); }
+  }
+  @media (min-width: 1000px) {
+    .cantinflas-legacy-intro .cantinflas-legacy-intro__grid h2 { font-size: var(--cl-title-size); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Título y texto del legado",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Un personaje que trascendió su tiempo"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Descripción"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#f2b846"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo sólido",
+      "default": "#c22921"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient",
+      "label": "Degradado de fondo"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Imagen de fondo"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Opacidad de la imagen",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alineación del título",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alineación de la descripción",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Alineación vertical",
+      "default": "start",
+      "options": [
+        {
+          "value": "start",
+          "label": "Arriba"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "end",
+          "label": "Abajo"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "stack_order",
+      "label": "Orden en móvil",
+      "default": "heading_first",
+      "options": [
+        {
+          "value": "heading_first",
+          "label": "Título primero"
+        },
+        {
+          "value": "text_first",
+          "label": "Descripción primero"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "label": "Ancho de la columna del título",
+      "min": 30,
+      "max": 75,
+      "step": 1,
+      "default": 54,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Título en escritorio",
+      "min": 28,
+      "max": 130,
+      "step": 2,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Título en móvil",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Descripción en escritorio",
+      "min": 12,
+      "max": 42,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_mobile",
+      "label": "Descripción en móvil",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Ancho máximo del contenido",
+      "min": 740,
+      "max": 1880,
+      "step": 20,
+      "default": 1740,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Separación entre columnas",
+      "min": 8,
+      "max": 160,
+      "step": 4,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Espacio vertical escritorio",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 72,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Espacio vertical móvil",
+      "min": 0,
+      "max": 96,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Título y texto del legado"
+    }
+  ]
+}
+{% endschema %}

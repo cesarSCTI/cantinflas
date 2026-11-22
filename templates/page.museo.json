@@ -88,7 +88,8 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "show_focus": false
+        "show_focus": false,
+        "column_order": "text_first"
       }
     },
     "origins": {
@@ -413,55 +414,35 @@
         "show_focus": false
       }
     },
+    "legacy_intro": {
+      "type": "cantinflas-legacy-intro",
+      "settings": {
+        "heading": "Un personaje que trascendió su tiempo",
+        "text": "<p>Su imagen, su humor y su particular manera de hablar forman parte de la cultura popular mexicana. Su nombre incluso llegó al lenguaje cotidiano con el verbo cantinflear, incorporado al diccionario de la Real Academia Española.</p>",
+        "heading_color": "#f2b846",
+        "text_color": "#ffffff",
+        "background": "#c22921"
+      }
+    },
     "legacy": {
-      "type": "cantinflas-editorial",
+      "type": "image-with-scrolling-text",
       "blocks": {
         "piece1": {
-          "type": "item",
+          "type": "image",
           "settings": {
             "heading": "En las películas que todavía se recuerdan.",
-            "text": "",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "text": "Su legado también vive en la cultura actual.",
+            "button_label": "",
+            "button_link": ""
           }
         },
         "piece2": {
-          "type": "item",
+          "type": "image",
           "settings": {
             "heading": "En las frases que seguimos repitiendo.",
             "text": "",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "button_label": "",
+            "button_link": ""
           }
         }
       },
@@ -470,18 +451,13 @@
         "piece2"
       ],
       "settings": {
-        "heading": "Un personaje que trascendió su tiempo",
-        "intro": "<p>Su imagen, su humor y su particular manera de hablar forman parte de la cultura popular mexicana. Su nombre incluso llegó al lenguaje cotidiano con el verbo cantinflear, incorporado al diccionario de la Real Academia Española.</p><p>Su legado también vive en la cultura actual.</p>",
-        "layout": "alternating",
-        "background": "#c22921",
-        "text_color": "#ffffff",
-        "accent": "#f2b846",
-        "heading_align": "left",
-        "intro_align": "left",
-        "intro_color": "",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "show_focus": false
+        "layout": "image_first",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "left",
+        "background_color": "#c22921",
+        "color-body-text": "#ffffff",
+        "margin-top": 0,
+        "margin-bottom": 0
       }
     },
     "closing": {
@@ -523,6 +499,7 @@
     "films",
     "world",
     "legacycontext",
+    "legacy_intro",
     "legacy",
     "closing"
   ]

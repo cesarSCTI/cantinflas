@@ -1,4 +1,5 @@
-<section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}"
+{% assign column_order = section.settings.column_order | default: 'alternate' %}
+<section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}{% if section.settings.layout == 'alternating' %} cantinflas-editorial--order-{{ column_order }}{% endif %}"
   {% if section.settings.layout == 'collage' and section.settings.collage_motion %}data-collage-motion{% endif %}
   style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
   <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
@@ -93,6 +94,26 @@
             --ce-copy-align: {{ block.settings.text_align }};
             --ce-link-align: {{ block.settings.button_align }};
           ">
+            {% capture card_copy %}
+              {% if card_title != blank or block.settings.text != blank or block.settings.label != blank %}
+                  <div class="cantinflas-editorial__copy">
+                    {% if card_title != blank %}<h3>{{ card_title | escape }}</h3>{% endif %}
+                    {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
+                    {% if block.settings.label != blank %}
+                      <div class="cantinflas-editorial__action">
+                        {% if card_url != blank %}
+                          <a class="cantinflas-editorial__link" href="{{ card_url }}">{{ block.settings.label | escape }}</a>
+                        {% elsif request.design_mode %}
+                          <button class="cantinflas-editorial__link" type="button" disabled>{{ block.settings.label | escape }}</button>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+              {% endif %}
+            {% endcapture %}
+            {% if section.settings.layout == 'alternating' and column_order == 'text_first' %}
+              {{ card_copy }}
+            {% endif %}
             {% unless block.settings.hide_media %}
               <div class="cantinflas-editorial__media">
                 {% if block.settings.video != blank %}
@@ -108,21 +129,9 @@
                 {% endif %}
               </div>
             {% endunless %}
-            {% if card_title != blank or block.settings.text != blank or block.settings.label != blank %}
-                <div class="cantinflas-editorial__copy">
-                  {% if card_title != blank %}<h3>{{ card_title | escape }}</h3>{% endif %}
-                  {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
-                  {% if block.settings.label != blank %}
-                    <div class="cantinflas-editorial__action">
-                      {% if card_url != blank %}
-                        <a class="cantinflas-editorial__link" href="{{ card_url }}">{{ block.settings.label | escape }}</a>
-                      {% elsif request.design_mode %}
-                        <button class="cantinflas-editorial__link" type="button" disabled>{{ block.settings.label | escape }}</button>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </div>
-            {% endif %}
+            {% unless section.settings.layout == 'alternating' and column_order == 'text_first' %}
+              {{ card_copy }}
+            {% endunless %}
           </article>
         {% endfor %}
       </div>
@@ -144,11 +153,17 @@
   @media (min-width: 600px) {
     .cantinflas-editorial--cards .cantinflas-editorial__items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
+  @media (max-width: 899px) {
+    .cantinflas-editorial--order-text_first .cantinflas-editorial__item {
+      display: grid;
+      gap: 1.5rem;
+    }
+  }
   @media (min-width: 900px) {
     .cantinflas-editorial--cards .cantinflas-editorial__items { grid-template-columns: repeat(auto-fit, minmax(min(100%, 27rem), 1fr)); }
     .cantinflas-editorial--alternating .cantinflas-editorial__item { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 5vw; }
-    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__media { grid-column: 2; grid-row: 1; }
-    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
+    .cantinflas-editorial--order-alternate .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__media { grid-column: 2; grid-row: 1; }
+    .cantinflas-editorial--order-alternate .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
     .cantinflas-editorial--alternating .cantinflas-editorial__copy:only-child { grid-column: 1 / -1; }
   }
 
@@ -305,8 +320,8 @@
   .cantinflas-editorial__hotspot-panel a { color: var(--ce-panel-link); text-decoration: underline; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .cantinflas-editorial[data-collage-motion].is-collage-moving .cantinflas-editorial__media :is(img, svg) {
-      animation: cantinflas-collage-float 4.4s ease-in-out var(--ce-float-delay, 0s);
+    .cantinflas-editorial[data-collage-motion] .cantinflas-editorial__media :is(img, svg) {
+      animation: cantinflas-collage-float 4.4s ease-in-out var(--ce-float-delay, 0s) infinite;
     }
     .cantinflas-editorial[data-collage-motion] .cantinflas-editorial__item:nth-child(even) {
       --ce-float-delay: .24s;
@@ -324,32 +339,6 @@
     }
   }
 {% endstylesheet %}
-
-{% javascript %}
-  if ('IntersectionObserver' in window) {
-    const collageSelector = '[data-collage-motion]';
-    const collageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (isIntersecting) target.classList.add('is-collage-moving');
-        else target.classList.remove('is-collage-moving');
-      });
-    }, { threshold: 0.16 });
-
-    const observeCollages = (root) => {
-      root.querySelectorAll(collageSelector).forEach((section) => collageObserver.observe(section));
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => observeCollages(document), { once: true });
-    } else {
-      observeCollages(document);
-    }
-    document.addEventListener('shopify:section:load', (event) => observeCollages(event.target));
-    document.addEventListener('shopify:section:unload', (event) => {
-      event.target.querySelectorAll(collageSelector).forEach((section) => collageObserver.unobserve(section));
-    });
-  }
-{% endjavascript %}
 
 {% schema %}
 {
@@ -547,6 +536,27 @@
       "label": "Animar las imágenes del collage",
       "default": false,
       "visible_if": "{{ section.settings.layout == 'collage' }}"
+    },
+    {
+      "type": "select",
+      "id": "column_order",
+      "label": "Orden de las columnas",
+      "default": "alternate",
+      "options": [
+        {
+          "value": "alternate",
+          "label": "Alternar por bloque"
+        },
+        {
+          "value": "image_first",
+          "label": "Imagen primero"
+        },
+        {
+          "value": "text_first",
+          "label": "Texto primero"
+        }
+      ],
+      "visible_if": "{{ section.settings.layout == 'alternating' }}"
     }
   ],
   "blocks": [
