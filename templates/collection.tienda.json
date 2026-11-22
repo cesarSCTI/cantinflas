@@ -39,7 +39,7 @@
     "grid": {
       "type": "main-collection-product-grid",
       "custom_css": [
-        ".collection__counter {display: none !important;}"
+        ".collection__counter:not(.collection__empty-collection) {display: none !important;}"
       ],
       "settings": {
         "products_per_page": 24,
