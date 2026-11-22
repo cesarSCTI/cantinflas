@@ -148,7 +148,7 @@
           "settings": {
             "button_select": "primary",
             "button_label": "Conoce su historia",
-            "button_link": "",
+            "button_link": "shopify://collections/all",
             "disable_on_mobile": false
           }
         }
@@ -159,7 +159,7 @@
         "button"
       ],
       "custom_css": [
-        "h2{color:#c22921; font-size:60px;}"
+        "h2 {color: #c22921; font-size: 60px;}"
       ],
       "settings": {
         "desktop_text_horizontal_position": "center",
