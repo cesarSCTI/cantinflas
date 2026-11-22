@@ -70,11 +70,19 @@
 }
 
 
-/* Keep the announcement in flow. Only the navigation layer overlays the hero. */
+/* Keep the announcement in flow and reserve header space on pages without a cover. */
 .page-header:has(> .cantinflas-xd-header--overlay) {
   position: absolute;
   inset-inline: 0;
   z-index: 17;
+}
+body:not(.menu-drawer-overlay-on):has(.page-header > [data-overlay-reserve]) #root {
+  padding-block-start: var(--xd-header-space, 64px);
+}
+@media (min-width: 1200px) {
+  body:not(.menu-drawer-overlay-on):has(.page-header > [data-overlay-reserve]) #root {
+    padding-block-start: var(--xd-header-space, 88px);
+  }
 }
 .cantinflas-xd-header--overlay {
   --color-header-background: var(--xd-header-overlay-bg, transparent);
@@ -94,6 +102,12 @@
 .cantinflas-xd-header--overlay .wt-page-nav-mega__sublist { --color-menu-text: #252525; }
 .cantinflas-xd-header--overlay .wt-header__spacer { display: none; }
 .cantinflas-xd-header--hero-brand .wt-header__logo { display: none; }
+.cantinflas-xd-header--overlay .wt-header__logo-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .cantinflas-header-overlay-logo {
   display: block;
   width: var(--logo-width, 90px);
@@ -110,20 +124,6 @@
   }
 }
 
-
-body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay.wt-header--separator { border-bottom: 0; }
-body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay .wt-header__logo-wrapper {
-  position: absolute;
-  inset-inline-start: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@media (min-width: 1200px) {
-  body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay .wt-header__body:not(.wt-header__body--search) {
-    padding-block: clamp(14px, 1.4vw, 28px);
-  }
-}
 
 .cantinflas-footer {
   background: var(--footer-bg);

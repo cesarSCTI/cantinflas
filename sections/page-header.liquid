@@ -1,14 +1,20 @@
 {% liquid
   assign xd_overlay = false
+  assign xd_cover = false
+  assign xd_reserve = false
+  assign xd_template = template.name | append: '.' | append: template.suffix
+  assign xd_hero_templates = 'index.,page.museo,page.mundo,page.contact' | split: ','
+  if xd_hero_templates contains xd_template
+    assign xd_cover = true
+  endif
   if section.settings.xd_text_controls
     if section.settings.xd_overlay == 'all'
       assign xd_overlay = true
-    elsif section.settings.xd_overlay == 'hero'
-      assign xd_template = template.name | append: '.' | append: template.suffix
-      assign xd_hero_templates = 'index.,page.museo,page.mundo,page.contact' | split: ','
-      if xd_hero_templates contains xd_template
-        assign xd_overlay = true
-      endif
+    elsif section.settings.xd_overlay == 'hero' and xd_cover
+      assign xd_overlay = true
+    endif
+    if xd_overlay and xd_cover == false
+      assign xd_reserve = true
     endif
   endif
 %}
@@ -16,7 +22,7 @@
   {% style %}
     #shopify-section-{{ section.id }} {
       --xd-header-overlay-text: {{ section.settings.xd_overlay_text }};
-      --xd-header-overlay-bg: {{ section.settings.xd_overlay_bg }};
+      --xd-header-overlay-bg: {% if xd_reserve %}{{ section.settings.xd_surface_bg | default: '#252525' }}{% else %}{{ section.settings.xd_overlay_bg }}{% endif %};
     }
   {% endstyle %}
 {% endif %}
@@ -92,6 +98,7 @@
   role="banner"
   id="header"
   data-hide-over-selector=".collection__grid"
+  {% if xd_reserve %}data-overlay-reserve{% endif %}
   class="
     wt-header{% if section.settings.xd_text_controls %} cantinflas-xd-header{% endif %}{% if xd_overlay %} cantinflas-xd-header--overlay{% unless section.settings.xd_overlay_logo %} cantinflas-xd-header--hero-brand{% endunless %}{% endif %}
     {% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}mobile-nav{% endif %}
@@ -696,8 +703,9 @@
   "tag": "header",
   "class": "page-header",
   "settings": [
-    {"type": "select", "id": "xd_overlay", "label": "Superponer encabezado", "default": "hero", "options": [{"value": "hero", "label": "Inicio, Museo, Mundo y Contacto"}, {"value": "all", "label": "Todas las páginas"}, {"value": "off", "label": "Dentro del flujo"}]},
+  {"type": "select", "id": "xd_overlay", "label": "Superponer encabezado", "default": "all", "options": [{"value": "hero", "label": "Inicio, Museo, Mundo y Contacto"}, {"value": "all", "label": "Todas las páginas"}, {"value": "off", "label": "Dentro del flujo"}]},
     {"type": "color", "id": "xd_overlay_bg", "label": "Fondo en modo superpuesto", "default": "transparent"},
+  {"type": "color", "id": "xd_surface_bg", "label": "Fondo en páginas sin portada", "default": "#252525"},
     {"type": "color", "id": "xd_overlay_text", "label": "Texto e iconos superpuestos", "default": "#ffffff"},
     {"type": "checkbox", "id": "xd_overlay_logo", "label": "Mostrar logo en el encabezado superpuesto", "default": true},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},

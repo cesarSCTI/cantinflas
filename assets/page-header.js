@@ -25,9 +25,25 @@ class PageHeaderSection extends HTMLElement {
 
   connectedCallback() {
     this.init();
+    if (this.hasAttribute("data-overlay-reserve")) {
+      const updateHeaderSpace = () => {
+        document.documentElement.style.setProperty(
+          "--xd-header-space",
+          `${this.offsetHeight}px`,
+        );
+      };
+
+      updateHeaderSpace();
+      this.overlayResizeObserver = new ResizeObserver(updateHeaderSpace);
+      this.overlayResizeObserver.observe(this);
+    }
   }
 
   disconnectedCallback() {
+    if (this.overlayResizeObserver) {
+      this.overlayResizeObserver.disconnect();
+      document.documentElement.style.removeProperty("--xd-header-space");
+    }
     this.disableStickyHeader();
   }
 
