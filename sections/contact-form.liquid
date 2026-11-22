@@ -1,3 +1,17 @@
+{% liquid
+  assign name_label = 'templates.contact.form.name' | t
+  assign phone_label = 'templates.contact.form.phone' | t
+  assign email_label = 'templates.contact.form.email' | t
+  assign message_label = 'templates.contact.form.comment' | t
+  assign submit_label = 'aria-label.contact-form' | t
+  if section.settings.xd_contact_layout
+    assign name_label = section.settings.xd_name_label | default: name_label
+    assign phone_label = section.settings.xd_phone_label | default: phone_label
+    assign email_label = section.settings.xd_email_label | default: email_label
+    assign message_label = section.settings.xd_message_label | default: message_label
+    assign submit_label = section.settings.xd_submit_label | default: submit_label
+  endif
+%}
 {% if section.settings.xd_text_controls %}
   {% style %}
     #shopify-section-{{ section.id }} .cantinflas-contact-layout__details h2, #shopify-section-{{ section.id }} .hero__title {
@@ -13,7 +27,7 @@
       {% unless section.settings.xd_labels_align == 'inherit' %}text-align: {{ section.settings.xd_labels_align }};{% endunless %}
     }
     #shopify-section-{{ section.id }} .wt-newsletter__send__text {
-      {% if section.settings.xd_button_color != blank %}color: {{ section.settings.xd_button_color }};{% endif %}
+      {% if section.settings.xd_button_color != blank and section.settings.xd_contact_layout == false %}color: {{ section.settings.xd_button_color }};{% endif %}
       {% unless section.settings.xd_button_align == 'inherit' %}text-align: {{ section.settings.xd_button_align }};{% endunless %}
     }
   {% endstyle %}
@@ -27,6 +41,17 @@
     {
         {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
           --color-background: {{ section.settings.background_color }};
+        {% endif %}
+
+        {% if section.settings.xd_contact_layout %}
+          --cc-input: {{ section.settings.xd_contact_field_bg }};
+          --cc-card: {{ section.settings.xd_contact_card_bg }};
+          --cc-button: {{ section.settings.xd_contact_button_bg }};
+          --cc-button-text: {{ section.settings.xd_button_color | default: '#ffffff' }};
+          --cc-action-align: {{ section.settings.xd_button_align }};
+          --cc-accent: {{ section.settings.xd_contact_accent }};
+          --cc-body: {{ section.settings.xd_body_color | default: '#252525' }};
+          --cc-label: {{ section.settings.xd_labels_color | default: '#252525' }};
         {% endif %}
 
         {% if section.settings.margin-top %}
@@ -59,7 +84,7 @@
   {%- endfor -%}
 </style>
 
-<div data-section-id="{{ section.id }}" class="wt-contact__form form__full">
+<div data-section-id="{{ section.id }}" class="wt-contact__form form__full{% if section.settings.xd_contact_layout %} cantinflas-contact-design{% endif %}">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'heading' -%}
@@ -100,13 +125,15 @@
                 >
                   <input
                     type="text"
+                    autocomplete="name"
+                    {% if section.settings.xd_contact_layout and section.settings.xd_name_required %}required{% endif %}
                     name="contact[name]"
                     id="ContactFormName-{{ section.id }}"
                     class="form__field__input"
                     placeholder=" "
                     value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}"
                   >
-                  <span class="form__field__label">{{ 'templates.contact.form.name' | t }}</span>
+                  <span class="form__field__label">{{ name_label | escape }}{% if section.settings.xd_contact_layout and section.settings.xd_name_required %}*{% endif %}</span>
                 </label>
 
                 <label
@@ -122,7 +149,7 @@
                     placeholder=" "
                     value="{% if form.phone %}{{ form.phone | escape }}{% elsif customer %}{{ customer.phone | escape }}{% endif %}"
                   >
-                  <span class="form__field__label">{{ 'templates.contact.form.phone' | t }}</span>
+                  <span class="form__field__label">{{ phone_label | escape }}</span>
                 </label>
               </div>
 
@@ -140,7 +167,7 @@
                   placeholder=" "
                   value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
                 >
-                <span class="form__field__label">{{ 'templates.contact.form.email' | t }}* </span>
+                <span class="form__field__label">{{ email_label | escape }}* </span>
               </label>
 
               <label
@@ -154,17 +181,16 @@
                   placeholder=" "
                   rows="6"
                 >{{- form.body | escape -}}</textarea>
-                <span class="form__field__label">{{- 'templates.contact.form.comment' | t -}}</span>
+                <span class="form__field__label">{{ message_label | escape }}</span>
               </label>
-              {% comment %}<a href="#" class="test-1">{% endcomment %}
+              {% if section.settings.xd_contact_layout %}<div class="cantinflas-contact-design__submit">{% endif %}
               <button
-                aria-label="{{ 'aria-label.contact-form' | t }}"
+                type="submit"
                 class="hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %} block__button block{% if block.settings.disable_on_mobile %}__button--mobile{% endif %}"
               >
-                <span> {{ block.settings.button_label }}</span>
-                <span class="wt-newsletter__send__text">{{ 'aria-label.contact-form' | t }}</span>
+                <span class="wt-newsletter__send__text">{{ submit_label | escape }}</span>
               </button>
-              {% comment %}</a>{% endcomment %}
+              {% if section.settings.xd_contact_layout %}</div>{% endif %}
             {% endform %}
           </div>
         </div>
@@ -172,6 +198,14 @@
           <aside class="cantinflas-contact-layout__details">
             {% if section.settings.contact_heading != blank %}<h2>{{ section.settings.contact_heading | escape }}</h2>{% endif %}
             <div class="rte">{{ section.settings.contact_details }}</div>
+            {% if section.settings.xd_contact_layout and section.settings.xd_contact_social %}
+              <div class="cantinflas-contact-design__social">
+                {% if section.settings.xd_contact_social_label != blank %}
+                  <p>{{ section.settings.xd_contact_social_label | escape }}</p>
+                {% endif %}
+                {% render 'social-links' %}
+              </div>
+            {% endif %}
           </aside>
           </div>
         {% endif %}
@@ -187,6 +221,171 @@
   @media (min-width: 900px) {
     .cantinflas-contact-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
   }
+
+  .cantinflas-contact-design {
+    padding-block: calc(clamp(76px, 19vw, 132px) + var(--section-gap-top, 0px)) min(7vw, var(--section-gap-bottom, 100px));
+    color: var(--cc-body);
+  }
+
+  .cantinflas-contact-design > .form__text {
+    width: min(86.5%, 1100px);
+    max-width: none;
+    margin: 0 auto clamp(30px, 6.2vw, 120px);
+    padding: 0;
+    color: var(--cc-body);
+    font-size: clamp(16px, 1.51vw, 29px);
+    font-weight: 700;
+    line-height: 1.22;
+    text-align: center;
+  }
+
+  .cantinflas-contact-design > .form__text p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+
+  .cantinflas-contact-design .cantinflas-contact-layout,
+  .cantinflas-contact-design > .form__container { width: min(86.5%, 1660px); }
+
+  .cantinflas-contact-design .cantinflas-contact-layout { gap: clamp(30px, 5.8vw, 112px); }
+  .cantinflas-contact-design .form__container { max-width: none; padding: 0; }
+
+  .cantinflas-contact-design .form__fieldset { gap: 0 clamp(14px, 1.61vw, 31px); }
+  .cantinflas-contact-design .form__field {
+    flex-direction: column-reverse;
+    gap: .45em;
+    margin-block-end: clamp(13px, 1.45vw, 28px);
+  }
+
+  .wt-contact__form.cantinflas-contact-design .form__field > .form__field__label {
+    position: static;
+    display: block;
+    height: auto;
+    padding-inline: clamp(8px, 1.35vw, 26px);
+    transform: none;
+    background: transparent;
+    color: var(--cc-label);
+    font-size: clamp(12px, 1.04vw, 20px);
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .cantinflas-contact-design .form__field :is(.form__field__input, .form__field__textarea) {
+    box-sizing: border-box;
+    min-height: clamp(40px, 3.02vw, 58px);
+    border: 1px solid transparent;
+    border-radius: clamp(6px, .78vw, 15px);
+    background: var(--cc-input);
+    padding: .55em clamp(10px, 1.35vw, 26px);
+    color: var(--cc-body);
+  }
+
+  .cantinflas-contact-design .form__field__textarea { height: clamp(100px, 7.97vw, 153px); resize: vertical; }
+  .cantinflas-contact-design :is(input, textarea, button, a):focus-visible {
+    outline: 2px solid var(--cc-button);
+    outline-offset: 2px;
+  }
+
+  .cantinflas-contact-design__submit { text-align: var(--cc-action-align); }
+
+  .cantinflas-contact-design .cantinflas-contact-design__submit button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: clamp(126px, 12.03vw, 231px);
+    min-height: clamp(40px, 3.18vw, 61px);
+    padding: .5em 1.5em;
+    border: 1px solid var(--cc-button);
+    border-radius: 999px;
+    background: var(--cc-button);
+    color: var(--cc-button-text);
+    font-size: clamp(12px, 1.04vw, 20px);
+    letter-spacing: .035em;
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-design__submit .hero__button--secondary {
+    background: transparent;
+    color: var(--cc-button);
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-design__submit .hero__button--link {
+    border-color: transparent;
+    min-width: 0;
+    text-decoration: underline;
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details {
+    padding: clamp(24px, 3.2vw, 62px) clamp(16px, 2.45vw, 47px);
+    background: var(--cc-card);
+    border: 0;
+    border-radius: clamp(9px, .84vw, 16px);
+    box-shadow: 0 2px 16px rgb(0 0 0 / .14);
+    color: var(--cc-body);
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details h2 {
+    margin: 0 0 1em;
+    font-size: clamp(24px, 2.03vw, 39px);
+    line-height: 1.12;
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details .rte {
+    font-size: clamp(14px, 1.35vw, 26px);
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details .rte :is(p, a) {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details .rte p + p { margin-block-start: .85em; }
+
+  .cantinflas-contact-design .cantinflas-contact-layout__details .rte a { text-decoration: none; }
+  .cantinflas-contact-design .cantinflas-contact-layout__details .rte a:hover { text-decoration: underline; }
+  .cantinflas-contact-design .cantinflas-contact-layout__details a:is([href^="tel:"], [href^="mailto:"])::before {
+    display: inline-block;
+    width: 1.55em;
+    color: var(--cc-accent);
+    font-family: Arial, sans-serif;
+  }
+  .cantinflas-contact-design .cantinflas-contact-layout__details a[href^="tel:"]::before { content: '\260e' / ''; }
+  .cantinflas-contact-design .cantinflas-contact-layout__details a[href^="mailto:"]::before { content: '\2709' / ''; }
+
+  .cantinflas-contact-design__social { margin-block-start: 1em; font-size: clamp(14px, 1.35vw, 26px); }
+  .cantinflas-contact-design__social p { margin: 0 0 .35em; }
+  .cantinflas-contact-design__social .social-links {
+    justify-content: center;
+    gap: .55em;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cantinflas-contact-design__social .social-link {
+    display: grid;
+    place-items: center;
+    width: clamp(30px, 2.18vw, 42px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--cc-accent);
+    color: var(--cc-card);
+  }
+
+  .cantinflas-contact-design__social .social-link svg { width: 58%; height: 58%; }
+
+  @media (max-width: 899px) {
+    .cantinflas-contact-design .cantinflas-contact-layout__details { max-width: 470px; width: 100%; justify-self: center; }
+    .cantinflas-contact-design .cantinflas-contact-design__submit button { min-height: 44px; }
+    .cantinflas-contact-design__social .social-link { width: 36px; }
+  }
+
+  @media (min-width: 750px) {
+    .cantinflas-contact-design { padding-block-start: calc(clamp(105px, 14.6vw, 280px) + var(--section-gap-top, 0px)); }
+  }
+
+  @media (min-width: 900px) {
+    .cantinflas-contact-design .cantinflas-contact-layout { grid-template-columns: minmax(0, 1081fr) minmax(0, 459fr); }
+    .cantinflas-contact-design .cantinflas-contact-layout__details { min-height: clamp(225px, 23.75vw, 456px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -195,6 +394,19 @@
   "tag": "section",
   "class": "spaced-section",
   "settings": [
+    {"type": "checkbox", "id": "xd_contact_layout", "label": "Composición del diseño de Contacto", "default": false},
+    {"type": "text", "id": "xd_name_label", "label": "Etiqueta de nombre", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "checkbox", "id": "xd_name_required", "label": "Pedir nombre obligatorio", "default": false, "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "text", "id": "xd_phone_label", "label": "Etiqueta de teléfono", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "text", "id": "xd_email_label", "label": "Etiqueta de correo electrónico", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "text", "id": "xd_message_label", "label": "Etiqueta del mensaje", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "text", "id": "xd_submit_label", "label": "Texto del botón de envío", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "color", "id": "xd_contact_field_bg", "label": "Fondo de los campos", "default": "#f5f5f5", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "color", "id": "xd_contact_button_bg", "label": "Fondo del botón de envío", "default": "#ca3732", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "color", "id": "xd_contact_card_bg", "label": "Fondo de la tarjeta", "default": "#ffffff", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "color", "id": "xd_contact_accent", "label": "Color de iconos de contacto y redes", "default": "#f2b846", "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "checkbox", "id": "xd_contact_social", "label": "Mostrar redes en la tarjeta", "default": false, "visible_if": "{{ section.settings.xd_contact_layout }}"},
+    {"type": "text", "id": "xd_contact_social_label", "label": "Etiqueta de redes", "default": "Redes Sociales", "visible_if": "{{ section.settings.xd_contact_layout }}"},
     {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
     {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
     {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},

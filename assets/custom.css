@@ -110,6 +110,21 @@
   }
 }
 
+
+body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay.wt-header--separator { border-bottom: 0; }
+body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay .wt-header__logo-wrapper {
+  position: absolute;
+  inset-inline-start: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1200px) {
+  body:has(.cantinflas-video-hero--contact) .cantinflas-xd-header--overlay .wt-header__body:not(.wt-header__body--search) {
+    padding-block: clamp(14px, 1.4vw, 28px);
+  }
+}
+
 .cantinflas-footer {
   background: var(--footer-bg);
   color: var(--footer-text);

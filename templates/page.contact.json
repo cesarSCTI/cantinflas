@@ -12,23 +12,24 @@
     "banner": {
       "type": "cantinflas-video-hero",
       "settings": {
-        "heading": "Escríbenos Chato!!",
+        "heading": "Escríbenos\nChato!!",
         "subheading": "",
         "cover": "shopify://shop_images/Contact-Cantinflas.png",
-        "cover_asset": "",
-        "cover_width": 1920,
-        "cover_height": 1080,
+        "cover_asset": "cantinflas-xd-contacto.webp",
+        "cover_width": 800,
+        "cover_height": 993,
         "autoplay": false,
         "alignment": "contact",
         "background": "#2b3d8f",
         "text_color": "#f2b846",
         "overlay": 0,
-        "heading_align": "right",
-        "subheading_align": "right",
+        "heading_align": "center",
+        "subheading_align": "center",
         "heading_color": "#f2b846",
         "subheading_color": "",
-        "heading_size": 90,
-        "heading_mobile": 30
+        "heading_size": 120,
+        "heading_mobile": 40,
+        "background_gradient": "linear-gradient(180deg, #2b3d8f 0%, #0f1633 100%)"
       }
     },
     "main": {
@@ -45,35 +46,6 @@
         "margin-bottom": 0
       }
     },
-    "introduction": {
-      "type": "rich-text",
-      "blocks": {
-        "piece1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>¿Tienes alguna pregunta sobre nuestros productos o tu pedido?<br>¡Aquí estamos para ayudarte!</p>",
-            "disable_on_mobile": false
-          }
-        }
-      },
-      "block_order": [
-        "piece1"
-      ],
-      "settings": {
-        "section_width": "regular",
-        "desktop_text_horizontal_position": "center",
-        "color-body-text": "rgba(0,0,0,0)",
-        "background_color": "rgba(0,0,0,0)",
-        "margin-top": 20,
-        "margin-bottom": 20,
-        "xd_heading_color": "",
-        "xd_heading_align": "inherit",
-        "xd_body_color": "",
-        "xd_body_align": "inherit",
-        "xd_button_color": "",
-        "xd_button_align": "inherit"
-      }
-    },
     "form": {
       "type": "contact-form",
       "blocks": {
@@ -82,34 +54,50 @@
           "settings": {
             "button_select": "primary"
           }
+        },
+        "intro": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>¿Tienes alguna pregunta sobre nuestros productos o tu pedido?<br>¡Aquí estamos para ayudarte!</p>",
+            "text_disable_on_mobile": false
+          }
         }
       },
       "block_order": [
+        "intro",
         "form"
       ],
       "settings": {
         "xd_text_controls": true,
         "xd_heading_color": "#252525",
-        "xd_heading_align": "left",
-        "xd_body_color": "",
+        "xd_heading_align": "center",
+        "xd_body_color": "#252525",
         "xd_body_align": "inherit",
         "xd_labels_color": "#252525",
         "xd_labels_align": "inherit",
-        "xd_button_color": "",
-        "xd_button_align": "inherit",
+        "xd_button_color": "#ffffff",
+        "xd_button_align": "center",
         "contact_heading": "Contáctanos",
         "contact_details": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a></p><p><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>",
         "color-body-text": "rgba(0,0,0,0)",
-        "background_color": "rgba(0,0,0,0)",
+        "background_color": "#ffffff",
         "margin-top": 0,
-        "margin-bottom": 80
+        "margin-bottom": 100,
+        "xd_contact_layout": true,
+        "xd_name_required": true,
+        "xd_name_label": "Nombre",
+        "xd_phone_label": "Teléfono",
+        "xd_email_label": "Correo electrónico",
+        "xd_message_label": "Su mensaje",
+        "xd_submit_label": "Enviar",
+        "xd_contact_social": true,
+        "xd_contact_social_label": "Redes Sociales"
       }
     }
   },
   "order": [
     "banner",
     "main",
-    "introduction",
     "form"
   ]
 }
