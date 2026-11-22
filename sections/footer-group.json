@@ -26,22 +26,6 @@
             "text": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a><br><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>"
           }
         },
-        "image_QgyTXx": {
-          "type": "image",
-          "settings": {
-            "desktop_image": "shopify://shop_images/Rectangle_1541.png",
-            "image-width": 510
-          },
-          "disabled": true
-        },
-        "image_JRKmtC": {
-          "type": "image",
-          "settings": {
-            "desktop_image": "shopify://shop_images/img-Cantinflas-footer.png",
-            "image-width": 500
-          },
-          "disabled": true
-        },
         "newsletter": {
           "type": "newsletter",
           "settings": {
@@ -55,9 +39,7 @@
         "text_rBVikd",
         "menu_TyWCqJ",
         "menu_DzCNd6",
-        "newsletter",
-        "image_QgyTXx",
-        "image_JRKmtC"
+        "newsletter"
       ],
       "custom_css": [
         ".wt-footer__block {padding-bottom: 0px !important;}",

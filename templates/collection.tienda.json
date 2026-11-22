@@ -68,7 +68,7 @@
             "desktop_image": "shopify://shop_images/icono-envios.png",
             "select_icon": "bag",
             "heading": "Atención personalizada",
-            "text": "Expertos te ayudaran",
+            "text": "<p>Expertos te ayudaran</p>",
             "link": ""
           }
         },
@@ -78,7 +78,7 @@
             "desktop_image": "shopify://shop_images/icono-contamos_con_garantia.png",
             "select_icon": "bag",
             "heading": "Envíos",
-            "text": "Rápidos y a tiempo",
+            "text": "<p>Rápidos y a tiempo</p>",
             "link": ""
           }
         },
@@ -88,7 +88,7 @@
             "desktop_image": "shopify://shop_images/icono-pago_seguro.png",
             "select_icon": "bag",
             "heading": "Contamos con garantía",
-            "text": "Nuestra promesa para tí",
+            "text": "<p>Nuestra promesa para tí</p>",
             "link": ""
           }
         },
@@ -98,7 +98,7 @@
             "desktop_image": "shopify://shop_images/icono-atencion_personalizada.png",
             "select_icon": "bag",
             "heading": "Pago seguro",
-            "text": "Tus datos protegidos",
+            "text": "<p>Tus datos protegidos</p>",
             "link": ""
           }
         }
