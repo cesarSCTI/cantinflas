@@ -1,15 +1,26 @@
-{% assign column_order = section.settings.column_order | default: 'alternate' %}
-<section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}{% if section.settings.layout == 'alternating' %} cantinflas-editorial--order-{{ column_order }}{% endif %}"
-  {% if section.settings.layout == 'collage' and section.settings.collage_motion %}data-collage-motion{% endif %}
-  style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
-  <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
-    {% if section.settings.layout == 'collage' %}<div class="cantinflas-editorial__collage-copy">{% endif %}
+{% liquid
+  assign column_order = section.settings.column_order | default: 'alternate'
+  assign full_hotspot = false
+  assign overlay_hotspot_copy = false
+  if section.settings.layout == 'hotspots'
+    assign full_hotspot = section.settings.hotspot_full_width
+    assign overlay_hotspot_copy = section.settings.hotspot_overlay_copy
+  endif
+%}
+{%- capture editorial_copy -%}
     {% if section.settings.heading != blank %}
       <h2 class="cantinflas-editorial__heading">{{ section.settings.heading | escape }}</h2>
     {% endif %}
     {% if section.settings.intro != blank %}
       <div class="cantinflas-editorial__intro rte">{{ section.settings.intro }}</div>
     {% endif %}
+{%- endcapture -%}
+<section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}{% if section.settings.layout == 'alternating' %} cantinflas-editorial--order-{{ column_order }}{% endif %}{% if full_hotspot %} cantinflas-editorial--hotspot-full{% endif %}"
+  {% if section.settings.layout == 'collage' and section.settings.collage_motion %}data-collage-motion{% endif %}
+  style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
+  <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
+    {% if section.settings.layout == 'collage' %}<div class="cantinflas-editorial__collage-copy">{% endif %}
+    {% unless overlay_hotspot_copy %}{{ editorial_copy }}{% endunless %}
     {% if section.settings.layout == 'collage' %}
         <div class="cantinflas-editorial__collage-actions">
           {% for number in (1..2) %}
@@ -33,40 +44,49 @@
     {% endif %}
     {% if section.settings.layout == 'hotspots' %}
       <div class="cantinflas-editorial__hotspot-stage">
-        {% if section.settings.focus_image != blank %}
-          {{ section.settings.focus_image | image_url: width: 1920 | image_tag: loading: 'lazy', widths: '480, 720, 1080, 1440, 1920', sizes: '(min-width: 1260px) 1080px, 86vw' }}
-        {% else %}
-          {{ 'image' | placeholder_svg_tag: 'cantinflas-editorial__placeholder' }}
-        {% endif %}
-        <div class="cantinflas-editorial__hotspot-layer">
-          {% for block in section.blocks %}
-            {% liquid
-              assign marker_heading = block.settings.heading | default: 'Punto interactivo'
-              assign marker_url = block.settings.link
-              assign marker_label = block.settings.label | default: 'Ver más'
-            %}
-            <details name="Hotspots-{{ section.id }}" class="cantinflas-editorial__hotspot{% if block.settings.marker_y > 50 %} cantinflas-editorial__hotspot--above{% endif %}" {{ block.shopify_attributes }} style="
-              --ce-x: {{ block.settings.marker_x }}%;
-              --ce-y: {{ block.settings.marker_y }}%;
-              --ce-dot: {{ block.settings.marker_color | default: '#c22921' }};
-              --ce-dot-text: {{ block.settings.marker_text_color | default: '#ffffff' }};
-              --ce-panel: {{ block.settings.card_color | default: '#ffffff' }};
-              --ce-panel-heading: {{ block.settings.title_color | default: section.settings.accent }};
-              --ce-panel-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
-              --ce-panel-link: {{ block.settings.button_color | default: section.settings.accent }};
-            ">
-              <summary aria-label="{{ marker_heading | escape }}">
-                <span class="cantinflas-editorial__hotspot-plus" aria-hidden="true">+</span>
-                <span class="cantinflas-editorial__hotspot-minus" aria-hidden="true">−</span>
-              </summary>
-              <div class="cantinflas-editorial__hotspot-panel">
-                <h3>{{ marker_heading | escape }}</h3>
-                {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
-                {% if marker_url != blank %}<a href="{{ marker_url }}">{{ marker_label | escape }}</a>{% endif %}
-              </div>
-            </details>
-          {% endfor %}
+        <div class="cantinflas-editorial__hotspot-canvas">
+          {% if section.settings.focus_image != blank %}
+            {% assign hotspot_sizes = '(min-width: 1260px) 1080px, 86vw' %}
+            {% if full_hotspot %}{% assign hotspot_sizes = '100vw' %}{% endif %}
+            {{ section.settings.focus_image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '480, 720, 1080, 1440, 1920, 2400', sizes: hotspot_sizes }}
+          {% elsif section.settings.hotspot_anatomy_image %}
+            <img src="{{ 'cantinflas-xd-anatomia.webp' | asset_url }}" alt="Collage de Cantinflas con un micrófono y una cinta de película" width="1671" height="941" loading="lazy">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'cantinflas-editorial__placeholder' }}
+          {% endif %}
+          <div class="cantinflas-editorial__hotspot-layer">
+            {% for block in section.blocks %}
+              {% liquid
+                assign marker_heading = block.settings.heading | default: 'Punto interactivo'
+                assign marker_url = block.settings.link
+                assign marker_label = block.settings.label | default: 'Ver más'
+              %}
+              <details name="Hotspots-{{ section.id }}" class="cantinflas-editorial__hotspot{% if block.settings.marker_y > 50 %} cantinflas-editorial__hotspot--above{% endif %}" {{ block.shopify_attributes }} style="
+                --ce-x: {{ block.settings.marker_x }}%;
+                --ce-y: {{ block.settings.marker_y }}%;
+                --ce-dot: {{ block.settings.marker_color | default: '#c22921' }};
+                --ce-dot-text: {{ block.settings.marker_text_color | default: '#ffffff' }};
+                --ce-panel: {{ block.settings.card_color | default: '#ffffff' }};
+                --ce-panel-heading: {{ block.settings.title_color | default: section.settings.accent }};
+                --ce-panel-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
+                --ce-panel-link: {{ block.settings.button_color | default: section.settings.accent }};
+              ">
+                <summary aria-label="{{ marker_heading | escape }}">
+                  <span class="cantinflas-editorial__hotspot-plus" aria-hidden="true">+</span>
+                  <span class="cantinflas-editorial__hotspot-minus" aria-hidden="true">−</span>
+                </summary>
+                <div class="cantinflas-editorial__hotspot-panel">
+                  <h3>{{ marker_heading | escape }}</h3>
+                  {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
+                  {% if marker_url != blank %}<a href="{{ marker_url }}">{{ marker_label | escape }}</a>{% endif %}
+                </div>
+              </details>
+            {% endfor %}
+          </div>
         </div>
+        {% if overlay_hotspot_copy and editorial_copy != blank %}
+          <div class="cantinflas-editorial__hotspot-copy">{{ editorial_copy }}</div>
+        {% endif %}
       </div>
     {% else %}
     {% if section.settings.show_focus or section.settings.focus_image != blank %}
@@ -270,7 +290,36 @@
     width: min(100%, 108rem);
     margin: 2.6rem auto;
   }
-  .cantinflas-editorial__hotspot-stage > :is(img, svg) { display: block; width: 100%; height: auto; }
+  .cantinflas-editorial--hotspot-full { padding: 0; overflow-x: clip; }
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__inner { width: 100%; }
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__hotspot-stage { width: 100%; margin: 0; }
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__inner > :is(.cantinflas-editorial__heading, .cantinflas-editorial__intro) {
+    margin-inline: auto;
+    width: min(86%, 1640px);
+  }
+
+  .cantinflas-editorial__hotspot-canvas { position: relative; }
+  .cantinflas-editorial__hotspot-canvas > :is(img, svg) { display: block; width: 100%; height: auto; }
+  .cantinflas-editorial__hotspot-copy { padding: 1.5rem 8%; }
+  .cantinflas-editorial__hotspot-copy .cantinflas-editorial__heading { margin: 0; text-wrap: balance; }
+  .cantinflas-editorial__hotspot-copy .cantinflas-editorial__intro { font-weight: 600; }
+  .cantinflas-editorial__hotspot-copy .cantinflas-editorial__intro p { margin-block: 0; }
+
+  @media (min-width: 900px) {
+    .cantinflas-editorial__hotspot-copy {
+      position: absolute;
+      inset: auto 8% 8%;
+      display: grid;
+      grid-template-columns: minmax(0, 35%) minmax(0, 38%);
+      justify-content: space-between;
+      align-items: end;
+      padding: 0;
+    }
+
+    .cantinflas-editorial__hotspot-copy .cantinflas-editorial__heading { font-size: min(var(--ce-desktop), 4vw); }
+    .cantinflas-editorial__hotspot-copy .cantinflas-editorial__intro { grid-column: 2; font-size: clamp(14px, 1.4vw, 24px); line-height: 1.2; }
+    .cantinflas-editorial__hotspot-copy .cantinflas-editorial__intro p { font-size: inherit; }
+  }
   .cantinflas-editorial__hotspot-layer { position: absolute; inset: 0; pointer-events: none; }
   .cantinflas-editorial__hotspot summary {
     position: absolute;
@@ -291,6 +340,24 @@
     cursor: pointer;
     pointer-events: auto;
   }
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__hotspot summary {
+    border: 0;
+    background: transparent;
+    font-size: 17px;
+  }
+
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__hotspot summary::before {
+    content: '';
+    grid-area: 1 / 1;
+    box-sizing: border-box;
+    width: clamp(24px, 2.3vw, 32px);
+    aspect-ratio: 1;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: var(--ce-dot);
+  }
+
+  .cantinflas-editorial--hotspot-full .cantinflas-editorial__hotspot summary span { grid-area: 1 / 1; z-index: 1; }
   .cantinflas-editorial__hotspot summary::-webkit-details-marker { display: none; }
   .cantinflas-editorial__hotspot-minus, .cantinflas-editorial__hotspot[open] .cantinflas-editorial__hotspot-plus { display: none; }
   .cantinflas-editorial__hotspot[open] .cantinflas-editorial__hotspot-minus { display: block; }
@@ -479,6 +546,28 @@
       "type": "image_picker",
       "id": "focus_image",
       "label": "Imagen principal o fondo de marcadores"
+    },
+    {
+      "type": "checkbox",
+      "id": "hotspot_full_width",
+      "label": "Imagen de marcadores a ancho completo",
+      "default": false,
+      "visible_if": "{{ section.settings.layout == 'hotspots' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hotspot_overlay_copy",
+      "label": "Textos sobre la imagen en escritorio",
+      "default": false,
+      "visible_if": "{{ section.settings.layout == 'hotspots' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hotspot_anatomy_image",
+      "label": "Usar el arte original de Anatomía",
+      "info": "Se usa cuando no hay una imagen elegida.",
+      "default": false,
+      "visible_if": "{{ section.settings.layout == 'hotspots' }}"
     },
     {
       "type": "checkbox",
@@ -778,7 +867,7 @@
           "id": "marker_x",
           "label": "Posición horizontal del marcador",
           "min": 0,
-          "max": 80,
+          "max": 100,
           "step": 1,
           "default": 48,
           "unit": "%"
@@ -787,8 +876,8 @@
           "type": "range",
           "id": "marker_y",
           "label": "Posición vertical del marcador",
-          "min": 10,
-          "max": 95,
+          "min": 0,
+          "max": 100,
           "step": 1,
           "default": 64,
           "unit": "%"

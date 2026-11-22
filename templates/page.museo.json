@@ -217,7 +217,7 @@
             "text": "<p>Holgados, sencillos y parte de su estilo.</p>",
             "label": "",
             "link": "",
-            "title_color": "",
+            "title_color": "#2b3d8f",
             "copy_color": "",
             "card_color": "",
             "button_color": "",
@@ -226,10 +226,70 @@
             "marker_color": "#c22921",
             "marker_text_color": "#ffffff"
           }
+        },
+        "sombrero": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "El sombrero",
+            "title_color": "#2b3d8f",
+            "marker_x": 47,
+            "marker_y": 6,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "voz": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "La voz",
+            "title_color": "#2b3d8f",
+            "marker_x": 17,
+            "marker_y": 45,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "sonrisa": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "La sonrisa",
+            "title_color": "#2b3d8f",
+            "marker_x": 61,
+            "marker_y": 40,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "gestos": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Los gestos",
+            "title_color": "#2b3d8f",
+            "marker_x": 85,
+            "marker_y": 16,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "cine": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "El cine",
+            "title_color": "#2b3d8f",
+            "marker_x": 74,
+            "marker_y": 69,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
         }
       },
       "block_order": [
-        "piece1"
+        "sombrero",
+        "voz",
+        "gestos",
+        "sonrisa",
+        "piece1",
+        "cine"
       ],
       "settings": {
         "heading": "",
@@ -237,9 +297,9 @@
         "layout": "hotspots",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#252525",
+        "accent": "#c22921",
         "heading_align": "left",
-        "intro_align": "left",
+        "intro_align": "right",
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
@@ -254,76 +314,62 @@
         "collage_button_bg_2": "#252525",
         "collage_button_text_2": "#ffffff",
         "collage_motion": false,
-        "column_order": "alternate"
+        "column_order": "alternate",
+        "hotspot_full_width": true,
+        "hotspot_overlay_copy": true,
+        "hotspot_anatomy_image": true
       }
     },
     "films": {
-      "type": "cantinflas-media-gallery",
+      "type": "cantinflas-film-posters",
       "blocks": {
         "piece1": {
           "type": "media",
           "settings": {
             "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff"
           }
         },
         "piece2": {
           "type": "media",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "title": "Ahí está el detalle",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff"
           }
         },
         "piece3": {
           "type": "media",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "title": "El bolero de Raquel",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff"
           }
         },
         "piece4": {
           "type": "media",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "title": "El Padrecito",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff"
           }
         },
         "piece5": {
           "type": "media",
           "settings": {
-            "title": "",
-            "caption": "",
-            "frame": "#ffffff",
-            "title_color": "#252525",
-            "caption_color": "#252525",
-            "title_align": "left",
-            "caption_align": "left",
-            "rotation": 0
+            "title": "El Patrullero 777",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff"
           }
+        },
+        "piece6": {
+          "type": "media",
+          "settings": {}
+        },
+        "piece7": {
+          "type": "media",
+          "settings": {}
         }
       },
       "block_order": [
@@ -331,7 +377,9 @@
         "piece2",
         "piece3",
         "piece4",
-        "piece5"
+        "piece5",
+        "piece6",
+        "piece7"
       ],
       "settings": {
         "heading": "Cantinflas en la Pantalla",
@@ -340,19 +388,15 @@
         "intro_color": "#ffffff",
         "heading_align": "center",
         "intro_align": "center",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "layout": "film",
+        "heading_size": 48,
+        "heading_mobile": 30,
         "background": "#252525",
-        "card_width": 320,
-        "card_height": 420,
-        "gap": 20,
-        "padding": 48,
-        "desktop_count": 0,
-        "mobile_count": 0,
+        "gap": 6,
+        "desktop_count": 5,
+        "mobile_count": 2,
         "show_navigation": true,
-        "navigation_color": "",
-        "navigation_background": ""
+        "navigation_color": "#dedbd6",
+        "show_captions": false
       }
     },
     "world": {
@@ -557,32 +601,67 @@
       }
     },
     "closing": {
-      "type": "rich-text",
+      "type": "cantinflas-text-marquee",
       "blocks": {
         "piece1": {
-          "type": "text",
+          "type": "phrase",
           "settings": {
-            "text": "<p>Legado · Cine · Humor · Cantinflear · Cultura · México · Mundo</p>",
-            "disable_on_mobile": false
+            "text": "Legado"
+          }
+        },
+        "piece2": {
+          "type": "phrase",
+          "settings": {
+            "text": "Cine"
+          }
+        },
+        "piece3": {
+          "type": "phrase",
+          "settings": {
+            "text": "Humor"
+          }
+        },
+        "piece4": {
+          "type": "phrase",
+          "settings": {
+            "text": "Cantinflear"
+          }
+        },
+        "piece5": {
+          "type": "phrase",
+          "settings": {
+            "text": "Cultura"
+          }
+        },
+        "piece6": {
+          "type": "phrase",
+          "settings": {
+            "text": "México"
+          }
+        },
+        "piece7": {
+          "type": "phrase",
+          "settings": {
+            "text": "Mundo"
           }
         }
       },
       "block_order": [
-        "piece1"
+        "piece1",
+        "piece2",
+        "piece3",
+        "piece4",
+        "piece5",
+        "piece6",
+        "piece7"
       ],
       "settings": {
-        "section_width": "regular",
-        "desktop_text_horizontal_position": "center",
-        "color-body-text": "rgba(0,0,0,0)",
-        "background_color": "rgba(0,0,0,0)",
-        "margin-top": 20,
-        "margin-bottom": 20,
-        "xd_heading_color": "",
-        "xd_heading_align": "inherit",
-        "xd_body_color": "",
-        "xd_body_align": "inherit",
-        "xd_button_color": "",
-        "xd_button_align": "inherit"
+        "background_color": "#c22921",
+        "text_color": "#fff3df",
+        "separator": "·",
+        "animate": true,
+        "direction": "normal",
+        "speed": 45
       }
     }
   },

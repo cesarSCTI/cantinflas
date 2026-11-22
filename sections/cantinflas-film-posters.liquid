@@ -1,0 +1,663 @@
+{%- liquid
+  assign desktop_count = section.settings.desktop_count | at_most: section.blocks.size
+  assign mobile_count = section.settings.mobile_count | at_most: section.blocks.size
+  assign loop = false
+  if section.blocks.size > desktop_count and section.blocks.size > mobile_count
+    assign loop = true
+  endif
+-%}
+
+<section class="cantinflas-film" style="
+  --cf-bg: {{ section.settings.gradient | default: section.settings.background }};
+  --cf-heading: {{ section.settings.heading_color }};
+  --cf-copy: {{ section.settings.intro_color }};
+  --cf-heading-align: {{ section.settings.heading_align }};
+  --cf-copy-align: {{ section.settings.intro_align }};
+  --cf-heading-size: {{ section.settings.heading_size }}px;
+  --cf-heading-mobile: {{ section.settings.heading_mobile }}px;
+  --cf-copy-size: {{ section.settings.intro_size }}px;
+  --cf-copy-mobile: {{ section.settings.intro_mobile }}px;
+  --cf-copy-width: {{ section.settings.intro_width }}px;
+  --cf-desktop-count: {{ desktop_count }};
+  --cf-mobile-count: {{ mobile_count }};
+  --cf-gap: {{ section.settings.gap }}px;
+  --cf-ratio: {{ section.settings.poster_height }};
+  --cf-fit: {{ section.settings.image_fit }};
+  --cf-stagger: {{ section.settings.stagger }}px;
+  --cf-rail-space: {{ section.settings.rail_space }}px;
+  --cf-pad-top: {{ section.settings.padding_top }}px;
+  --cf-pad-bottom: {{ section.settings.padding_bottom }}px;
+  --cf-dot: {{ section.settings.navigation_color }};
+  --cf-dot-active: {{ section.settings.navigation_active }};
+">
+  {% if section.settings.heading != blank or section.settings.intro != blank %}
+    <header class="cantinflas-film__intro">
+      {% if section.settings.heading != blank %}
+        <h2 id="FilmGalleryTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.intro != blank %}
+        <div class="cantinflas-film__description rte">{{ section.settings.intro }}</div>
+      {% endif %}
+    </header>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <slideshow-section class="cantinflas-film__carousel" data-slides-group data-skip-center-nav-method="true">
+      <div data-swiper
+        class="cantinflas-film__track"
+        role="region"
+        tabindex="0"
+        {% if section.settings.heading != blank %}aria-labelledby="FilmGalleryTitle-{{ section.id }}"{% else %}aria-label="Carteles de cine"{% endif %}
+      >
+        <ul data-swiper-container class="swiper-wrapper cantinflas-film__posters" role="list">
+          {% for block in section.blocks %}
+            {% liquid
+              assign offset = forloop.index | modulo: 2
+              if block.settings.position == 'raised'
+                assign offset = 0
+              elsif block.settings.position == 'lowered'
+                assign offset = 1
+              endif
+              assign poster = block.settings.image | default: block.settings.video.preview_image
+              assign poster_alt = poster.alt | default: block.settings.title
+            %}
+            <li data-swiper-slide data-block-id="{{ block.id }}" class="cantinflas-film__slide"
+              style="--cf-offset: {{ offset }}; --cf-frame: {{ block.settings.frame }}; --cf-caption: {{ block.settings.caption_color }};
+                --cf-card-title: {{ block.settings.title_color | default: block.settings.caption_color }};
+                --cf-card-title-align: {{ block.settings.title_align }};
+                --cf-caption-align: {{ block.settings.caption_align }};"
+              {{ block.shopify_attributes }}
+            >
+              <figure>
+                <div class="cantinflas-film__poster">
+                  {% if block.settings.video != blank %}
+                    {%- assign poster_url = poster | image_url: width: 960 -%}
+                    <div class="cantinflas-film__video" role="group"{% if block.settings.title != blank %} aria-label="{{ block.settings.title | escape }}"{% endif %}>
+                      {{ block.settings.video | video_tag: controls: true, playsinline: true, preload: 'none', poster: poster_url }}
+                    </div>
+                  {% elsif poster != blank %}
+                    {{ poster | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '180, 280, 420, 640, 960, 1200', sizes: '(min-width: 1200px) 20vw, (min-width: 750px) 33vw, 50vw', alt: poster_alt }}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'cantinflas-film__placeholder' }}
+                  {% endif %}
+                </div>
+                {% if section.settings.show_captions %}
+                  {% if block.settings.title != blank or block.settings.caption != blank %}
+                    <figcaption>
+                      {% if block.settings.title != blank %}<h3>{{ block.settings.title | escape }}</h3>{% endif %}
+                      {% if block.settings.caption != blank %}<div class="rte">{{ block.settings.caption }}</div>{% endif %}
+                    </figcaption>
+                  {% endif %}
+                {% endif %}
+              </figure>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% if section.settings.show_navigation and section.blocks.size > 1 %}
+        <div class="swiper-pagination cantinflas-film__dots"></div>
+      {% endif %}
+      <script data-swiper-configuration type="text/json">
+        {
+          "slidesPerView": {{ mobile_count | json }},
+          "spaceBetween": {{ section.settings.gap | json }},
+          "loop": {{ loop | json }},
+          "speed": 260,
+          "pagination": { "el": ".swiper-pagination", "bulletElement": "button" },
+          "a11y": {
+            "slideLabelMessage": {% raw %}"Cartel {{index}} de {{slidesLength}}"{% endraw %},
+            "paginationBulletMessage": {% raw %}"Ir al cartel {{index}}"{% endraw %}
+          },
+          "breakpoints": { "750": { "slidesPerView": {{ desktop_count | json }} } }
+        }
+      </script>
+    </slideshow-section>
+    <script type="module" src="{{ 'slider.js' | asset_url }}"></script>
+    {% if request.design_mode %}
+      <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
+    {% endif %}
+  {% endif %}
+</section>
+
+{% stylesheet %}
+  .cantinflas-film {
+    background: var(--cf-bg);
+    padding-block: min(var(--cf-pad-top), 9vw) min(var(--cf-pad-bottom), 8vw);
+  }
+
+  .cantinflas-film__intro {
+    width: min(90%, var(--cf-copy-width));
+    margin-inline: auto;
+  }
+
+  .cantinflas-film .cantinflas-film__intro h2 {
+    margin: 0;
+    color: var(--cf-heading);
+    font-size: var(--cf-heading-mobile);
+    line-height: 1.08;
+    text-align: var(--cf-heading-align);
+  }
+
+  .cantinflas-film__description {
+    margin-block-start: clamp(14px, 2.2vw, 28px);
+    color: var(--cf-copy);
+    font-size: var(--cf-copy-mobile);
+    line-height: 1.45;
+    text-align: var(--cf-copy-align);
+  }
+
+  .cantinflas-film__description :is(p, li) { color: inherit; font-size: inherit; line-height: inherit; }
+  .cantinflas-film__description > :first-child { margin-block-start: 0; }
+  .cantinflas-film__description > :last-child { margin-block-end: 0; }
+
+  .cantinflas-film__carousel {
+    --cf-visible: var(--cf-mobile-count);
+    --cf-shift: min(var(--cf-stagger), 3vw);
+    display: block;
+    width: min(92%, 1640px);
+    margin-inline: auto;
+  }
+
+  .cantinflas-film__intro + .cantinflas-film__carousel { margin-block-start: min(var(--cf-rail-space), 8vw); }
+
+  .cantinflas-film .cantinflas-film__track {
+    display: block;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .cantinflas-film .cantinflas-film__track:not(.swiper-initialized) {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .cantinflas-film .cantinflas-film__posters {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: auto;
+  }
+
+  .cantinflas-film__track:not(.swiper-initialized) .cantinflas-film__posters { display: flex; gap: var(--cf-gap); }
+  .cantinflas-film__track:not(.swiper-initialized) .cantinflas-film__slide {
+    flex: 0 0 calc((100% - (var(--cf-visible) - 1) * var(--cf-gap)) / var(--cf-visible));
+    scroll-snap-align: start;
+  }
+
+  .cantinflas-film .cantinflas-film__slide { height: auto; padding-block-start: calc(var(--cf-offset) * var(--cf-shift)); }
+  .cantinflas-film__slide figure { margin: 0; }
+
+  .cantinflas-film__poster {
+    display: grid;
+    place-items: center;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    aspect-ratio: 100 / var(--cf-ratio);
+    overflow: hidden;
+    background: var(--cf-frame);
+  }
+
+  .cantinflas-film__poster > :is(img, .cantinflas-film__video),
+  .cantinflas-film__poster video { display: block; width: 100%; height: 100%; min-height: 0; object-fit: var(--cf-fit); }
+  .cantinflas-film__placeholder { width: min(45%, 76px); height: auto; color: #252525; }
+  .cantinflas-film figcaption { text-align: var(--cf-caption-align); color: var(--cf-caption); padding-block: 8px; }
+  .cantinflas-film figcaption :is(h3, p) { margin: 0; color: inherit; font-size: 1em; }
+  .cantinflas-film figcaption h3 { color: var(--cf-card-title); text-align: var(--cf-card-title-align); }
+
+  .cantinflas-film .cantinflas-film__dots {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-block-start: 8px;
+    transform: none;
+  }
+
+  .cantinflas-film .cantinflas-film__dots:empty,
+  .cantinflas-film .cantinflas-film__dots.swiper-pagination-lock { display: none; }
+
+  .cantinflas-film .cantinflas-film__dots .swiper-pagination-bullet {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--cf-dot);
+    opacity: 1;
+  }
+
+  .cantinflas-film__dots .swiper-pagination-bullet::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .cantinflas-film .cantinflas-film__dots .swiper-pagination-bullet-active { color: var(--cf-dot-active); }
+  .cantinflas-film__dots .swiper-pagination-bullet-active::after { transform: scale(1.35); }
+  .cantinflas-film :is(.cantinflas-film__track, .swiper-pagination-bullet):focus-visible {
+    outline: 2px solid var(--cf-dot-active);
+    outline-offset: -2px;
+  }
+
+  @media (min-width: 750px) {
+    .cantinflas-film .cantinflas-film__intro h2 { font-size: var(--cf-heading-size); }
+    .cantinflas-film__description { font-size: var(--cf-copy-size); }
+    .cantinflas-film__carousel { --cf-visible: var(--cf-desktop-count); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cantinflas-film .cantinflas-film__posters { transition-duration: 1ms !important; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Carteles de cine",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Encabezado"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Cantinflas en la Pantalla"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introducción"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del título",
+      "default": "#f2b846"
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Color de introducción",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intro_align",
+      "label": "Alineación de introducción",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamaño del título en escritorio",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Tamaño del título en móvil",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "intro_size",
+      "label": "Tamaño de introducción en escritorio",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "intro_mobile",
+      "label": "Tamaño de introducción en móvil",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "intro_width",
+      "label": "Ancho máximo del encabezado",
+      "min": 400,
+      "max": 1280,
+      "step": 20,
+      "default": 800,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Carteles"
+    },
+    {
+      "type": "range",
+      "id": "desktop_count",
+      "label": "Carteles visibles en escritorio",
+      "min": 1,
+      "max": 7,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "mobile_count",
+      "label": "Carteles visibles en móvil",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "poster_height",
+      "label": "Alto respecto al ancho",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 150,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Ajuste de imagen",
+      "default": "contain",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Mostrar completa"
+        },
+        {
+          "value": "cover",
+          "label": "Llenar el cartel"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Separación entre carteles",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "default": 6,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "stagger",
+      "label": "Desnivel de los carteles",
+      "min": 0,
+      "max": 56,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_captions",
+      "label": "Mostrar títulos y pies",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Fondo y espaciado"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo sólido",
+      "default": "#252525"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient",
+      "label": "Degradado de fondo"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espacio superior",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 44,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "rail_space",
+      "label": "Espacio antes de los carteles",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espacio inferior",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Paginación"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Mostrar puntos de navegación",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "navigation_color",
+      "label": "Color de los puntos",
+      "default": "#dedbd6"
+    },
+    {
+      "type": "color",
+      "id": "navigation_active",
+      "label": "Color del punto activo",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Cartel o vídeo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Cartel"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo de Shopify"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título del cartel"
+        },
+        {
+          "type": "richtext",
+          "id": "caption",
+          "label": "Pie de cartel"
+        },
+        {
+          "type": "color",
+          "id": "frame",
+          "label": "Fondo del cartel",
+          "default": "#f4ede1"
+        },
+        {
+          "type": "color",
+          "id": "caption_color",
+          "label": "Color del pie",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del título"
+        },
+        {
+          "type": "select",
+          "id": "title_align",
+          "label": "Alineación del título",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "caption_align",
+          "label": "Alineación del pie",
+          "default": "center",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Altura del cartel",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Alternar por posición"
+            },
+            {
+              "value": "raised",
+              "label": "Arriba"
+            },
+            {
+              "value": "lowered",
+              "label": "Abajo"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carteles de cine",
+      "blocks": [
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  }
+}
+{% endschema %}

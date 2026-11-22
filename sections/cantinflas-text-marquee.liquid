@@ -1,0 +1,482 @@
+{%- liquid
+  assign marquee_font = 'var(--font-headline, Baga, sans-serif)'
+  if section.settings.font_family == 'body'
+    assign marquee_font = 'var(--font-base, Montserrat, sans-serif)'
+  endif
+-%}
+{%- capture marquee_items -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.text != blank -%}
+      <span class="cantinflas-marquee__item" role="listitem"{% if block.settings.color != blank %} style="--ct-word-color: {{ block.settings.color }};"{% endif %} {{ block.shopify_attributes }}>
+        <span dir="auto">{{ block.settings.text | escape }}</span>
+        {%- if section.settings.separator != blank -%}
+          <span class="cantinflas-marquee__separator" aria-hidden="true">{{ section.settings.separator | escape }}</span>
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if marquee_items != blank -%}
+  <cantinflas-text-marquee
+    {% if section.settings.animate %}data-motion{% endif %}
+    data-speed="{{ section.settings.speed }}"
+    style="
+      --ct-background: {{ section.settings.background_gradient | default: section.settings.background_color }};
+      --ct-control-background: {{ section.settings.background_color }};
+      --ct-color: {{ section.settings.text_color }};
+      --ct-separator-color: {{ section.settings.separator_color | default: section.settings.text_color }};
+      --ct-font: {{ marquee_font }};
+      --ct-weight: {{ section.settings.font_weight }};
+      --ct-size: {{ section.settings.text_size }}px;
+      --ct-mobile-size: {{ section.settings.mobile_text_size }}px;
+      --ct-letter-spacing: {{ section.settings.letter_spacing }}px;
+      --ct-gap: {{ section.settings.spacing }}px;
+      --ct-padding: {{ section.settings.padding }}px;
+      --ct-mobile-padding: {{ section.settings.mobile_padding }}px;
+      --ct-direction: {{ section.settings.direction }};
+    "
+  >
+    <div class="cantinflas-marquee__track">
+      <div class="cantinflas-marquee__group">
+        <div class="cantinflas-marquee__cycle" role="list">{{ marquee_items }}</div>
+      </div>
+    </div>
+    {% if section.settings.animate %}
+      <button class="cantinflas-marquee__pause" type="button" aria-label="Pausar el desplazamiento del texto" aria-pressed="false" hidden>
+        <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <path class="cantinflas-marquee__icon-pause" d="M4 3h3v10H4zm5 0h3v10H9z"/>
+          <path class="cantinflas-marquee__icon-play" d="M5 3v10l8-5z"/>
+        </svg>
+      </button>
+    {% endif %}
+  </cantinflas-text-marquee>
+{%- endif -%}
+
+{% stylesheet %}
+  cantinflas-text-marquee {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding-block: var(--ct-mobile-padding);
+    background: var(--ct-background);
+    color: var(--ct-color);
+    font-family: var(--ct-font);
+    font-size: var(--ct-mobile-size);
+    font-weight: var(--ct-weight);
+    line-height: 1.25;
+    letter-spacing: var(--ct-letter-spacing);
+  }
+
+  @media (min-width: 750px) {
+    cantinflas-text-marquee {
+      padding-block: var(--ct-padding);
+      font-size: var(--ct-size);
+    }
+  }
+
+  .cantinflas-marquee__cycle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: var(--ct-gap);
+    padding-inline: var(--ct-gap);
+  }
+
+  .cantinflas-marquee__item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--ct-gap);
+    min-inline-size: 0;
+    color: var(--ct-word-color, var(--ct-color));
+    overflow-wrap: anywhere;
+  }
+
+  .cantinflas-marquee__separator { color: var(--ct-separator-color); }
+  cantinflas-text-marquee:not([data-running]) .cantinflas-marquee__item:last-child .cantinflas-marquee__separator {
+    display: none;
+  }
+
+  cantinflas-text-marquee[data-running] .cantinflas-marquee__track {
+    display: flex;
+    direction: ltr;
+    inline-size: max-content;
+    animation: cantinflas-marquee-slide var(--ct-duration, 0s) linear infinite var(--ct-direction);
+  }
+
+  cantinflas-text-marquee[data-paused] .cantinflas-marquee__track { animation-play-state: paused; }
+
+  cantinflas-text-marquee[data-running] :is(.cantinflas-marquee__group, .cantinflas-marquee__cycle) {
+    display: flex;
+    flex: none;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  cantinflas-text-marquee[data-running] .cantinflas-marquee__cycle {
+    padding-inline: 0 max(var(--ct-gap), 1px);
+  }
+
+  @keyframes cantinflas-marquee-slide {
+    to { transform: translateX(-50%); }
+  }
+
+  .cantinflas-marquee__pause:not([hidden]) {
+    position: absolute;
+    z-index: 1;
+    inset: 0 0 0 auto;
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: min(100%, 44px);
+    margin-block: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--ct-control-background);
+    color: var(--ct-color);
+    cursor: pointer;
+  }
+
+  .cantinflas-marquee__pause:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -3px;
+  }
+
+  .cantinflas-marquee__pause[aria-pressed="false"] .cantinflas-marquee__icon-play,
+  .cantinflas-marquee__pause[aria-pressed="true"] .cantinflas-marquee__icon-pause { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    cantinflas-text-marquee:not(:hover):not(:focus-within):not([data-paused]) .cantinflas-marquee__pause {
+      opacity: 0;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cantinflas-text-marquee')) {
+    customElements.define('cantinflas-text-marquee', class extends HTMLElement {
+      connectedCallback() {
+        if (!this.hasAttribute('data-motion')) return;
+
+        this.track = this.querySelector('.cantinflas-marquee__track');
+        this.group = this.track.firstElementChild;
+        this.cycle = this.group.firstElementChild;
+        this.pauseButton = this.querySelector('.cantinflas-marquee__pause');
+        this.motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+        this.speed = Number(this.dataset.speed);
+
+        this.listeners = new AbortController();
+        const options = { signal: this.listeners.signal };
+        this.motionPreference.addEventListener('change', () => this.update(), options);
+        this.pauseButton.addEventListener('click', () => {
+          const paused = this.toggleAttribute('data-paused');
+          this.pauseButton.setAttribute('aria-pressed', String(paused));
+        }, options);
+
+        if (window.Shopify?.designMode) {
+          this.addEventListener('shopify:block:select', () => {
+            this.editingBlock = true;
+            this.update();
+          }, options);
+          this.addEventListener('shopify:block:deselect', () => {
+            this.editingBlock = false;
+            this.update();
+          }, options);
+        }
+
+        this.resizeObserver = new ResizeObserver(() => this.update());
+        this.resizeObserver.observe(this);
+        this.resizeObserver.observe(this.cycle);
+        this.update();
+      }
+
+      disconnectedCallback() {
+        this.resizeObserver?.disconnect();
+        this.listeners?.abort();
+      }
+
+      update() {
+        if (this.motionPreference.matches || this.editingBlock || !this.clientWidth) {
+          if (this.hasAttribute('data-running')) {
+            this.removeAttribute('data-running');
+            this.group.replaceChildren(this.cycle);
+            this.track.replaceChildren(this.group);
+            this.copies = 0;
+          }
+          this.pauseButton.hidden = true;
+          return;
+        }
+
+        this.setAttribute('data-running', '');
+        const cycleWidth = this.cycle.getBoundingClientRect().width;
+        if (cycleWidth <= 0) return;
+
+        const copies = Math.ceil(this.clientWidth / cycleWidth);
+        if (copies !== this.copies) {
+          this.group.replaceChildren(this.cycle);
+          this.track.replaceChildren(this.group);
+
+          const copy = this.cycle.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          copy.querySelectorAll('[data-shopify-editor-block]').forEach((item) => {
+            item.removeAttribute('data-shopify-editor-block');
+          });
+          for (let index = 1; index < copies; index += 1) {
+            this.group.append(copy.cloneNode(true));
+          }
+
+          const secondGroup = this.group.cloneNode(false);
+          secondGroup.setAttribute('aria-hidden', 'true');
+          for (let index = 0; index < copies; index += 1) {
+            secondGroup.append(copy.cloneNode(true));
+          }
+          this.track.append(secondGroup);
+          this.copies = copies;
+        }
+
+        const duration = this.group.getBoundingClientRect().width / this.speed;
+        this.style.setProperty('--ct-duration', duration + 's');
+        this.pauseButton.hidden = false;
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Cinta de texto animada",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto y separador"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Tipografía",
+      "default": "headline",
+      "options": [
+        {
+          "value": "headline",
+          "label": "Títulos del tema"
+        },
+        {
+          "value": "body",
+          "label": "Texto del tema"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "font_weight",
+      "label": "Grosor de letra",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Tamaño en escritorio",
+      "min": 12,
+      "max": 80,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Tamaño en móvil",
+      "min": 12,
+      "max": 56,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Espacio entre letras",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#fff3df"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separador",
+      "default": "·"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Color del separador"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Espacio entre elementos",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 6,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Fondo y altura"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Fondo sólido",
+      "default": "#c22921"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Degradado de fondo"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Espacio vertical en escritorio",
+      "min": 0,
+      "max": 64,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding",
+      "label": "Espacio vertical en móvil",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Desplazamiento"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate",
+      "label": "Animar el texto",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Dirección",
+      "default": "normal",
+      "options": [
+        {
+          "value": "normal",
+          "label": "De derecha a izquierda"
+        },
+        {
+          "value": "reverse",
+          "label": "De izquierda a derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Velocidad de desplazamiento",
+      "min": 15,
+      "max": 160,
+      "step": 5,
+      "default": 45
+    }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "Palabra o frase",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Legado"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color individual"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinta de texto animada",
+      "blocks": [
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Legado"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Cine"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Humor"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Cantinflear"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Cultura"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "México"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "Mundo"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  }
+}
+{% endschema %}
