@@ -362,6 +362,71 @@
     "films": {
       "type": "cantinflas-film-posters",
       "blocks": {
+        "media_HMaQYP": {
+          "type": "media",
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_3q9jHV": {
+          "type": "media",
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_r9Hqq3": {
+          "type": "media",
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_Pkkd3i": {
+          "type": "media",
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_Qi9m4w": {
+          "type": "media",
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
         "piece1": {
           "type": "media",
           "settings": {
@@ -455,6 +520,11 @@
         }
       },
       "block_order": [
+        "media_HMaQYP",
+        "media_3q9jHV",
+        "media_r9Hqq3",
+        "media_Pkkd3i",
+        "media_Qi9m4w",
         "piece1",
         "piece2",
         "piece3",
@@ -597,17 +667,18 @@
     },
     "legacycontext": {
       "type": "cantinflas-editorial",
+      "custom_css": [],
       "settings": {
         "heading": "Cantinflas había dejado de ser solamente un personaje mexicano",
         "intro": "<p>Su humor, su imagen y su manera de interpretar trascendieron fronteras, llevando una parte de la cultura popular mexicana a millones de espectadores y demostrando hasta dónde puede llegar un personaje cuando conecta con públicos de todo el mundo.</p>",
         "layout": "alternating",
         "background": "#f4ede1",
         "text_color": "#242424",
-        "accent": "#c22921",
+        "accent": "#000000",
         "heading_align": "center",
         "intro_align": "center",
         "intro_color": "",
-        "heading_size": 60,
+        "heading_size": 40,
         "heading_mobile": 32,
         "hotspot_full_width": false,
         "hotspot_overlay_copy": false,
@@ -640,7 +711,7 @@
         "vertical_alignment": "start",
         "stack_order": "heading_first",
         "heading_width": 54,
-        "heading_size": 64,
+        "heading_size": 46,
         "heading_mobile": 36,
         "text_size": 20,
         "text_mobile": 16,
