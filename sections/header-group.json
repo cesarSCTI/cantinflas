@@ -75,10 +75,9 @@
         "column_W3ihtQ"
       ],
       "settings": {
-        "xd_text_controls": true,
         "xd_overlay": "all",
         "xd_overlay_logo": true,
-        "xd_surface_bg": "#252525",
+        "xd_text_controls": true,
         "xd_nav_color": "#252525",
         "xd_icons_color": "#252525",
         "layout": "option_5",

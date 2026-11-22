@@ -161,9 +161,11 @@
       "settings": {
         "desktop_text_horizontal_position": "center",
         "rotation": 5,
+        "image_1": "shopify://shop_images/Cantinflas-1-Chato.png",
         "button_link1": "",
+        "image_2": "shopify://shop_images/Cantinflas-2-Chato.png",
         "button_link2": "",
-        "color-body-text": "#252525",
+        "color-body-text": "#000000",
         "background_color": "#ffffff",
         "margin-top": 20,
         "margin-bottom": 20
