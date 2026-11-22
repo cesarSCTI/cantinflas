@@ -195,7 +195,7 @@
     "news": {
       "type": "blog-posts",
       "settings": {
-        "xd_sample_title": "Inauguramos oficialmente el Museo Mario Moreno “Cantinflas”",
+        "xd_sample_title": "inauguramos oficialmente el Museo Mario Moreno “Cantinflas”",
         "xd_title_color": "#ffffff",
         "xd_intro_color": "#ffffff",
         "xd_intro_align": "right",
@@ -215,10 +215,18 @@
         "button_select": "primary",
         "size_heading": 100,
         "size_heading_mobile": 100,
-        "color-body-text": "#ffffff",
+        "color-body-text": "#252525",
         "background_color": "#c22921",
         "margin-top": 20,
-        "margin-bottom": 20
+        "margin-bottom": 20,
+        "xd_news_layout": true,
+        "xd_news_heading_align": "right",
+        "xd_news_surface": "#ffffff",
+        "xd_news_button_color": "#36845d",
+        "xd_news_button_text": "#ffffff",
+        "xd_news_sample_date": "9 | 10 | 2026",
+        "xd_news_sample_art": true,
+        "xd_news_date_color": "#252525"
       }
     },
     "social": {

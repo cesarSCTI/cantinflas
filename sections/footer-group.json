@@ -57,7 +57,7 @@
       "settings": {
         "xd_text_controls": true,
         "xd_heading_color": "#ffffff",
-        "xd_body_color": "#ffffff",
+        "xd_body_color": "#f4ede1",
         "show-scroll-effect": false,
         "show-social-media-icons": true,
         "show_country_selector": false,
@@ -71,7 +71,11 @@
         "big-logo": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
         "big-logo-width": 100,
         "margin-top": 0,
-        "margin-bottom": 20
+        "margin-bottom": 20,
+        "xd_use_design_logo": true,
+        "xd_heading_align": "left",
+        "xd_body_align": "left",
+        "xd_privacy": "<p>Al proporcionarnos tu correo electrónico, aceptas recibir nuestros correos electrónicos de marketing, incluidos correos electrónicos exclusivos sobre nuevos lanzamientos, ofertas emblemáticas y otros anuncios interesantes.</p>"
       }
     }
   },

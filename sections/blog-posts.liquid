@@ -1,3 +1,6 @@
+{% if section.settings.xd_news_layout %}
+  {% render 'cantinflas-news-cards', section: section %}
+{% else %}
 {% if section.settings.xd_title_color != blank %}
   {% style %}
     #shopify-section-{{ section.id }} .headline__title { color: {{ section.settings.xd_title_color }}; }
@@ -219,12 +222,24 @@
 </div>
 {% endif %}
 
+{% endif %}
+
 {% schema %}
 {
   "name": "t:sections.blog-posts.name",
   "class": "wt-multicol__section",
   "tag": "section",
   "settings": [
+    {"type": "checkbox", "id": "xd_news_layout", "label": "Diseño Actualidad Cantinflas", "default": false},
+    {"type": "select", "id": "xd_news_heading_align", "label": "Alineación del título", "default": "right", "options": [{"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}], "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "color", "id": "xd_news_surface", "label": "Fondo de las tarjetas", "default": "#ffffff", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "color", "id": "xd_news_date_color", "label": "Color de fecha y autor", "default": "#625c55", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "color", "id": "xd_news_button_color", "label": "Color del botón", "default": "#36845d", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "color", "id": "xd_news_button_text", "label": "Color del texto del botón", "default": "#ffffff", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "text", "id": "xd_news_button_label", "label": "Texto del botón", "default": "Leer más", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "text", "id": "xd_news_sample_date", "label": "Fecha de noticia de muestra", "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "checkbox", "id": "xd_news_sample_art", "label": "Usar foto original de la inauguración", "default": false, "visible_if": "{{ section.settings.xd_news_layout }}"},
+    {"type": "url", "id": "xd_news_sample_link", "label": "Enlace de noticia de muestra", "visible_if": "{{ section.settings.xd_news_layout }}"},
     {"type": "text", "id": "xd_sample_title", "label": "Título de noticia de muestra"},
     {"type": "image_picker", "id": "xd_sample_image", "label": "Imagen de noticia de muestra"},
     {"type": "color", "id": "xd_title_color", "label": "Color del título"},

@@ -113,89 +113,147 @@
 .cantinflas-footer {
   background: var(--footer-bg);
   color: var(--footer-text);
-  font-size: clamp(13px, .99vw, 18px);
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 1.45;
 }
 .cantinflas-footer a { color: inherit; }
 .cantinflas-footer :is(p, ul) { margin: 0; }
 .cantinflas-footer .rte :is(p, a) { color: inherit; }
 .cantinflas-footer__columns, .cantinflas-footer__bottom-inner {
-  width: min(91.5%, 176rem);
+  width: min(89.6%, 172rem);
   margin-inline: auto;
 }
 .cantinflas-footer__columns {
   display: grid;
-  gap: 2.6rem;
-  padding-block: clamp(2rem, 2.7vw, 5.2rem) clamp(3rem, 4.5vw, 8.7rem);
+  gap: clamp(1.8rem, 4vw, 3.4rem);
+  padding-block: clamp(2rem, 3.125vw, 6rem) clamp(2.6rem, 4.55vw, 8.8rem);
 }
 .cantinflas-footer__column { min-width: 0; text-align: var(--footer-body-align); }
 .cantinflas-footer__column > h2 {
-  margin: 0 0 .7em;
+  margin: 0 0 .8em;
   color: var(--footer-title);
-  font: 700 clamp(16px, 1.4vw, 25px)/1.1 "baga", sans-serif;
+  font: 700 clamp(15px, 1.31vw, 25px)/1.12 "baga", sans-serif;
   text-align: var(--footer-heading-align);
 }
 .cantinflas-footer__brand {
-  padding-bottom: clamp(1rem, 2vw, 3.7rem);
-  margin-bottom: clamp(1rem, 1.4vw, 2.6rem);
-  border-bottom: 1px solid rgb(255 255 255 / .4);
+  padding-bottom: clamp(.9rem, 1.7vw, 3.2rem);
+  margin-bottom: clamp(.9rem, 1.45vw, 2.8rem);
+  border-bottom: 1px solid rgb(255 255 255 / .42);
 }
-.cantinflas-footer__brand img { display: block; width: var(--footer-logo); height: auto; }
+.cantinflas-footer__brand-link { display: inline-block; vertical-align: bottom; width: var(--footer-logo); }
+.cantinflas-footer__brand img { display: block; width: 100%; height: auto; }
 .cantinflas-footer__brand-text { font: 700 clamp(24px, 3vw, 56px)/1 "baga", sans-serif; }
-.cantinflas-footer__social { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .8em; }
-.cantinflas-footer__social .social-links { padding: 0; gap: .7rem; }
-.cantinflas-footer__social .social-link { color: var(--footer-accent); }
-.cantinflas-footer__links { list-style: none; padding: 0; display: grid; gap: .62em; }
+.cantinflas-footer__contact a { overflow-wrap: anywhere; text-decoration: none; }
+.cantinflas-footer__contact a:hover { text-decoration: underline; }
+.cantinflas-footer__contact a:is([href^="tel:"], [href^="mailto:"])::before {
+  display: inline-block;
+  width: 1.55em;
+  color: var(--footer-accent);
+  font-family: Arial, sans-serif;
+}
+.cantinflas-footer__contact a[href^="tel:"]::before { content: '\260e' / ''; }
+.cantinflas-footer__contact a[href^="mailto:"]::before { content: '\2709' / ''; }
+.cantinflas-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  align-items: center;
+  margin-top: .75em;
+}
+.cantinflas-footer__social .social-links { padding: 0; gap: .35rem; }
+.cantinflas-footer__social .social-link {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--footer-accent) 55%, transparent 57%);
+  color: var(--footer-bg);
+}
+.cantinflas-footer__social .social-link svg { width: 12px; height: 12px; }
+.cantinflas-footer__links { list-style: none; padding: 0; display: grid; gap: .55em; }
+.cantinflas-footer__links a { text-decoration: none; overflow-wrap: anywhere; }
+.cantinflas-footer__links a:hover { text-decoration: underline; }
 .cantinflas-footer__column--newsletter { text-align: var(--footer-newsletter-align); }
 .cantinflas-footer__column--newsletter > h2 {
   color: var(--footer-accent);
   text-align: var(--footer-newsletter-align);
   text-transform: uppercase;
-  font: 750 clamp(17px, 1.75vw, 32px)/1.05 "Montserrat", sans-serif;
+  font: 750 clamp(17px, 1.82vw, 35px)/1.05 "Montserrat", sans-serif;
+  margin-bottom: .5em;
+  text-wrap: balance;
 }
 .cantinflas-footer__newsletter-copy { line-height: 1.35; }
-.cantinflas-footer__form { margin-top: clamp(1rem, 1.8vw, 3.4rem); }
+.cantinflas-footer__form { margin-top: clamp(.9rem, 1.35vw, 2.6rem); }
 .cantinflas-footer__pill {
   display: flex;
   align-items: stretch;
-  padding: .35rem;
+  padding: 2px;
   border-radius: 999px;
   background: #f4ede1;
   color: #252525;
 }
 .cantinflas-footer__pill input {
   min-width: 0;
-  flex: 1;
+  flex: 1 1 62%;
   border: 0;
-  padding-inline: .85em;
+  border-radius: 999px;
+  padding-inline: clamp(.55rem, .9vw, 1.75rem);
   background: transparent;
   color: #252525;
   font: inherit;
+  font-size: clamp(11px, .78vw, 15px);
 }
 .cantinflas-footer__pill button {
-  min-height: 44px;
-  padding-inline: clamp(.65rem, 1.45vw, 2.8rem);
+  flex: 0 0 38%;
+  min-height: clamp(34px, 2.7vw, 52px);
+  padding-inline: .45em;
   border: 0;
   border-radius: 999px;
   background: var(--footer-button);
   color: var(--footer-button-text);
   font: inherit;
+  font-size: clamp(11px, .78vw, 15px);
+  letter-spacing: normal;
+  text-transform: none;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
-.cantinflas-footer__privacy { margin: .8em auto 0; max-width: 42ch; font-size: .76em; line-height: 1.45; }
-.cantinflas-footer__bottom { border-top: 1px solid rgb(255 255 255 / .35); }
-.cantinflas-footer__bottom-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1rem; font-size: .85em; }
-.cantinflas-footer__payments { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
-.cantinflas-footer__payments svg { display: block; width: clamp(26px, 2.45vw, 42px); height: auto; }
-.cantinflas-footer__payment-image { width: min(100%, 54rem); height: auto; }
+.cantinflas-footer__privacy { margin: .85em auto 0; font-size: clamp(9px, .68vw, 13px); line-height: 1.4; }
+.cantinflas-footer__bottom { border-top: 1px solid rgb(255 255 255 / .42); }
+.cantinflas-footer__bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1.4rem;
+  padding-block: clamp(.8rem, 1.1vw, 2.1rem);
+  font-size: clamp(11px, .84vw, 16px);
+}
+.cantinflas-footer__payments { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; padding: 0; list-style: none; }
+.cantinflas-footer__payments svg { display: block; width: clamp(26px, 2.5vw, 48px); height: auto; }
+.cantinflas-footer__payment-image { display: block; width: min(100%, 54rem); height: auto; }
 .cantinflas-footer__column--image :is(img, svg) { width: 100%; height: auto; }
+
+@media (max-width: 599px) {
+  .cantinflas-footer__brand { max-width: 26rem; }
+  .cantinflas-footer__pill button { min-height: 44px; }
+}
 @media (min-width: 600px) {
   .cantinflas-footer__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (min-width: 900px) {
+@media (min-width: 960px) {
+  .cantinflas-footer { font-size: clamp(12px, .94vw, 18px); }
   .cantinflas-footer__columns {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, .59fr) minmax(0, .9fr) minmax(0, 1.21fr);
-    column-gap: clamp(1.6rem, 5.8vw, 11rem);
+    min-height: min(28.55vw, 548px);
+    box-sizing: border-box;
+    grid-template-columns: minmax(0, 34fr) minmax(0, 17fr) minmax(0, 23.5fr) minmax(0, 25.5fr);
+    column-gap: 0;
   }
-  .cantinflas-footer__column:not(.cantinflas-footer__column--text) { padding-top: clamp(.8rem, 2.15vw, 4rem); }
+  .cantinflas-footer__column--text { padding-inline-end: 18%; }
+  .cantinflas-footer__column--menu { padding-inline-end: 12%; }
+  .cantinflas-footer__column:not(.cantinflas-footer__column--text) { padding-top: clamp(2.4rem, 3.23vw, 6.2rem); }
   .cantinflas-footer__column:nth-child(n + 5) { grid-column: 1 / -1; }
+  .cantinflas-footer__payments { gap: clamp(.55rem, .67vw, 1.3rem); }
+  .cantinflas-footer__payment-image { width: min(28vw, 54rem); }
 }

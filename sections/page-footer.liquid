@@ -583,6 +583,19 @@
   "tag": "section",
   "max_blocks": 5,
   "settings": [
+    {"type": "header", "content": "Logo del pie"},
+    {"type": "image_picker", "id": "xd_footer_logo", "label": "Logo del pie de página", "info": "Selecciona la imagen que aparecerá encima de Contáctanos."},
+    {"type": "checkbox", "id": "xd_use_design_logo", "label": "Usar el logo original del diseño", "info": "Se usa cuando no hay una imagen elegida para el pie.", "default": false},
+    {
+      "type": "range",
+      "id": "big-logo-width",
+      "min": 10,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 100,
+      "label": "Ancho del logo del pie"
+    },
     {"type": "color", "id": "xd_footer_bg", "label": "Fondo del pie", "default": "#252525"},
     {"type": "color", "id": "xd_footer_accent", "label": "Color de suscripción y redes", "default": "#f2b846"},
     {"type": "color", "id": "xd_footer_button", "label": "Fondo del botón de suscripción", "default": "#c22921"},
@@ -694,16 +707,6 @@
       "type": "image_picker",
       "id": "big-logo",
       "label": "t:sections.footer.settings.big_logo_image.label"
-    },
-    {
-      "type": "range",
-      "id": "big-logo-width",
-      "min": 10,
-      "max": 100,
-      "unit": "%",
-      "step": 1,
-      "default": 100,
-      "label": "t:sections.footer.settings.big_logo_image_width.label"
     },
     {
       "type": "range",

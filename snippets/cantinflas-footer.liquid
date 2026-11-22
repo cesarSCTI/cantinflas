@@ -1,4 +1,10 @@
-{%- assign footer_settings = footer_section.settings -%}
+{%- liquid
+  assign footer_settings = footer_section.settings
+  assign footer_logo = footer_settings.xd_footer_logo
+  unless footer_settings.xd_use_design_logo
+    assign footer_logo = footer_logo | default: footer_settings['big-logo']
+  endunless
+-%}
 <footer class="cantinflas-footer" style="
   --footer-bg: {{ footer_settings.xd_footer_bg }};
   --footer-text: {{ footer_settings.xd_body_color | default: '#f4ede1' }};
@@ -17,10 +23,14 @@
         {% case block.type %}
           {% when 'text' %}
             <div class="cantinflas-footer__brand">
-              {% if footer_settings['big-logo'] != blank %}
-                {% assign logo_alt = footer_settings['big-logo'].alt | default: shop.name %}
-                <a href="{{ routes.root_url }}">
-                  {{ footer_settings['big-logo'] | image_url: width: 860 | image_tag: loading: 'lazy', widths: '220, 360, 560, 860', sizes: '(min-width: 900px) 24vw, 60vw', alt: logo_alt }}
+              {% if footer_logo != blank %}
+                {% assign logo_alt = footer_logo.alt | default: shop.name %}
+                <a class="cantinflas-footer__brand-link" href="{{ routes.root_url }}">
+                  {{ footer_logo | image_url: width: 960 | image_tag: loading: 'lazy', widths: '220, 360, 560, 760, 960', sizes: '(min-width: 960px) 25vw, 75vw', alt: logo_alt }}
+                </a>
+              {% elsif footer_settings.xd_use_design_logo %}
+                <a class="cantinflas-footer__brand-link" href="{{ routes.root_url }}">
+                  <img src="{{ 'cantinflas-xd-footer-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="960" height="327" loading="lazy">
                 </a>
               {% else %}
                 <a class="cantinflas-footer__brand-text" href="{{ routes.root_url }}">{{ shop.name | escape }}</a>
@@ -99,11 +109,17 @@
       <div class="cantinflas-footer__bottom-inner">
         {% if footer_settings['show-copyright'] %}<p>{{ footer_settings.text | escape }}</p>{% endif %}
         {% if footer_settings['show-payments-icons'] %}
+          {% liquid
+            assign payment_types = shop.enabled_payment_types
+            if request.design_mode and payment_types == empty
+              assign payment_types = 'paypal,visa,master,american_express,discover,maestro,diners_club' | split: ','
+            endif
+          %}
           {% if footer_settings.xd_payment_image != blank %}
             {{ footer_settings.xd_payment_image | image_url: width: 760 | image_tag: class: 'cantinflas-footer__payment-image', loading: 'lazy', widths: '260, 480, 760' }}
-          {% else %}
+          {% elsif payment_types.size > 0 %}
             <ul class="cantinflas-footer__payments" aria-label="{{ 'sections.footer.payment' | t | escape }}" role="list">
-              {% for type in shop.enabled_payment_types %}
+              {% for type in payment_types %}
                 <li>{{ type | payment_type_svg_tag }}</li>
               {% endfor %}
             </ul>
