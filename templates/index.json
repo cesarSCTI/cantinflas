@@ -199,7 +199,7 @@
         "piece2"
       ],
       "custom_css": [
-        "h2{font-size: 60px; }"
+        "h2 {font-size: 60px;}"
       ],
       "settings": {
         "xd_text_controls": true,
@@ -224,6 +224,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas8.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -248,6 +249,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas4.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -272,6 +274,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas6.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -296,6 +299,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas2.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -320,6 +324,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas7.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -344,6 +349,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas5.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -368,6 +374,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas3.png",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -392,6 +399,7 @@
           "settings": {
             "heading": "",
             "text": "",
+            "image": "shopify://shop_images/universo-cantinflas1.png",
             "label": "",
             "link": "",
             "image_asset": "",
