@@ -1,3 +1,16 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .wt-footer__title {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .wt-footer__text, #shopify-section-{{ section.id }} .wt-footer__text a, #shopify-section-{{ section.id }} .wt-footer__links a {
+      {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+      {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 <style>
   [id="shopify-section-{{ section.id }}"]
   {
@@ -93,12 +106,12 @@
 
 
 
-<footer class="wt-footer {% if section.settings.show-scroll-effect %}wt-footer--scroll-effect{% endif %}">
+<footer class="wt-footer {% if section.settings.xd_text_controls %}cantinflas-xd-footer{% endif %} {% if section.settings.show-scroll-effect %}wt-footer--scroll-effect{% endif %}">
   <div class="wt-footer__body">
     <div class="rd">
       <div class="first-rd">
         {% for block in section.blocks limit: 4 %}
-          <div class="wt-footer__block wt-footer__block--{{ block.type }} ">
+          <div class="wt-footer__block wt-footer__block--{{ block.type }} " {{ block.shopify_attributes }}>
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -298,7 +311,7 @@
       </div>
       <div class="second-rd">
         {% for block in section.blocks offset: 4 %}
-          <div class="wt-footer__block wt-footer__block--{{ block.type }}">
+          <div class="wt-footer__block wt-footer__block--{{ block.type }}" {{ block.shopify_attributes }}>
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
@@ -542,7 +555,7 @@
 
   {% if section.settings['big-logo'] != null %}
     <div class="wt-footer__big-logo">
-      {% assign big_logo = section.settings['big-logo'] | get_image %}
+      {% assign big_logo = section.settings['big-logo'] %}
       {% assign alt_text = big_logo.alt | default: big_logo.filename | escape %}
       {{
         section.settings['big-logo']
@@ -565,6 +578,11 @@
   "tag": "section",
   "max_blocks": 5,
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_body_color", "label": "Color · Texto"},
+    {"type": "select", "id": "xd_body_align", "label": "Alineación · Texto", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "header",
       "content": "Layout"

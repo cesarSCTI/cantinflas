@@ -1,3 +1,24 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .cantinflas-contact-layout__details h2, #shopify-section-{{ section.id }} .hero__title {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .cantinflas-contact-layout__details .rte, #shopify-section-{{ section.id }} .cantinflas-contact-layout__details .rte a {
+      {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+      {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .form__field__label {
+      {% if section.settings.xd_labels_color != blank %}color: {{ section.settings.xd_labels_color }};{% endif %}
+      {% unless section.settings.xd_labels_align == 'inherit' %}text-align: {{ section.settings.xd_labels_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .wt-newsletter__send__text {
+      {% if section.settings.xd_button_color != blank %}color: {{ section.settings.xd_button_color }};{% endif %}
+      {% unless section.settings.xd_button_align == 'inherit' %}text-align: {{ section.settings.xd_button_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
 
@@ -174,6 +195,15 @@
   "tag": "section",
   "class": "spaced-section",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_body_color", "label": "Color · Texto"},
+    {"type": "select", "id": "xd_body_align", "label": "Alineación · Texto", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_labels_color", "label": "Color · Etiquetas"},
+    {"type": "select", "id": "xd_labels_align", "label": "Alineación · Etiquetas", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_button_color", "label": "Color · Botón"},
+    {"type": "select", "id": "xd_button_align", "label": "Alineación · Botón", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "text",
       "id": "contact_heading",

@@ -1,3 +1,16 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .wt-page-nav-mega__decorated {
+      {% if section.settings.xd_nav_color != blank %}color: {{ section.settings.xd_nav_color }};{% endif %}
+      {% unless section.settings.xd_nav_align == 'inherit' %}text-align: {{ section.settings.xd_nav_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .wt-header__panel__link, #shopify-section-{{ section.id }} .wt-localization-trigger {
+      {% if section.settings.xd_icons_color != blank %}color: {{ section.settings.xd_icons_color }};{% endif %}
+      {% unless section.settings.xd_icons_align == 'inherit' %}text-align: {{ section.settings.xd_icons_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 <script src="{{ 'search-drawer.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'page-header.js' | asset_url }}" defer="defer"></script>
 
@@ -57,12 +70,12 @@
   id="header"
   data-hide-over-selector=".collection__grid"
   class="
-    wt-header
+    wt-header{% if section.settings.xd_text_controls %} cantinflas-xd-header{% endif %}
     {% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}mobile-nav{% endif %}
     {% if section.settings.layout == 'option_1' %} wt-header--v1 wt-header--search{% endif %}
     {% if section.settings.layout == 'option_2' %} wt-header--v2{% endif %}
     {% if section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %} wt-header--v3 wt-header--fashion{% endif %}
-    {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5'  %} wt-header--transparent {% endif %}
+    {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5'  %} {% unless section.settings.xd_text_controls %}wt-header--transparent{% endunless %} {% endif %}
     {% if section.settings.transparent_logo != blank %} wt-header--transparent-logo {% endif %}
     {% if section.settings.layout == 'option_5' %}  wt-header--v3 wt-header--fashion wt-header--v5{% endif %}
     {% if section.settings.show_shadow %} wt-header--shadow{% endif %}
@@ -75,7 +88,7 @@
     data-always-mobile-menu="true"
   {% endif %}
   {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5' %}
-    data-transparent="true"
+    {% unless section.settings.xd_text_controls %}data-transparent="true"{% endunless %}
   {% endif %}
   {% if section.settings.sticky_header %}
     data-sticky="true"
@@ -651,6 +664,11 @@
   "tag": "header",
   "class": "page-header",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_nav_color", "label": "Color · Navegación"},
+    {"type": "select", "id": "xd_nav_align", "label": "Alineación · Navegación", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_icons_color", "label": "Color · Iconos"},
+    {"type": "select", "id": "xd_icons_align", "label": "Alineación · Iconos", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "select",
       "id": "layout",

@@ -1,3 +1,16 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .headline__title, #shopify-section-{{ section.id }} .wt-keys__title {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .wt-keys__text {
+      {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+      {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 {% assign icon_rgb = section.settings.color_body_icon | color_to_rgb %}
 {% assign background_icon_rgb = section.settings.color_background_icon | color_to_rgb %}
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
@@ -79,7 +92,9 @@
                 href="{{ block.settings.link }}"
               >
             {% endif %}
-            {%- if block.settings.desktop_image == blank -%}
+            {%- if section.settings.xd_text_controls and block.settings.desktop_image == blank and block.settings.select_icon == blank -%}
+                {{ 'image' | placeholder_svg_tag: 'wt-keys__image' }}
+              {%- elsif block.settings.desktop_image == blank -%}
               {% render 'icons',
                 id: block.settings.select_icon,
                 url: block.settings.image.url,
@@ -167,7 +182,9 @@
                     href="{{ block.settings.link }}"
                   >
                 {% endif %}
-                {%- if block.settings.desktop_image == blank -%}
+                {%- if section.settings.xd_text_controls and block.settings.desktop_image == blank and block.settings.select_icon == blank -%}
+                {{ 'image' | placeholder_svg_tag: 'wt-keys__image' }}
+              {%- elsif block.settings.desktop_image == blank -%}
                   {% render 'icons',
                     id: block.settings.select_icon,
                     url: block.settings.image.url,
@@ -227,6 +244,11 @@
   "name": "t:sections.features-banner.name",
   "tag": "section",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_body_color", "label": "Color · Texto"},
+    {"type": "select", "id": "xd_body_align", "label": "Alineación · Texto", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "header",
       "content": "t:sections.global.general"

@@ -1,3 +1,12 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a, #shopify-section-{{ section.id }} .card__price {
+      {% if section.settings.xd_cards_color != blank %}color: {{ section.settings.xd_cards_color }};{% endif %}
+      {% unless section.settings.xd_cards_align == 'inherit' %}text-align: {{ section.settings.xd_cards_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 <style>
   [data-section-id="{{ section.id }}"]
   {
@@ -290,6 +299,9 @@
   "class": "spaced-section collection-grid-section",
   "tag": "section",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_cards_color", "label": "Color · Tarjetas"},
+    {"type": "select", "id": "xd_cards_align", "label": "Alineación · Tarjetas", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "range",
       "id": "products_per_page",

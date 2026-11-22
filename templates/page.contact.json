@@ -8,9 +8,11 @@
         "background": "#2b3d8f",
         "text_color": "#f2b846",
         "autoplay": false,
-        "cover_asset": "cantinflas-xd-contacto.webp",
-        "cover_width": 800,
-        "cover_height": 993
+        "heading_align": "right",
+        "subheading_align": "right",
+        "heading_color": "#f2b846",
+        "heading_size": 90,
+        "heading_mobile": 30
       }
     },
     "main": {
@@ -63,7 +65,11 @@
         "margin-top": 0,
         "margin-bottom": 80,
         "contact_heading": "Contáctanos",
-        "contact_details": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a></p><p><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>"
+        "contact_details": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a></p><p><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>",
+        "xd_text_controls": true,
+        "xd_heading_align": "left",
+        "xd_heading_color": "#252525",
+        "xd_labels_color": "#252525"
       }
     }
   },

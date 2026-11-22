@@ -12,3 +12,71 @@
   font-style: var(--font-headline-style);
   font-weight: var(--font-headline-weight);
 }
+
+
+/* Typography and shared chrome for the Cantinflas redesign. */
+#root.cantinflas-redesign,
+.cantinflas-xd-header,
+.cantinflas-xd-footer {
+  --font-base: "Montserrat", sans-serif;
+  --font-button: "Montserrat", sans-serif;
+  --font-navigation: "Montserrat", sans-serif;
+  --font-price: "Montserrat", sans-serif;
+  font-family: var(--font-base);
+}
+
+#root.cantinflas-redesign :is(p, label, button, select, input, textarea, figcaption) {
+  font-family: var(--font-base);
+}
+
+.cantinflas-xd-header .wt-header__body {
+  background: #fff;
+  color: #252525;
+}
+
+.cantinflas-featured-intro, .cantinflas-tabs-intro, .cantinflas-blog-intro {
+  width: min(90%, 164rem);
+  margin: 0 auto 2rem;
+}
+
+.cantinflas-xd-footer {
+  --color-background: #252525;
+  background: #252525;
+  color: #fff;
+}
+
+.cantinflas-xd-footer__title {
+  font-family: "baga", sans-serif;
+  font-weight: 700;
+}
+
+@media (min-width: 1200px) {
+  .cantinflas-xd-header .wt-header__nav-teaser--full-menu { justify-content: flex-start; }
+  .cantinflas-xd-header .wt-header__logo-wrapper { position: absolute; left: 50%; transform: translateX(-50%); }
+}
+
+
+.cantinflas-featured-action {
+  width: min(90%, 164rem);
+  margin: 0 auto 1.8rem;
+  text-align: end;
+}
+
+@media (min-width: 900px) {
+  .cantinflas-xd-footer .first-rd {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1.3fr .85fr .95fr 1.5fr;
+    gap: clamp(1rem, 3vw, 5rem);
+  }
+  .cantinflas-xd-footer .first-rd > .wt-footer__block:nth-child(n) { width: auto !important; min-width: 0; }
+  .cantinflas-xd-footer .second-rd:not(:has(.wt-footer__block)) { display: none; }
+}
+
+.cantinflas-xd-article-sample svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #f4ede1;
+}

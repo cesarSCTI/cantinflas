@@ -1,1 +1,90 @@
-{"type":"footer","name":"Footer Group","sections":{"footer":{"type":"page-footer","blocks":{"menu_TyWCqJ":{"type":"menu","settings":{"heading_links":"Mapa de sitio","links":"sin-venta"}},"menu_DzCNd6":{"type":"menu","settings":{"heading_links":"Legales","links":"aviso"}},"text_rBVikd":{"type":"text","settings":{"heading_text":"Contáctanos","text":"<p>Correo: tequila@cantinflas.com<\/p><p>Tel: +52 33 895 6344<\/p>"}},"image_QgyTXx":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/Rectangle_1541.png","image-width":510}},"image_JRKmtC":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/img-Cantinflas-footer.png","image-width":500}}},"block_order":["menu_TyWCqJ","menu_DzCNd6","text_rBVikd","image_QgyTXx","image_JRKmtC"],"custom_css":[".wt-footer {padding-top: 0px !important;}",".wt-footer__block {padding-bottom: 0px !important;}",".wt-footer__image {margin-bottom: 0px !important;}"],"settings":{"show-scroll-effect":false,"show-social-media-icons":true,"show_country_selector":false,"show_country_selector_label":false,"show_country_selector_flag":false,"show_language_selector":false,"enable_follow_on_shop":false,"show-payments-icons":true,"show-copyright":true,"text":"© Copyright 2026 Mundo Cantinflas – Todos los Derechos Reservados.","big-logo":"shopify:\/\/shop_images\/logo-Cantinflas-Oficial-blanco.png","big-logo-width":85,"margin-top":0,"margin-bottom":20}}},"order":["footer"]}
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "page-footer",
+      "blocks": {
+        "menu_TyWCqJ": {
+          "type": "menu",
+          "settings": {
+            "heading_links": "Mapa de Sitio",
+            "links": "sin-venta"
+          }
+        },
+        "menu_DzCNd6": {
+          "type": "menu",
+          "settings": {
+            "heading_links": "Compra con Nosotros",
+            "links": "aviso"
+          }
+        },
+        "text_rBVikd": {
+          "type": "text",
+          "settings": {
+            "heading_text": "Contáctanos",
+            "text": "<p><a href=\"tel:+52338956344\">Tel. +52 33 895 6344</a><br><a href=\"mailto:tienda@cantinflas.com\">tienda@cantinflas.com</a></p>"
+          }
+        },
+        "image_QgyTXx": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Rectangle_1541.png",
+            "image-width": 510
+          },
+          "disabled": true
+        },
+        "image_JRKmtC": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/img-Cantinflas-footer.png",
+            "image-width": 500
+          },
+          "disabled": true
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading_newsletter": "Mantente cerca del Mundo Cantinflas",
+            "text_newsletter": "<p>Recibe noticias, novedades, productos y contenidos especiales.</p>",
+            "button_type": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "text_rBVikd",
+        "menu_TyWCqJ",
+        "menu_DzCNd6",
+        "newsletter",
+        "image_QgyTXx",
+        "image_JRKmtC"
+      ],
+      "custom_css": [
+        ".wt-footer__block {padding-bottom: 0px !important;}",
+        ".wt-footer__image {margin-bottom: 0px !important;}"
+      ],
+      "settings": {
+        "show-scroll-effect": false,
+        "show-social-media-icons": true,
+        "show_country_selector": false,
+        "show_country_selector_label": false,
+        "show_country_selector_flag": false,
+        "show_language_selector": false,
+        "enable_follow_on_shop": false,
+        "show-payments-icons": true,
+        "show-copyright": true,
+        "text": "© Copyright 2026 Mundo Cantinflas – Todos los Derechos Reservados.",
+        "big-logo": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
+        "big-logo-width": 85,
+        "margin-top": 0,
+        "margin-bottom": 20,
+        "xd_text_controls": true,
+        "xd_heading_color": "#f2b846",
+        "xd_body_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

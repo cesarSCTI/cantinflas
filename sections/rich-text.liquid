@@ -1,3 +1,18 @@
+{% style %}
+  #shopify-section-{{ section.id }} .hero__title {
+    {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+    {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+  }
+  #shopify-section-{{ section.id }} .hero__text {
+    {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+    {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+  }
+  #shopify-section-{{ section.id }} .hero__button--primary, #shopify-section-{{ section.id }} .hero__button--secondary, #shopify-section-{{ section.id }} .hero__button--link {
+    {% if section.settings.xd_button_color != blank %}color: {{ section.settings.xd_button_color }};{% endif %}
+    {% unless section.settings.xd_button_align == 'inherit' %}text-align: {{ section.settings.xd_button_align }};{% endunless %}
+  }
+{% endstyle %}
+
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
 
@@ -139,6 +154,93 @@
       "default": 20,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "color",
+      "id": "xd_heading_color",
+      "label": "Color del título"
+    },
+    {
+      "type": "select",
+      "id": "xd_heading_align",
+      "label": "Alineación del título",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Tema"
+        },
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "xd_body_color",
+      "label": "Color del texto"
+    },
+    {
+      "type": "select",
+      "id": "xd_body_align",
+      "label": "Alineación del texto",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Tema"
+        },
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "xd_button_color",
+      "label": "Color del botón"
+    },
+    {
+      "type": "select",
+      "id": "xd_button_align",
+      "label": "Alineación del botón",
+      "default": "inherit",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Tema"
+        },
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
     }
   ],
   "blocks": [
@@ -338,7 +440,10 @@
     }
   ],
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   }
 }
 {% endschema %}

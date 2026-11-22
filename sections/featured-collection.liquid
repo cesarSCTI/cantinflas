@@ -1,3 +1,20 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .headline__title {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .cantinflas-featured-intro {
+      {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+      {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .card__title, #shopify-section-{{ section.id }} .card__title a, #shopify-section-{{ section.id }} .card__price {
+      {% if section.settings.xd_cards_color != blank %}color: {{ section.settings.xd_cards_color }};{% endif %}
+      {% unless section.settings.xd_cards_align == 'inherit' %}text-align: {{ section.settings.xd_cards_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 {% liquid
   assign products_source = section.settings.collection.products
   assign show_section = false
@@ -67,6 +84,15 @@
       </div>
     {% endif %}
 
+    {% if section.settings.xd_intro != blank %}<div class="cantinflas-featured-intro rte">{{ section.settings.xd_intro }}</div>{% endif %}
+
+    {% if section.settings.xd_link_label != blank %}
+      {% assign browse_url = section.settings.xd_link | default: section.settings.collection.url | default: routes.all_products_collection_url %}
+      <div class="cantinflas-featured-action">
+        <a href="{{ browse_url }}" class="hero__button--secondary">{{ section.settings.xd_link_label | escape }}</a>
+      </div>
+    {% endif %}
+
     <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
 
     <!-- Slider main container -->
@@ -87,6 +113,7 @@
         >
           <!-- Slides -->
           {%- if products_source == blank -%}
+            {% assign sample_titles = section.settings.xd_sample_titles | newline_to_br | split: "<br />" %}
             {% for i in (1..section.settings.products_to_show) %}
                 <div data-swiper-slide>
                     <div
@@ -102,11 +129,12 @@
                         {% if placeholder_image_index == 0 %}
                           {% assign placeholder_image_index = 1 %}
                         {% endif %}
+                        {% assign sample_title = sample_titles[forloop.index0] | strip | default: "Producto de muestra" %}
                         {% render 'card',
                           placeholder_image_index: placeholder_image_index,
-                          title: 'Example product title',
+                          title: sample_title,
                           subtitle: 'Vendor',
-                          price: '1999',
+                          price: blank,
                           rating: section.settings.show_product_rating,
                           options: false,
                           text_alignment: section.settings.text_alignment,
@@ -217,7 +245,7 @@
       </div>
     </slideshow-section>
 
-    {% if section.settings.show_view_all
+    {% if section.settings.xd_link_label == blank and section.settings.show_view_all
       and section.settings.collection.products_count > section.settings.products_to_show
       and section.settings.product_list == empty
     %}
@@ -240,6 +268,17 @@
   "tag": "section",
   "class": "spaced-section",
   "settings": [
+    {"type": "text", "id": "xd_link_label", "label": "Etiqueta del enlace de catálogo"},
+    {"type": "url", "id": "xd_link", "label": "Destino del enlace de catálogo"},
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_body_color", "label": "Color · Texto"},
+    {"type": "select", "id": "xd_body_align", "label": "Alineación · Texto", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_cards_color", "label": "Color · Tarjetas"},
+    {"type": "select", "id": "xd_cards_align", "label": "Alineación · Tarjetas", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "richtext", "id": "xd_intro", "label": "Subtítulo editorial"},
+    {"type": "textarea", "id": "xd_sample_titles", "label": "Títulos de muestra, uno por línea"},
     {
       "type": "textarea",
       "id": "title",

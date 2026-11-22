@@ -8,9 +8,8 @@
         "alignment": "center",
         "autoplay": true,
         "background": "#c22921",
-        "cover_asset": "cantinflas-xd-home.webp",
-        "cover_width": 1071,
-        "cover_height": 1469
+        "heading_align": "center",
+        "subheading_align": "center"
       }
     },
     "featured": {
@@ -18,51 +17,48 @@
       "settings": {
         "title": "Lleva un pedacito de Cantinflas contigo",
         "products_to_show": 4,
-        "hide_empty_section": true
+        "hide_empty_section": false,
+        "xd_text_controls": true,
+        "xd_heading_color": "#2b3d8f",
+        "xd_heading_align": "left",
+        "xd_body_align": "left",
+        "show_view_all": true,
+        "button_select": "secondary",
+        "xd_intro": "<p>Los productos más vendidos del universo de Cantinflas</p>",
+        "xd_sample_titles": "Agua Premium\nFestival Dunkel\nGorra\nTaza Peltre Azul Chato",
+        "enable_stack_products": true,
+        "number_of_column_desktop": 4,
+        "xd_link_label": "Ir a productos"
       }
     },
     "tequilapromo": {
-      "type": "cantinflas-editorial",
+      "type": "cantinflas-product-promo",
       "settings": {
-        "heading": "Tequila Cantinflas",
-        "layout": "alternating",
-        "background": "#ffffff",
-        "text_color": "#252525",
-        "accent": "#252525",
-        "intro": "<p>Un tequila elaborado con 100% agave azul Weber, inspirado en el legado de uno de los personajes más queridos de México.</p>"
-      },
-      "blocks": {
-        "piece1": {
-          "type": "item",
-          "settings": {
-            "heading": "Tequila Cantinflas Blanco",
-            "text": "<p>Un legado que se brinda.</p>",
-            "image_asset": "cantinflas-xd-tequila-home.webp",
-            "image_width": 3056,
-            "image_height": 5456,
-            "image_alt": "Tequila Cantinflas Blanco"
-          }
-        }
-      },
-      "block_order": [
-        "piece1"
-      ]
+        "product": "tequila-cantinflas-blanco-100-agave"
+      }
     },
     "story": {
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "¡Quiubo, Chato!",
-        "layout": "alternating",
+        "layout": "duo",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#252525"
+        "accent": "#c22921",
+        "show_focus": true,
+        "heading_align": "center",
+        "intro_align": "center"
       },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
             "heading": "Detrás de Cantinflas estaba Mario Moreno",
-            "text": "<p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>"
+            "text": "<p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>",
+            "title_align": "center",
+            "text_align": "center",
+            "label": "Conoce su historia",
+            "button_align": "center"
           }
         }
       },
@@ -74,19 +70,27 @@
       "type": "home-product-tabs",
       "settings": {
         "heading": "Los consentidos de la casa",
-        "products_to_show": 4
+        "products_to_show": 4,
+        "xd_text_controls": true,
+        "xd_heading_align": "center",
+        "xd_body_align": "center",
+        "xd_tabs_align": "center",
+        "xd_tabs_color": "#36845d",
+        "xd_intro": "<p>Lo que más se antoja de cada rincón del mundo Cantinflas.</p>"
       },
       "blocks": {
         "piece1": {
           "type": "category",
           "settings": {
-            "title": "Bebidas"
+            "title": "Bebidas",
+            "sample_titles": "Agua Premium\nFestival Dunkel\nTequila Cantinflas"
           }
         },
         "piece2": {
           "type": "category",
           "settings": {
-            "title": "Promocionales"
+            "title": "Promocionales",
+            "sample_titles": "Plumas\nVaso\nGorra\nTaza Peltre Azul Chato"
           }
         }
       },
@@ -99,25 +103,57 @@
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "Universo Cantinflas",
-        "layout": "alternating",
+        "layout": "collage",
         "background": "#f2b846",
         "text_color": "#252525",
         "accent": "#c22921",
-        "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>"
+        "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
+        "heading_align": "center",
+        "intro_align": "center"
       },
       "blocks": {
         "photo": {
           "type": "item",
-          "settings": {
-            "image_asset": "cantinflas-xd-bio.webp",
-            "image_width": 614,
-            "image_height": 319,
-            "image_alt": "Cantinflas en el cine"
-          }
+          "settings": {}
+        },
+        "photo2": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo3": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo4": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo5": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo6": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo7": {
+          "type": "item",
+          "settings": {}
+        },
+        "photo8": {
+          "type": "item",
+          "settings": {}
         }
       },
       "block_order": [
-        "photo"
+        "photo",
+        "photo2",
+        "photo3",
+        "photo4",
+        "photo5",
+        "photo6",
+        "photo7",
+        "photo8"
       ]
     },
     "threepieces": {
@@ -127,7 +163,7 @@
         "layout": "cards",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#252525",
+        "accent": "#2b3d8f",
         "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>"
       },
       "blocks": {
@@ -135,21 +171,34 @@
           "type": "item",
           "settings": {
             "heading": "Tequila",
-            "text": "<p>Tequila Blanco 100% de Agave</p>"
+            "text": "<p>Tequila Blanco 100% de Agave</p>",
+            "title_align": "center",
+            "text_align": "center",
+            "label": "Comprar",
+            "button_align": "center",
+            "product": "tequila-cantinflas-blanco-100-agave"
           }
         },
         "piece2": {
           "type": "item",
           "settings": {
             "heading": "Taza",
-            "text": "<p>Taza de peltre azul</p>"
+            "text": "<p>Taza de peltre azul</p>",
+            "title_align": "center",
+            "text_align": "center",
+            "label": "Comprar",
+            "button_align": "center"
           }
         },
         "piece3": {
           "type": "item",
           "settings": {
             "heading": "Agua",
-            "text": "<p>Agua pura de manantial</p>"
+            "text": "<p>Agua pura de manantial</p>",
+            "title_align": "center",
+            "text_align": "center",
+            "label": "Comprar",
+            "button_align": "center"
           }
         }
       },
@@ -163,16 +212,18 @@
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "Hay historias que merecen descubrirse a fondo",
-        "layout": "alternating"
+        "layout": "feature",
+        "heading_align": "center",
+        "accent": "#2b3d8f"
       },
       "blocks": {
         "photo": {
           "type": "item",
           "settings": {
-            "image_asset": "cantinflas-xd-museum-collage.webp",
-            "image_width": 1902,
-            "image_height": 827,
-            "image_alt": "Collage del Museo Cantinflas"
+            "label": "Visita el Museo Cantinflas",
+            "button_align": "center",
+            "text": "<p>Descubre la historia, el legado y las diferentes facetas del hombre detrás del personaje en el Museo Mario Moreno Cantinflas.</p><p>Con más de 400 piezas, objetos originales, vestuario, fotografías, material audiovisual y reconocimientos, el museo conserva y comparte la memoria de uno de los grandes íconos de la cultura mexicana.</p>",
+            "text_align": "center"
           }
         }
       },
@@ -183,7 +234,9 @@
     "closing": {
       "type": "rich-text",
       "settings": {
-        "desktop_text_horizontal_position": "center"
+        "desktop_text_horizontal_position": "center",
+        "xd_heading_color": "#252525",
+        "xd_heading_align": "center"
       },
       "blocks": {
         "piece1": {

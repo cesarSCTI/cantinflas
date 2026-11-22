@@ -71,7 +71,7 @@
         "1c9b0bb2-fe62-4649-9439-76836162d773": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Ficha Técnica",
+            "heading": "Especificaciones",
             "content": "<ul><li><strong>Agave: </strong>Tequilana Weber var. Azul – Los Altos de Jalisco</li><li><strong>Cocción: </strong>50% horno de mampostería (~48 h) / 50% autoclave (~16 h)</li><li><strong>Extracción: </strong>Molienda tradicional</li><li><strong>Fermentación: </strong>Acero inoxidable</li><li><strong>Destilación: </strong>Doble, alambique con interiores de cobre</li><li><strong>Expresión: </strong>Blanco (sin crianza)</li><li><strong>ABV / Volumen: </strong>40% / 700 ml</li><li><strong>NOM / Región: </strong>1499 / Arandas, Jalisco (Los Altos)</li></ul>",
             "metafield_variables": "",
             "page": "",
@@ -150,7 +150,7 @@
         "enable_sticky_buy_button": true,
         "full-width-enabled": false,
         "desktop-media-size": "normal",
-        "desktop-layout": "carousel-horizontal",
+        "desktop-layout": "carousel-vertical",
         "desktop-image-ratio": "original",
         "enable_video_looping": false,
         "video_controls": false,
@@ -163,7 +163,11 @@
         "text_color": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 60,
-        "margin-bottom": 40
+        "margin-bottom": 40,
+        "xd_text_controls": true,
+        "xd_heading_color": "#252525",
+        "xd_price_color": "#2b3d8f",
+        "xd_body_color": "#252525"
       }
     },
     "tribute": {
@@ -174,41 +178,54 @@
         "background": "#252525",
         "text_color": "#ffffff",
         "accent": "#f2b846",
-        "intro": "<p>Porque algunos legados no solo se cuentan… se brindan</p>"
+        "intro": "<p>Hay nombres que forman parte del corazón de un país. Cantinflas es uno de ellos.</p><p>Hoy, su legado vive en un tequila elaborado con 100% agave azul Weber, en Los Altos de Jalisco, como un homenaje a nuestras raíces, nuestra cultura y al espíritu alegre que caracterizó a Mario Moreno.</p><p>Su autenticidad, alegría, ingenio y humanidad siguen presentes, y cada botella invita a compartir, celebrar y disfrutar esos momentos que se construyen alrededor de una buena conversación y una copa de tequila.</p><p>Porque algunos legados no solo se cuentan…<br>se brindan</p>",
+        "show_focus": true
       }
     },
     "essence": {
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "Nuestra esencia, en cada botella.",
-        "layout": "cards",
+        "layout": "orbit",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#2b3d8f"
+        "accent": "#2b3d8f",
+        "show_focus": true,
+        "intro": "<p>Elaborado únicamente con 100% agave azul Weber, Tequila Cantinflas refleja la tradición tequilera mexicana, el respeto por el proceso artesanal y el compromiso con ofrecer un destilado de la más alta calidad.</p>",
+        "heading_align": "center",
+        "intro_align": "center"
       },
       "blocks": {
         "piece1": {
           "type": "item",
           "settings": {
-            "heading": "Respeto por el proceso artesanal"
+            "heading": "Respeto por el proceso artesanal",
+            "hide_media": true,
+            "title_align": "center"
           }
         },
         "piece2": {
           "type": "item",
           "settings": {
-            "heading": "Compromiso con la calidad"
+            "heading": "Compromiso con la calidad",
+            "hide_media": true,
+            "title_align": "center"
           }
         },
         "piece3": {
           "type": "item",
           "settings": {
-            "heading": "100% Agave Azul Weber"
+            "heading": "100% Agave Azul Weber",
+            "hide_media": true,
+            "title_align": "center"
           }
         },
         "piece4": {
           "type": "item",
           "settings": {
-            "heading": "Tradición tequilera mexicana"
+            "heading": "Tradición tequilera mexicana",
+            "hide_media": true,
+            "title_align": "center"
           }
         }
       },
@@ -224,8 +241,11 @@
       "settings": {
         "heading": "Método de Producción",
         "presentation": "steps",
-        "background": "#ffffff",
-        "text_color": "#252525"
+        "background": "#f4ede1",
+        "text_color": "#252525",
+        "show_image": true,
+        "image_side": "left",
+        "heading_color": "#36845d"
       },
       "blocks": {
         "piece1": {
@@ -255,7 +275,8 @@
         "layout": "cards",
         "background": "#f4ede1",
         "text_color": "#252525",
-        "accent": "#c22921"
+        "accent": "#c22921",
+        "heading_align": "right"
       },
       "blocks": {
         "piece1": {
@@ -293,7 +314,10 @@
         "layout": "cards",
         "background": "#36845d",
         "text_color": "#ffffff",
-        "accent": "#ffffff"
+        "accent": "#ffffff",
+        "intro": "<p>Tequila Cantinflas Blanco puede disfrutarse solo, ligeramente frío o a temperatura ambiente. Su perfil de agave cocido, notas cítricas y carácter fresco también lo convierte en una opción para preparar cocteles clásicos y compartir buenos momentos.</p>",
+        "heading_align": "center",
+        "intro_align": "center"
       },
       "blocks": {
         "piece1": {
@@ -325,10 +349,14 @@
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "Más que un tequila, un legado que se comparte.",
-        "layout": "alternating",
+        "layout": "feature",
         "background": "#c22921",
         "text_color": "#ffffff",
-        "accent": "#f2b846"
+        "accent": "#f2b846",
+        "show_focus": true,
+        "intro": "<p>Cada botella de Tequila Cantinflas celebra el legado de uno de los personajes más queridos de México.</p>",
+        "heading_align": "right",
+        "intro_align": "right"
       }
     }
   },

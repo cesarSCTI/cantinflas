@@ -8,9 +8,8 @@
         "alignment": "left",
         "autoplay": true,
         "background": "#252525",
-        "cover_asset": "cantinflas-xd-mundo.webp",
-        "cover_width": 1200,
-        "cover_height": 1600
+        "heading_align": "left",
+        "subheading_align": "left"
       }
     },
     "main": {
@@ -28,47 +27,77 @@
       }
     },
     "memories": {
-      "type": "cantinflas-editorial",
+      "type": "cantinflas-media-gallery",
       "settings": {
         "heading": "Recuerdos de Cantinflas",
-        "layout": "cards",
+        "layout": "photo",
+        "card_width": 420,
+        "card_height": 320,
         "intro": "<p>De sus momentos detrás de cámaras a los personajes que hicieron historia, descubre imágenes que forman parte de la trayectoria de Mario Moreno y Cantinflas.</p>"
       },
       "blocks": {
-        "photo": {
-          "type": "item",
+        "piece1": {
+          "type": "media",
           "settings": {
-            "image_asset": "cantinflas-xd-recuerdo.webp",
-            "image_width": 990,
-            "image_height": 1200,
-            "image_alt": "Mario Moreno Cantinflas"
+            "frame": "#fffaf0",
+            "rotation": -6
+          }
+        },
+        "piece2": {
+          "type": "media",
+          "settings": {
+            "frame": "#f2b846",
+            "rotation": 4
+          }
+        },
+        "piece3": {
+          "type": "media",
+          "settings": {
+            "frame": "#2b3d8f",
+            "rotation": -4
+          }
+        },
+        "piece4": {
+          "type": "media",
+          "settings": {
+            "frame": "#fffaf0",
+            "rotation": 5
           }
         }
       },
       "block_order": [
-        "photo"
+        "piece1",
+        "piece2",
+        "piece3",
+        "piece4"
       ]
     },
     "reels": {
-      "type": "video-reels",
+      "type": "cantinflas-media-gallery",
       "settings": {
-        "heading": "Cantinflas en Movimiento"
+        "heading": "Cantinflas en Movimiento",
+        "layout": "film",
+        "card_width": 340,
+        "card_height": 520,
+        "heading_align": "center",
+        "intro_align": "center",
+        "intro": "<p>Sus gestos, sus palabras y su particular manera de hacer reír cobran vida cada vez que volvemos a verlo.</p><p>Revive escenas, fragmentos de películas y otros videos que mantienen vivo el humor de Cantinflas.</p>"
       },
       "blocks": {
         "piece1": {
-          "type": "product",
+          "type": "media",
           "settings": {}
         },
         "piece2": {
-          "type": "product",
+          "type": "media",
           "settings": {}
         },
         "piece3": {
-          "type": "product",
+          "type": "media",
           "settings": {}
         },
         "piece4": {
-          "type": "product",
+          "type": "media",
           "settings": {}
         }
       },
@@ -82,7 +111,17 @@
     "news": {
       "type": "blog-posts",
       "settings": {
-        "heading": "Actualidad Cantinflas"
+        "heading": "Actualidad Cantinflas",
+        "background_color": "#c22921",
+        "color-body-text": "#ffffff",
+        "column_alignment": "left",
+        "show_image": true,
+        "post_limit": 3,
+        "xd_intro": "<p>Noticias, actividades y novedades relacionadas con el legado de Mario Moreno y el universo de Cantinflas.</p>",
+        "xd_sample_title": "Inauguramos oficialmente el Museo Mario Moreno “Cantinflas”",
+        "xd_title_color": "#ffffff",
+        "xd_intro_color": "#ffffff",
+        "xd_intro_align": "right"
       }
     },
     "social": {
@@ -91,42 +130,36 @@
         "post1": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-1.webp",
             "alt": "Escena de una película de Cantinflas"
           }
         },
         "post2": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-2.webp",
             "alt": "Publicación ¿Por qué Cantinflas hablaba así?"
           }
         },
         "post3": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-3.webp",
             "alt": "Publicación ¿De qué trata El Barrendero?"
           }
         },
         "post4": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-4.webp",
             "alt": "Escena de una publicación de Cantinflas"
           }
         },
         "post5": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-5.webp",
             "alt": "Publicación ¿De qué película es esta frase?"
           }
         },
         "post6": {
           "type": "post",
           "settings": {
-            "asset": "cantinflas-xd-social-6.webp",
             "alt": "Publicación sobre el Museo Cantinflas en la Ciudad de México"
           }
         }
@@ -140,7 +173,10 @@
         "post6"
       ],
       "settings": {
-        "heading": "Síguenos en nuestras redes sociales"
+        "heading": "Síguenos en nuestras redes sociales",
+        "xd_text_controls": true,
+        "xd_heading_color": "#252525",
+        "xd_heading_align": "left"
       }
     }
   },

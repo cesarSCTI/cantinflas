@@ -17,6 +17,9 @@
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/fzw0jto.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&amp;display=swap">
 <style>
   @font-face {
   font-family: 'celebrate';
@@ -321,11 +324,11 @@
     <!-- Wonder Theme v2.1.0 -->
   </body>
   <style>
-    main#root *{
+    main#root:not(.cantinflas-redesign) *{
       font-family:'avenir-next-lt-pro';
       letter-spacing:normal !important;
     }
-    h1, h2, h3, h4, h5, h6{
+    :is(h1, h2, h3, h4, h5, h6):not(.cantinflas-redesign *){
       font-weight:800 !important;
       letter-spacing:normal !important;
     }
@@ -354,7 +357,7 @@
         width:30% !important;
         flex: 1 1 30%
     }
-    .wt-footer__title{
+    .wt-footer__title:not(.cantinflas-xd-footer *){
       font-family:'avenir-next-lt-pro' !important;
       font-weight:800;
     }

@@ -1,3 +1,12 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} .cantinflas-social-preview__header h2 {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 <section class="cantinflas-social-preview" aria-labelledby="SocialTitle-{{ section.id }}">
   <div class="cantinflas-social-preview__header">
     <h2 id="SocialTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
@@ -14,6 +23,8 @@
           {{ block.settings.image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '280, 420, 560, 720', sizes: '(min-width: 900px) 16vw, 40vw', alt: block.settings.alt }}
         {% elsif block.settings.asset != blank %}
           <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="360" height="480" loading="lazy">
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'cantinflas-social-preview__placeholder' }}
         {% endif %}
       </li>
     {% endfor %}
@@ -29,7 +40,7 @@
   .cantinflas-social-preview__posts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; margin: 0; gap: .6rem; list-style: none; }
   .cantinflas-social-preview__posts li { aspect-ratio: 3 / 4; }
   .cantinflas-social-preview__posts li:empty { display: none; }
-  .cantinflas-social-preview__posts img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-social-preview__posts :is(img, svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
   @media (min-width: 600px) { .cantinflas-social-preview__posts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 900px) { .cantinflas-social-preview__posts { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 {% endstylesheet %}
@@ -38,6 +49,9 @@
 {
   "name": "Franja social temporal",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "text",
       "id": "heading",

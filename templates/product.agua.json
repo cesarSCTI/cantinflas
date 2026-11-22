@@ -263,24 +263,79 @@
         "text_color": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 4,
-        "margin-bottom": 28
+        "margin-bottom": 28,
+        "xd_text_controls": true,
+        "xd_heading_color": "#252525",
+        "xd_price_color": "#2b3d8f",
+        "xd_body_color": "#252525"
       }
     },
     "intro": {
       "type": "cantinflas-editorial",
       "settings": {
         "heading": "¡Mucho más que agua!",
-        "layout": "alternating",
+        "layout": "duo",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#252525"
-      }
+        "accent": "#2b3d8f",
+        "show_focus": true,
+        "intro": "<p>Agua premium en envase de cartón sostenible de 500 ml, inspirada en el legado de Cantinflas.</p><p>Inspirada en uno de los personajes más emblemáticos de México, esta propuesta combina calidad, sostenibilidad y un diseño exclusivo que celebra el universo de Mario Moreno.</p><p>Su presentación práctica la convierte en una opción para acompañar distintos momentos del día, mientras que su identidad visual puede hacerla atractiva para quienes disfrutan de los productos relacionados con Cantinflas.</p><p>Una forma de llevar contigo un pedacito de su historia y convertir un producto cotidiano en algo especial.</p>",
+        "heading_align": "center",
+        "intro_align": "center"
+      },
+      "blocks": {
+        "waterdetail": {
+          "type": "item",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "waterdetail"
+      ]
     },
     "moments": {
-      "type": "lookbook",
+      "type": "cantinflas-media-gallery",
       "settings": {
-        "heading": "Acompáñate de Cantinflas."
-      }
+        "heading": "Acompáñate de Cantinflas.",
+        "layout": "film",
+        "card_width": 340,
+        "card_height": 480,
+        "heading_align": "center",
+        "intro_align": "center",
+        "intro": "<p>Una presentación práctica para llevar contigo y disfrutar en distintos momentos del día.</p>"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "media",
+          "settings": {}
+        },
+        "piece2": {
+          "type": "media",
+          "settings": {}
+        },
+        "piece3": {
+          "type": "media",
+          "settings": {
+            "title": "En movimiento",
+            "caption": "<p>Llévala contigo al salir, viajar o realizar tus actividades.</p>"
+          }
+        },
+        "piece4": {
+          "type": "media",
+          "settings": {}
+        },
+        "piece5": {
+          "type": "media",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2",
+        "piece3",
+        "piece4",
+        "piece5"
+      ]
     },
     "packaging": {
       "type": "cantinflas-editorial",
@@ -296,10 +351,6 @@
           "type": "item",
           "settings": {
             "heading": "Tapón de origen vegetal",
-            "image_asset": "cantinflas-xd-envase.webp",
-            "image_width": 1664,
-            "image_height": 2496,
-            "image_alt": "Envase de Agua Premium Cantinflas",
             "text": "<p>Agua Cantinflas utiliza un envase Tetra Prisma Aseptic que integra materiales de origen renovable y características orientadas a reducir el impacto ambiental de su presentación.</p><p>Una propuesta que busca integrar diseño, practicidad y sostenibilidad en una presentación cotidiana.</p>"
           }
         }
@@ -344,7 +395,10 @@
         "heading": "Un proceso en cuatro etapas.",
         "presentation": "steps",
         "background": "#2b3d8f",
-        "text_color": "#ffffff"
+        "text_color": "#ffffff",
+        "show_image": true,
+        "heading_align": "center",
+        "heading_color": "#f2b846"
       },
       "blocks": {
         "piece1": {
@@ -380,47 +434,36 @@
         "piece4"
       ]
     },
-    "faqtitle": {
-      "type": "rich-text",
-      "settings": {
-        "desktop_text_horizontal_position": "center"
-      },
-      "blocks": {
-        "piece1": {
-          "type": "heading",
-          "settings": {
-            "heading": "Preguntas frecuentes"
-          }
-        }
-      },
-      "block_order": [
-        "piece1"
-      ]
-    },
     "faq": {
-      "type": "collapsible_menu",
-      "settings": {},
+      "type": "cantinflas-product-details",
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "heading_color": "#f2b846",
+        "show_image": true,
+        "image_side": "left",
+        "presentation": "steps"
+      },
       "blocks": {
         "piece1": {
-          "type": "collapsible_tab",
+          "type": "detail",
           "settings": {
             "heading": "¿Es agua mineral natural?"
           }
         },
         "piece2": {
-          "type": "collapsible_tab",
+          "type": "detail",
           "settings": {
             "heading": "¿El envase es reciclable?"
           }
         },
         "piece3": {
-          "type": "collapsible_tab",
+          "type": "detail",
           "settings": {
             "heading": "¿Contiene BPA?"
           }
         },
         "piece4": {
-          "type": "collapsible_tab",
+          "type": "detail",
           "settings": {
             "heading": "¿Cuál es su vida útil?"
           }
@@ -441,7 +484,6 @@
     "packaging",
     "composition",
     "process",
-    "faqtitle",
     "faq"
   ]
 }

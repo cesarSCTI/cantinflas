@@ -1,3 +1,9 @@
+{% if section.settings.xd_title_color != blank %}
+  {% style %}
+    #shopify-section-{{ section.id }} .headline__title { color: {{ section.settings.xd_title_color }}; }
+  {% endstyle %}
+{% endif %}
+
 {{ 'section-multicol.css' | asset_url | stylesheet_tag }}
 
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
@@ -63,6 +69,7 @@
       render 'headline', title: section.settings.heading
     endif
   %}
+    {% if section.settings.xd_intro != blank %}<div class="cantinflas-blog-intro rte" style="color: {{ section.settings.xd_intro_color | default: section.settings['color-body-text'] }}; text-align: {{ section.settings.xd_intro_align }};">{{ section.settings.xd_intro }}</div>{% endif %}
 
     <div class="wt-multicol__text">
       {% if section.settings.swipe_on_mobile %}
@@ -127,7 +134,17 @@
                     style="--animation-order: {{ forloop.index }};"
                   {% endif %}
                 >
-                  {% render 'article-card',
+                  {% if section.settings.xd_sample_title != blank %}
+                    <article class="cantinflas-xd-article-sample">
+                      {% if section.settings.xd_sample_image != blank %}
+                        {{ section.settings.xd_sample_image | image_url: width: 870 | image_tag: loading: 'lazy' }}
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag }}
+                      {% endif %}
+                      <h3>{{ section.settings.xd_sample_title | escape }}</h3>
+                    </article>
+                  {% else %}
+                    {% render 'article-card',
                     show_image: section.settings.show_image,
                     classname: customclass,
                     make_full_width: section.settings['full-width-enabled'],
@@ -137,6 +154,7 @@
                     hide_badge: true,
                     media_aspect_ratio: section.settings.image_ratio
                   %}
+                  {% endif %}
                 </div>
               </li>
             {% endfor %}
@@ -207,6 +225,12 @@
   "class": "wt-multicol__section",
   "tag": "section",
   "settings": [
+    {"type": "text", "id": "xd_sample_title", "label": "Título de noticia de muestra"},
+    {"type": "image_picker", "id": "xd_sample_image", "label": "Imagen de noticia de muestra"},
+    {"type": "color", "id": "xd_title_color", "label": "Color del título"},
+    {"type": "color", "id": "xd_intro_color", "label": "Color de introducción"},
+    {"type": "select", "id": "xd_intro_align", "label": "Alineación de introducción", "default": "left", "options": [{"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type":"richtext","id":"xd_intro","label":"Subtítulo editorial"},
     {
       "type": "textarea",
       "id": "heading",

@@ -1,3 +1,24 @@
+{% if section.settings.xd_text_controls %}
+  {% style %}
+    #shopify-section-{{ section.id }} h1 {
+      {% if section.settings.xd_heading_color != blank %}color: {{ section.settings.xd_heading_color }};{% endif %}
+      {% unless section.settings.xd_heading_align == 'inherit' %}text-align: {{ section.settings.xd_heading_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .price {
+      {% if section.settings.xd_price_color != blank %}color: {{ section.settings.xd_price_color }};{% endif %}
+      {% unless section.settings.xd_price_align == 'inherit' %}text-align: {{ section.settings.xd_price_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} .rte, #shopify-section-{{ section.id }} .rte p {
+      {% if section.settings.xd_body_color != blank %}color: {{ section.settings.xd_body_color }};{% endif %}
+      {% unless section.settings.xd_body_align == 'inherit' %}text-align: {{ section.settings.xd_body_align }};{% endunless %}
+    }
+    #shopify-section-{{ section.id }} summary {
+      {% if section.settings.xd_accordion_color != blank %}color: {{ section.settings.xd_accordion_color }};{% endif %}
+      {% unless section.settings.xd_accordion_align == 'inherit' %}text-align: {{ section.settings.xd_accordion_align }};{% endunless %}
+    }
+  {% endstyle %}
+{% endif %}
+
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
 {{ 'module-product-gallery.css' | asset_url | stylesheet_tag }}
 
@@ -1069,11 +1090,11 @@
                   <div class="wt-collapse__trigger__text">
                     {%if block.settings.icon == 'agave' %}
                         <div class="wt-collapse__trigger__icon">
-                        <img src="{{ 'icono-ficha-tecnica.png' | file_url }}" alt="Ficha técnica" height="30">
+                        <img src="{{ 'icono-ficha-tecnica.png' | file_url }}" alt="Ficha técnica" width="30" height="30">
                       </div>
                       {%elsif block.settings.icon == 'boxpackage' %}
                         <div class="wt-collapse__trigger__icon">
-                          <img src="{{ 'icono-politica-envio.png' | file_url }}" alt="Ficha técnica" height="30">
+                          <img src="{{ 'icono-politica-envio.png' | file_url }}" alt="Ficha técnica" width="30" height="30">
                       </div>
                       {% elsif block.settings.icon != 'none' %}
                         <div class="wt-collapse__trigger__icon">
@@ -2706,6 +2727,15 @@
   "tag": "section",
   "class": "product-section",
   "settings": [
+    {"type": "checkbox", "id": "xd_text_controls", "label": "Usar ajustes de texto del rediseño", "default": false},
+    {"type": "color", "id": "xd_heading_color", "label": "Color · Título"},
+    {"type": "select", "id": "xd_heading_align", "label": "Alineación · Título", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_price_color", "label": "Color · Precio"},
+    {"type": "select", "id": "xd_price_align", "label": "Alineación · Precio", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_body_color", "label": "Color · Texto"},
+    {"type": "select", "id": "xd_body_align", "label": "Alineación · Texto", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
+    {"type": "color", "id": "xd_accordion_color", "label": "Color · Acordeones"},
+    {"type": "select", "id": "xd_accordion_align", "label": "Alineación · Acordeones", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {
       "type": "checkbox",
       "id": "enable_sticky_buy_button",

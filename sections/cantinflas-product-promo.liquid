@@ -1,0 +1,551 @@
+{%- liquid
+  assign promo_product = section.settings.product
+  assign variant = promo_product.selected_or_first_available_variant
+  if variant.available == false
+    assign variant = promo_product.first_available_variant
+  endif
+  assign product_image = section.settings.product_image | default: promo_product.featured_image
+  assign product_title = section.settings.product_title | default: promo_product.title
+  assign details_url = section.settings.discover_link | default: promo_product.url
+  assign product_form_id = 'CantinflasPromo-' | append: section.id
+-%}
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --promo-background: {{ section.settings.background }};
+    --promo-buy: {{ section.settings.buy_color }};
+    --promo-discover: {{ section.settings.discover_color }};
+    --promo-buy-text: {{ section.settings.buy_text | default: section.settings.button_text }};
+    --promo-discover-text: {{ section.settings.discover_text | default: section.settings.button_text }};
+    --promo-accent: {{ section.settings.accent_color }};
+    --promo-actions-align: {{ section.settings.button_align }};
+    {% assign roles = 'title,kicker,intro,product_title,tagline,description' | split: ',' %}
+    {% for role in roles %}
+      {% assign color = role | append: '_color' %}
+      {% assign alignment = role | append: '_align' %}
+      {% assign desktop = role | append: '_size' %}
+      {% assign mobile = role | append: '_mobile' %}
+      --promo-{{ role }}-color: {{ section.settings[color] }};
+      --promo-{{ role }}-align: {{ section.settings[alignment] }};
+      --promo-{{ role }}-desktop: {{ section.settings[desktop] }}px;
+      --promo-{{ role }}-mobile: {{ section.settings[mobile] }}px;
+    {% endfor %}
+  }
+{% endstyle %}
+<section class="cantinflas-promo">
+  <header class="cantinflas-promo__intro">
+    <h2 class="cantinflas-promo__text cantinflas-promo__title">{{ section.settings.title | escape }}{% if section.settings.accent != blank %} <span>{{ section.settings.accent | escape }}</span>{% endif %}</h2>
+    {% if section.settings.kicker != blank %}<p class="cantinflas-promo__text cantinflas-promo__kicker">{{ section.settings.kicker | escape }}</p>{% endif %}
+    {% if section.settings.intro != blank %}<div class="cantinflas-promo__text cantinflas-promo__intro-text rte">{{ section.settings.intro }}</div>{% endif %}
+  </header>
+  <div class="cantinflas-promo__grid">
+    <div class="cantinflas-promo__product">
+      <div class="cantinflas-promo__product-image">
+        {% if product_image != blank %}
+          {{ product_image | image_url: width: 960 | image_tag: loading: 'lazy', widths: '320, 480, 640, 960', sizes: '(min-width: 900px) 32vw, 85vw' }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'cantinflas-promo__placeholder' }}
+        {% endif %}
+      </div>
+      {% if product_title != blank %}<h3 class="cantinflas-promo__text cantinflas-promo__product-title">{{ product_title | escape }}</h3>{% endif %}
+      {% if section.settings.tagline != blank %}<p class="cantinflas-promo__text cantinflas-promo__tagline">{{ section.settings.tagline | escape }}</p>{% endif %}
+      {% if section.settings.description != blank %}<div class="cantinflas-promo__text cantinflas-promo__description rte">{{ section.settings.description }}</div>{% endif %}
+      {% if promo_product != blank and promo_product.available and promo_product.requires_selling_plan == false and section.settings.buy_label != blank %}
+        {% form 'product', promo_product, id: product_form_id, return_to: '/checkout' %}
+          {% if promo_product.has_only_default_variant %}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+          {% else %}
+            <label class="cantinflas-promo__variant" for="PromoVariant-{{ section.id }}">
+              {{ section.settings.variant_label | escape }}
+              <select id="PromoVariant-{{ section.id }}" name="id" required>
+                {% for option_variant in promo_product.variants %}
+                  <option value="{{ option_variant.id }}"{% if option_variant.id == variant.id %} selected{% endif %}{% unless option_variant.available %} disabled{% endunless %}>{{ option_variant.title | escape }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          {% endif %}
+          <div class="cantinflas-promo__actions">
+            <button type="submit" class="cantinflas-promo__buy">{{ section.settings.buy_label | escape }}</button>
+            {% if details_url != blank and section.settings.discover_label != blank %}<a class="cantinflas-promo__discover" href="{{ details_url }}">{{ section.settings.discover_label | escape }}</a>{% endif %}
+          </div>
+        {% endform %}
+      {% else %}
+        <div class="cantinflas-promo__actions">
+          {% if section.settings.buy_label != blank %}<button type="button" class="cantinflas-promo__buy" disabled>{{ section.settings.buy_label | escape }}</button>{% endif %}
+          {% if details_url != blank and section.settings.discover_label != blank %}
+            <a class="cantinflas-promo__discover" href="{{ details_url }}">{{ section.settings.discover_label | escape }}</a>
+          {% elsif section.settings.discover_label != blank %}
+            <button type="button" class="cantinflas-promo__discover" disabled>{{ section.settings.discover_label | escape }}</button>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="cantinflas-promo__media">
+      {% if section.settings.video != blank %}
+        {%- assign poster = section.settings.media_image | default: section.settings.video.preview_image -%}
+        {%- assign poster_url = poster | image_url: width: 1200 -%}
+        {{ section.settings.video | video_tag: controls: true, playsinline: true, preload: 'none', poster: poster_url }}
+      {% elsif section.settings.media_image != blank %}
+        {{ section.settings.media_image | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1440', sizes: '(min-width: 900px) 50vw, 100vw' }}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'cantinflas-promo__placeholder' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .cantinflas-promo { background: var(--promo-background); padding: clamp(2.4rem, 3.5vw, 6.8rem) 0; }
+  .cantinflas-promo__intro { width: min(90%, 150rem); margin: 0 auto clamp(2.4rem, 4.1vw, 8rem); }
+  .cantinflas-promo__text { margin: 0; font-size: var(--promo-mobile); line-height: 1.22; text-align: var(--promo-align); color: var(--promo-color); }
+  .cantinflas-promo__title { --promo-color: var(--promo-title-color); --promo-align: var(--promo-title-align); --promo-mobile: var(--promo-title-mobile); --promo-desktop: var(--promo-title-desktop); line-height: 1.05; }
+  .cantinflas-promo__title span { color: var(--promo-accent); }
+  .cantinflas-promo__kicker { --promo-color: var(--promo-kicker-color); --promo-align: var(--promo-kicker-align); --promo-mobile: var(--promo-kicker-mobile); --promo-desktop: var(--promo-kicker-desktop); font-family: var(--font-headline); font-weight: 700; margin-top: clamp(1.2rem, 2.7vw, 5.2rem); }
+  .cantinflas-promo__intro-text { --promo-color: var(--promo-intro-color); --promo-align: var(--promo-intro-align); --promo-mobile: var(--promo-intro-mobile); --promo-desktop: var(--promo-intro-desktop); margin-top: 1.5rem; }
+  .cantinflas-promo__product-title { --promo-color: var(--promo-product_title-color); --promo-align: var(--promo-product_title-align); --promo-mobile: var(--promo-product_title-mobile); --promo-desktop: var(--promo-product_title-desktop); margin-top: 1.6rem; }
+  .cantinflas-promo__tagline { --promo-color: var(--promo-tagline-color); --promo-align: var(--promo-tagline-align); --promo-mobile: var(--promo-tagline-mobile); --promo-desktop: var(--promo-tagline-desktop); font-style: italic; font-weight: 700; margin-top: 1.1rem; }
+  .cantinflas-promo__description { --promo-color: var(--promo-description-color); --promo-align: var(--promo-description-align); --promo-mobile: var(--promo-description-mobile); --promo-desktop: var(--promo-description-desktop); margin-top: .7rem; }
+  .cantinflas-promo__text.rte p { margin: 0; font-size: inherit; color: inherit; }
+  .cantinflas-promo__grid { display: grid; gap: 2rem; }
+  .cantinflas-promo__product { width: min(86%, 70rem); margin: auto; }
+  .cantinflas-promo__product-image { height: clamp(17rem, 32vw, 63rem); }
+  .cantinflas-promo__product-image :is(img, svg) { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .cantinflas-promo__media { aspect-ratio: 900 / 1000; background: #f4ede1; overflow: hidden; }
+  .cantinflas-promo__media :is(img, video, svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-promo__variant { display: block; text-align: var(--promo-actions-align); margin-top: 1rem; }
+  .cantinflas-promo__variant select { max-width: 100%; font: inherit; }
+  .cantinflas-promo__actions { text-align: var(--promo-actions-align); margin-top: clamp(1rem, 1.8vw, 3.4rem); }
+  .cantinflas-promo__actions :is(button, a) { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: min(100%, 16rem); margin: .3rem; border: 0; border-radius: 999px; padding: .7rem 1.2rem; font: inherit; font-weight: 600; text-decoration: none; }
+  .cantinflas-promo__actions button:disabled { cursor: default; }
+  .cantinflas-promo__buy { background: var(--promo-buy); color: var(--promo-buy-text); }
+  .cantinflas-promo__discover { background: var(--promo-discover); color: var(--promo-discover-text); }
+  @media (min-width: 900px) {
+    .cantinflas-promo__grid { grid-template-columns: minmax(0, 49fr) minmax(0, 51fr); gap: 0; }
+    .cantinflas-promo__text { font-size: min(var(--promo-desktop), calc(var(--promo-desktop) * .65 + 2.7vw)); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Promoción de producto",
+  "settings": [
+    {"type": "color", "id": "buy_text", "label": "Texto de Comprar ahora"},
+    {"type": "color", "id": "discover_text", "label": "Texto de Descubrir"},
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Primera parte del título",
+      "default": "Tequila"
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Segunda parte del título",
+      "default": "Cantinflas"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color de la segunda parte",
+      "default": "#c22921"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Bajada",
+      "default": "Hay historias que se cuentan. Y otras que se coleccionan."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introducción",
+      "default": "<p>Una botella inspirada en una leyenda mexicana.<br>Diseñada para celebrar su historia y conservar un pedacito de su legado.</p>"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Producto"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Imagen alternativa del producto"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Nombre visible",
+      "default": "Tequila Cantinflas Blanco"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Lema",
+      "default": "Un legado que se brinda."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Descripción",
+      "default": "<p>Un tequila elaborado con 100% agave azul Weber, inspirado en el legado de uno de los personajes más queridos de México.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "media_image",
+      "label": "Imagen o portada del vídeo"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo lateral"
+    },
+    {
+      "type": "text",
+      "id": "variant_label",
+      "label": "Etiqueta del selector",
+      "default": "Presentación"
+    },
+    {
+      "type": "text",
+      "id": "buy_label",
+      "label": "Botón de compra",
+      "default": "Comprar ahora"
+    },
+    {
+      "type": "text",
+      "id": "discover_label",
+      "label": "Botón de información",
+      "default": "Descubrir"
+    },
+    {
+      "type": "url",
+      "id": "discover_link",
+      "label": "Destino alternativo de Descubrir"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "buy_color",
+      "label": "Fondo de Comprar ahora",
+      "default": "#c22921"
+    },
+    {
+      "type": "color",
+      "id": "discover_color",
+      "label": "Fondo de Descubrir",
+      "default": "#36845d"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Texto de botones",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "button_align",
+      "label": "Alineación de botones",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color · título",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "Alineación · título",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Tamaño escritorio · título",
+      "min": 13,
+      "max": 191,
+      "step": 2,
+      "default": 139,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "title_mobile",
+      "label": "Tamaño móvil · título",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 44,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "kicker_color",
+      "label": "Color · bajada",
+      "default": "#36845d"
+    },
+    {
+      "type": "select",
+      "id": "kicker_align",
+      "label": "Alineación · bajada",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "kicker_size",
+      "label": "Tamaño escritorio · bajada",
+      "min": 12,
+      "max": 192,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "kicker_mobile",
+      "label": "Tamaño móvil · bajada",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Color · introducción",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "intro_align",
+      "label": "Alineación · introducción",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "intro_size",
+      "label": "Tamaño escritorio · introducción",
+      "min": 12,
+      "max": 192,
+      "step": 2,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "intro_mobile",
+      "label": "Tamaño móvil · introducción",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Color · nombre",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "product_title_align",
+      "label": "Alineación · nombre",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "label": "Tamaño escritorio · nombre",
+      "min": 12,
+      "max": 192,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_title_mobile",
+      "label": "Tamaño móvil · nombre",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 22,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Color · lema",
+      "default": "#c22921"
+    },
+    {
+      "type": "select",
+      "id": "tagline_align",
+      "label": "Alineación · lema",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "label": "Tamaño escritorio · lema",
+      "min": 12,
+      "max": 192,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "tagline_mobile",
+      "label": "Tamaño móvil · lema",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color · descripción",
+      "default": "#252525"
+    },
+    {
+      "type": "select",
+      "id": "description_align",
+      "label": "Alineación · descripción",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Tamaño escritorio · descripción",
+      "min": 12,
+      "max": 192,
+      "step": 2,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_mobile",
+      "label": "Tamaño móvil · descripción",
+      "min": 12,
+      "max": 108,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promoción de producto"
+    }
+  ]
+}
+{% endschema %}

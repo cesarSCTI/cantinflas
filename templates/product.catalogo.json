@@ -263,7 +263,11 @@
         "text_color": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 4,
-        "margin-bottom": 28
+        "margin-bottom": 28,
+        "xd_text_controls": true,
+        "xd_heading_color": "#252525",
+        "xd_price_color": "#2b3d8f",
+        "xd_body_color": "#252525"
       }
     },
     "recommendations": {
@@ -285,7 +289,11 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 0,
-        "margin-bottom": 60
+        "margin-bottom": 60,
+        "xd_text_controls": true,
+        "xd_heading_align": "center",
+        "xd_heading_color": "#c22921",
+        "xd_cards_align": "center"
       }
     }
   },

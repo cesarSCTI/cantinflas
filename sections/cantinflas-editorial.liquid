@@ -1,29 +1,74 @@
 <section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}"
-  style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }};">
+  style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
   <div class="cantinflas-editorial__inner">
     {% if section.settings.heading != blank %}
-      <h2>{{ section.settings.heading | escape }}</h2>
+      <h2 class="cantinflas-editorial__heading">{{ section.settings.heading | escape }}</h2>
     {% endif %}
     {% if section.settings.intro != blank %}
-      <div class="rte">{{ section.settings.intro }}</div>
+      <div class="cantinflas-editorial__intro rte">{{ section.settings.intro }}</div>
+    {% endif %}
+    {% if section.settings.show_focus or section.settings.focus_image != blank %}
+      <div class="cantinflas-editorial__focus">
+        {% if section.settings.focus_image != blank %}
+          {{ section.settings.focus_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '480, 720, 1080, 1600' }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'cantinflas-editorial__placeholder' }}
+        {% endif %}
+      </div>
     {% endif %}
     {% if section.blocks.size > 0 %}
       <div class="cantinflas-editorial__items">
         {% for block in section.blocks %}
-          <article class="cantinflas-editorial__item" {{ block.shopify_attributes }}>
-            {% if block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 45vw, 100vw' }}
-            {% elsif block.settings.image_asset != blank %}
-              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.image_alt | escape }}" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}" loading="lazy">
-            {% endif %}
-            {% if block.settings.heading != blank or block.settings.text != blank or block.settings.link != blank %}
-              <div class="cantinflas-editorial__copy">
-                {% if block.settings.heading != blank %}<h3>{{ block.settings.heading | escape }}</h3>{% endif %}
-                {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
-                {% if block.settings.link != blank and block.settings.label != blank %}
-                  <a class="cantinflas-editorial__link" href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
+          {% assign card_url = block.settings.link | default: block.settings.product.url %}
+          {% assign card_title = block.settings.heading | default: block.settings.product.title %}
+          {% assign card_image = block.settings.image | default: block.settings.product.featured_image %}
+          <article class="cantinflas-editorial__item" {{ block.shopify_attributes }} style="
+            --ce-card: {{ block.settings.card_color | default: 'transparent' }};
+            --ce-card-title: {{ block.settings.title_color | default: section.settings.accent }};
+            --ce-card-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
+            --ce-link: {{ block.settings.button_color | default: section.settings.text_color }};
+            --ce-title-align: {{ block.settings.title_align }};
+            --ce-copy-align: {{ block.settings.text_align }};
+            --ce-link-align: {{ block.settings.button_align }};
+            --ce-marker-x: {{ block.settings.marker_x }}%;
+            --ce-marker-y: {{ block.settings.marker_y }}%;
+          ">
+            {% unless block.settings.hide_media %}
+              <div class="cantinflas-editorial__media">
+                {% if block.settings.video != blank %}
+                  {% assign poster = block.settings.image | default: block.settings.video.preview_image %}
+                  {% assign poster_url = poster | image_url: width: 1200 %}
+                  {{ block.settings.video | video_tag: controls: true, preload: 'none', playsinline: true, poster: poster_url }}
+                {% elsif card_image != blank %}
+                  {{ card_image | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 45vw, 100vw' }}
+                {% elsif block.settings.image_asset != blank %}
+                  <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.image_alt | escape }}" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}" loading="lazy">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'cantinflas-editorial__placeholder' }}
                 {% endif %}
               </div>
+            {% endunless %}
+            {% if card_title != blank or block.settings.text != blank or block.settings.label != blank %}
+              {% if section.settings.layout == 'hotspots' and block.settings.text != blank %}
+                <details class="cantinflas-editorial__copy">
+                  <summary>{{ card_title | escape }}</summary>
+                  <div class="rte">{{ block.settings.text }}</div>
+                </details>
+              {% else %}
+                <div class="cantinflas-editorial__copy">
+                  {% if card_title != blank %}<h3>{{ card_title | escape }}</h3>{% endif %}
+                  {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
+                  {% if block.settings.label != blank %}
+                    <div class="cantinflas-editorial__action">
+                      {% if card_url != blank %}
+                        <a class="cantinflas-editorial__link" href="{{ card_url }}">{{ block.settings.label | escape }}</a>
+                      {% elsif request.design_mode %}
+                        <button class="cantinflas-editorial__link" type="button" disabled>{{ block.settings.label | escape }}</button>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
             {% endif %}
           </article>
         {% endfor %}
@@ -36,8 +81,8 @@
   .cantinflas-editorial { background: var(--ce-background); color: var(--ce-text); padding: clamp(3rem, 5vw, 9rem) 0; }
   .cantinflas-editorial__inner { width: min(86%, 1640px); margin-inline: auto; }
   .cantinflas-editorial h2, .cantinflas-editorial h3 { color: var(--ce-accent); line-height: 1.08; }
-  .cantinflas-editorial h2 { font-size: clamp(2.8rem, 4vw, 6rem); margin: 0 0 1.6rem; }
-  .cantinflas-editorial h3 { font-size: clamp(2rem, 2.2vw, 3.8rem); margin: 0 0 1rem; }
+  .cantinflas-editorial h2 { text-align: var(--ce-head-align); font-size: var(--ce-mobile); margin: 0 0 1.6rem; }
+  .cantinflas-editorial h3 { color: var(--ce-card-title); text-align: var(--ce-title-align); font-size: clamp(2rem, 2.2vw, 3.8rem); margin: 0 0 1rem; }
   .cantinflas-editorial__items { display: grid; gap: clamp(2rem, 4vw, 7rem); margin-top: 2.4rem; }
   .cantinflas-editorial__item img { display: block; width: 100%; height: auto; }
   .cantinflas-editorial__item img + .cantinflas-editorial__copy { margin-top: 1.6rem; }
@@ -48,9 +93,81 @@
   @media (min-width: 900px) {
     .cantinflas-editorial--cards .cantinflas-editorial__items { grid-template-columns: repeat(auto-fit, minmax(min(100%, 27rem), 1fr)); }
     .cantinflas-editorial--alternating .cantinflas-editorial__item { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 5vw; }
-    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) img { grid-column: 2; grid-row: 1; }
+    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__media { grid-column: 2; grid-row: 1; }
     .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
     .cantinflas-editorial--alternating .cantinflas-editorial__copy:only-child { grid-column: 1 / -1; }
+  }
+
+  .cantinflas-editorial__intro { color: var(--ce-intro); text-align: var(--ce-intro-align); }
+  .cantinflas-editorial__item { background: var(--ce-card); min-width: 0; }
+  .cantinflas-editorial__copy { color: var(--ce-card-copy); text-align: var(--ce-copy-align); }
+  .cantinflas-editorial__copy summary { cursor: pointer; color: var(--ce-card-title); text-align: var(--ce-title-align); }
+  .cantinflas-editorial__copy p, .cantinflas-editorial__intro p { color: inherit; }
+  .cantinflas-editorial__action { text-align: var(--ce-link-align); }
+  .cantinflas-editorial__action a { color: var(--ce-link); }
+  .cantinflas-editorial__media :is(svg, video), .cantinflas-editorial__focus :is(img, svg) { display: block; width: 100%; height: auto; }
+  .cantinflas-editorial__placeholder { aspect-ratio: 4 / 3; background: #f4ede1; }
+  .cantinflas-editorial__focus { margin: 2.6rem auto; width: min(100%, 108rem); }
+  .cantinflas-editorial--orbit .cantinflas-editorial__focus { width: min(80%, 36rem); }
+  .cantinflas-editorial--rail .cantinflas-editorial__items { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .cantinflas-editorial--rail article { flex: 0 0 clamp(19rem, 32vw, 39rem); scroll-snap-align: start; }
+  @media (min-width: 900px) {
+    .cantinflas-editorial h2 { font-size: var(--ce-desktop); }
+    .cantinflas-editorial--duo .cantinflas-editorial__item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 4vw; align-items: center; }
+    .cantinflas-editorial--collage .cantinflas-editorial__items { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2vw; align-items: center; }
+    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__media { transform: rotate(3deg); }
+    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(odd) .cantinflas-editorial__media { transform: rotate(-3deg); }
+    .cantinflas-editorial--orbit .cantinflas-editorial__inner, .cantinflas-editorial--hotspots .cantinflas-editorial__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; column-gap: 4rem; }
+    .cantinflas-editorial--orbit :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro), .cantinflas-editorial--hotspots :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro) { grid-column: 1 / -1; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__items { grid-template-columns: repeat(2,minmax(0, 1fr)); }
+  }
+
+
+  .cantinflas-editorial--feature .cantinflas-editorial__media :is(img,video,svg) { aspect-ratio: 16 / 8; object-fit: cover; }
+  @media (min-width: 900px) {
+    .cantinflas-editorial--duo .cantinflas-editorial__inner:has(> .cantinflas-editorial__focus) {
+      display: grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,4fr);
+      column-gap: 4vw;
+      align-items: center;
+    }
+    .cantinflas-editorial--duo :is(.cantinflas-editorial__heading,.cantinflas-editorial__intro) { grid-column: 1 / -1; }
+    .cantinflas-editorial--duo .cantinflas-editorial__item .cantinflas-editorial__media { grid-column: 2; grid-row: 1; }
+    .cantinflas-editorial--duo .cantinflas-editorial__item .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
+    .cantinflas-editorial--collage .cantinflas-editorial__inner {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 2vw;
+      row-gap: 2rem;
+      align-items: center;
+    }
+    .cantinflas-editorial--collage .cantinflas-editorial__items { display: contents; }
+    .cantinflas-editorial--collage .cantinflas-editorial__heading { grid-column: 2 / 4; grid-row: 2; align-self: end; }
+    .cantinflas-editorial--collage .cantinflas-editorial__intro { grid-column: 2 / 4; grid-row: 3; align-self: start; }
+    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(-n+4) { grid-row: 1; }
+    .cantinflas-editorial--collage .cantinflas-editorial__item:nth-child(n+5) { grid-row: 4; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__inner { grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); }
+    .cantinflas-editorial--orbit .cantinflas-editorial__focus { grid-area: 3 / 2; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__items { display: contents; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__item:nth-child(odd) { grid-column: 1; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__item:nth-child(even) { grid-column: 3; }
+    .cantinflas-editorial--orbit .cantinflas-editorial__item:nth-child(-n+2) { grid-row: 3; }
+    .cantinflas-editorial--hotspots .cantinflas-editorial__inner:has(> .cantinflas-editorial__focus) { display: block; position: relative; }
+    .cantinflas-editorial--hotspots .cantinflas-editorial__focus { position: relative; }
+    .cantinflas-editorial--hotspots .cantinflas-editorial__items {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+    .cantinflas-editorial--hotspots .cantinflas-editorial__item {
+      position: absolute;
+      inset-block-start: var(--ce-marker-y);
+      inset-inline-start: var(--ce-marker-x);
+      max-width: min(28rem, 30%);
+      pointer-events: auto;
+    }
+    .cantinflas-editorial--hotspots details { background: var(--ce-background); padding: .75rem; box-shadow: 0 .2rem .7rem #0002; }
   }
 {% endstylesheet %}
 
@@ -81,6 +198,30 @@
         {
           "value": "cards",
           "label": "Tarjetas"
+        },
+        {
+          "value": "duo",
+          "label": "Fotos a ambos lados"
+        },
+        {
+          "value": "collage",
+          "label": "Collage con texto central"
+        },
+        {
+          "value": "orbit",
+          "label": "Imagen central y cuatro llamadas"
+        },
+        {
+          "value": "hotspots",
+          "label": "Imagen y marcadores"
+        },
+        {
+          "value": "feature",
+          "label": "Imagen destacada"
+        },
+        {
+          "value": "rail",
+          "label": "Tarjetas horizontales"
         }
       ]
     },
@@ -101,6 +242,80 @@
       "id": "accent",
       "label": "Títulos",
       "default": "#242424"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intro_align",
+      "label": "Alineación de la introducción",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Color de la introducción"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Título escritorio",
+      "min": 24,
+      "max": 124,
+      "step": 2,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "heading_mobile",
+      "label": "Título móvil",
+      "min": 18,
+      "max": 72,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "image_picker",
+      "id": "focus_image",
+      "label": "Imagen central o lateral"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_focus",
+      "label": "Mostrar espacio para imagen destacada",
+      "default": false
     }
   ],
   "blocks": [
@@ -154,6 +369,122 @@
           "id": "image_height",
           "label": "Alto del archivo",
           "default": 1080
+        },
+        {
+          "type": "select",
+          "id": "title_align",
+          "label": "Alineación del título",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Alineación del texto",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_align",
+          "label": "Alineación del enlace",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del título"
+        },
+        {
+          "type": "color",
+          "id": "copy_color",
+          "label": "Color del texto"
+        },
+        {
+          "type": "color",
+          "id": "card_color",
+          "label": "Fondo de tarjeta"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Color del enlace"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_media",
+          "label": "Ocultar espacio de imagen",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "marker_x",
+          "label": "Posición horizontal del marcador",
+          "min": 0,
+          "max": 80,
+          "step": 1,
+          "default": 48,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "marker_y",
+          "label": "Posición vertical del marcador",
+          "min": 10,
+          "max": 95,
+          "step": 1,
+          "default": 64,
+          "unit": "%"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto vinculado"
         }
       ]
     }

@@ -1,13 +1,14 @@
 <section class="cantinflas-details"
-  style="--cd-background: {{ section.settings.background }}; --cd-text: {{ section.settings.text_color }};">
+  style="--cd-background: {{ section.settings.background }}; --cd-text: {{ section.settings.text_color }}; --cd-title: {{ section.settings.heading_color | default: section.settings.text_color }}; --cd-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --cd-head-align: {{ section.settings.heading_align }}; --cd-intro-align: {{ section.settings.intro_align }};">
   <div class="cantinflas-details__inner">
     {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
-    {% if section.settings.intro != blank %}<div class="rte">{{ section.settings.intro }}</div>{% endif %}
-    <div class="cantinflas-details__layout">
+    {% if section.settings.intro != blank %}<div class="cantinflas-details__intro rte">{{ section.settings.intro }}</div>{% endif %}
+    <div class="cantinflas-details__layout cantinflas-details__layout--{{ section.settings.image_side }}">
       <div>
         {% for block in section.blocks %}
+          {% capture row_style %}--cd-row-title: {{ block.settings.heading_color | default: section.settings.text_color }}; --cd-row-text: {{ block.settings.body_color | default: section.settings.text_color }}; --cd-row-head-align: {{ block.settings.heading_align }}; --cd-row-text-align: {{ block.settings.text_align }};{% endcapture %}
           {% if section.settings.presentation == 'steps' and block.settings.text != blank or section.settings.presentation == 'steps' and block.settings.image != blank %}
-            <details class="cantinflas-details__row" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+            <details class="cantinflas-details__row" style="{{ row_style }}" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
               <summary>{{ block.settings.heading | escape }}</summary>
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 1080 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080' }}
@@ -15,7 +16,7 @@
               <div class="rte">{{ block.settings.text }}</div>
             </details>
           {% else %}
-            <div class="cantinflas-details__row" {{ block.shopify_attributes }}>
+            <div class="cantinflas-details__row" style="{{ row_style }}" {{ block.shopify_attributes }}>
               <h3>{{ block.settings.heading | escape }}</h3>
               <div class="rte">{{ block.settings.text }}</div>
             </div>
@@ -24,6 +25,8 @@
       </div>
       {% if section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1080 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080', sizes: '(min-width: 900px) 40vw, 100vw' }}
+      {% elsif section.settings.show_image %}
+        {{ 'image' | placeholder_svg_tag: 'cantinflas-details__placeholder' }}
       {% endif %}
     </div>
   </div>
@@ -39,7 +42,18 @@
   .cantinflas-details__row summary { cursor: pointer; font-weight: 700; }
   .cantinflas-details__layout img { width: 100%; height: auto; }
   @media (min-width: 900px) {
-    .cantinflas-details__layout:has(> img) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cantinflas-details__layout:has(> :is(img, svg)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .cantinflas-details__inner > h2 { color: var(--cd-title); text-align: var(--cd-head-align); }
+  .cantinflas-details__intro { color: var(--cd-intro); text-align: var(--cd-intro-align); }
+  .cantinflas-details__row :is(summary,h3) { color: var(--cd-row-title); text-align: var(--cd-row-head-align); }
+  .cantinflas-details__row .rte { color: var(--cd-row-text); text-align: var(--cd-row-text-align); }
+  .cantinflas-details :is(.rte p,.rte li) { color: inherit; }
+  .cantinflas-details__placeholder { width: 100%; aspect-ratio: 4 / 3; background: #f4ede1; }
+  @media (min-width: 900px) {
+    .cantinflas-details__layout--left > :is(img, svg) { grid-row: 1; grid-column: 1; }
+    .cantinflas-details__layout--left:has(> :is(img, svg)) > div { grid-row: 1; grid-column: 2; }
   }
 {% endstylesheet %}
 
@@ -89,6 +103,78 @@
       "id": "text_color",
       "label": "Texto",
       "default": "#242424"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Alineación del título",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intro_align",
+      "label": "Alineación de la introducción",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color de título"
+    },
+    {
+      "type": "color",
+      "id": "intro_color",
+      "label": "Color de introducción"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Mostrar imagen lateral",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Ubicación del medio",
+      "default": "right",
+      "options": [
+        {
+          "value": "left",
+          "label": "Izquierda"
+        },
+        {
+          "value": "right",
+          "label": "Derecha"
+        }
+      ]
     }
   ],
   "blocks": [
@@ -110,6 +196,56 @@
           "type": "image_picker",
           "id": "image",
           "label": "Imagen de la etapa"
+        },
+        {
+          "type": "select",
+          "id": "heading_align",
+          "label": "Alineación del título",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Alineación del texto",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Color del título"
+        },
+        {
+          "type": "color",
+          "id": "body_color",
+          "label": "Color del texto"
         }
       ]
     }

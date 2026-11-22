@@ -3,7 +3,10 @@
     "heading": {
       "type": "rich-text",
       "settings": {
-        "desktop_text_horizontal_position": "center"
+        "desktop_text_horizontal_position": "center",
+        "xd_heading_color": "#c22921",
+        "xd_heading_align": "center",
+        "xd_body_align": "center"
       },
       "blocks": {
         "piece1": {
@@ -50,7 +53,10 @@
         "enable_filtering": false,
         "filter_position": "drawer",
         "margin-top": 32,
-        "margin-bottom": 0
+        "margin-bottom": 0,
+        "xd_text_controls": true,
+        "xd_cards_align": "center",
+        "xd_cards_color": "#252525"
       }
     },
     "benefits": {
@@ -61,8 +67,8 @@
           "settings": {
             "desktop_image": "shopify://shop_images/icono-envios.png",
             "select_icon": "bag",
-            "heading": "Envíos",
-            "text": "<p>Rápidos y a tiempo</p>",
+            "heading": "Atención personalizada",
+            "text": "Expertos te ayudaran",
             "link": ""
           }
         },
@@ -71,8 +77,8 @@
           "settings": {
             "desktop_image": "shopify://shop_images/icono-contamos_con_garantia.png",
             "select_icon": "bag",
-            "heading": "Contamos con garantía",
-            "text": "<p>Nuestra promesa para tí</p>",
+            "heading": "Envíos",
+            "text": "Rápidos y a tiempo",
             "link": ""
           }
         },
@@ -81,8 +87,8 @@
           "settings": {
             "desktop_image": "shopify://shop_images/icono-pago_seguro.png",
             "select_icon": "bag",
-            "heading": "Pago seguro",
-            "text": "<p>Tus datos protegidos</p>",
+            "heading": "Contamos con garantía",
+            "text": "Nuestra promesa para tí",
             "link": ""
           }
         },
@@ -91,8 +97,8 @@
           "settings": {
             "desktop_image": "shopify://shop_images/icono-atencion_personalizada.png",
             "select_icon": "bag",
-            "heading": "Atención personalizada",
-            "text": "<p>Expertos te ayudaran</p>",
+            "heading": "Pago seguro",
+            "text": "Tus datos protegidos",
             "link": ""
           }
         }
@@ -120,7 +126,10 @@
         "color_body_text": "#363636",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 40,
-        "margin-bottom": 40
+        "margin-bottom": 40,
+        "xd_text_controls": true,
+        "xd_heading_align": "left",
+        "xd_body_align": "left"
       }
     }
   },
