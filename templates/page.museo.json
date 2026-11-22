@@ -21,6 +21,7 @@
         "autoplay": true,
         "alignment": "left",
         "background": "#252525",
+        "background_gradient": "",
         "text_color": "#ffffff",
         "overlay": 0,
         "heading_align": "left",
@@ -197,6 +198,7 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "focus_image": "shopify://shop_images/img-Cantinflas-de_las_carpas_al_cine.png",
         "hotspot_full_width": false,
         "hotspot_overlay_copy": false,
         "hotspot_anatomy_image": false,
@@ -339,7 +341,7 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
-        "focus_image": "shopify://shop_images/Captura_de_pantalla_2026-11-22_124648.png",
+        "focus_image": "shopify://shop_images/cantinflas.anatomia.png",
         "hotspot_full_width": true,
         "hotspot_overlay_copy": true,
         "hotspot_anatomy_image": true,
@@ -653,6 +655,9 @@
         "piece1": {
           "type": "image",
           "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
             "heading": "En las películas que todavía se recuerdan.",
             "size_heading": 100,
             "size_heading_mobile": 100,
@@ -666,6 +671,9 @@
         "piece2": {
           "type": "image",
           "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
             "heading": "En las frases que seguimos repitiendo.",
             "size_heading": 100,
             "size_heading_mobile": 100,
@@ -682,6 +690,15 @@
         "piece2"
       ],
       "settings": {
+        "xd_process_design": false,
+        "xd_process_heading": "Método de Producción",
+        "xd_process_heading_color": "#36845d",
+        "xd_process_heading_align": "left",
+        "xd_process_heading_size": 80,
+        "xd_process_heading_mobile": 36,
+        "xd_process_body_size": 22,
+        "xd_process_radius": 16,
+        "xd_process_gradient": "",
         "layout": "image_first",
         "full-width-enabled": false,
         "image_ratio": "adapt",
