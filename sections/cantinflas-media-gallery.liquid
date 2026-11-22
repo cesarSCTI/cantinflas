@@ -1,4 +1,8 @@
-<section class="cantinflas-gallery cantinflas-gallery--{{ section.settings.layout }}" style="
+{% liquid
+  assign desktop_count = section.settings.desktop_count | default: 0
+  assign mobile_count = section.settings.mobile_count | default: 0
+%}
+<section class="cantinflas-gallery cantinflas-gallery--{{ section.settings.layout }}{% if desktop_count > 0 %} cantinflas-gallery--fixed-desktop{% endif %}{% if mobile_count > 0 %} cantinflas-gallery--fixed-mobile{% endif %}" style="
   --cg-bg: {{ section.settings.background }};
   --cg-title: {{ section.settings.heading_color }};
   --cg-copy: {{ section.settings.intro_color }};
@@ -10,6 +14,10 @@
   --cg-height: {{ section.settings.card_height }}px;
   --cg-gap: {{ section.settings.gap }}px;
   --cg-padding: {{ section.settings.padding }}px;
+  --cg-navigation-text: {{ section.settings.navigation_color | default: section.settings.heading_color }};
+  --cg-navigation-bg: {{ section.settings.navigation_background | default: 'transparent' }};
+  {% if desktop_count > 0 %}--cg-desktop-count: {{ desktop_count }};{% endif %}
+  {% if mobile_count > 0 %}--cg-mobile-count: {{ mobile_count }};{% endif %}
 ">
   <header class="cantinflas-gallery__intro">
     {% if section.settings.heading != blank %}<h2 id="GalleryTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{% endif %}
@@ -52,10 +60,12 @@
         {% endfor %}
       </ul>
     </div>
-    <div class="cantinflas-gallery__controls" data-gallery-controls hidden>
-      <button type="button" aria-label="Anterior" data-gallery-prev>‹</button>
-      <button type="button" aria-label="Siguiente" data-gallery-next>›</button>
-    </div>
+    {% if section.settings.show_navigation %}
+      <div class="cantinflas-gallery__controls" data-gallery-controls hidden>
+        <button type="button" aria-label="Anterior" data-gallery-prev>‹</button>
+        <button type="button" aria-label="Siguiente" data-gallery-next>›</button>
+      </div>
+    {% endif %}
   </cantinflas-gallery-track>
 </section>
 
@@ -65,9 +75,18 @@
   .cantinflas-gallery__intro h2 { color: var(--cg-title); text-align: var(--cg-title-align); font-size: var(--cg-title-mobile); margin: 0 0 1rem; }
   .cantinflas-gallery__description { color: var(--cg-copy); text-align: var(--cg-copy-align); }
   .cantinflas-gallery__description p, .cantinflas-gallery figcaption p { color: inherit; }
-  .cantinflas-gallery__track { overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; }
-  .cantinflas-gallery__track ul { display: flex; width: max-content; min-width: 100%; justify-content: center; margin: 0; padding: 2.7rem max(1.25rem, 5vw); box-sizing: border-box; gap: var(--cg-gap); list-style: none; }
-  .cantinflas-gallery__track li { flex: 0 0 min(var(--cg-width), 82vw); width: min(var(--cg-width), 82vw); scroll-snap-align: center; }
+  .cantinflas-gallery__track {
+    --cg-gutter: max(1.25rem, 5vw);
+    --cg-visible: var(--cg-mobile-count, 0);
+    --cg-basis: min(var(--cg-width), 82vw);
+    container-type: inline-size;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--cg-gutter);
+    overscroll-behavior-inline: contain;
+  }
+  .cantinflas-gallery__track ul { display: flex; width: max-content; min-width: 100%; justify-content: center; margin: 0; padding: 2.7rem var(--cg-gutter); box-sizing: border-box; gap: var(--cg-gap); list-style: none; }
+  .cantinflas-gallery__track li { flex: 0 0 var(--cg-basis); width: var(--cg-basis); scroll-snap-align: start; }
   .cantinflas-gallery figure { margin: 0; background: var(--cg-frame); padding: .9rem; box-shadow: 0 0.5rem 1.4rem rgb(0 0 0 / .18); transform: rotate(var(--cg-angle)); transition: transform .22s ease; }
   .cantinflas-gallery figure:focus-within, .cantinflas-gallery figure:hover { transform: rotate(0); }
   .cantinflas-gallery--film figure { box-shadow: none; padding: 0; }
@@ -76,8 +95,19 @@
   .cantinflas-gallery figcaption { color: var(--cg-caption); text-align: var(--cg-caption-align); padding: .8rem .6rem .2rem; }
   .cantinflas-gallery figcaption h3 { color: var(--cg-card-title); text-align: var(--cg-card-align); font-size: 1.1em; margin: 0; }
   .cantinflas-gallery__controls:not([hidden]) { display: flex; justify-content: center; gap: .7rem; }
-  .cantinflas-gallery__controls button { border: 1px solid currentColor; border-radius: 50%; width: 44px; height: 44px; font: inherit; color: var(--cg-title); background: transparent; }
-  @media (min-width: 900px) { .cantinflas-gallery__intro h2 { font-size: var(--cg-title-size); } }
+  .cantinflas-gallery__controls button { border: 1px solid currentColor; border-radius: 50%; width: 44px; height: 44px; font: inherit; color: var(--cg-navigation-text); background: var(--cg-navigation-bg); }
+  @media (max-width: 899px) {
+    .cantinflas-gallery--fixed-mobile .cantinflas-gallery__track li {
+      --cg-basis: calc((100cqw - 2 * var(--cg-gutter) - (var(--cg-visible) - 1) * var(--cg-gap)) / var(--cg-visible));
+    }
+  }
+  @media (min-width: 900px) {
+    .cantinflas-gallery__intro h2 { font-size: var(--cg-title-size); }
+    .cantinflas-gallery__track { --cg-visible: var(--cg-desktop-count, 0); }
+    .cantinflas-gallery--fixed-desktop .cantinflas-gallery__track li {
+      --cg-basis: calc((100cqw - 2 * var(--cg-gutter) - (var(--cg-visible) - 1) * var(--cg-gap)) / var(--cg-visible));
+    }
+  }
   @media (prefers-reduced-motion: reduce) { .cantinflas-gallery figure { transition: none; } }
 {% endstylesheet %}
 
@@ -87,9 +117,13 @@
       connectedCallback() {
         const track = this.querySelector('[data-gallery-track]');
         const controls = this.querySelector('[data-gallery-controls]');
-        if (!track || !controls) return;
+        if (!track) return;
         this.listeners = new AbortController();
         const { signal } = this.listeners;
+        this.addEventListener('shopify:block:select', (event) => {
+          event.target.closest('li')?.scrollIntoView({ block: 'nearest', inline: 'center' });
+        }, { signal });
+        if (!controls) return;
         const update = () => { controls.hidden = track.scrollWidth <= track.clientWidth + 2; };
         const move = (direction) => {
           const motion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -99,9 +133,6 @@
         };
         controls.querySelector('[data-gallery-prev]').addEventListener('click', () => move(-1), { signal });
         controls.querySelector('[data-gallery-next]').addEventListener('click', () => move(1), { signal });
-        this.addEventListener('shopify:block:select', (event) => {
-          event.target.closest('li')?.scrollIntoView({ block: 'nearest', inline: 'center' });
-        }, { signal });
         this.resize = new ResizeObserver(update);
         this.resize.observe(track);
         this.resize.observe(track.querySelector('ul'));
@@ -259,6 +290,42 @@
       "max": 100,
       "step": 2,
       "default": 48
+    },
+    {
+      "type": "range",
+      "id": "desktop_count",
+      "label": "Tarjetas visibles en escritorio",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 0,
+      "info": "0 conserva el ancho de tarjeta y muestra las que quepan."
+    },
+    {
+      "type": "range",
+      "id": "mobile_count",
+      "label": "Tarjetas visibles en móvil",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "default": 0,
+      "info": "0 conserva el ancho de tarjeta y muestra las que quepan."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Mostrar flechas de navegación",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "navigation_color",
+      "label": "Color de las flechas"
+    },
+    {
+      "type": "color",
+      "id": "navigation_background",
+      "label": "Fondo de las flechas"
     }
   ],
   "blocks": [

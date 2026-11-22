@@ -1,0 +1,415 @@
+<cantinflas-world-journey class="cantinflas-journey" {% if section.settings.reveal_images %}data-reveal{% endif %}
+  style="
+    --cj-bg: {{ section.settings.background }};
+    --cj-heading: {{ section.settings.heading_color }};
+    --cj-copy: {{ section.settings.text_color }};
+    --cj-stage-title: {{ section.settings.stage_heading_color }};
+    --cj-watermark: {{ section.settings.watermark_color }};
+  ">
+  <header class="cantinflas-journey__intro">
+    {% if section.settings.heading != blank %}<h2>{{ section.settings.heading | escape }}</h2>{% endif %}
+    {% if section.settings.lead != blank %}<div class="cantinflas-journey__lead rte">{{ section.settings.lead }}</div>{% endif %}
+    {% if section.settings.intro_left != blank or section.settings.intro_right != blank %}
+      <div class="cantinflas-journey__intro-columns">
+        {% if section.settings.intro_left != blank %}<div class="rte">{{ section.settings.intro_left }}</div>{% endif %}
+        {% if section.settings.intro_right != blank %}<div class="rte">{{ section.settings.intro_right }}</div>{% endif %}
+      </div>
+    {% endif %}
+  </header>
+  {% for block in section.blocks %}
+    {% liquid
+      assign photo_side = block.settings.photo_side
+      if photo_side == 'auto'
+        assign remainder = forloop.index0 | modulo: 2
+        if remainder == 0
+          assign photo_side = 'left'
+        else
+          assign photo_side = 'right'
+        endif
+      endif
+      assign watermark = block.settings.watermark | default: block.settings.heading
+      assign photo_alt = block.settings.image_alt | default: block.settings.image.alt
+    %}
+    <article class="cantinflas-journey__stage cantinflas-journey__stage--{{ photo_side }}" {{ block.shopify_attributes }}
+      style="
+        --cj-stage-title: {{ block.settings.title_color | default: section.settings.stage_heading_color }};
+        --cj-stage-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
+        --cj-stage-watermark: {{ block.settings.watermark_color | default: section.settings.watermark_color }};
+        --cj-tilt: {{ block.settings.rotation }}deg;
+        --cj-focal-point: {{ block.settings.image.presentation.focal_point | default: 'center' }};
+      ">
+      {% if watermark != blank %}
+        <div class="cantinflas-journey__watermark" aria-hidden="true">
+          {{ watermark | escape }} <span>·</span> {{ watermark | escape }} <span>·</span> {{ watermark | escape }}
+        </div>
+      {% endif %}
+      <div class="cantinflas-journey__photo" data-journey-photo>
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '280, 480, 760, 1000, 1200', sizes: '(min-width: 1920px) 620px, (min-width: 750px) 33vw, 62vw', alt: photo_alt }}
+        {% elsif block.settings.image_asset != blank and block.settings.show_sample %}
+          <img src="{{ block.settings.image_asset | asset_url }}" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}" alt="{{ photo_alt | escape }}" loading="lazy">
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'cantinflas-journey__placeholder' }}
+        {% endif %}
+      </div>
+      <div class="cantinflas-journey__caption">
+        {% if block.settings.heading != blank %}<h3>{{ block.settings.heading | escape }}</h3>{% endif %}
+        {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
+        {% if block.settings.link != blank and block.settings.label != blank %}
+          <a href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
+        {% endif %}
+      </div>
+    </article>
+  {% endfor %}
+</cantinflas-world-journey>
+
+{% stylesheet %}
+  .cantinflas-journey {
+    display: block;
+    overflow: clip;
+    background: var(--cj-bg);
+    color: var(--cj-copy);
+    padding-block: clamp(2.8rem, 4vw, 7.7rem);
+  }
+  .cantinflas-journey__intro, .cantinflas-journey__stage {
+    width: min(100%, 1920px);
+    box-sizing: border-box;
+    margin-inline: auto;
+  }
+  .cantinflas-journey__intro {
+    padding-inline: 4.5%;
+    margin-bottom: clamp(2rem, 5.3vw, 10.2rem);
+  }
+  .cantinflas-journey .cantinflas-journey__intro h2 {
+    margin: 0 0 .28em;
+    font: 700 clamp(2.8rem, 4.45vw, 8.5rem)/1.04 "baga", sans-serif;
+    color: var(--cj-heading);
+  }
+  .cantinflas-journey__lead { font-weight: 700; font-size: clamp(1.35rem, 1.55vw, 3rem); }
+  .cantinflas-journey__intro-columns {
+    display: grid;
+    gap: 1.3rem clamp(2.5rem, 7vw, 13.4rem);
+    margin-top: clamp(1.3rem, 4vw, 7.6rem);
+    padding-inline: clamp(0rem, 2.4vw, 4.6rem);
+    font-size: clamp(1.25rem, 1.3vw, 2.5rem);
+    line-height: 1.45;
+  }
+  .cantinflas-journey .rte p { color: inherit; font-size: inherit; margin-block: 0 .7em; }
+  .cantinflas-journey__stage {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 1.4rem;
+    padding: 2.5rem 4.5%;
+  }
+  .cantinflas-journey__watermark {
+    position: absolute;
+    z-index: -1;
+    inset-inline-start: 50%;
+    inset-block-start: 52%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    color: var(--cj-stage-watermark);
+    font: 800 clamp(4.6rem, 11.5vw, 22rem)/1 "Montserrat", sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+  .cantinflas-journey__stage--right .cantinflas-journey__watermark {
+    inset-inline-start: 30%;
+  }
+  .cantinflas-journey__photo {
+    --cj-reveal-x: -36px;
+    width: min(62vw, 36rem);
+    transform: rotate(var(--cj-tilt));
+    transform-origin: center;
+    transition: opacity .65s ease-out, transform .78s cubic-bezier(.2,.7,.25,1);
+  }
+  .cantinflas-journey__photo :is(img, svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: var(--cj-focal-point);
+    border-radius: clamp(.5rem, .85vw, 1.6rem);
+  }
+  .cantinflas-journey__placeholder { background: #f4ede1; }
+  .cantinflas-journey__stage--right .cantinflas-journey__photo { --cj-reveal-x: 36px; justify-self: end; }
+  .cantinflas-journey__caption {
+    min-width: 0;
+    width: min(100%, 74rem);
+    color: var(--cj-stage-copy);
+    font-weight: 550;
+    font-size: clamp(1.3rem, 1.39vw, 2.65rem);
+    line-height: 1.4;
+  }
+  .cantinflas-journey .cantinflas-journey__caption h3 {
+    margin: 0 0 .12em;
+    color: var(--cj-stage-title);
+    font: 700 clamp(2.9rem, 6.1vw, 11.7rem)/1.03 "baga", sans-serif;
+    overflow-wrap: anywhere;
+  }
+  .cantinflas-journey__caption a { color: var(--cj-stage-title); text-decoration: underline; }
+  .cantinflas-journey[data-reveal-ready] [data-journey-photo]:not(.is-visible) {
+    opacity: 0;
+    transform: translate(var(--cj-reveal-x), 36px) rotate(var(--cj-tilt));
+  }
+  @media (min-width: 750px) {
+    .cantinflas-journey__intro-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cantinflas-journey__stage {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: clamp(36rem, 48vw, 92rem);
+      padding: 0 4.5%;
+    }
+    .cantinflas-journey__photo { width: min(33vw, 62rem); margin-inline-start: -12%; }
+    .cantinflas-journey__stage--left .cantinflas-journey__caption {
+      justify-self: end;
+      text-align: right;
+    }
+    .cantinflas-journey__stage--right .cantinflas-journey__photo {
+      grid-column: 2;
+      grid-row: 1;
+      margin-inline-start: 0;
+      margin-inline-end: -12%;
+    }
+    .cantinflas-journey__stage--right .cantinflas-journey__caption { grid-column: 1; grid-row: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cantinflas-journey__photo { transition: none; }
+    .cantinflas-journey[data-reveal-ready] [data-journey-photo]:not(.is-visible) {
+      opacity: 1;
+      transform: rotate(var(--cj-tilt));
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cantinflas-world-journey')) {
+    customElements.define('cantinflas-world-journey', class extends HTMLElement {
+      connectedCallback() {
+        if (!this.hasAttribute('data-reveal') ||
+            !('IntersectionObserver' in window) ||
+            matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(({ isIntersecting, target }) => {
+            if (isIntersecting) this.reveal(target);
+          });
+        }, { threshold: 0.12 });
+        this.setAttribute('data-reveal-ready', '');
+        this.querySelectorAll('[data-journey-photo]').forEach((image) => this.observer.observe(image));
+
+        this.listeners = new AbortController();
+        this.addEventListener('shopify:block:select', (event) => {
+          const image = event.target.closest('.cantinflas-journey__stage')?.querySelector('[data-journey-photo]');
+          if (image) this.reveal(image);
+        }, { signal: this.listeners.signal });
+      }
+
+      reveal(image) {
+        image.classList.add('is-visible');
+        this.observer.unobserve(image);
+      }
+
+      disconnectedCallback() {
+        this.observer?.disconnect();
+        this.listeners?.abort();
+        this.removeAttribute('data-reveal-ready');
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "De México para el Mundo",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "De México para el Mundo"
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Texto destacado"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_left",
+      "label": "Introducción izquierda"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_right",
+      "label": "Introducción derecha"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color del encabezado",
+      "default": "#36845d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "stage_heading_color",
+      "label": "Color de los nombres de etapa",
+      "default": "#2b3d8f"
+    },
+    {
+      "type": "color",
+      "id": "watermark_color",
+      "label": "Color del texto de fondo",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "checkbox",
+      "id": "reveal_images",
+      "label": "Animar las imágenes al hacer scroll",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Etapa del recorrido",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Nombre de la etapa"
+        },
+        {
+          "type": "text",
+          "id": "watermark",
+          "label": "Texto grande de fondo"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Descripción"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fotografía"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Texto alternativo"
+        },
+        {
+          "type": "select",
+          "id": "photo_side",
+          "label": "Lado de la fotografía",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Alternado"
+            },
+            {
+              "value": "left",
+              "label": "Izquierda"
+            },
+            {
+              "value": "right",
+              "label": "Derecha"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "rotation",
+          "label": "Inclinación",
+          "min": -15,
+          "max": 15,
+          "step": 1,
+          "default": 0,
+          "unit": "°"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color del nombre"
+        },
+        {
+          "type": "color",
+          "id": "copy_color",
+          "label": "Color de la descripción"
+        },
+        {
+          "type": "color",
+          "id": "watermark_color",
+          "label": "Color del texto de fondo"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto de enlace opcional"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Destino del enlace"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sample",
+          "label": "Usar fotografía de respaldo incluida",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Archivo de respaldo del tema"
+        },
+        {
+          "type": "number",
+          "id": "image_width",
+          "label": "Ancho del archivo de respaldo",
+          "default": 1280
+        },
+        {
+          "type": "number",
+          "id": "image_height",
+          "label": "Alto del archivo de respaldo",
+          "default": 720
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "De México para el Mundo",
+      "blocks": [
+        {
+          "type": "stage"
+        },
+        {
+          "type": "stage"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -191,27 +191,18 @@
       "type": "cantinflas-editorial",
       "blocks": {
         "piece1": {
-          "type": "item",
+          "type": "hotspot",
           "settings": {
             "heading": "Los pantalones",
             "text": "<p>Holgados, sencillos y parte de su estilo.</p>",
             "label": "",
             "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
             "title_color": "",
             "copy_color": "",
             "card_color": "",
             "button_color": "",
-            "hide_media": true,
             "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "marker_y": 64
           }
         }
       },
@@ -327,102 +318,62 @@
       }
     },
     "world": {
-      "type": "cantinflas-editorial",
+      "type": "cantinflas-world-journey",
       "blocks": {
         "piece1": {
-          "type": "item",
+          "type": "stage",
           "settings": {
             "heading": "México",
             "text": "<p>Cantinflas conquistó al público mexicano con su humor y su estilo inconfundible. Su popularidad sentó las bases para que su trabajo llegara a nuevos públicos.</p>",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "image_width": 1280,
+            "image_height": 720,
+            "image_asset": "cantinflas-xd-recorrido-mexico.webp",
+            "image_alt": "Cantinflas con traje de charro",
+            "watermark": "México",
+            "photo_side": "auto",
+            "rotation": -6
           }
         },
         "piece2": {
-          "type": "item",
+          "type": "stage",
           "settings": {
             "heading": "Estados Unidos",
             "text": "<p>Su actuación en La vuelta al mundo en 80 días le valió el Globo de Oro como Mejor Actor de Comedia o Musical.</p>",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "image_width": 2048,
+            "image_height": 2048,
+            "image_asset": "cantinflas-xd-recorrido-estados-unidos.webp",
+            "image_alt": "Cantinflas con el Globo de Oro",
+            "watermark": "Estados Unidos",
+            "photo_side": "auto",
+            "rotation": 6
           }
         },
         "piece3": {
-          "type": "item",
+          "type": "stage",
           "settings": {
             "heading": "Hollywood",
             "text": "<p>Su trayectoria fue reconocida con una estrella en el Paseo de la Fama de Hollywood.</p>",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "image_width": 1440,
+            "image_height": 2290,
+            "image_asset": "cantinflas-xd-recorrido-hollywood.webp",
+            "image_alt": "Cantinflas junto a su estrella en Hollywood",
+            "watermark": "Hollywood",
+            "photo_side": "auto",
+            "rotation": -6
           }
         },
         "piece4": {
-          "type": "item",
+          "type": "stage",
           "settings": {
             "heading": "El Mundo",
             "text": "<p>Su humor y su estilo inconfundible cruzaron fronteras, convirtiéndolo en un referente de la comedia internacional.</p>",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": false,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": ""
+            "image_width": 1728,
+            "image_height": 2304,
+            "image_asset": "cantinflas-xd-recorrido-mundo.webp",
+            "image_alt": "Cantinflas saludando al público",
+            "watermark": "El Mundo",
+            "photo_side": "auto",
+            "rotation": 6
           }
         }
       },
@@ -434,17 +385,15 @@
       ],
       "settings": {
         "heading": "De México para el Mundo",
-        "intro": "<p>Lo que comenzó en las carpas de México terminó dando la vuelta al mundo.</p><p>Cantinflas ya era una de las grandes figuras de la comedia mexicana cuando llegó una oportunidad que cambiaría la dimensión de su carrera. En 1956 protagonizó junto a David Niven La vuelta al mundo en 80 días, interpretando a Passepartout.</p><p>La película fue un fenómeno internacional y llevó a Cantinflas a públicos de distintos países. Su interpretación le valió el Globo de Oro como Mejor Actor de Comedia o Musical en 1957.</p>",
-        "layout": "alternating",
+        "lead": "<p>Lo que comenzó en las carpas de México terminó dando la vuelta al mundo.</p>",
+        "intro_left": "<p>Cantinflas ya era una de las grandes figuras de la comedia mexicana cuando llegó una oportunidad que cambiaría la dimensión de su carrera. En 1956 protagonizó junto a David Niven La vuelta al mundo en 80 días, interpretando a Passepartout.</p>",
+        "intro_right": "<p>La película fue un fenómeno internacional y llevó a Cantinflas a públicos de distintos países. Su interpretación le valió el Globo de Oro como Mejor Actor de Comedia o Musical en 1957.</p>",
         "background": "#ffffff",
         "text_color": "#252525",
-        "accent": "#2b3d8f",
-        "heading_align": "left",
-        "intro_align": "left",
-        "intro_color": "",
-        "heading_size": 60,
-        "heading_mobile": 32,
-        "show_focus": false
+        "heading_color": "#36845d",
+        "stage_heading_color": "#2b3d8f",
+        "watermark_color": "#e8e8e8",
+        "reveal_images": true
       }
     },
     "legacycontext": {
