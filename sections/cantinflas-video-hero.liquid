@@ -1,0 +1,116 @@
+{{ 'section-video.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'video-controls.js' | asset_url }}" defer></script>
+
+<section class="cantinflas-video-hero cantinflas-video-hero--{{ section.settings.alignment }}"
+  style="--cvh-bg: {{ section.settings.background }}; --cvh-fg: {{ section.settings.text_color }}; --cvh-overlay: {{ section.settings.overlay | divided_by: 100.0 }};">
+  <cantinflas-hero-media class="cantinflas-video-hero__media" data-autoplay="{{ section.settings.autoplay }}">
+    {% liquid
+      assign desktop_video = section.settings.video
+      assign mobile_video = section.settings.mobile_video
+      assign active_video = desktop_video | default: mobile_video
+      assign native_autoplay = section.settings.autoplay
+      if desktop_video != blank and mobile_video != blank
+        assign native_autoplay = false
+        assign desktop_class = 'wt-mobile-hidden'
+      endif
+    %}
+    {% if active_video %}
+      <video-controls class="{{ desktop_class }}" data-video-click="false">
+        {% render 'play-pause-button' %}
+        {{ active_video | video_tag: autoplay: native_autoplay, loop: true, muted: true, playsinline: true, controls: false, image_size: '1600x' }}
+      </video-controls>
+      {% if desktop_video != blank and mobile_video != blank %}
+        <video-controls class="wt-desktop-hidden" data-video-click="false">
+          {% render 'play-pause-button' %}
+          {{ mobile_video | video_tag: autoplay: native_autoplay, loop: true, muted: true, playsinline: true, controls: false, image_size: '800x' }}
+        </video-controls>
+      {% endif %}
+    {% elsif section.settings.cover != blank %}
+      {{ section.settings.cover | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '480, 750, 1080, 1600, 1920, 2400', sizes: '100vw' }}
+    {% elsif section.settings.cover_asset != blank %}
+      <img src="{{ section.settings.cover_asset | asset_url }}" alt="" width="{{ section.settings.cover_width }}" height="{{ section.settings.cover_height }}" fetchpriority="high">
+    {% endif %}
+  </cantinflas-hero-media>
+  <div class="cantinflas-video-hero__copy">
+    {% if section.settings.title_image != blank %}
+      <h1>{{ section.settings.title_image | image_url: width: 960 | image_tag: loading: 'eager', widths: '320, 480, 640, 960', alt: section.settings.heading }}</h1>
+    {% else %}
+      <h1>{{ section.settings.heading | escape }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}<p>{{ section.settings.subheading | escape }}</p>{% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .cantinflas-video-hero { position: relative; isolation: isolate; display: grid; align-items: end; min-height: clamp(36rem, 52vw, 102rem); color: var(--cvh-fg); background: var(--cvh-bg); }
+  .cantinflas-video-hero--center { place-items: center; text-align: center; }
+  .cantinflas-video-hero__media, .cantinflas-video-hero__media video-controls { position: absolute; inset: 0; }
+  .cantinflas-video-hero__media > img, .cantinflas-video-hero__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cantinflas-video-hero__media::after { position: absolute; inset: 0; pointer-events: none; background: rgb(0 0 0 / var(--cvh-overlay)); content: ''; }
+  .cantinflas-video-hero--center .cantinflas-video-hero__media > img { object-fit: contain; object-position: center bottom; }
+  .cantinflas-video-hero--contact { align-items: center; text-align: right; }
+  .cantinflas-video-hero--contact .cantinflas-video-hero__media { width: min(45%, 58rem); left: 8%; }
+  .cantinflas-video-hero--contact .cantinflas-video-hero__media > img { object-fit: contain; object-position: center bottom; }
+  .cantinflas-video-hero__copy { position: relative; pointer-events: none; width: min(86%, 1640px); margin: 0 auto; padding: clamp(3rem, 6vw, 10rem) 0; }
+  .cantinflas-video-hero__copy h1 { color: inherit; margin: 0; font-size: clamp(4rem, 8vw, 13rem); line-height: 1; }
+  .cantinflas-video-hero--contact .cantinflas-video-hero__copy h1 { margin-left: auto; max-width: 55%; font-size: clamp(2.8rem, 6vw, 10rem); }
+  .cantinflas-video-hero__copy h1 img { width: min(68vw, 64rem); height: auto; }
+  .cantinflas-video-hero__copy p { margin: 1rem 0 0; font-size: clamp(1.5rem, 1.8vw, 3rem); }
+  .cantinflas-video-hero__media .shoppable-video__control-button { position: absolute; z-index: 1; right: 2rem; bottom: 2rem; }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cantinflas-hero-media')) {
+    customElements.define('cantinflas-hero-media', class extends HTMLElement {
+      connectedCallback() {
+        const videos = this.querySelectorAll('video');
+        if (videos.length !== 2) return;
+
+        this.desktop = matchMedia('(min-width: 1200px)');
+        this.syncVideos = () => {
+          const active = this.desktop.matches ? 0 : 1;
+          videos[1 - active].pause();
+          if (this.dataset.autoplay === 'true') {
+            videos[active].play().catch(() => {
+              // The theme's play button remains available if autoplay is blocked.
+            });
+          }
+        };
+        this.desktop.addEventListener('change', this.syncVideos);
+        this.syncVideos();
+      }
+
+      disconnectedCallback() {
+        this.desktop?.removeEventListener('change', this.syncVideos);
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Hero de vídeo Cantinflas",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título y texto alternativo del logotipo" },
+    { "type": "image_picker", "id": "title_image", "label": "Logotipo sobre el hero" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo" },
+    { "type": "video", "id": "video", "label": "Vídeo de escritorio" },
+    { "type": "video", "id": "mobile_video", "label": "Vídeo móvil opcional" },
+    { "type": "image_picker", "id": "cover", "label": "Imagen cuando no hay vídeo" },
+    { "type": "text", "id": "cover_asset", "label": "Archivo del tema para respaldo" },
+    { "type": "number", "id": "cover_width", "label": "Ancho del archivo", "default": 1920 },
+    { "type": "number", "id": "cover_height", "label": "Alto del archivo", "default": 1080 },
+    { "type": "checkbox", "id": "autoplay", "label": "Reproducción automática sin sonido", "default": true },
+    { "type": "select", "id": "alignment", "label": "Posición del texto", "default": "left", "options": [
+      { "value": "left", "label": "Inferior izquierda" },
+      { "value": "center", "label": "Centro" },
+      { "value": "contact", "label": "Figura izquierda, título derecho" }
+    ] },
+    { "type": "color", "id": "background", "label": "Fondo", "default": "#242424" },
+    { "type": "color", "id": "text_color", "label": "Texto", "default": "#ffffff" },
+    { "type": "range", "id": "overlay", "label": "Oscurecer el fondo", "min": 0, "max": 100, "step": 5, "default": 0, "unit": "%" }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] },
+  "presets": [{ "name": "Hero de vídeo Cantinflas" }]
+}
+{% endschema %}

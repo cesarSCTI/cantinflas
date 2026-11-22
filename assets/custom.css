@@ -1,0 +1,14 @@
+
+
+/* Headings in the Adobe XD redesign use the Baga family from the Adobe Fonts kit. */
+#root.cantinflas-redesign {
+  --font-headline: "baga", sans-serif;
+  --font-headline-style: normal;
+  --font-headline-weight: 700;
+}
+
+#root.cantinflas-redesign :is(h1, h2, h3, h4, h5, h6, .headline__title, .hero__title) {
+  font-family: var(--font-headline);
+  font-style: var(--font-headline-style);
+  font-weight: var(--font-headline-weight);
+}

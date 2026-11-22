@@ -1,1 +1,212 @@
-{"sections":{"parallax_wrR7BD":{"type":"parallax","blocks":{"heading_rtNxib":{"type":"heading","settings":{"heading":"Quiubo <span>CHATO!!<\/span>","disable_on_mobile":false,"size_heading":400,"size_heading_mobile":240}},"text_FPNX9w":{"type":"text","settings":{"text":"<p><\/p><p>Bienvenido a la página oficial de <strong>Mario Moreno “Cantinflas”<\/strong>, un espacio para rendir homenaje al artista más reconocido del cine mexicano. Figura emblemática de la comedia mundial, supo retratar con humor, inteligencia y sensibilidad la vida cotidiana del pueblo, dando voz y dignidad al personaje humilde que lo hizo inolvidable. Su alegría, ingenio y estilo único siguen inspirando generaciones, y hoy su legado permanece vivo a través de iniciativas culturales como su museo.<\/p>","disable_on_mobile":false}},"button_c9jdt9":{"type":"button","settings":{"button_select":"primary","button_label":"Conoce más de Cantinflas","button_link":"shopify:\/\/pages\/cantinflas","disable_on_mobile":false}}},"block_order":["heading_rtNxib","text_FPNX9w","button_c9jdt9"],"custom_css":["h2 {font-family: \"celebrate\" !important;}","h2 span {font-family: \"celebrate\"; color: #d9000d;}"],"settings":{"desktop_text_horizontal_position":"center","rotation":10,"image_1":"shopify:\/\/shop_images\/img-mario_moreno-min.png","button_link1":"","image_2":"shopify:\/\/shop_images\/img-mario_moreno-cantinflas-min.png","button_link2":"","color-body-text":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","margin-top":0,"margin-bottom":0}},"image_banner_zGfxQJ":{"type":"image-banner","disabled":true,"name":"t:sections.image-banner.presets.name","settings":{"heading":"","full-width-enabled":true,"slide_height":"adapt_to_first_image","desktop_fixed_height":320,"mobile_fixed_height":460,"desktop_image":"shopify:\/\/shop_images\/banner-tequila-cantinflas-100porciento-agave-nuevo.png","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"center","mobile_image":"shopify:\/\/shop_images\/banner-tequila-cantinflas-100porciento-agavenuevo-responsivo.png","mobile_text_vertical_position":"center","mobile_text_horizontal_position":"center","color-heading":"rgba(0,0,0,0)","section-color-overlay":"rgba(0,0,0,0)","section-color-overlay-opacity":100,"color-body-text":"rgba(0,0,0,0)","text-container-color":"rgba(0,0,0,0)","color-overlay-opacity":100,"margin-top":20,"margin-bottom":0}},"rich_text_KiU9Bb":{"type":"rich-text","blocks":{"heading_jii7Fg":{"type":"heading","settings":{"heading":"Lleva a casa los productos <span>OFICIALES<\/span>","disable_on_mobile":false,"size_heading":160,"size_heading_mobile":120}},"text_nHDqYG":{"type":"text","settings":{"text":"<p><\/p><p>Brinda con el tequila, disfruta la frescura del agua y relajate con la cerveza que llevan el nombre del gran ícono mexicano <strong>Cantinflas<\/strong>, creados para celebrar su legado con cada sorbo.<\/p>","disable_on_mobile":false}}},"block_order":["heading_jii7Fg","text_nHDqYG"],"disabled":true,"custom_css":["h2 span {font-family: \"celebrate\"; color: #d9000d;}"],"name":"t:sections.rich-text.presets.name","settings":{"section_width":"regular","desktop_text_horizontal_position":"center","color-body-text":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","margin-top":100,"margin-bottom":20}},"1645701451ca57fd3c":{"type":"multicolumn","blocks":{"16457014517af02773-0":{"type":"column","settings":{"heading":"TEQUILA","heading_disable_on_mobile":false,"text":"<p>Tequila Blanco 100% Agave<\/p>","text_disable_on_mobile":false,"button_select":"primary","button_label":"Comprar","button_disable_on_mobile":false,"button_link":"shopify:\/\/products\/tequila-cantinflas-blanco-100-agave","button_link_in_new_window":false,"desktop_image":"shopify:\/\/shop_images\/img-producto-oficial-tequila-cantinflas-nuevo.png"}},"column_m6FKRU":{"type":"column","settings":{"heading":"AGUA","heading_disable_on_mobile":false,"text":"<p>Agua Pura de Manantial<\/p>","text_disable_on_mobile":false,"button_select":"primary","button_label":"Comprar","button_disable_on_mobile":false,"button_link":"","button_link_in_new_window":false,"desktop_image":"shopify:\/\/shop_images\/img-producto-oficial-agua-cantinflas-min.png"}},"column_9LnHtC":{"type":"column","settings":{"heading":"CERVEZA","heading_disable_on_mobile":false,"text":"<p>Cerveza Clara y Obscura<\/p>","text_disable_on_mobile":false,"button_select":"primary","button_label":"Comprar","button_disable_on_mobile":false,"button_link":"","button_link_in_new_window":false,"desktop_image":"shopify:\/\/shop_images\/img-producto-oficial-agua-cantinflas-min.png"}}},"block_order":["16457014517af02773-0","column_m6FKRU","column_9LnHtC"],"disabled":true,"custom_css":["h2 {font-family: \"celebrate\" !important; color: #7b4922;}"],"settings":{"heading":"","swipe_on_mobile":true,"full-width-enabled":false,"image_ratio":"adapt","column_alignment":"center","size_heading":90,"size_heading_mobile":110,"color-body-text":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","margin-top":20,"margin-bottom":60}},"separator_CT4jRp":{"type":"separator","disabled":true,"name":"t:sections.separator.presets.name","settings":{"advanced_heading":false,"heading":"","heading_richtext":"<h2>Separator<\/h2>","size_heading":100,"size_heading_mobile":100,"show-separator-line":true,"full-width-line":false,"color-background":"#dfdfdf","color-body-text":"#dfdfdf","color-section-background":"#ffffff","margin-top":20,"margin-bottom":0}},"164580331540910010":{"type":"features-banner","blocks":{"164580331573ddb00a-1":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/icono-envios.png","select_icon":"bag","heading":"Envíos","text":"<p>Rápidos y a tiempo<\/p>","link":""}},"164580331573ddb00a-2":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/icono-contamos_con_garantia.png","select_icon":"bag","heading":"Contamos con garantía","text":"<p>Nuestra promesa para tí<\/p>","link":""}},"164580331573ddb00a-3":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/icono-pago_seguro.png","select_icon":"bag","heading":"Pago seguro","text":"<p>Tus datos protegidos<\/p>","link":""}},"image_dAh9rq":{"type":"image","settings":{"desktop_image":"shopify:\/\/shop_images\/icono-atencion_personalizada.png","select_icon":"bag","heading":"Atención personalizada","text":"<p>Expertos te ayudarán<\/p>","link":""}}},"block_order":["164580331573ddb00a-1","164580331573ddb00a-2","164580331573ddb00a-3","image_dAh9rq"],"disabled":true,"custom_css":[".wt-keys__title {font-weight: 800; font-size: 17px !important;}"],"settings":{"heading":"","size_heading_mobile":80,"size_heading":70,"icon_width_mobile":52,"icon_width_desktop":64,"icon_layout":"left","columns_desktop":"4","icon_layout_mobile":"grid","color_body_icon":"rgba(0,0,0,0)","color_background_icon":"rgba(0,0,0,0)","color_body_text":"#363636","background_color":"rgba(0,0,0,0)","margin-top":40,"margin-bottom":40}},"image_with_text_fxAPFW":{"type":"image-with-text","blocks":{"heading_wcNJHk":{"type":"heading","settings":{"heading":"Visita el museo y revivela magia de <span>CANTINFLAS!<\/span>","disable_on_mobile":false,"size_heading":100,"size_heading_mobile":100}},"text_Ahb6Q7":{"type":"text","settings":{"text":"<p><\/p><p>Descubre la historia, el legado y la genialidad de <strong>Mario Moreno “Cantinflas”<\/strong> en su museo oficial, un espacio dedicado a preservar la memoria del gran ícono del cine mexicano. Vive de cerca su trayectoria, sus momentos más emblemáticos y la huella que dejó en la cultura mundial.<\/p><p><\/p>","text_style":"body","disable_on_mobile":false}},"button_t6fFwH":{"type":"button","settings":{"button_select":"primary","button_label":"Ir al sitio oficial","button_link":"https:\/\/museocantinflas.org\/","disable_on_mobile":false}}},"block_order":["heading_wcNJHk","text_Ahb6Q7","button_t6fFwH"],"custom_css":["h2 span {font-family: \"celebrate\"; color: #d9000d;}",".hero__title {font-size: 40px !important;}"],"settings":{"title":"","layout":"image_first","desktop-percentage-image-width":50,"full-width-enabled":true,"slide_height":"adapt_to_first_image","desktop_fixed_height":320,"mobile_fixed_height":460,"section-color-body-text":"rgba(0,0,0,0)","section-color-overlay":"rgba(0,0,0,0)","section-color-overlay-opacity":100,"color-body-text":"#363636","color-overlay":"#f5f5f5","color-overlay-opacity":100,"desktop_image":"shopify:\/\/shop_images\/img-museo-cantinflas-nuevo.png","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"left","mobile_image":"shopify:\/\/shop_images\/img-museo-cantinflas-nuevo-responsivo.png","mobile_text_horizontal_position":"left","margin-top":0,"margin-bottom":40}},"image_banner_Q6W8Mx":{"type":"image-banner","name":"t:sections.image-banner.presets.name","settings":{"heading":"","full-width-enabled":false,"slide_height":"adapt_to_first_image","desktop_fixed_height":320,"mobile_fixed_height":460,"desktop_image":"shopify:\/\/shop_images\/AHI_ESTA_EL_DETALLE.png","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"center","mobile_image":"shopify:\/\/shop_images\/AHI_ESTA_EL_DETALLE-responsivo.png","mobile_text_vertical_position":"center","mobile_text_horizontal_position":"center","color-heading":"rgba(0,0,0,0)","section-color-overlay":"rgba(0,0,0,0)","section-color-overlay-opacity":100,"color-body-text":"rgba(0,0,0,0)","text-container-color":"rgba(0,0,0,0)","color-overlay-opacity":100,"margin-top":20,"margin-bottom":60}},"parallax_nBzxN8":{"type":"parallax","blocks":{"heading_U6XWyq":{"type":"heading","settings":{"heading":"Quiubo <span>CHATO!!<\/span>","disable_on_mobile":false,"size_heading":400,"size_heading_mobile":240}},"text_jaa7Nn":{"type":"text","settings":{"text":"<p><\/p><p>La tienda oficial de <strong>Mario Moreno “Cantinflas”<\/strong> es un espacio para rendir homenaje al artista más conocido y famoso del cine mexicano, cuya alegría e ingenio siguen inspirando generaciones y que hoy también se recuerda a través de iniciativas culturales como su museo.<br\/><br\/>Aquí encontrarás productos que reflejan su esencia única, desde artículos exclusivos hasta bebidas que llevan su nombre.<\/p>","disable_on_mobile":false}},"button_rcMgXF":{"type":"button","settings":{"button_select":"primary","button_label":"Conoce más de Cantinflas","button_link":"shopify:\/\/pages\/cantinflas","disable_on_mobile":false}}},"block_order":["heading_U6XWyq","text_jaa7Nn","button_rcMgXF"],"disabled":true,"settings":{"desktop_text_horizontal_position":"center","rotation":10,"image_1":"shopify:\/\/shop_images\/img-mario_moreno-min.png","button_link1":"","image_2":"shopify:\/\/shop_images\/img-tequila-cantinflas-min.png","button_link2":"","color-body-text":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","margin-top":0,"margin-bottom":0}},"product_slider_tFfUHf":{"type":"product-slider","blocks":{"product_pkEabP":{"type":"product","settings":{"slider_product":"tequila-cantinflas-blanco-100-agave","text_color":"#7b4922","background_color":"rgba(0,0,0,0)","heading":"","text":"","promo_text_color":"rgba(0,0,0,0)","desktop_image":"shopify:\/\/shop_images\/Screenshot_2026-07-07_at_13.04.19.png","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"center","mobile_text_horizontal_position":"center"}},"product_GGVQxb":{"type":"product","settings":{"slider_product":"","text_color":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","heading":"Your headline","text":"<p>Tell your story<\/p>","promo_text_color":"rgba(0,0,0,0)","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"center","mobile_text_horizontal_position":"center"}},"product_paBnYr":{"type":"product","settings":{"slider_product":"","text_color":"rgba(0,0,0,0)","background_color":"rgba(0,0,0,0)","heading":"Your headline","text":"<p>Tell your story<\/p>","promo_text_color":"rgba(0,0,0,0)","desktop_text_vertical_position":"center","desktop_text_horizontal_position":"center","mobile_text_horizontal_position":"center"}}},"block_order":["product_pkEabP","product_GGVQxb","product_paBnYr"],"disabled":true,"custom_css":[],"name":"t:sections.products_slider.presets.name","settings":{"heading":"","full-width-enabled":true,"text_alignment":"center","product_name_style":"heading","show_vendor":false,"show_rating":false,"layout":"right","size_heading":100,"size_heading_mobile":100,"color-heading-text":"rgba(0,0,0,0)","section-color-overlay":"rgba(0,0,0,0)","margin-top":20,"margin-bottom":20}}},"order":["parallax_wrR7BD","image_banner_zGfxQJ","rich_text_KiU9Bb","1645701451ca57fd3c","separator_CT4jRp","164580331540910010","image_with_text_fxAPFW","image_banner_Q6W8Mx","parallax_nBzxN8","product_slider_tFfUHf"]}
+{
+  "sections": {
+    "hero": {
+      "type": "cantinflas-video-hero",
+      "settings": {
+        "heading": "Cantinflas",
+        "subheading": "Tienda oficial",
+        "alignment": "center",
+        "autoplay": true,
+        "background": "#c22921",
+        "cover_asset": "cantinflas-xd-home.webp",
+        "cover_width": 1071,
+        "cover_height": 1469
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Lleva un pedacito de Cantinflas contigo",
+        "products_to_show": 4,
+        "hide_empty_section": true
+      }
+    },
+    "tequilapromo": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "Tequila Cantinflas",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525",
+        "intro": "<p>Un tequila elaborado con 100% agave azul Weber, inspirado en el legado de uno de los personajes más queridos de México.</p>"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "item",
+          "settings": {
+            "heading": "Tequila Cantinflas Blanco",
+            "text": "<p>Un legado que se brinda.</p>",
+            "image_asset": "cantinflas-xd-tequila-home.webp",
+            "image_width": 3056,
+            "image_height": 5456,
+            "image_alt": "Tequila Cantinflas Blanco"
+          }
+        }
+      },
+      "block_order": [
+        "piece1"
+      ]
+    },
+    "story": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "¡Quiubo, Chato!",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "item",
+          "settings": {
+            "heading": "Detrás de Cantinflas estaba Mario Moreno",
+            "text": "<p>Actor, comediante y uno de los grandes referentes del cine mexicano, Mario Moreno creó un personaje que convirtió el ingenio, la picardía y una manera muy particular de hablar en una forma única de hacer comedia.<br><br>De las carpas de la Ciudad de México al cine y al reconocimiento internacional, su historia es mucho más grande que un personaje.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "piece1"
+      ]
+    },
+    "favorites": {
+      "type": "home-product-tabs",
+      "settings": {
+        "heading": "Los consentidos de la casa",
+        "products_to_show": 4
+      },
+      "blocks": {
+        "piece1": {
+          "type": "category",
+          "settings": {
+            "title": "Bebidas"
+          }
+        },
+        "piece2": {
+          "type": "category",
+          "settings": {
+            "title": "Promocionales"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2"
+      ]
+    },
+    "universe": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "Universo Cantinflas",
+        "layout": "alternating",
+        "background": "#f2b846",
+        "text_color": "#252525",
+        "accent": "#c22921",
+        "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>"
+      },
+      "blocks": {
+        "photo": {
+          "type": "item",
+          "settings": {
+            "image_asset": "cantinflas-xd-bio.webp",
+            "image_width": 614,
+            "image_height": 319,
+            "image_alt": "Cantinflas en el cine"
+          }
+        }
+      },
+      "block_order": [
+        "photo"
+      ]
+    },
+    "threepieces": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "Tres piezas, un mismo legado",
+        "layout": "cards",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525",
+        "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "item",
+          "settings": {
+            "heading": "Tequila",
+            "text": "<p>Tequila Blanco 100% de Agave</p>"
+          }
+        },
+        "piece2": {
+          "type": "item",
+          "settings": {
+            "heading": "Taza",
+            "text": "<p>Taza de peltre azul</p>"
+          }
+        },
+        "piece3": {
+          "type": "item",
+          "settings": {
+            "heading": "Agua",
+            "text": "<p>Agua pura de manantial</p>"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2",
+        "piece3"
+      ]
+    },
+    "museum": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "Hay historias que merecen descubrirse a fondo",
+        "layout": "alternating"
+      },
+      "blocks": {
+        "photo": {
+          "type": "item",
+          "settings": {
+            "image_asset": "cantinflas-xd-museum-collage.webp",
+            "image_width": 1902,
+            "image_height": 827,
+            "image_alt": "Collage del Museo Cantinflas"
+          }
+        }
+      },
+      "block_order": [
+        "photo"
+      ]
+    },
+    "closing": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_text_horizontal_position": "center"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "heading",
+          "settings": {
+            "heading": "¡Aquí está el Detalle!"
+          }
+        }
+      },
+      "block_order": [
+        "piece1"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "featured",
+    "tequilapromo",
+    "story",
+    "favorites",
+    "universe",
+    "threepieces",
+    "museum",
+    "closing"
+  ]
+}

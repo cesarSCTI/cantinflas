@@ -1,0 +1,132 @@
+{
+  "sections": {
+    "heading": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_text_horizontal_position": "center"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tienda Oficial Cantinflas"
+          }
+        },
+        "piece2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Productos inspirados en el universo de Cantinflas, para disfrutar, compartir y llevar contigo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2"
+      ]
+    },
+    "grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [
+        ".collection__counter {display: none !important;}"
+      ],
+      "settings": {
+        "products_per_page": 24,
+        "columns_mobile": "1",
+        "columns_desktop": "4",
+        "spacing_desktop": "8",
+        "full-width-enabled": false,
+        "spacing_mobile": "8",
+        "image_ratio": "square",
+        "show_video": false,
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "enable_vendor_link": false,
+        "show_product_rating": false,
+        "enable_product_url_within_collection": false,
+        "enable_quick_add_button": true,
+        "text_alignment": "center",
+        "toolbar_style": "minimal",
+        "enable_sorting": false,
+        "enable_filtering": false,
+        "filter_position": "drawer",
+        "margin-top": 32,
+        "margin-bottom": 0
+      }
+    },
+    "benefits": {
+      "type": "features-banner",
+      "blocks": {
+        "image_CKCXhM": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/icono-envios.png",
+            "select_icon": "bag",
+            "heading": "Envíos",
+            "text": "<p>Rápidos y a tiempo</p>",
+            "link": ""
+          }
+        },
+        "image_VGUkeA": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/icono-contamos_con_garantia.png",
+            "select_icon": "bag",
+            "heading": "Contamos con garantía",
+            "text": "<p>Nuestra promesa para tí</p>",
+            "link": ""
+          }
+        },
+        "image_McECbz": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/icono-pago_seguro.png",
+            "select_icon": "bag",
+            "heading": "Pago seguro",
+            "text": "<p>Tus datos protegidos</p>",
+            "link": ""
+          }
+        },
+        "image_LpU9LC": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/icono-atencion_personalizada.png",
+            "select_icon": "bag",
+            "heading": "Atención personalizada",
+            "text": "<p>Expertos te ayudaran</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_CKCXhM",
+        "image_VGUkeA",
+        "image_McECbz",
+        "image_LpU9LC"
+      ],
+      "custom_css": [
+        ".wt-keys__title {font-weight: 800; font-size: 17px !important;}"
+      ],
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 80,
+        "size_heading": 70,
+        "icon_width_mobile": 52,
+        "icon_width_desktop": 64,
+        "icon_layout": "left",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "#363636",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    }
+  },
+  "order": [
+    "heading",
+    "grid",
+    "benefits"
+  ]
+}

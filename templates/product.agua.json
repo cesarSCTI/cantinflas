@@ -1,0 +1,447 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "brand": "{{ product.vendor }}",
+            "enable_vendor_link": false,
+            "size_text": 180,
+            "size_text_mobile": 160
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {}
+        },
+        "feature_tags_44iTGm": {
+          "type": "feature_tags",
+          "settings": {
+            "metafield": "custom.feature_tags",
+            "limit": 4,
+            "text_color": "rgba(0,0,0,0)",
+            "border_color": "rgba(0,0,0,0)"
+          }
+        },
+        "separator_Qt7zAY": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#000000",
+            "margin-top": 8,
+            "margin-bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_tax_included": true,
+            "show_shipping_policy": true,
+            "size_text": 120,
+            "size_text_mobile": 140
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "color_swatch_names": "",
+            "variant_picture_swatch_names": "",
+            "thumb_size": 60,
+            "radius": "default",
+            "border_radius": 0,
+            "dropdown_swatch_names": "",
+            "margin-top": 8,
+            "margin-bottom": 8,
+            "size_icon": "check_mark",
+            "size_link": "",
+            "variant_name": "",
+            "size_content": "",
+            "metafield": "",
+            "enable-striped-rows": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "show_qty_selector": true,
+            "text_color": "rgba(0,0,0,0)",
+            "background_color": "rgba(0,0,0,0)"
+          }
+        },
+        "promo_67ttgj": {
+          "type": "promo",
+          "settings": {
+            "content": "<p>🎟️ Use code \"Beauty\" for 10% OFF!</p>",
+            "text_alignment": "center",
+            "color-body-text": "#a04848",
+            "background_color": "#f6f2ea"
+          }
+        },
+        "payments_badge_EFynmG": {
+          "type": "payments_badge",
+          "settings": {
+            "content": "",
+            "desktop_text_horizontal_position": "center",
+            "badge_type": "payment_icons",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "rgba(0,0,0,0)"
+          }
+        },
+        "separator_DwMham": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#000000",
+            "margin-top": 8,
+            "margin-bottom": 8
+          }
+        },
+        "e23830b4-3ca6-452f-a7d1-cb245a3e9282": {
+          "type": "bulletpoints",
+          "settings": {
+            "metafield": "custom.features",
+            "default_text": ""
+          }
+        },
+        "00841757-ace4-48f5-8edb-08c8c579a24f": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#e0dedb",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "is_open": false,
+            "icon": "none"
+          }
+        },
+        "a8e9c281-a34c-4fe4-94a1-ea9a3880dc33": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#e0dedb",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "1c9b0bb2-fe62-4649-9439-76836162d773": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How to use",
+            "content": "",
+            "metafield_variables": "",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "2ce0b4b1-3440-40cd-92c2-15d46e61dfca": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#e0dedb",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "5fed6e0f-fb7e-4874-8ba9-3321623fc828": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients ",
+            "content": "",
+            "metafield_variables": "",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "separator_jY8GV3": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#e0dedb",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "video_reels_fUDDgA": {
+          "type": "video_reels",
+          "settings": {
+            "heading": "Complete your beauty ritual",
+            "show_play_pause": true,
+            "show_unmute": true,
+            "auto_advanced": false,
+            "enable_quick_add": true,
+            "hide_brand": false,
+            "video_reels_1_product": "aquarius-pore-purifying-clarity-cream",
+            "video_reels_2_product": "active-toning-essence-white-rose-100-ml",
+            "video_reels_3_product": "algae-peel-off-mask-with-soothing-properties",
+            "video_reels_4_product": "body-balm-chocolate-cherry-180ml",
+            "video_reels_5_product": "body-balm-cranberry-180-ml",
+            "video_reels_6_product": ""
+          }
+        },
+        "separator_BNyJGF": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": false,
+            "color-background": "#e0dedb",
+            "margin-top": 16,
+            "margin-bottom": 8
+          }
+        },
+        "78809992-2318-4893-9402-6cfd49f50b6a": {
+          "type": "separator",
+          "settings": {
+            "show-separator-line": true,
+            "color-background": "#e0dedb",
+            "margin-top": 0,
+            "margin-bottom": 0
+          }
+        },
+        "d162f900-ee92-4311-b27d-d5f312fa73f2": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery  and  return policy",
+            "content": "<p>Our team will ship your order within 5 business days. The time it takes to receive your order depends on the shipping method chosen at checkout. </p><p><br/></p><p>We hope you to love it, but if you need to make a return, breathe easy. Returns are always free and can be done in person or by mail. </p>",
+            "metafield_variables": "",
+            "page": "",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating",
+        "feature_tags_44iTGm",
+        "separator_Qt7zAY",
+        "price",
+        "variant_picker",
+        "buy_buttons",
+        "promo_67ttgj",
+        "payments_badge_EFynmG",
+        "separator_DwMham",
+        "e23830b4-3ca6-452f-a7d1-cb245a3e9282",
+        "00841757-ace4-48f5-8edb-08c8c579a24f",
+        "description",
+        "a8e9c281-a34c-4fe4-94a1-ea9a3880dc33",
+        "1c9b0bb2-fe62-4649-9439-76836162d773",
+        "2ce0b4b1-3440-40cd-92c2-15d46e61dfca",
+        "5fed6e0f-fb7e-4874-8ba9-3321623fc828",
+        "separator_jY8GV3",
+        "video_reels_fUDDgA",
+        "separator_BNyJGF",
+        "78809992-2318-4893-9402-6cfd49f50b6a",
+        "d162f900-ee92-4311-b27d-d5f312fa73f2"
+      ],
+      "custom_css": [
+        "strong,.b {font-weight: 500;}",
+        ".wt-product__feature-tags label:before {border-color: #e7e7e7;}"
+      ],
+      "settings": {
+        "enable_sticky_buy_button": true,
+        "full-width-enabled": false,
+        "desktop-media-size": "normal",
+        "desktop-layout": "carousel-vertical",
+        "desktop-image-ratio": "original",
+        "enable_video_looping": false,
+        "video_controls": false,
+        "video_custom_play_controls": false,
+        "video_custom_mute_controls": false,
+        "enable-preselected-variant": true,
+        "enable-image-zoom": true,
+        "mobile-image": "small",
+        "show-thumbnails-mobile": false,
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 4,
+        "margin-bottom": 28
+      }
+    },
+    "intro": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "¡Mucho más que agua!",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525"
+      }
+    },
+    "moments": {
+      "type": "lookbook",
+      "settings": {
+        "heading": "Acompáñate de Cantinflas."
+      }
+    },
+    "packaging": {
+      "type": "cantinflas-editorial",
+      "settings": {
+        "heading": "Un envase pensado para algo más.",
+        "layout": "alternating",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "accent": "#252525"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "item",
+          "settings": {
+            "heading": "Tapón de origen vegetal",
+            "image_asset": "cantinflas-xd-envase.webp",
+            "image_width": 1664,
+            "image_height": 2496,
+            "image_alt": "Envase de Agua Premium Cantinflas",
+            "text": "<p>Agua Cantinflas utiliza un envase Tetra Prisma Aseptic que integra materiales de origen renovable y características orientadas a reducir el impacto ambiental de su presentación.</p><p>Una propuesta que busca integrar diseño, practicidad y sostenibilidad en una presentación cotidiana.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "piece1"
+      ]
+    },
+    "composition": {
+      "type": "cantinflas-product-details",
+      "settings": {
+        "heading": "Pureza y equilibrio en cada presentación",
+        "presentation": "rows",
+        "background": "#f4ede1",
+        "text_color": "#252525",
+        "intro": "<p>Agua osmotizada con minerales esenciales y mineralización débil, con un perfil diseñado para ofrecer una experiencia ligera y equilibrada.</p>"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "detail",
+          "settings": {
+            "heading": "Características del agua",
+            "text": "<p>Agua osmotizada con minerales esenciales.</p><p>Mineralización débil.</p><p>pH aproximado de 7.3.</p><p>Libre de alérgenos.</p>"
+          }
+        },
+        "piece2": {
+          "type": "detail",
+          "settings": {
+            "heading": "Composición mineral",
+            "text": "<p>Sodio: menos de 3 mg/L.</p><p>Calcio: menos de 10 mg/L.</p><p>Magnesio: menos de 5 mg/L.</p><p>Potasio: menos de 1 mg/L.</p><p>Residuo seco: menos de 29 mg/L.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2"
+      ]
+    },
+    "process": {
+      "type": "cantinflas-product-details",
+      "settings": {
+        "heading": "Un proceso en cuatro etapas.",
+        "presentation": "steps",
+        "background": "#2b3d8f",
+        "text_color": "#ffffff"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "detail",
+          "settings": {
+            "heading": "1. Ósmosis",
+            "text": "<p>El agua pasa por un proceso de ósmosis para reducir las sustancias disueltas presentes en ella.</p>"
+          }
+        },
+        "piece2": {
+          "type": "detail",
+          "settings": {
+            "heading": "2. Remineralización"
+          }
+        },
+        "piece3": {
+          "type": "detail",
+          "settings": {
+            "heading": "3. Microfiltrado"
+          }
+        },
+        "piece4": {
+          "type": "detail",
+          "settings": {
+            "heading": "4. Esterilización UV"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2",
+        "piece3",
+        "piece4"
+      ]
+    },
+    "faqtitle": {
+      "type": "rich-text",
+      "settings": {
+        "desktop_text_horizontal_position": "center"
+      },
+      "blocks": {
+        "piece1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Preguntas frecuentes"
+          }
+        }
+      },
+      "block_order": [
+        "piece1"
+      ]
+    },
+    "faq": {
+      "type": "collapsible_menu",
+      "settings": {},
+      "blocks": {
+        "piece1": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Es agua mineral natural?"
+          }
+        },
+        "piece2": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿El envase es reciclable?"
+          }
+        },
+        "piece3": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Contiene BPA?"
+          }
+        },
+        "piece4": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "¿Cuál es su vida útil?"
+          }
+        }
+      },
+      "block_order": [
+        "piece1",
+        "piece2",
+        "piece3",
+        "piece4"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "intro",
+    "moments",
+    "packaging",
+    "composition",
+    "process",
+    "faqtitle",
+    "faq"
+  ]
+}

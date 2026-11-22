@@ -219,7 +219,9 @@
     {% if settings.sticky_header %}<div class="sticky-header__threshold"></div>{% endif %}
     {% sections 'header-group' %}
 
-    <main id="root" class="" role="main" tabindex="-1">
+    {%- assign redesign_template = template.name | append: '.' | append: template.suffix -%}
+    {%- assign redesign_templates = 'index.,collection.tienda,page.museo,page.mundo,page.contact,product.tequila,product.agua,product.catalogo' | split: ',' -%}
+    <main id="root" class="{% if redesign_templates contains redesign_template %}cantinflas-redesign{% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 

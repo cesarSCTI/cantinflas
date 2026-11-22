@@ -53,9 +53,11 @@
           {{ block.settings.paragraph }}
         </div>
       {%- when 'email_form' -%}
+        {% if section.settings.contact_details != blank %}<div class="cantinflas-contact-layout">{% endif %}
         <div class="form__container {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
-          <div class="contact-form">
-            {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+          <div class="contact-form" {{ block.shopify_attributes }}>
+            {%- assign contact_form_id = 'ContactForm-' | append: section.id -%}
+            {%- form 'contact', id: contact_form_id, class: 'isolate' -%}
               {%- if form.posted_successfully? -%}
                 <div class="form__message">
                   <div class="form__success-field" tabindex="-1" autofocus>
@@ -81,7 +83,7 @@
                     id="ContactFormName-{{ section.id }}"
                     class="form__field__input"
                     placeholder=" "
-                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}"
                   >
                   <span class="form__field__label">{{ 'templates.contact.form.name' | t }}</span>
                 </label>
@@ -91,12 +93,13 @@
                   for="ContactFormPhone-{{ section.id }}"
                 >
                   <input
-                    type="text"
+                    type="tel"
+                    autocomplete="tel"
                     name="contact[phone]"
                     id="ContactFormPhone-{{ section.id }}"
                     class="form__field__input"
                     placeholder=" "
-                    value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    value="{% if form.phone %}{{ form.phone | escape }}{% elsif customer %}{{ customer.phone | escape }}{% endif %}"
                   >
                   <span class="form__field__label">{{ 'templates.contact.form.phone' | t }}</span>
                 </label>
@@ -107,12 +110,14 @@
                 for="ContactFormEmail-{{ section.id }}"
               >
                 <input
-                  type="text"
+                  type="email"
+                  autocomplete="email"
+                  required
                   name="contact[email]"
                   id="ContactFormEmail-{{ section.id }}"
                   class="form__field__input"
                   placeholder=" "
-                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
                 >
                 <span class="form__field__label">{{ 'templates.contact.form.email' | t }}* </span>
               </label>
@@ -123,12 +128,11 @@
               >
                 <textarea
                   class="form__field__textarea"
-                  name="contact[comment]"
+                  name="contact[body]"
                   id="ContactFormComment-{{ section.id }}"
                   placeholder=" "
                   rows="6"
-                  value="{% if form[comment] %}{{ form[comment] }}{% elsif customer %}{{ customer.comment }}{% endif %}"
-                >{{- form.body -}}</textarea>
+                >{{- form.body | escape -}}</textarea>
                 <span class="form__field__label">{{- 'templates.contact.form.comment' | t -}}</span>
               </label>
               {% comment %}<a href="#" class="test-1">{% endcomment %}
@@ -143,9 +147,26 @@
             {% endform %}
           </div>
         </div>
+        {% if section.settings.contact_details != blank %}
+          <aside class="cantinflas-contact-layout__details">
+            {% if section.settings.contact_heading != blank %}<h2>{{ section.settings.contact_heading | escape }}</h2>{% endif %}
+            <div class="rte">{{ section.settings.contact_details }}</div>
+          </aside>
+          </div>
+        {% endif %}
     {%- endcase -%}
   {%- endfor -%}
 </div>
+
+{% stylesheet %}
+  .cantinflas-contact-layout { display: grid; align-items: start; gap: clamp(2rem, 4vw, 6rem); width: 100%; }
+  .cantinflas-contact-layout .form__container { width: 100%; max-width: none; }
+  .cantinflas-contact-layout__details { padding: 2.4rem; border: 1px solid rgb(0 0 0 / .12); border-radius: .8rem; }
+  .cantinflas-contact-layout__details h2 { margin-top: 0; }
+  @media (min-width: 900px) {
+    .cantinflas-contact-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -153,6 +174,16 @@
   "tag": "section",
   "class": "spaced-section",
   "settings": [
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Título de la tarjeta de contacto"
+    },
+    {
+      "type": "richtext",
+      "id": "contact_details",
+      "label": "Datos de contacto"
+    },
     {
       "type": "header",
       "content": "t:sections.global.colors",

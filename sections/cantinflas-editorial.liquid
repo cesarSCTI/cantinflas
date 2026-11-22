@@ -1,0 +1,168 @@
+<section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}"
+  style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }};">
+  <div class="cantinflas-editorial__inner">
+    {% if section.settings.heading != blank %}
+      <h2>{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.intro != blank %}
+      <div class="rte">{{ section.settings.intro }}</div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="cantinflas-editorial__items">
+        {% for block in section.blocks %}
+          <article class="cantinflas-editorial__item" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 900px) 45vw, 100vw' }}
+            {% elsif block.settings.image_asset != blank %}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.image_alt | escape }}" width="{{ block.settings.image_width }}" height="{{ block.settings.image_height }}" loading="lazy">
+            {% endif %}
+            {% if block.settings.heading != blank or block.settings.text != blank or block.settings.link != blank %}
+              <div class="cantinflas-editorial__copy">
+                {% if block.settings.heading != blank %}<h3>{{ block.settings.heading | escape }}</h3>{% endif %}
+                {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
+                {% if block.settings.link != blank and block.settings.label != blank %}
+                  <a class="cantinflas-editorial__link" href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .cantinflas-editorial { background: var(--ce-background); color: var(--ce-text); padding: clamp(3rem, 5vw, 9rem) 0; }
+  .cantinflas-editorial__inner { width: min(86%, 1640px); margin-inline: auto; }
+  .cantinflas-editorial h2, .cantinflas-editorial h3 { color: var(--ce-accent); line-height: 1.08; }
+  .cantinflas-editorial h2 { font-size: clamp(2.8rem, 4vw, 6rem); margin: 0 0 1.6rem; }
+  .cantinflas-editorial h3 { font-size: clamp(2rem, 2.2vw, 3.8rem); margin: 0 0 1rem; }
+  .cantinflas-editorial__items { display: grid; gap: clamp(2rem, 4vw, 7rem); margin-top: 2.4rem; }
+  .cantinflas-editorial__item img { display: block; width: 100%; height: auto; }
+  .cantinflas-editorial__item img + .cantinflas-editorial__copy { margin-top: 1.6rem; }
+  .cantinflas-editorial__link { display: inline-block; margin-top: 1.4rem; color: inherit; text-underline-offset: .2em; }
+  @media (min-width: 600px) {
+    .cantinflas-editorial--cards .cantinflas-editorial__items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 900px) {
+    .cantinflas-editorial--cards .cantinflas-editorial__items { grid-template-columns: repeat(auto-fit, minmax(min(100%, 27rem), 1fr)); }
+    .cantinflas-editorial--alternating .cantinflas-editorial__item { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 5vw; }
+    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) img { grid-column: 2; grid-row: 1; }
+    .cantinflas-editorial--alternating .cantinflas-editorial__item:nth-child(even) .cantinflas-editorial__copy { grid-column: 1; grid-row: 1; }
+    .cantinflas-editorial--alternating .cantinflas-editorial__copy:only-child { grid-column: 1 / -1; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial Cantinflas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introducción"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Composición",
+      "default": "alternating",
+      "options": [
+        {
+          "value": "alternating",
+          "label": "Imagen y texto alternados"
+        },
+        {
+          "value": "cards",
+          "label": "Tarjetas"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto",
+      "default": "#242424"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Títulos",
+      "default": "#242424"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Pieza editorial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etiqueta de enlace"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Archivo precargado en el tema"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Texto alternativo del archivo"
+        },
+        {
+          "type": "number",
+          "id": "image_width",
+          "label": "Ancho del archivo",
+          "default": 1080
+        },
+        {
+          "type": "number",
+          "id": "image_height",
+          "label": "Alto del archivo",
+          "default": 1080
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Editorial Cantinflas"
+    }
+  ]
+}
+{% endschema %}

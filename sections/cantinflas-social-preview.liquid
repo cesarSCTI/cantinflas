@@ -1,0 +1,78 @@
+<section class="cantinflas-social-preview" aria-labelledby="SocialTitle-{{ section.id }}">
+  <div class="cantinflas-social-preview__header">
+    <h2 id="SocialTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    <div class="cantinflas-social-preview__networks" aria-hidden="true">
+      {% render 'icon-facebook' %}
+      {% render 'icon-instagram' %}
+      {% render 'icon-tiktok' %}
+    </div>
+  </div>
+  <ul class="cantinflas-social-preview__posts" role="list">
+    {% for block in section.blocks %}
+      <li {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '280, 420, 560, 720', sizes: '(min-width: 900px) 16vw, 40vw', alt: block.settings.alt }}
+        {% elsif block.settings.asset != blank %}
+          <img src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="360" height="480" loading="lazy">
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% stylesheet %}
+  .cantinflas-social-preview { padding-block: clamp(2rem, 4vw, 7rem); }
+  .cantinflas-social-preview__header { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 1rem; width: min(90%, 1720px); margin: 0 auto clamp(1.5rem, 3vw, 4rem); }
+  .cantinflas-social-preview__header h2 { margin: 0; color: #252525; font-size: clamp(2.3rem, 3.15vw, 6rem); }
+  .cantinflas-social-preview__networks { display: flex; align-items: center; gap: 1.2rem; color: #f2b846; }
+  .cantinflas-social-preview__networks svg { width: clamp(1.7rem, 2.2vw, 4rem); height: auto; }
+  .cantinflas-social-preview__posts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; margin: 0; gap: .6rem; list-style: none; }
+  .cantinflas-social-preview__posts li { aspect-ratio: 3 / 4; }
+  .cantinflas-social-preview__posts li:empty { display: none; }
+  .cantinflas-social-preview__posts img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (min-width: 600px) { .cantinflas-social-preview__posts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .cantinflas-social-preview__posts { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Franja social temporal",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Síguenos en nuestras redes sociales"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Publicación de muestra",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Archivo de respaldo del tema"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Texto alternativo"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Franja social temporal"
+    }
+  ]
+}
+{% endschema %}
