@@ -88,6 +88,9 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "hotspot_full_width": false,
+        "hotspot_overlay_copy": false,
+        "hotspot_anatomy_image": false,
         "show_focus": false,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -194,6 +197,9 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "hotspot_full_width": false,
+        "hotspot_overlay_copy": false,
+        "hotspot_anatomy_image": false,
         "show_focus": true,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -210,6 +216,74 @@
     "anatomy": {
       "type": "cantinflas-editorial",
       "blocks": {
+        "sombrero": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "El sombrero",
+            "text": "",
+            "label": "",
+            "link": "",
+            "title_color": "#2b3d8f",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "marker_x": 47,
+            "marker_y": 6,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "voz": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "La voz",
+            "text": "",
+            "label": "",
+            "link": "",
+            "title_color": "#2b3d8f",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "marker_x": 17,
+            "marker_y": 45,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "gestos": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Los gestos",
+            "text": "",
+            "label": "",
+            "link": "",
+            "title_color": "#2b3d8f",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "marker_x": 85,
+            "marker_y": 16,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
+        "sonrisa": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "La sonrisa",
+            "text": "",
+            "label": "",
+            "link": "",
+            "title_color": "#2b3d8f",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "marker_x": 61,
+            "marker_y": 40,
+            "marker_color": "#ffffff",
+            "marker_text_color": "#252525"
+          }
+        },
         "piece1": {
           "type": "hotspot",
           "settings": {
@@ -227,55 +301,17 @@
             "marker_text_color": "#ffffff"
           }
         },
-        "sombrero": {
-          "type": "hotspot",
-          "settings": {
-            "heading": "El sombrero",
-            "title_color": "#2b3d8f",
-            "marker_x": 47,
-            "marker_y": 6,
-            "marker_color": "#ffffff",
-            "marker_text_color": "#252525"
-          }
-        },
-        "voz": {
-          "type": "hotspot",
-          "settings": {
-            "heading": "La voz",
-            "title_color": "#2b3d8f",
-            "marker_x": 17,
-            "marker_y": 45,
-            "marker_color": "#ffffff",
-            "marker_text_color": "#252525"
-          }
-        },
-        "sonrisa": {
-          "type": "hotspot",
-          "settings": {
-            "heading": "La sonrisa",
-            "title_color": "#2b3d8f",
-            "marker_x": 61,
-            "marker_y": 40,
-            "marker_color": "#ffffff",
-            "marker_text_color": "#252525"
-          }
-        },
-        "gestos": {
-          "type": "hotspot",
-          "settings": {
-            "heading": "Los gestos",
-            "title_color": "#2b3d8f",
-            "marker_x": 85,
-            "marker_y": 16,
-            "marker_color": "#ffffff",
-            "marker_text_color": "#252525"
-          }
-        },
         "cine": {
           "type": "hotspot",
           "settings": {
             "heading": "El cine",
+            "text": "",
+            "label": "",
+            "link": "",
             "title_color": "#2b3d8f",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
             "marker_x": 74,
             "marker_y": 69,
             "marker_color": "#ffffff",
@@ -304,6 +340,9 @@
         "heading_size": 60,
         "heading_mobile": 32,
         "focus_image": "shopify://shop_images/Captura_de_pantalla_2026-11-22_124648.png",
+        "hotspot_full_width": true,
+        "hotspot_overlay_copy": true,
+        "hotspot_anatomy_image": true,
         "show_focus": true,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -314,10 +353,7 @@
         "collage_button_bg_2": "#252525",
         "collage_button_text_2": "#ffffff",
         "collage_motion": false,
-        "column_order": "alternate",
-        "hotspot_full_width": true,
-        "hotspot_overlay_copy": true,
-        "hotspot_anatomy_image": true
+        "column_order": "alternate"
       }
     },
     "films": {
@@ -327,49 +363,92 @@
           "type": "media",
           "settings": {
             "title": "",
+            "caption": "",
             "frame": "#f4ede1",
-            "caption_color": "#ffffff"
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
           }
         },
         "piece2": {
           "type": "media",
           "settings": {
             "title": "Ahí está el detalle",
+            "caption": "",
             "frame": "#f4ede1",
-            "caption_color": "#ffffff"
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
           }
         },
         "piece3": {
           "type": "media",
           "settings": {
             "title": "El bolero de Raquel",
+            "caption": "",
             "frame": "#f4ede1",
-            "caption_color": "#ffffff"
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
           }
         },
         "piece4": {
           "type": "media",
           "settings": {
             "title": "El Padrecito",
+            "caption": "",
             "frame": "#f4ede1",
-            "caption_color": "#ffffff"
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
           }
         },
         "piece5": {
           "type": "media",
           "settings": {
             "title": "El Patrullero 777",
+            "caption": "",
             "frame": "#f4ede1",
-            "caption_color": "#ffffff"
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
           }
         },
         "piece6": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
         },
         "piece7": {
           "type": "media",
-          "settings": {}
+          "settings": {
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
         }
       },
       "block_order": [
@@ -390,13 +469,24 @@
         "intro_align": "center",
         "heading_size": 48,
         "heading_mobile": 30,
-        "background": "#252525",
-        "gap": 6,
+        "intro_size": 15,
+        "intro_mobile": 14,
+        "intro_width": 800,
         "desktop_count": 5,
         "mobile_count": 2,
+        "poster_height": 150,
+        "image_fit": "contain",
+        "gap": 6,
+        "stagger": 18,
+        "show_captions": false,
+        "background": "#252525",
+        "gradient": "",
+        "padding_top": 44,
+        "rail_space": 56,
+        "padding_bottom": 28,
         "show_navigation": true,
         "navigation_color": "#dedbd6",
-        "show_captions": false
+        "navigation_active": "#ffffff"
       }
     },
     "world": {
@@ -516,6 +606,9 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "hotspot_full_width": false,
+        "hotspot_overlay_copy": false,
+        "hotspot_anatomy_image": false,
         "show_focus": false,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -606,43 +699,50 @@
         "piece1": {
           "type": "phrase",
           "settings": {
-            "text": "Legado"
+            "text": "Legado",
+            "color": ""
           }
         },
         "piece2": {
           "type": "phrase",
           "settings": {
-            "text": "Cine"
+            "text": "Cine",
+            "color": ""
           }
         },
         "piece3": {
           "type": "phrase",
           "settings": {
-            "text": "Humor"
+            "text": "Humor",
+            "color": ""
           }
         },
         "piece4": {
           "type": "phrase",
           "settings": {
-            "text": "Cantinflear"
+            "text": "Cantinflear",
+            "color": ""
           }
         },
         "piece5": {
           "type": "phrase",
           "settings": {
-            "text": "Cultura"
+            "text": "Cultura",
+            "color": ""
           }
         },
         "piece6": {
           "type": "phrase",
           "settings": {
-            "text": "México"
+            "text": "México",
+            "color": ""
           }
         },
         "piece7": {
           "type": "phrase",
           "settings": {
-            "text": "Mundo"
+            "text": "Mundo",
+            "color": ""
           }
         }
       },
@@ -656,9 +756,19 @@
         "piece7"
       ],
       "settings": {
-        "background_color": "#c22921",
+        "font_family": "headline",
+        "font_weight": 500,
+        "text_size": 50,
+        "mobile_text_size": 18,
+        "letter_spacing": 0,
         "text_color": "#fff3df",
         "separator": "·",
+        "separator_color": "",
+        "spacing": 6,
+        "background_color": "#c22921",
+        "background_gradient": "",
+        "padding": 32,
+        "mobile_padding": 14,
         "animate": true,
         "direction": "normal",
         "speed": 45
