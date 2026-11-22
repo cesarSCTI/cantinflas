@@ -232,8 +232,8 @@
         "piece1"
       ],
       "settings": {
-        "heading": "El personaje y su anatomía",
-        "intro": "<p>Una apariencia. Una voz. Una personalidad. Un personaje inconfundible.</p>",
+        "heading": "",
+        "intro": "",
         "layout": "hotspots",
         "background": "#ffffff",
         "text_color": "#252525",
@@ -243,6 +243,7 @@
         "intro_color": "",
         "heading_size": 60,
         "heading_mobile": 32,
+        "focus_image": "shopify://shop_images/Captura_de_pantalla_2026-11-22_124648.png",
         "show_focus": true,
         "collage_label_1": "",
         "collage_link_1": "",
@@ -334,7 +335,7 @@
       ],
       "settings": {
         "heading": "Cantinflas en la Pantalla",
-        "intro": "<p>Después de construir al personaje en los escenarios, Cantinflas llegó al cine en 1936 con No te engañes corazón.</p><p>A partir de entonces comenzó una extensa carrera cinematográfica en la que protagonizó algunas de las películas más recordadas de la comedia mexicana.  En 1940, Ahí está el detalle se convirtió en un éxito decisivo para su carrera y consolidó a Cantinflas como una de las grandes figuras del cine nacional.</p><p>Durante las siguientes décadas, protagonizó numerosas películas y llevó su particular estilo de humor a diferentes historias y personajes, manteniéndose como uno de los actores más populares de México.</p>",
+        "intro": "<p>Después de construir al personaje en los escenarios, Cantinflas llegó al cine en 1936 con No te engañes corazón.</p><p>A partir de entonces comenzó una extensa carrera cinematográfica en la que protagonizó algunas de las películas más recordadas de la comedia mexicana. &nbsp;En 1940, Ahí está el detalle se convirtió en un éxito decisivo para su carrera y consolidó a Cantinflas como una de las grandes figuras del cine nacional.</p><p>Durante las siguientes décadas, protagonizó numerosas películas y llevó su particular estilo de humor a diferentes historias y personajes, manteniéndose como uno de los actores más populares de México.</p>",
         "heading_color": "#f2b846",
         "intro_color": "#ffffff",
         "heading_align": "center",
