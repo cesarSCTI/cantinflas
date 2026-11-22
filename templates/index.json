@@ -468,7 +468,7 @@
             "text": "<p>Tequila Blanco 100% de Agave</p>",
             "image": "shopify://shop_images/img-tequila-cantinflas.png",
             "label": "Comprar",
-            "link": "",
+            "link": "shopify://products/tequila-cantinflas-blanco-100-agave",
             "image_asset": "",
             "image_alt": "",
             "image_width": 1080,
@@ -543,7 +543,7 @@
         "piece3"
       ],
       "custom_css": [
-        "h3{margin: 16px;}"
+        "h3 {margin: 36px 0px 16px;}"
       ],
       "settings": {
         "heading": "Tres piezas, un mismo legado",
@@ -564,7 +564,7 @@
         "collage_label_1": "",
         "collage_link_1": "",
         "collage_button_bg_1": "#36845d",
-        "collage_button_text_1": "#ffffff",
+        "collage_button_text_1": "#C22921",
         "collage_label_2": "",
         "collage_link_2": "",
         "collage_button_bg_2": "#252525",
