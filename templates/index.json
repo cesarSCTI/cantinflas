@@ -466,6 +466,7 @@
           "settings": {
             "heading": "Tequila",
             "text": "<p>Tequila Blanco 100% de Agave</p>",
+            "image": "shopify://shop_images/img-tequila-cantinflas.png",
             "label": "Comprar",
             "link": "",
             "image_asset": "",
@@ -490,6 +491,7 @@
           "settings": {
             "heading": "Taza",
             "text": "<p>Taza de peltre azul</p>",
+            "image": "shopify://shop_images/img-taza-cantinflas.png",
             "label": "Comprar",
             "link": "",
             "image_asset": "",
@@ -514,6 +516,7 @@
           "settings": {
             "heading": "Agua",
             "text": "<p>Agua pura de manantial</p>",
+            "image": "shopify://shop_images/img-agua-cantinflas.png",
             "label": "Comprar",
             "link": "",
             "image_asset": "",
