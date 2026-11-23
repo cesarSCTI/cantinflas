@@ -80,6 +80,7 @@
       ],
       "settings": {
         "heading": "El hombre detrás del personaje",
+        "heading_in_copy": true,
         "intro": "",
         "layout": "alternating",
         "background": "#ffffff",
@@ -113,15 +114,15 @@
           "type": "item",
           "settings": {
             "heading": "Carpas",
-            "text": "<p>Donde todo comenzó</p><p>Entre escenarios itinerantes, personajes y público, Mario Moreno comenzó a encontrar su propia forma de hacer comedia</p>",
+            "text": "<p>Entre escenarios itinerantes, personajes y público, Mario Moreno comenzó a encontrar su propia forma de hacer comedia</p>",
             "label": "",
             "link": "",
             "image_asset": "",
             "image_alt": "",
             "image_width": 1080,
             "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
+            "title_align": "right",
+            "text_align": "right",
             "button_align": "left",
             "title_color": "",
             "copy_color": "",
@@ -130,22 +131,23 @@
             "hide_media": true,
             "marker_x": 48,
             "marker_y": 64,
-            "product": ""
+            "product": "",
+            "film_kicker": "Donde todo comenzó"
           }
         },
         "piece2": {
           "type": "item",
           "settings": {
             "heading": "Cine",
-            "text": "<p>Cantinflas llegó a la pantalla</p><p>El personaje que nació frente al público encontró un nuevo escenario y llegó a millones de espectadores.</p>",
+            "text": "<p>El personaje que nació frente al público encontró un nuevo escenario y llegó a millones de espectadores.</p>",
             "label": "",
             "link": "",
             "image_asset": "",
             "image_alt": "",
             "image_width": 1080,
             "image_height": 1080,
-            "title_align": "left",
-            "text_align": "left",
+            "title_align": "right",
+            "text_align": "right",
             "button_align": "left",
             "title_color": "",
             "copy_color": "",
@@ -154,14 +156,15 @@
             "hide_media": true,
             "marker_x": 48,
             "marker_y": 64,
-            "product": ""
+            "product": "",
+            "film_kicker": "Cantinflas llegó a la pantalla"
           }
         },
         "piece3": {
           "type": "item",
           "settings": {
             "heading": "Teatro",
-            "text": "<p>El personaje tomó forma.</p><p>La experiencia sobre el escenario ayudó a construir la personalidad, los gestos y el lenguaje que harían reconocible a Cantinflas.</p>",
+            "text": "<p>La experiencia sobre el escenario ayudó a construir la personalidad, los gestos y el lenguaje que harían reconocible a Cantinflas.</p>",
             "label": "",
             "link": "",
             "image_asset": "",
@@ -178,27 +181,28 @@
             "hide_media": true,
             "marker_x": 48,
             "marker_y": 64,
-            "product": ""
+            "product": "",
+            "film_kicker": "El personaje tomó forma."
           }
         }
       },
       "block_order": [
         "piece1",
-        "piece2",
-        "piece3"
+        "piece3",
+        "piece2"
       ],
       "settings": {
-        "heading": "De las carpas al cine",
+        "heading": "De las carpas",
         "intro": "",
-        "layout": "orbit",
+        "layout": "filmstrip",
         "background": "#f2b846",
         "text_color": "#252525",
         "accent": "#2b3d8f",
         "heading_align": "center",
         "intro_align": "center",
         "intro_color": "",
-        "heading_size": 60,
-        "heading_mobile": 32,
+        "heading_size": 82,
+        "heading_mobile": 36,
         "focus_image": "shopify://shop_images/img-Cantinflas-de_las_carpas_al_cine.png",
         "hotspot_full_width": false,
         "hotspot_overlay_copy": false,
@@ -213,7 +217,10 @@
         "collage_button_bg_2": "#252525",
         "collage_button_text_2": "#ffffff",
         "collage_motion": false,
-        "column_order": "alternate"
+        "column_order": "alternate",
+        "film_heading_line": "al cine",
+        "film_use_default_background": true,
+        "film_kicker_color": "#c22921"
       }
     },
     "anatomy": {

@@ -282,7 +282,7 @@
         "intro_align": "left",
         "heading_size": 60,
         "heading_mobile": 32,
-        "layout": "photo",
+        "layout": "original",
         "background": "#ffffff",
         "card_width": 420,
         "card_height": 320,

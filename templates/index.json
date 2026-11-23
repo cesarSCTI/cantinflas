@@ -533,7 +533,7 @@
             "hide_media": false,
             "marker_x": 48,
             "marker_y": 64,
-            "product": ""
+            "product": "agua-cantinflas"
           }
         }
       },
@@ -547,6 +547,8 @@
       ],
       "settings": {
         "heading": "Tres piezas, un mismo legado",
+        "card_purchase_buttons": true,
+        "card_purchase_bg": "#c22921",
         "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>",
         "layout": "cards",
         "background": "#ffffff",

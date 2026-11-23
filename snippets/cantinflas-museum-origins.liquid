@@ -1,0 +1,67 @@
+{{ 'cantinflas-museum-origins.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign background_url = nil
+  if section.settings.film_background != blank
+    assign background_url = section.settings.film_background | image_url: width: 2400
+  elsif section.settings.film_use_default_background
+    assign background_url = 'cantinflas-xd-carpas-fondo.png' | asset_url
+  endif
+%}
+
+<section class="cantinflas-origins" style="
+  --origins-background: {{ section.settings.background }};
+  --origins-heading: {{ section.settings.accent }};
+  --origins-text: {{ section.settings.text_color }};
+  --origins-kicker: {{ section.settings.film_kicker_color }};
+  --origins-intro: {{ section.settings.intro_color | default: section.settings.text_color }};
+  --origins-intro-align: {{ section.settings.intro_align }};
+  --origins-heading-align: {{ section.settings.heading_align }};
+  --origins-heading-desktop: {{ section.settings.heading_size }}px;
+  --origins-heading-mobile: {{ section.settings.heading_mobile }}px;
+  {% if background_url != blank %}--origins-background-art: url('{{ background_url }}');{% endif %}
+">
+  <div class="cantinflas-origins__inner">
+    {% if section.settings.heading != blank or section.settings.film_heading_line != blank or section.settings.intro != blank %}
+      <header class="cantinflas-origins__title">
+        {% if section.settings.heading != blank or section.settings.film_heading_line != blank %}
+          <h2>
+            {{ section.settings.heading | escape }}
+            {% if section.settings.film_heading_line != blank %}
+              {% if section.settings.heading != blank %}<br>{% endif %}
+              {{ section.settings.film_heading_line | escape }}
+            {% endif %}
+          </h2>
+        {% endif %}
+        {% if section.settings.intro != blank %}
+          <div class="rte">{{ section.settings.intro }}</div>
+        {% endif %}
+      </header>
+    {% endif %}
+    {% if section.settings.focus_image != blank or section.settings.show_focus %}
+      <div class="cantinflas-origins__film">
+        {% if section.settings.focus_image != blank %}
+          {% assign film_alt = section.settings.focus_image.alt | default: 'Tira de película con tres fotografías de Cantinflas' %}
+          {{ section.settings.focus_image | image_url: width: 1120 | image_tag: loading: 'lazy', widths: '240, 360, 540, 720, 960, 1120', sizes: '(min-width: 1100px) 27vw, (min-width: 500px) 260px, 52vw', alt: film_alt }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'cantinflas-origins__placeholder' }}
+        {% endif %}
+      </div>
+    {% endif %}
+    {% assign chapter_number = 0 %}
+    {% for block in section.blocks %}
+      {% unless block.type == 'item' %}{% continue %}{% endunless %}
+      {% assign chapter_number = chapter_number | plus: 1 %}
+      <article class="cantinflas-origins__chapter cantinflas-origins__chapter--{{ chapter_number }}" {{ block.shopify_attributes }} style="
+        --chapter-title: {{ block.settings.title_color | default: section.settings.text_color }};
+        --chapter-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
+        --chapter-title-align: {{ block.settings.title_align }};
+        --chapter-copy-align: {{ block.settings.text_align }};
+      ">
+        {% if block.settings.heading != blank %}<h3>{{ block.settings.heading | escape }}</h3>{% endif %}
+        {% if block.settings.film_kicker != blank %}<p class="cantinflas-origins__kicker">{{ block.settings.film_kicker | escape }}</p>{% endif %}
+        {% if block.settings.text != blank %}<div class="cantinflas-origins__copy rte">{{ block.settings.text }}</div>{% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>

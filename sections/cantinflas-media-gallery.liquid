@@ -97,8 +97,19 @@
   .cantinflas-gallery figure { margin: 0; background: var(--cg-frame); padding: .9rem; box-shadow: 0 0.5rem 1.4rem rgb(0 0 0 / .18); transform: rotate(var(--cg-angle)); transition: transform .22s ease; }
   .cantinflas-gallery figure:focus-within, .cantinflas-gallery figure:hover { transform: rotate(0); }
   .cantinflas-gallery--film figure { box-shadow: none; padding: 0; }
+  .cantinflas-gallery--original .cantinflas-gallery__track { scrollbar-width: none; }
+  .cantinflas-gallery--original .cantinflas-gallery__track::-webkit-scrollbar { display: none; }
+  .cantinflas-gallery--original figure,
+  .cantinflas-gallery--original figure:is(:hover, :focus-within) {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+  }
   .cantinflas-gallery__media { height: min(var(--cg-height), 90vw); overflow: hidden; }
   .cantinflas-gallery__media :is(img, video, svg) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cantinflas-gallery--original .cantinflas-gallery__media :is(img, video, svg) { object-fit: contain; }
   .cantinflas-gallery figcaption { color: var(--cg-caption); text-align: var(--cg-caption-align); padding: .8rem .6rem .2rem; }
   .cantinflas-gallery figcaption h3 { color: var(--cg-card-title); text-align: var(--cg-card-align); font-size: 1.1em; margin: 0; }
   .cantinflas-gallery__controls:not([hidden]) { display: flex; justify-content: center; gap: .7rem; }
@@ -310,6 +321,10 @@
         {
           "value": "film",
           "label": "Pantalla completa"
+        },
+        {
+          "value": "original",
+          "label": "Imagen original sin marco"
         }
       ]
     },

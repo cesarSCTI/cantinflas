@@ -1,3 +1,6 @@
+{% if section.settings.layout == 'filmstrip' %}
+  {% render 'cantinflas-museum-origins', section: section %}
+{% else %}
 {% liquid
   assign column_order = section.settings.column_order | default: 'alternate'
   assign full_hotspot = false
@@ -7,6 +10,11 @@
     assign overlay_hotspot_copy = section.settings.hotspot_overlay_copy
   endif
 %}
+{% if section.settings.card_purchase_buttons %}
+  <script src="{{ 'product-form.js' | asset_url }}" defer></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer></script>
+  <script src="{{ 'variant-dropdown.js' | asset_url }}" defer></script>
+{% endif %}
 {%- capture editorial_copy -%}
     {% if section.settings.heading != blank %}
       <h2 class="cantinflas-editorial__heading">{{ section.settings.heading | escape }}</h2>
@@ -15,12 +23,21 @@
       <div class="cantinflas-editorial__intro rte">{{ section.settings.intro }}</div>
     {% endif %}
 {%- endcapture -%}
+{% liquid
+  assign column_heading_pending = false
+  if section.settings.heading_in_copy and section.settings.layout == 'alternating' and editorial_copy != blank
+    assign editorial_items = section.blocks | where: 'type', 'item'
+    if editorial_items.size > 0
+      assign column_heading_pending = true
+    endif
+  endif
+%}
 <section class="cantinflas-editorial cantinflas-editorial--{{ section.settings.layout }}{% if section.settings.layout == 'alternating' %} cantinflas-editorial--order-{{ column_order }}{% endif %}{% if full_hotspot %} cantinflas-editorial--hotspot-full{% endif %}"
   {% if section.settings.layout == 'collage' and section.settings.collage_motion %}data-collage-motion{% endif %}
   style="--ce-background: {{ section.settings.background }}; --ce-text: {{ section.settings.text_color }}; --ce-accent: {{ section.settings.accent }}; --ce-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --ce-head-align: {{ section.settings.heading_align }}; --ce-intro-align: {{ section.settings.intro_align }}; --ce-mobile: {{ section.settings.heading_mobile }}px; --ce-desktop: {{ section.settings.heading_size }}px;">
   <div class="cantinflas-editorial__inner{% if section.settings.layout == 'collage' and section.blocks.size <= 8 %} cantinflas-editorial__inner--framed{% endif %}">
     {% if section.settings.layout == 'collage' %}<div class="cantinflas-editorial__collage-copy">{% endif %}
-    {% unless overlay_hotspot_copy %}{{ editorial_copy }}{% endunless %}
+    {% unless overlay_hotspot_copy or column_heading_pending %}{{ editorial_copy }}{% endunless %}
     {% if section.settings.layout == 'collage' %}
         <div class="cantinflas-editorial__collage-actions">
           {% for number in (1..2) %}
@@ -102,26 +119,50 @@
       <div class="cantinflas-editorial__items">
         {% for block in section.blocks %}
           {% unless block.type == 'item' %}{% continue %}{% endunless %}
-          {% assign card_url = block.settings.link | default: block.settings.product.url %}
-          {% assign card_title = block.settings.heading | default: block.settings.product.title %}
-          {% assign card_image = block.settings.image | default: block.settings.product.featured_image %}
+          {% assign show_column_heading = column_heading_pending %}
+          {% assign column_heading_pending = false %}
+          {% assign card_product = block.settings.product %}
+          {% assign card_url = block.settings.link | default: card_product.url %}
+          {% assign card_title = block.settings.heading | default: card_product.title %}
+          {% assign card_image = block.settings.image | default: card_product.featured_image %}
           <article class="cantinflas-editorial__item" {{ block.shopify_attributes }} style="
             --ce-card: {{ block.settings.card_color | default: 'transparent' }};
             --ce-card-title: {{ block.settings.title_color | default: section.settings.accent }};
             --ce-card-copy: {{ block.settings.copy_color | default: section.settings.text_color }};
             --ce-link: {{ block.settings.button_color | default: section.settings.text_color }};
+            {% if section.settings.card_purchase_buttons %}
+              --ce-purchase-bg: {{ section.settings.card_purchase_bg }};
+              --ce-purchase-text: {{ block.settings.button_color | default: '#ffffff' }};
+            {% endif %}
             --ce-title-align: {{ block.settings.title_align }};
             --ce-copy-align: {{ block.settings.text_align }};
             --ce-link-align: {{ block.settings.button_align }};
           ">
             {% capture card_copy %}
-              {% if card_title != blank or block.settings.text != blank or block.settings.label != blank %}
+              {% if show_column_heading or card_title != blank or block.settings.text != blank or block.settings.label != blank %}
                   <div class="cantinflas-editorial__copy">
+                    {% if show_column_heading %}{{ editorial_copy }}{% endif %}
                     {% if card_title != blank %}<h3>{{ card_title | escape }}</h3>{% endif %}
                     {% if block.settings.text != blank %}<div class="rte">{{ block.settings.text }}</div>{% endif %}
                     {% if block.settings.label != blank %}
                       <div class="cantinflas-editorial__action">
-                        {% if card_url != blank %}
+                        {% if section.settings.card_purchase_buttons %}
+                          <div class="cantinflas-editorial__purchase">
+                            {% if card_product == blank %}
+                              <button class="cantinflas-editorial__purchase-button" type="button" disabled>{{ 'products.product.unavailable' | t }}</button>
+                            {% elsif card_product.requires_selling_plan or card_product.gift_card? %}
+                              <a class="cantinflas-editorial__purchase-button" href="{{ card_product.url }}">{{ block.settings.label | escape }}</a>
+                            {% else %}
+                              {% assign card_form_id = 'EditorialPurchase-' | append: section.id | append: '-' | append: block.id %}
+                              {% render 'quick-add-button',
+                                card_product: card_product,
+                                product: card_product,
+                                product_form_id: card_form_id,
+                                quick_add_label: block.settings.label
+                              %}
+                            {% endif %}
+                          </div>
+                        {% elsif card_url != blank %}
                           <a class="cantinflas-editorial__link" href="{{ card_url }}">{{ block.settings.label | escape }}</a>
                         {% elsif request.design_mode %}
                           <button class="cantinflas-editorial__link" type="button" disabled>{{ block.settings.label | escape }}</button>
@@ -159,6 +200,7 @@
     {% endif %}
   </div>
 </section>
+{% endif %}
 
 {% stylesheet %}
   .cantinflas-editorial { background: var(--ce-background); color: var(--ce-text); padding: clamp(3rem, 5vw, 9rem) 0; }
@@ -194,6 +236,31 @@
   .cantinflas-editorial__copy p, .cantinflas-editorial__intro p { color: inherit; }
   .cantinflas-editorial__action { text-align: var(--ce-link-align); }
   .cantinflas-editorial__action a { color: var(--ce-link); }
+  .cantinflas-editorial__purchase { display: inline-block; margin-top: 1.4rem; width: min(100%, 15rem); }
+  .cantinflas-editorial__purchase product-form { margin: 0; }
+  .cantinflas-editorial__purchase :is(.hero__button--secondary, .cantinflas-editorial__purchase-button) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+    padding: .6rem 1.6rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: var(--ce-purchase-bg);
+    color: var(--ce-purchase-text);
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+    text-decoration: none;
+  }
+  .cantinflas-editorial__purchase :is(button, a):hover:not(:disabled) {
+    background: var(--ce-purchase-bg);
+    color: var(--ce-purchase-text);
+    filter: brightness(.9);
+  }
+  .cantinflas-editorial__purchase button:disabled { opacity: .55; cursor: default; }
   .cantinflas-editorial__media :is(svg, video), .cantinflas-editorial__focus :is(img, svg) { display: block; width: 100%; height: auto; }
   .cantinflas-editorial__placeholder { aspect-ratio: 4 / 3; background: #f4ede1; }
   .cantinflas-editorial__focus { margin: 2.6rem auto; width: min(100%, 108rem); }
@@ -411,6 +478,13 @@
 {
   "name": "Editorial Cantinflas",
   "settings": [
+    {"type":"checkbox","id":"heading_in_copy","label":"Título en la columna de texto","info":"Para la composición de imagen y texto alternados.","default":false},
+    {"type":"image_picker","id":"film_background","label":"Fondo completo de Carpas al cine"},
+    {"type":"checkbox","id":"film_use_default_background","label":"Usar fondo ilustrado original","default":true},
+    {"type":"text","id":"film_heading_line","label":"Segunda línea del título de Carpas al cine"},
+    {"type":"color","id":"film_kicker_color","label":"Color del subtítulo de cada etapa","default":"#c22921"},
+    {"type":"checkbox","id":"card_purchase_buttons","label":"Comprar el producto de la tarjeta","default":false},
+    {"type":"color","id":"card_purchase_bg","label":"Fondo del botón Comprar","default":"#c22921"},
     {
       "type": "text",
       "id": "heading",
@@ -427,6 +501,10 @@
       "label": "Composición",
       "default": "alternating",
       "options": [
+        {
+          "value": "filmstrip",
+          "label": "Carpas al cine"
+        },
         {
           "value": "alternating",
           "label": "Imagen y texto alternados"
@@ -653,6 +731,7 @@
       "type": "item",
       "name": "Pieza editorial",
       "settings": [
+        {"type":"text","id":"film_kicker","label":"Subtítulo de la etapa"},
         {
           "type": "text",
           "id": "heading",

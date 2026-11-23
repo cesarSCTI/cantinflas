@@ -28,7 +28,7 @@ if (!customElements.get("quick-add")) {
           .closest(".card__picture-container")
           ?.querySelector("a.card");
           this.product_url = this.add_button.getAttribute("data-product-url");
-            this.currentTrigger = cardLink;
+            this.currentTrigger = cardLink || button;
             this.fetchProduct(this.product_url);
           });
 
