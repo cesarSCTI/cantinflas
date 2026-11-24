@@ -70,17 +70,21 @@
 }
 
 
-/* Keep the announcement in flow and reserve header space on pages without a cover. */
+/* The announcement scrolls above the fixed navigation. */
 .page-header:has(> .cantinflas-xd-header--overlay) {
   position: absolute;
   inset-inline: 0;
   z-index: 17;
 }
-body:not(.menu-drawer-overlay-on):has(.page-header > [data-overlay-reserve]) #root {
+.page-header:has(> [data-xd-fixed-header][data-xd-header-ready]) {
+  position: fixed;
+  inset-block-start: var(--xd-header-top, 0px);
+}
+body:has(.page-header > [data-overlay-reserve]) #root {
   padding-block-start: var(--xd-header-space, 64px);
 }
 @media (min-width: 1200px) {
-  body:not(.menu-drawer-overlay-on):has(.page-header > [data-overlay-reserve]) #root {
+  body:has(.page-header > [data-overlay-reserve]) #root {
     padding-block-start: var(--xd-header-space, 88px);
   }
 }
@@ -91,6 +95,16 @@ body:not(.menu-drawer-overlay-on):has(.page-header > [data-overlay-reserve]) #ro
   background: var(--xd-header-overlay-bg, transparent);
   border: 0;
   box-shadow: none;
+}
+.cantinflas-xd-header--overlay[data-xd-header-surface] {
+  --color-header-background: var(--xd-header-surface-bg, #252525);
+  background: var(--color-header-background);
+}
+@media (scripting: enabled) {
+  body:has(page-header-logo-banner[data-logo-handoff])
+    [data-home-header][data-xd-fixed-header]:not([data-logo-revealed]) .wt-header__logo {
+    visibility: hidden;
+  }
 }
 .cantinflas-xd-header--overlay .wt-header__body {
   background: transparent;

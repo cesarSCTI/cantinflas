@@ -19,10 +19,25 @@ if (!customElements.get("page-header-logo-banner")) {
       }
 
       connectedCallback() {
+        if (
+          this.hasAttribute("data-logo-handoff") &&
+          document.querySelector("[data-xd-fixed-header][data-home-header]")
+        ) {
+          this.initLogoHandoff();
+          return;
+        }
         this.init();
       }
 
       disconnectedCallback() {
+        if (this.handoffController) {
+          this.handoffController.abort();
+          cancelAnimationFrame(this.handoffFrame);
+          this.handoffHeader?.removeAttribute("data-logo-revealed");
+          this.handoffController = null;
+          this.handoffFrame = null;
+          return;
+        }
         document.removeEventListener(
           "shopify:section:load",
           this.handleShopifyEditorEvent,
@@ -50,6 +65,55 @@ if (!customElements.get("page-header-logo-banner")) {
           window.removeEventListener("resize", this.resizeListener);
           this.resizeListener = null;
         }
+      }
+
+      initLogoHandoff() {
+        const picture = this.querySelector(".wt-logo-banner__picture");
+        const bannerLogo = picture.querySelector(".wt-logo-banner__logo");
+        const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+        this.handoffController = new AbortController();
+        const { signal } = this.handoffController;
+
+        const update = () => {
+          this.handoffFrame = null;
+          const header = document.querySelector("[data-xd-fixed-header][data-home-header]");
+          if (!header) return;
+
+          const destination = header.querySelector(".cantinflas-header-overlay-logo")
+            || header.querySelector(".wt-header__logo__link");
+          this.handoffHeader = header;
+          const banner = this.getBoundingClientRect();
+          const headerBounds = header.getBoundingClientRect();
+          const logo = destination?.getBoundingClientRect();
+          const distance = Math.max(1, banner.height - headerBounds.height);
+          const progress = Math.max(0, Math.min(1, 1 - (banner.bottom - headerBounds.bottom) / distance));
+          const ready = logo?.width > 0 && (!bannerLogo.complete || bannerLogo.naturalWidth > 0);
+          const settled = progress >= 1 || !ready;
+
+          header.toggleAttribute("data-logo-revealed", settled);
+          this.toggleAttribute("data-logo-settled", settled);
+          this.toggleAttribute("data-logo-active", ready);
+          this.classList.toggle("wt-logo-banner--vanishing", progress > .3);
+          if (settled) return;
+
+          const position = reducedMotion.matches ? 0 : progress;
+          const startWidth = Math.max(logo.width, Math.min(banner.width * .6, logo.width * 6));
+          const interpolate = (start, end) => start + (end - start) * position;
+          picture.style.setProperty("--xd-logo-width", `${interpolate(startWidth, logo.width)}px`);
+          picture.style.setProperty("--xd-logo-x", `${interpolate(banner.left + banner.width / 2, logo.left + logo.width / 2)}px`);
+          picture.style.setProperty("--xd-logo-y", `${interpolate(headerBounds.top + banner.height / 2, logo.top + logo.height / 2)}px`);
+        };
+        const schedule = () => {
+          if (!this.handoffFrame) this.handoffFrame = requestAnimationFrame(update);
+        };
+
+        window.addEventListener("scroll", schedule, { passive: true, signal });
+        window.addEventListener("resize", schedule, { passive: true, signal });
+        document.addEventListener("shopify:section:load", schedule, { signal });
+        reducedMotion.addEventListener("change", schedule, { signal });
+        bannerLogo.addEventListener("load", schedule, { signal });
+        bannerLogo.addEventListener("error", schedule, { signal });
+        update();
       }
 
       isMobile() {

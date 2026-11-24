@@ -22,6 +22,7 @@
   {% style %}
     #shopify-section-{{ section.id }} {
       --xd-header-overlay-text: {{ section.settings.xd_overlay_text }};
+      --xd-header-surface-bg: {{ section.settings.xd_surface_bg | default: '#252525' }};
       --xd-header-overlay-bg: {% if xd_reserve %}{{ section.settings.xd_surface_bg | default: '#252525' }}{% else %}{{ section.settings.xd_overlay_bg }}{% endif %};
     }
   {% endstyle %}
@@ -98,6 +99,8 @@
   role="banner"
   id="header"
   data-hide-over-selector=".collection__grid"
+  {% if xd_overlay %}data-xd-fixed-header{% endif %}
+  {% if request.page_type == 'index' %}data-home-header{% endif %}
   {% if xd_reserve %}data-overlay-reserve{% endif %}
   class="
     wt-header{% if section.settings.xd_text_controls %} cantinflas-xd-header{% endif %}{% if xd_overlay %} cantinflas-xd-header--overlay{% unless section.settings.xd_overlay_logo %} cantinflas-xd-header--hero-brand{% endunless %}{% endif %}

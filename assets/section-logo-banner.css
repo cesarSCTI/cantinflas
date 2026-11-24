@@ -61,6 +61,24 @@ page-header-logo-banner::after {
   position: fixed;
   opacity: 1;
 }
+page-header-logo-banner[data-logo-active] .wt-logo-banner__picture {
+  position: fixed;
+  top: var(--xd-logo-y);
+  left: var(--xd-logo-x);
+  width: var(--xd-logo-width);
+  height: auto;
+  opacity: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: none;
+}
+page-header-logo-banner[data-logo-settled] .wt-logo-banner__picture {
+  visibility: hidden;
+}
+page-header-logo-banner[data-logo-active] .wt-logo-banner__logo {
+  width: 100%;
+  transition: none;
+}
 .low-battery-mode .wt-logo-banner__picture {
   position: absolute;
   transition: unset;

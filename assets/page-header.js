@@ -25,26 +25,61 @@ class PageHeaderSection extends HTMLElement {
 
   connectedCallback() {
     this.init();
-    if (this.hasAttribute("data-overlay-reserve")) {
-      const updateHeaderSpace = () => {
-        document.documentElement.style.setProperty(
-          "--xd-header-space",
-          `${this.offsetHeight}px`,
-        );
-      };
-
-      updateHeaderSpace();
-      this.overlayResizeObserver = new ResizeObserver(updateHeaderSpace);
-      this.overlayResizeObserver.observe(this);
-    }
+    if (this.hasAttribute("data-xd-fixed-header")) this.initFixedOverlay();
   }
 
   disconnectedCallback() {
     if (this.overlayResizeObserver) {
       this.overlayResizeObserver.disconnect();
+      this.overlayController.abort();
+      cancelAnimationFrame(this.overlayFrame);
       document.documentElement.style.removeProperty("--xd-header-space");
     }
     this.disableStickyHeader();
+  }
+
+  initFixedOverlay() {
+    const reservesSpace = this.hasAttribute("data-overlay-reserve");
+    this.overlayController = new AbortController();
+    const { signal } = this.overlayController;
+    let announcement;
+    let cover;
+
+    const update = () => {
+      this.overlayFrame = null;
+      const top = Math.max(0, announcement?.getBoundingClientRect().bottom || 0);
+      const bottom = top + this.offsetHeight;
+      this.parentElement.style.setProperty("--xd-header-top", `${top}px`);
+      this.toggleAttribute("data-overlay-reserve", reservesSpace || !cover);
+      this.toggleAttribute("data-xd-header-surface", !cover || cover.getBoundingClientRect().bottom <= bottom);
+      document.documentElement.style.setProperty("--xd-header-space", `${this.offsetHeight}px`);
+      this.setAttribute("data-xd-header-ready", "");
+    };
+    const schedule = () => {
+      if (!this.overlayFrame) this.overlayFrame = requestAnimationFrame(update);
+    };
+
+    this.overlayResizeObserver = new ResizeObserver(schedule);
+    const refreshSections = () => {
+      announcement = document.querySelector(".wt-announcement");
+      cover = reservesSpace ? null : document.querySelector(
+        "page-header-logo-banner, #root > .shopify-section:first-of-type .cantinflas-video-hero",
+      );
+      this.overlayResizeObserver.disconnect();
+      this.overlayResizeObserver.observe(this);
+      if (announcement) this.overlayResizeObserver.observe(announcement);
+      if (cover) this.overlayResizeObserver.observe(cover);
+      schedule();
+    };
+
+    refreshSections();
+    cancelAnimationFrame(this.overlayFrame);
+    update();
+    window.addEventListener("scroll", schedule, { passive: true, signal });
+    window.addEventListener("resize", schedule, { passive: true, signal });
+    document.addEventListener("shopify:section:load", refreshSections, { signal });
+    document.addEventListener("shopify:section:unload", refreshSections, { signal });
+    document.addEventListener("shopify:section:reorder", refreshSections, { signal });
   }
 
   getHeaderHeight() {

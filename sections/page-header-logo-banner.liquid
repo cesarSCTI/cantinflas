@@ -33,6 +33,7 @@
   <page-header-logo-banner
     class="{{ width_line }} "
     data-section-id="{{ section.id }}"
+    {% if section.settings.logo_image != blank %}data-logo-handoff{% endif %}
     {% if request.design_mode %}
       data-design-mode="true"
     {% endif %}
@@ -64,7 +65,7 @@
               <img
                 srcset="{{ section.settings.logo_image | image_url: width: logo_image_size }} 1x, {{ section.settings.logo_image | image_url: width: logo_image_size_double }} 2x"
                 src="{{ section.settings.logo_image | image_url: width: logo_image_size }}"
-                loading="lazy"
+                loading="eager"
                 width="{{ section.settings.logo_image.width}}"
                 height="{{ section.settings.logo_image.height }}"
                 class="wt-logo-banner__logo"
