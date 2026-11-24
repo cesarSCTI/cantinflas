@@ -591,7 +591,7 @@
         "heading_align": "left",
         "intro_align": "left",
         "intro_color": "",
-        "heading_size": 60,
+        "heading_size": 42,
         "heading_mobile": 32,
         "hotspot_full_width": false,
         "hotspot_overlay_copy": false,
@@ -612,7 +612,7 @@
     "museum": {
       "type": "cantinflas-museum-banner",
       "custom_css": [
-        "button{letter-spacing: 1px;}"
+        "button {letter-spacing: 1px;}"
       ],
       "settings": {
         "use_collage": true,
