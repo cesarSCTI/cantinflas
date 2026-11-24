@@ -89,6 +89,8 @@
         "1c9b0bb2-fe62-4649-9439-76836162d773": {
           "type": "collapsible_tab",
           "settings": {
+            "xd_shop_shipping": false,
+            "xd_product_specs": false,
             "heading": "Especificaciones",
             "content": "<ul><li><strong>Agave: </strong>Tequilana Weber var. Azul – Los Altos de Jalisco</li><li><strong>Cocción: </strong>50% horno de mampostería (~48 h) / 50% autoclave (~16 h)</li><li><strong>Extracción: </strong>Molienda tradicional</li><li><strong>Fermentación: </strong>Acero inoxidable</li><li><strong>Destilación: </strong>Doble, alambique con interiores de cobre</li><li><strong>Expresión: </strong>Blanco (sin crianza)</li><li><strong>ABV / Volumen: </strong>40% / 700 ml</li><li><strong>NOM / Región: </strong>1499 / Arandas, Jalisco (Los Altos)</li></ul>",
             "metafield_variables": "",
@@ -108,6 +110,8 @@
         "5fed6e0f-fb7e-4874-8ba9-3321623fc828": {
           "type": "collapsible_tab",
           "settings": {
+            "xd_shop_shipping": false,
+            "xd_product_specs": false,
             "heading": "Políticas de Envío",
             "content": "",
             "metafield_variables": "",
@@ -407,10 +411,15 @@
           "type": "cocktail",
           "settings": {
             "title": "MARGARITA",
+            "image": "shopify://shop_images/img-receta-margarita.png",
             "reference": "margarita",
             "image_x": 50,
             "image_y": 50,
             "title_color": "",
+            "back_image": "shopify://shop_images/img-receta-margarita-back.png",
+            "back_image_fit": "contain",
+            "back_background": "#252525",
+            "back_text_color": "#ffffff",
             "details": "<p>m m m m</p>",
             "link": "",
             "link_label": ""
@@ -420,10 +429,15 @@
           "type": "cocktail",
           "settings": {
             "title": "PALOMA",
+            "image": "shopify://shop_images/img-receta-paloma.png",
             "reference": "paloma",
             "image_x": 50,
             "image_y": 50,
             "title_color": "",
+            "back_image": "shopify://shop_images/img-receta-paloma-back.png",
+            "back_image_fit": "contain",
+            "back_background": "#252525",
+            "back_text_color": "#ffffff",
             "details": "",
             "link": "",
             "link_label": ""
@@ -433,10 +447,15 @@
           "type": "cocktail",
           "settings": {
             "title": "MEXICAN EL DIABLO",
+            "image": "shopify://shop_images/img-receta-mexican_el_diablo.png",
             "reference": "diablo",
             "image_x": 50,
             "image_y": 50,
             "title_color": "",
+            "back_image": "shopify://shop_images/img-receta-mexican_el_diablo-back.png",
+            "back_image_fit": "contain",
+            "back_background": "#252525",
+            "back_text_color": "#ffffff",
             "details": "",
             "link": "",
             "link_label": ""
