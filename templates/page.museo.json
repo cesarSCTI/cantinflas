@@ -955,12 +955,12 @@
         "heading_width": 54,
         "heading_size": 46,
         "heading_mobile": 36,
-        "text_size": 20,
+        "text_size": 16,
         "text_mobile": 16,
         "content_width": 1740,
         "column_gap": 48,
-        "padding": 72,
-        "mobile_padding": 28
+        "padding": 76,
+        "mobile_padding": 0
       }
     },
     "legacy": {
@@ -1004,6 +1004,9 @@
       "block_order": [
         "piece1",
         "piece2"
+      ],
+      "custom_css": [
+        "h2.hero__title {font-family: \"Montserrat\" !important; font-size: 40px !important;}"
       ],
       "settings": {
         "xd_process_design": false,
