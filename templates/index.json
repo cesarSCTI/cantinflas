@@ -206,7 +206,10 @@
         "piece2"
       ],
       "custom_css": [
-        "h2 {font-size: 60px;}"
+        "h2 {font-size: 60px;}",
+        "button {font-weight: 700;}",
+        "a.hero__button--secondary {background: #36845d; color: #fff; padding: 10px 20px; border-radius: 45px; font-weight: 500;}",
+        ".card__price span {color: #2b3d8f !important;}"
       ],
       "settings": {
         "xd_text_controls": true,
@@ -217,7 +220,7 @@
         "xd_tabs_color": "#36845d",
         "xd_tabs_align": "center",
         "xd_cards_color": "",
-        "xd_cards_align": "inherit",
+        "xd_cards_align": "center",
         "xd_intro": "<p>Lo que más se antoja de cada rincón del mundo Cantinflas.</p>",
         "heading": "Los consentidos de la casa",
         "products_to_show": 4
