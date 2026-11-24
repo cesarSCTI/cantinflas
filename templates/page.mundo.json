@@ -34,6 +34,9 @@
     },
     "cantinflas_legacy_intro_WgFUcz": {
       "type": "cantinflas-legacy-intro",
+      "custom_css": [
+        ".cantinflas-legacy-intro {padding-bottom: 0;}"
+      ],
       "name": "Título y texto del legado",
       "settings": {
         "heading": "Recuerdos de Cantinflas",
@@ -271,7 +274,7 @@
         "media_WnkqbH"
       ],
       "custom_css": [
-        ".cantinflas-gallery__media{height: auto;}"
+        ".cantinflas-gallery__media {height: auto;}"
       ],
       "settings": {
         "xd_centered": false,
