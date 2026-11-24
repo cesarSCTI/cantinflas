@@ -448,6 +448,9 @@
         "photo7",
         "photo8"
       ],
+      "custom_css": [
+        ".cantinflas-editorial__collage-button {font-weight: 600; letter-spacing: 1px !important;}"
+      ],
       "settings": {
         "heading_in_copy": false,
         "film_use_default_background": true,
