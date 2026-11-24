@@ -54,7 +54,7 @@
           "settings": {
             "film_kicker": "",
             "heading": "",
-            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br/>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br/>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br/><br/>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>",
+            "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br/>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br/>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br/><br/><strong>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</strong></p>",
             "image": "shopify://shop_images/Cantinflas-el_hombre_detras_del_personaje.png",
             "label": "",
             "link": "",
@@ -78,6 +78,9 @@
       },
       "block_order": [
         "portrait"
+      ],
+      "custom_css": [
+        "p strong{color:#2B3D8F;}"
       ],
       "settings": {
         "heading_in_copy": true,
