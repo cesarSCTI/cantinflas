@@ -52,6 +52,7 @@
         "portrait": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "<p>Mario Moreno nació en la Ciudad de México en 1911. Desde joven fue una persona inquieta y versátil: practicó boxeo, trabajó como bailarín y cantante y pasó por distintos oficios antes de encontrar su camino en el espectáculo.<br/>Su entrada al mundo artístico ocurrió en las carpas, escenarios populares e itinerantes donde comenzó a trabajar como bailarín y poco a poco fue incorporándose a distintos números. Ahí descubrió su facilidad para conectar con el público y para hacer de la improvisación una parte esencial de su trabajo.<br/>Con el tiempo, Mario Moreno fue construyendo una carrera como comediante y actor, mientras aquel personaje que comenzaba a tomar forma frente al público se convertiría en Cantinflas.<br/><br/>Así comenzó una trayectoria que lo llevaría de los escenarios populares a convertirse en una de las figuras más reconocidas del espectáculo mexicano.</p>",
             "image": "shopify://shop_images/Cantinflas-el_hombre_detras_del_personaje.png",
@@ -79,8 +80,13 @@
         "portrait"
       ],
       "settings": {
-        "heading": "El hombre detrás del personaje",
         "heading_in_copy": true,
+        "film_use_default_background": true,
+        "film_heading_line": "",
+        "film_kicker_color": "#c22921",
+        "card_purchase_buttons": false,
+        "card_purchase_bg": "#c22921",
+        "heading": "El hombre detrás del personaje",
         "intro": "",
         "layout": "alternating",
         "background": "#ffffff",
@@ -113,6 +119,7 @@
         "piece1": {
           "type": "item",
           "settings": {
+            "film_kicker": "Donde todo comenzó",
             "heading": "Carpas",
             "text": "<p>Entre escenarios itinerantes, personajes y público, Mario Moreno comenzó a encontrar su propia forma de hacer comedia</p>",
             "label": "",
@@ -131,38 +138,13 @@
             "hide_media": true,
             "marker_x": 48,
             "marker_y": 64,
-            "product": "",
-            "film_kicker": "Donde todo comenzó"
-          }
-        },
-        "piece2": {
-          "type": "item",
-          "settings": {
-            "heading": "Cine",
-            "text": "<p>El personaje que nació frente al público encontró un nuevo escenario y llegó a millones de espectadores.</p>",
-            "label": "",
-            "link": "",
-            "image_asset": "",
-            "image_alt": "",
-            "image_width": 1080,
-            "image_height": 1080,
-            "title_align": "right",
-            "text_align": "right",
-            "button_align": "left",
-            "title_color": "",
-            "copy_color": "",
-            "card_color": "",
-            "button_color": "",
-            "hide_media": true,
-            "marker_x": 48,
-            "marker_y": 64,
-            "product": "",
-            "film_kicker": "Cantinflas llegó a la pantalla"
+            "product": ""
           }
         },
         "piece3": {
           "type": "item",
           "settings": {
+            "film_kicker": "El personaje tomó forma.",
             "heading": "Teatro",
             "text": "<p>La experiencia sobre el escenario ayudó a construir la personalidad, los gestos y el lenguaje que harían reconocible a Cantinflas.</p>",
             "label": "",
@@ -181,8 +163,32 @@
             "hide_media": true,
             "marker_x": 48,
             "marker_y": 64,
-            "product": "",
-            "film_kicker": "El personaje tomó forma."
+            "product": ""
+          }
+        },
+        "piece2": {
+          "type": "item",
+          "settings": {
+            "film_kicker": "Cantinflas llegó a la pantalla",
+            "heading": "Cine",
+            "text": "<p>El personaje que nació frente al público encontró un nuevo escenario y llegó a millones de espectadores.</p>",
+            "label": "",
+            "link": "",
+            "image_asset": "",
+            "image_alt": "",
+            "image_width": 1080,
+            "image_height": 1080,
+            "title_align": "right",
+            "text_align": "right",
+            "button_align": "left",
+            "title_color": "",
+            "copy_color": "",
+            "card_color": "",
+            "button_color": "",
+            "hide_media": true,
+            "marker_x": 48,
+            "marker_y": 64,
+            "product": ""
           }
         }
       },
@@ -192,6 +198,12 @@
         "piece2"
       ],
       "settings": {
+        "heading_in_copy": false,
+        "film_use_default_background": true,
+        "film_heading_line": "al cine",
+        "film_kicker_color": "#c22921",
+        "card_purchase_buttons": false,
+        "card_purchase_bg": "#c22921",
         "heading": "De las carpas",
         "intro": "",
         "layout": "filmstrip",
@@ -217,10 +229,7 @@
         "collage_button_bg_2": "#252525",
         "collage_button_text_2": "#ffffff",
         "collage_motion": false,
-        "column_order": "alternate",
-        "film_heading_line": "al cine",
-        "film_use_default_background": true,
-        "film_kicker_color": "#c22921"
+        "column_order": "alternate"
       }
     },
     "anatomy": {
@@ -338,6 +347,12 @@
         "cine"
       ],
       "settings": {
+        "heading_in_copy": false,
+        "film_use_default_background": true,
+        "film_heading_line": "",
+        "film_kicker_color": "#c22921",
+        "card_purchase_buttons": false,
+        "card_purchase_bg": "#c22921",
         "heading": "",
         "intro": "",
         "layout": "hotspots",
@@ -369,9 +384,136 @@
     "films": {
       "type": "cantinflas-film-posters",
       "blocks": {
+        "media_9RCAeB": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_Patrullero_777.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_UNUgxr": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-Caballero_a_la_medida.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_GfPHUd": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_Profe.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_kjteQc": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/bb54543173fcc246173d1cd9d630dbc2dce702a0bd944a2c7487b6d855cfec85.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_AYDq7q": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_Padrecito.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_cxKTJ3": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_senor_Doctor.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_bEL7rN": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_bombero_atomico.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_3qGcTM": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_senor_fotografo.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_BPFLtH": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-Entrega_Inmediata.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
         "media_HMaQYP": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Ni_sangre_ni_arena.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -385,6 +527,21 @@
         "media_3q9jHV": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_bolero_de_Raquel.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_yMNJke": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-La_Vuelta_al_Mundo_en_80_Dias.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -398,6 +555,7 @@
         "media_r9Hqq3": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_barrendero.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -411,6 +569,7 @@
         "media_Pkkd3i": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_Extra.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -424,6 +583,7 @@
         "media_Qi9m4w": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Conserje_en_Condominio.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -437,6 +597,7 @@
         "piece1": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_signo_de_la_muerte.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -450,6 +611,7 @@
         "piece2": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Don_Quijote_Cabalga_de_Nuevo.png",
             "title": "Ahí está el detalle",
             "caption": "",
             "frame": "#f4ede1",
@@ -463,6 +625,7 @@
         "piece3": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_Circo.png",
             "title": "El bolero de Raquel",
             "caption": "",
             "frame": "#f4ede1",
@@ -476,6 +639,7 @@
         "piece4": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Romeo_y_Julieta.png",
             "title": "El Padrecito",
             "caption": "",
             "frame": "#f4ede1",
@@ -489,6 +653,7 @@
         "piece5": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Asi_es_mi_tierra.png",
             "title": "El Patrullero 777",
             "caption": "",
             "frame": "#f4ede1",
@@ -502,6 +667,7 @@
         "piece6": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-Un_dia_con_el_diablo.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -515,6 +681,49 @@
         "piece7": {
           "type": "media",
           "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_ministro_y_Yo.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_LpPMrV": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-Su_Excelencia.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_aBq76w": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-El_portero.png",
+            "title": "",
+            "caption": "",
+            "frame": "#f4ede1",
+            "caption_color": "#ffffff",
+            "title_color": "",
+            "title_align": "center",
+            "caption_align": "center",
+            "position": "auto"
+          }
+        },
+        "media_XLBJ4M": {
+          "type": "media",
+          "settings": {
+            "image": "shopify://shop_images/Cantinflas-Ahi_esta_el_detalle.png",
             "title": "",
             "caption": "",
             "frame": "#f4ede1",
@@ -527,8 +736,18 @@
         }
       },
       "block_order": [
+        "media_9RCAeB",
+        "media_UNUgxr",
+        "media_GfPHUd",
+        "media_kjteQc",
+        "media_AYDq7q",
+        "media_cxKTJ3",
+        "media_bEL7rN",
+        "media_3qGcTM",
+        "media_BPFLtH",
         "media_HMaQYP",
         "media_3q9jHV",
+        "media_yMNJke",
         "media_r9Hqq3",
         "media_Pkkd3i",
         "media_Qi9m4w",
@@ -538,7 +757,10 @@
         "piece4",
         "piece5",
         "piece6",
-        "piece7"
+        "piece7",
+        "media_LpPMrV",
+        "media_aBq76w",
+        "media_XLBJ4M"
       ],
       "settings": {
         "heading": "Cantinflas en la Pantalla",
@@ -676,6 +898,12 @@
       "type": "cantinflas-editorial",
       "custom_css": [],
       "settings": {
+        "heading_in_copy": false,
+        "film_use_default_background": true,
+        "film_heading_line": "",
+        "film_kicker_color": "#c22921",
+        "card_purchase_buttons": false,
+        "card_purchase_bg": "#c22921",
         "heading": "Cantinflas había dejado de ser solamente un personaje mexicano",
         "intro": "<p>Su humor, su imagen y su manera de interpretar trascendieron fronteras, llevando una parte de la cultura popular mexicana a millones de espectadores y demostrando hasta dónde puede llegar un personaje cuando conecta con públicos de todo el mundo.</p>",
         "layout": "alternating",
