@@ -36,9 +36,10 @@
     "featured": {
       "type": "featured-collection",
       "custom_css": [
-        "h2 {font-size: 40px;}",
+        "h2 {font-size: 50px;}",
         ".cantinflas-featured-intro.rte {margin-left: calc(var(--gap, 8px) * 2);}",
-        "a.hero__button--secondary {background: #36845d; color: #fff; padding: 10px 20px; border-radius: 45px; font-weight: 500;}"
+        "a.hero__button--secondary {background: #36845d; color: #fff; padding: 10px 20px; border-radius: 45px; font-weight: 500;}",
+        ".card__price span {color: #2b3d8f !important;}"
       ],
       "settings": {
         "xd_link_label": "Ir a productos",
