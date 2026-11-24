@@ -886,7 +886,7 @@
       ],
       "custom_css": [
         ".cantinflas-journey article:last-of-type {background: linear-gradient( 180deg, rgba(255, 255, 255, 0) 20%, rgba(244, 237, 225, 1) 73% );}",
-        ".cantinflas-journey{padding-bottom:0px;}"
+        ".cantinflas-journey {padding-bottom: 0px;}"
       ],
       "settings": {
         "heading": "De México para el Mundo",
@@ -972,10 +972,11 @@
             "xd_process_photo": false,
             "xd_step_text": "",
             "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/img-peliculas-legado.png",
             "heading": "En las películas que todavía se recuerdan.",
             "size_heading": 100,
             "size_heading_mobile": 100,
-            "text": "Su legado también vive en la cultura actual.",
+            "text": "",
             "button_select": "primary",
             "button_label": "",
             "button_link": "",
@@ -988,6 +989,7 @@
             "xd_process_photo": false,
             "xd_step_text": "",
             "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/img-frases-cantinflas.png",
             "heading": "En las frases que seguimos repitiendo.",
             "size_heading": 100,
             "size_heading_mobile": 100,
@@ -1005,12 +1007,12 @@
       ],
       "settings": {
         "xd_process_design": false,
-        "xd_process_heading": "Método de Producción",
+        "xd_process_heading": "",
         "xd_process_heading_color": "#36845d",
         "xd_process_heading_align": "left",
         "xd_process_heading_size": 80,
         "xd_process_heading_mobile": 36,
-        "xd_process_body_size": 22,
+        "xd_process_body_size": 19,
         "xd_process_radius": 16,
         "xd_process_gradient": "",
         "layout": "image_first",
