@@ -1,4 +1,5 @@
 .cantinflas-origins {
+  display: block;
   background-color: var(--origins-background);
   background-image: var(--origins-background-art, none);
   background-position: center bottom;
@@ -10,14 +11,13 @@
   display: grid;
   width: min(100%, 1920px);
   margin-inline: auto;
-  min-height: min(62.97vw, 1209px);
   grid-template-columns: 5.25% 19.5% 2.45% 26.5% 2.4% 20% 18% 5.9%;
-  grid-template-rows: repeat(3, minmax(min(20.99vw, 403px), auto));
+  grid-template-rows: minmax(min(25.8vw, 495px), auto) minmax(min(16.7vw, 321px), auto) minmax(min(18.5vw, 355px), auto);
 }
 .cantinflas-origins__title {
   grid-area: 1 / 6 / 2 / 8;
   align-self: start;
-  margin-top: min(9.8vw, 188px);
+  margin-top: min(9.2vw, 177px);
   text-align: var(--origins-heading-align);
 }
 .cantinflas-origins__title h2 {
@@ -30,13 +30,13 @@
 .cantinflas-origins__film {
   grid-area: 1 / 4 / 4 / 5;
   align-self: start;
-  padding-block: min(2.25vw, 43px) min(1.6vw, 31px);
+  padding-block: min(1.3vw, 25px) min(1.1vw, 21px);
 }
 .cantinflas-origins__film :is(img, svg) {
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(58.3vw, 1119px);
+  max-height: min(58.6vw, 1125px);
   object-fit: contain;
 }
 .cantinflas-origins__placeholder { aspect-ratio: 436 / 957; }
@@ -44,22 +44,22 @@
   grid-column: 2 / 8;
   min-width: 0;
   align-self: start;
-  margin-block: min(2vw, 38px);
+  margin-block: min(1.2vw, 23px);
 }
-.cantinflas-origins__chapter--1 { grid-area: 1 / 2; margin-top: min(6.5vw, 125px); }
-.cantinflas-origins__chapter--2 { grid-area: 2 / 6; margin-top: min(6.8vw, 131px); }
-.cantinflas-origins__chapter--3 { grid-area: 3 / 2; margin-top: min(1.45vw, 28px); }
+.cantinflas-origins__chapter--1 { grid-area: 1 / 2; margin-top: min(5.8vw, 111px); }
+.cantinflas-origins__chapter--2 { grid-area: 2 / 6; margin-top: min(1.7vw, 33px); }
+.cantinflas-origins__chapter--3 { grid-area: 3 / 2; margin-top: min(1.1vw, 21px); }
 .cantinflas-origins__chapter h3 {
   margin: 0;
   color: var(--chapter-title);
   text-align: var(--chapter-title-align);
-  font-size: clamp(26px, 3.22vw, 62px);
+  font-size: clamp(24px, 3.22vw, 62px);
   line-height: 1;
 }
 .cantinflas-origins__kicker,
 .cantinflas-origins__copy {
   text-align: var(--chapter-copy-align);
-  font-size: clamp(14px, 1.17vw, 22px);
+  font-size: clamp(12px, 1.17vw, 22px);
   line-height: 1.32;
 }
 .cantinflas-origins__kicker {
@@ -71,11 +71,20 @@
 .cantinflas-origins__copy { color: var(--chapter-copy); margin-top: .7em; }
 .cantinflas-origins__copy p { font-size: inherit; color: inherit; margin: 0; }
 .cantinflas-origins__copy p + p { margin-top: .7em; }
-@media (max-width: 1099px) {
+@media (prefers-reduced-motion: no-preference) {
+  .cantinflas-origins__chapter {
+    transition: opacity .52s ease-out, transform .52s ease-out;
+    transition-delay: var(--origins-reveal-delay, 0ms);
+  }
+  .cantinflas-origins__chapter[data-origins-pending]:not(:focus-within) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@media (width < 750px) {
   .cantinflas-origins { background-size: 100% auto; }
   .cantinflas-origins__inner {
     width: 88%;
-    min-height: 0;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     gap: 1.7rem;
@@ -85,4 +94,6 @@
   .cantinflas-origins__film { grid-area: auto; width: min(52vw, 260px); justify-self: center; padding: 0; }
   .cantinflas-origins__film :is(img, svg) { max-height: min(112vw, 540px); }
   .cantinflas-origins__chapter { max-width: 42rem; }
+  .cantinflas-origins__chapter h3 { font-size: 26px; }
+  .cantinflas-origins__kicker, .cantinflas-origins__copy { font-size: 14px; }
 }
