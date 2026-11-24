@@ -284,8 +284,9 @@
           "type": "image",
           "settings": {
             "xd_process_photo": true,
-            "xd_step_text": "<p>50% en hornos de mampostería (~48 h): cocción lenta que desarrolla notas profundas de agave cocido.<br>50% en autoclave (~16 h): cocción controlada para consistencia y precisión en el punto de cocción.</p>",
+            "xd_step_text": "<p>50% en hornos de mampostería (~48 h): cocción lenta que desarrolla notas profundas de agave cocido.<br/>50% en autoclave (~16 h): cocción controlada para consistencia y precisión en el punto de cocción.</p>",
             "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/1-coccion.png",
             "heading": "1- Cocción (50/50)",
             "size_heading": 100,
             "size_heading_mobile": 100,
@@ -302,6 +303,7 @@
             "xd_process_photo": true,
             "xd_step_text": "<p>La fibra cocida se prensa en molinos tradicionales, extrayendo mieles ricas en azúcares que darán origen a mostos limpios y balanceados</p>",
             "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/2-molienda_extraccion.png",
             "heading": "2- Molienda / Extracción",
             "size_heading": 100,
             "size_heading_mobile": 100,
@@ -311,11 +313,66 @@
             "button_link": "/",
             "disable_on_mobile": false
           }
+        },
+        "image_LyDNak": {
+          "type": "image",
+          "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/3-fermentacion.png",
+            "mobile_image": "shopify://shop_images/3-fermentacion.png",
+            "heading": "",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        },
+        "image_ge6XR6": {
+          "type": "image",
+          "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/4-detilacion.png",
+            "heading": "",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        },
+        "image_MXCa6q": {
+          "type": "image",
+          "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/5-control_de_calidad.png",
+            "heading": "",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
         }
       },
       "block_order": [
         "coccion",
-        "molienda"
+        "molienda",
+        "image_LyDNak",
+        "image_ge6XR6",
+        "image_MXCa6q"
       ],
       "settings": {
         "xd_process_design": true,
@@ -326,7 +383,7 @@
         "xd_process_heading_mobile": 36,
         "xd_process_body_size": 22,
         "xd_process_radius": 16,
-        "xd_process_gradient": "linear-gradient(180deg, #ffffff 0%, #f4ede1 100%)",
+        "xd_process_gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(244, 237, 225, 1) 100%)",
         "layout": "image_first",
         "full-width-enabled": false,
         "image_ratio": "adapt",
