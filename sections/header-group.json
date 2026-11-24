@@ -76,10 +76,15 @@
       ],
       "settings": {
         "xd_overlay": "all",
+        "xd_overlay_bg": "rgba(0,0,0,0)",
+        "xd_surface_bg": "#252525",
+        "xd_overlay_text": "#ffffff",
         "xd_overlay_logo": true,
         "xd_text_controls": true,
         "xd_nav_color": "#252525",
+        "xd_nav_align": "inherit",
         "xd_icons_color": "#252525",
+        "xd_icons_align": "inherit",
         "layout": "option_5",
         "sticky_header": true,
         "sticky_header_always": false,
@@ -109,7 +114,6 @@
     },
     "page_header_logo_banner_DJLpfi": {
       "type": "page-header-logo-banner",
-      "disabled": true,
       "custom_css": [],
       "settings": {
         "logo_image": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
