@@ -208,8 +208,7 @@
       "custom_css": [
         "h2 {font-size: 60px;}",
         "button {font-weight: 700;}",
-        "a.hero__button--secondary {background: #36845d; color: #fff; padding: 10px 20px; border-radius: 45px; font-weight: 500;}",
-        ".card__price span {color: #2b3d8f !important;}"
+        ".card__price {color: #2b3d8f !important;}"
       ],
       "settings": {
         "xd_text_controls": true,
