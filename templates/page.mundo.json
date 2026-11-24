@@ -274,7 +274,8 @@
         "media_WnkqbH"
       ],
       "custom_css": [
-        ".cantinflas-gallery__media {height: auto;}"
+        ".cantinflas-gallery__media {height: auto;}",
+        "section.cantinflas-gallery.cantinflas-gallery--original {padding-top: 20px;}"
       ],
       "settings": {
         "xd_centered": false,
