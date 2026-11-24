@@ -37,7 +37,8 @@
       "type": "featured-collection",
       "custom_css": [
         "h2 {font-size: 40px;}",
-        ".cantinflas-featured-intro.rte {margin-left: calc(var(--gap, 8px) * 2);;}"
+        ".cantinflas-featured-intro.rte {margin-left: calc(var(--gap, 8px) * 2);}",
+        "a.hero__button--secondary {background: #36845d; color: #fff; padding: 10px 20px; border-radius: 45px; font-weight: 500;}"
       ],
       "settings": {
         "xd_link_label": "Ir a productos",
@@ -69,7 +70,7 @@
         "image_ratio": "square",
         "show_video": false,
         "show_secondary_image": false,
-        "show_vendor": true,
+        "show_vendor": false,
         "enable_vendor_link": false,
         "show_product_rating": false,
         "enable_quick_add_button": false,
