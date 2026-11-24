@@ -69,7 +69,13 @@ if (!customElements.get("cantinflas-tequila-cocktails")) {
         this.controller = new AbortController();
         const options = { signal: this.controller.signal };
         this.addEventListener("click", this.handleClick, options);
-        this.addEventListener("close", this.restoreFocus, { ...options, capture: true });
+        this.addEventListener("keydown", this.handleKeydown, options);
+        for (const card of this.querySelectorAll(".ct-cocktails__card")) {
+          const button = card.querySelector(".ct-cocktails__plus");
+          this.setFace(card, button, false);
+          card.setAttribute("data-enhanced", "");
+          button.hidden = false;
+        }
       }
 
       disconnectedCallback() {
@@ -77,27 +83,29 @@ if (!customElements.get("cantinflas-tequila-cocktails")) {
       }
 
       handleClick = (event) => {
-        const trigger = event.target.closest("[data-tequila-dialog-open]");
-        if (trigger) {
-          const dialog = document.getElementById(trigger.getAttribute("aria-controls"));
-          if (!dialog || typeof dialog.showModal !== "function") return;
-          event.preventDefault();
-          this.trigger = trigger;
-          dialog.showModal();
-        } else if (event.target.matches("dialog[open]")) {
-          const bounds = event.target.getBoundingClientRect();
-          if (
-            event.clientX < bounds.left || event.clientX > bounds.right ||
-            event.clientY < bounds.top || event.clientY > bounds.bottom
-          ) {
-            event.target.close();
-          }
-        }
+        const button = event.target.closest(".ct-cocktails__plus");
+        if (!button) return;
+        const card = button.closest(".ct-cocktails__card");
+        this.setFace(card, button, !card.hasAttribute("data-flipped"));
       };
 
-      restoreFocus = () => {
-        this.trigger?.focus();
+      handleKeydown = (event) => {
+        if (event.key !== "Escape" || event.defaultPrevented) return;
+        const card = event.target.closest(".ct-cocktails__card[data-flipped]");
+        if (!card) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const button = card.querySelector(".ct-cocktails__plus");
+        button.focus();
+        this.setFace(card, button, false);
       };
+
+      setFace(card, button, flipped) {
+        card.toggleAttribute("data-flipped", flipped);
+        button.setAttribute("aria-expanded", String(flipped));
+        card.querySelector(".ct-cocktails__front").inert = flipped;
+        card.querySelector(".ct-cocktails__back").inert = !flipped;
+      }
     },
   );
 }

@@ -59,15 +59,36 @@
 .ct-tasting__copy h3, .ct-cocktails__card > h3 { margin: 0 0 .35em; color: var(--ct-note-color, var(--ct-card-title)); font-size: clamp(14px, 1.55vw, var(--ct-card-size)); text-align: var(--ct-body-align); }
 .ct-cocktails .ct-tequila__copy { max-width: 1080px; margin: 1.5em auto 0; }
 .ct-cocktails__grid { width: min(94%, 1610px); gap: min(2.08vw, 40px); margin-top: clamp(28px, 5.35vw, 102px); }
-.ct-cocktails__media { position: relative; aspect-ratio: 507/714; overflow: hidden; border-radius: var(--ct-card-radius); }
+.ct-cocktails__media { position: relative; }
+.ct-cocktails__front { aspect-ratio: 507 / 714; }
+.ct-cocktails__front, .ct-cocktails__back { border-radius: var(--ct-card-radius); overflow: hidden; }
+.ct-cocktails__back { background: var(--ct-back-bg); color: var(--ct-back-text); }
+.ct-cocktails__back > img { aspect-ratio: 507 / 714; object-fit: var(--ct-back-fit); }
+.ct-cocktails__details { padding: clamp(14px, 1.4vw, 24px); background: var(--ct-back-bg); color: inherit; font-size: clamp(14px, 1.1vw, 18px); line-height: 1.45; overflow-wrap: anywhere; }
+.ct-cocktails__details :is(p, li, a) { color: inherit; }
+.ct-cocktails__details p { font-size: inherit; }
+.ct-cocktails__details > :last-child { margin-bottom: 0; }
+.ct-cocktails__details a { text-decoration: underline; }
+.ct-cocktails__card:not([data-enhanced]) .ct-cocktails__back[data-empty] { display: none; }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__media { aspect-ratio: 507 / 714; perspective: 1000px; }
+.ct-cocktails__card[data-enhanced] :is(.ct-cocktails__faces, .ct-cocktails__front, .ct-cocktails__back) { position: absolute; inset: 0; }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__faces { transform-style: preserve-3d; transition: transform .55s ease-in-out; }
+.ct-cocktails__card[data-enhanced] :is(.ct-cocktails__front, .ct-cocktails__back) { backface-visibility: hidden; }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__back,
+.ct-cocktails__card[data-flipped] .ct-cocktails__faces { transform: rotateY(180deg); }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__back { display: grid; grid-template-rows: minmax(0, 1fr); align-items: end; }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__back > img { position: absolute; inset: 0; }
+.ct-cocktails__card[data-enhanced] .ct-cocktails__details { position: relative; margin-bottom: calc(clamp(44px, 3vw, 58px) + 7%); max-height: 62%; overflow: auto; }
+.ct-cocktails__back-name { margin: 0; align-self: center; padding: 1rem; text-align: center; color: inherit; }
 .ct-cocktails__card > h3 { margin-top: .6em; }
-.ct-cocktails__plus { position: absolute; inset: auto 6% 5% auto; display: grid; place-items: center; width: clamp(44px, 3vw, 58px); aspect-ratio: 1; border-radius: 50%; color: var(--ct-plus-color); background: var(--ct-plus-bg); text-decoration: none; font-weight: 750; font-size: 24px; }
+.ct-cocktails__plus:not([hidden]) { position: absolute; z-index: 1; inset: auto 6% 5% auto; display: grid; place-items: center; width: clamp(44px, 3vw, 58px); aspect-ratio: 1; padding: 0; border: 0; border-radius: 50%; color: var(--ct-plus-color); background: var(--ct-plus-bg); cursor: pointer; font-weight: 750; font-size: 24px; }
+.ct-cocktails__plus[aria-expanded="false"] .ct-cocktails__close-icon,
+.ct-cocktails__plus[aria-expanded="true"] .ct-cocktails__open-icon { display: none; }
 .ct-cocktails__plus:focus-visible, .ct-tequila-close__button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-.ct-cocktails__dialog { width: min(90vw, 650px); max-height: 88vh; margin: auto; padding: 24px; border: 0; border-radius: 16px; background: #fff; color: #252525; overflow: auto; }
-.ct-cocktails__dialog::backdrop { background: rgb(0 0 0 / .7); }
-.ct-cocktails__dialog form { float: right; }
-.ct-cocktails__dialog button { min-width: 44px; min-height: 44px; font-size: 26px; border: 0; background: #f4ede1; border-radius: 50%; color: #252525; }
-.ct-cocktails__dialog-media img { width: 100%; max-height: 62vh; object-fit: contain; }
+.ct-cocktails__details:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+@media (prefers-reduced-motion: reduce) {
+  .ct-cocktails__card[data-enhanced] .ct-cocktails__faces { transition: none; }
+}
 .ct-tequila-close { overflow: hidden; }
 .ct-tequila-close__inner { width: min(100%, 1920px); min-height: min(54.25vw, 1042px); margin-inline: auto; position: relative; display: grid; align-items: start; }
 .ct-tequila-close__bottle { position: absolute; inset: min(1.1vw, 21px) auto auto 1.5%; width: 47%; }

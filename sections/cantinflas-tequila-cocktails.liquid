@@ -29,43 +29,48 @@
       {% for block in section.blocks %}
         {%- liquid
           assign fallback = block.settings.reference | replace: 'none', ''
-          assign dialog_id = 'TequilaCocktail-' | append: section.id | append: '-' | append: block.id
-          assign zoom_href = nil
-          if block.settings.image != blank
-            assign zoom_href = block.settings.image | image_url: width: 1600
-          elsif fallback != blank
-            assign zoom_href = 'cantinflas-xd-tequila-' | append: fallback | append: '.webp' | asset_url
+          assign back_id = 'TequilaCocktail-' | append: section.id | append: '-' | append: block.id
+          assign card_name = block.settings.title | default: 'Cóctel'
+          assign has_link = false
+          if block.settings.link != blank and block.settings.link_label != blank
+            assign has_link = true
           endif
         -%}
-        <article class="ct-cocktails__card" {{ block.shopify_attributes }}>
-          <div class="ct-cocktails__media" style="--ct-object-position: {{ block.settings.image_x }}% {{ block.settings.image_y }}%;">
-            {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: block.settings.title, sizes: '(min-width: 750px) 28vw, 90vw' %}
-            {% if zoom_href != blank %}
-              <a class="ct-cocktails__plus" href="{{ zoom_href }}" aria-haspopup="dialog" aria-controls="{{ dialog_id }}" data-tequila-dialog-open>
-                <span aria-hidden="true">+</span>
-                <span class="visually-hidden">{{ section.settings.open_label | escape }} {{ block.settings.title | escape }}</span>
-              </a>
-            {% endif %}
+        <article class="ct-cocktails__card" {{ block.shopify_attributes }} style="
+          --ct-back-bg: {{ block.settings.back_background | default: '#252525' }};
+          --ct-back-text: {{ block.settings.back_text_color | default: '#ffffff' }};
+          --ct-back-fit: {{ block.settings.back_image_fit | default: 'contain' }};
+        ">
+          <div class="ct-cocktails__media">
+            <button class="ct-cocktails__plus" type="button" aria-expanded="false" aria-controls="{{ back_id }}" hidden>
+              <span class="ct-cocktails__open-icon" aria-hidden="true">+</span>
+              <span class="ct-cocktails__close-icon" aria-hidden="true">−</span>
+              <span class="visually-hidden ct-cocktails__open-icon">{{ section.settings.open_label | default: 'Ver' | escape }} {{ card_name | escape }}</span>
+              <span class="visually-hidden ct-cocktails__close-icon">{{ section.settings.close_label | default: 'Cerrar' | escape }} {{ card_name | escape }}</span>
+            </button>
+            <div class="ct-cocktails__faces">
+              <div class="ct-cocktails__front" style="--ct-object-position: {{ block.settings.image_x }}% {{ block.settings.image_y }}%;">
+                {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: card_name, sizes: '(min-width: 750px) 28vw, 90vw' %}
+              </div>
+              <div class="ct-cocktails__back" id="{{ back_id }}"{% if block.settings.back_image == blank and block.settings.details == blank and has_link == false %} data-empty{% endif %}>
+                {% if block.settings.back_image != blank %}
+                  {% render 'cantinflas-tequila-image', image: block.settings.back_image, sizes: '(min-width: 750px) 28vw, 90vw' %}
+                {% endif %}
+                {% if block.settings.details != blank or has_link %}
+                  <div class="ct-cocktails__details rte" tabindex="0" role="group" aria-label="Información de {{ card_name | escape }}">
+                    {{ block.settings.details }}
+                    {% if has_link %}
+                      <a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+                    {% endif %}
+                  </div>
+                {% elsif block.settings.back_image == blank %}
+                  <p class="ct-cocktails__back-name">{{ card_name | escape }}</p>
+                {% endif %}
+              </div>
+            </div>
           </div>
           {% if block.settings.title != blank %}
             <h3 style="--ct-note-color: {{ block.settings.title_color | default: section.settings.card_title_color }}">{{ block.settings.title | escape }}</h3>
-          {% endif %}
-          {% if zoom_href != blank %}
-            <dialog id="{{ dialog_id }}" class="ct-cocktails__dialog" aria-labelledby="{{ dialog_id }}-title">
-              <form method="dialog">
-                <button type="submit" aria-label="{{ section.settings.close_label | escape }}" autofocus>×</button>
-              </form>
-              <h3 id="{{ dialog_id }}-title">{{ block.settings.title | default: section.settings.open_label | escape }}</h3>
-              <div class="ct-cocktails__dialog-media">
-                {% render 'cantinflas-tequila-image', image: block.settings.image, fallback: fallback, alt: block.settings.title, sizes: '(min-width: 750px) 640px, 90vw' %}
-              </div>
-              {% if block.settings.details != blank %}
-                <div class="rte">{{ block.settings.details }}</div>
-              {% endif %}
-              {% if block.settings.link != blank and block.settings.link_label != blank %}
-                <a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
-              {% endif %}
-            </dialog>
           {% endif %}
         </article>
       {% endfor %}
@@ -267,7 +272,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Fotografía"
+          "label": "Imagen frontal"
         },
         {
           "type": "select",
@@ -319,9 +324,40 @@
           "label": "Color del nombre"
         },
         {
+          "type": "header",
+          "content": "Reverso de la tarjeta"
+        },
+        {
+          "type": "image_picker",
+          "id": "back_image",
+          "label": "Imagen del reverso"
+        },
+        {
+          "type": "select",
+          "id": "back_image_fit",
+          "label": "Ajuste de la imagen del reverso",
+          "options": [
+            { "value": "contain", "label": "Mostrar completa" },
+            { "value": "cover", "label": "Rellenar la tarjeta" }
+          ],
+          "default": "contain"
+        },
+        {
+          "type": "color",
+          "id": "back_background",
+          "label": "Fondo del reverso",
+          "default": "#252525"
+        },
+        {
+          "type": "color",
+          "id": "back_text_color",
+          "label": "Color del texto del reverso",
+          "default": "#ffffff"
+        },
+        {
           "type": "richtext",
           "id": "details",
-          "label": "Texto del detalle"
+          "label": "Información del reverso"
         },
         {
           "type": "url",
