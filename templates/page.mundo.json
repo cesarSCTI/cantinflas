@@ -38,9 +38,9 @@
       "settings": {
         "heading": "Recuerdos de Cantinflas",
         "text": "<p>De sus momentos detrás de cámaras a los personajes que hicieron historia, descubre imágenes que forman parte de la trayectoria de Mario Moreno y Cantinflas.</p>",
-        "heading_color": "#C22921",
+        "heading_color": "#c22921",
         "text_color": "#000000",
-        "background": "#FFFFFF",
+        "background": "#ffffff",
         "gradient": "",
         "image_opacity": 50,
         "heading_alignment": "left",
@@ -270,6 +270,9 @@
         "media_BnRQ7k",
         "media_WnkqbH"
       ],
+      "custom_css": [
+        ".cantinflas-gallery__media{height: auto;}"
+      ],
       "settings": {
         "xd_centered": false,
         "xd_initial_slide": 1,
@@ -350,7 +353,7 @@
         "video_pKUmhd"
       ],
       "custom_css": [
-        "h2{font-size:65px;}"
+        "h2 {font-size: 65px;}"
       ],
       "name": "t:sections.benefits-video.name",
       "settings": {
