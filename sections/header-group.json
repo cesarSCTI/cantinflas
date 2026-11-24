@@ -117,6 +117,7 @@
       "custom_css": [],
       "settings": {
         "logo_image": "shopify://shop_images/logo-Cantinflas-Oficial-blanco.png",
+        "video_hosted": "shopify://files/videos/Video 1.mp4",
         "image_hosted": "shopify://shop_images/banner-Cantinflas-home-min.png",
         "image_hosted_mobile": "shopify://shop_images/banner-Cantinflas-home-responsivo-nuevo-min.png",
         "additional_text": "",

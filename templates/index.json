@@ -11,6 +11,7 @@
   "sections": {
     "hero": {
       "type": "cantinflas-video-hero",
+      "disabled": true,
       "settings": {
         "heading": "Cantinflas",
         "subheading": "Tienda oficial",
@@ -203,7 +204,7 @@
       ],
       "settings": {
         "xd_text_controls": true,
-        "xd_heading_color": "#2B3D8F",
+        "xd_heading_color": "#2b3d8f",
         "xd_heading_align": "center",
         "xd_body_color": "",
         "xd_body_align": "center",
@@ -222,6 +223,7 @@
         "photo": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas8.png",
@@ -247,6 +249,7 @@
         "photo2": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas4.png",
@@ -272,6 +275,7 @@
         "photo3": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas6.png",
@@ -297,6 +301,7 @@
         "photo4": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas2.png",
@@ -322,6 +327,7 @@
         "photo5": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas7.png",
@@ -347,6 +353,7 @@
         "photo6": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas5.png",
@@ -372,6 +379,7 @@
         "photo7": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas3.png",
@@ -397,6 +405,7 @@
         "photo8": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "",
             "text": "",
             "image": "shopify://shop_images/universo-cantinflas1.png",
@@ -431,6 +440,12 @@
         "photo8"
       ],
       "settings": {
+        "heading_in_copy": false,
+        "film_use_default_background": true,
+        "film_heading_line": "",
+        "film_kicker_color": "#c22921",
+        "card_purchase_buttons": false,
+        "card_purchase_bg": "#c22921",
         "heading": "Universo Cantinflas",
         "intro": "<p>Películas, fotografías y recuerdos que nos acercan a la vida de Mario Moreno y al personaje que conquistó la pantalla y el corazón de México.</p>",
         "layout": "collage",
@@ -464,6 +479,7 @@
         "piece1": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "Tequila",
             "text": "<p>Tequila Blanco 100% de Agave</p>",
             "image": "shopify://shop_images/img-tequila-cantinflas.png",
@@ -489,6 +505,7 @@
         "piece2": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "Taza",
             "text": "<p>Taza de peltre azul</p>",
             "image": "shopify://shop_images/img-taza-cantinflas.png",
@@ -514,6 +531,7 @@
         "piece3": {
           "type": "item",
           "settings": {
+            "film_kicker": "",
             "heading": "Agua",
             "text": "<p>Agua pura de manantial</p>",
             "image": "shopify://shop_images/img-agua-cantinflas.png",
@@ -546,9 +564,13 @@
         "h3 {margin: 36px 0px 16px;}"
       ],
       "settings": {
-        "heading": "Tres piezas, un mismo legado",
+        "heading_in_copy": false,
+        "film_use_default_background": true,
+        "film_heading_line": "",
+        "film_kicker_color": "#c22921",
         "card_purchase_buttons": true,
         "card_purchase_bg": "#c22921",
+        "heading": "Tres piezas, un mismo legado",
         "intro": "<p>Para brindar, para el cafecito de todos los días y para llevar a Cantinflas contigo.</p>",
         "layout": "cards",
         "background": "#ffffff",
@@ -566,7 +588,7 @@
         "collage_label_1": "",
         "collage_link_1": "",
         "collage_button_bg_1": "#36845d",
-        "collage_button_text_1": "#C22921",
+        "collage_button_text_1": "#c22921",
         "collage_label_2": "",
         "collage_link_2": "",
         "collage_button_bg_2": "#252525",
