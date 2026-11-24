@@ -80,7 +80,7 @@
         "portrait"
       ],
       "custom_css": [
-        "p strong{color:#2B3D8F;}"
+        "p strong {color: #2b3d8f;}"
       ],
       "settings": {
         "heading_in_copy": true,
@@ -883,6 +883,10 @@
         "piece2",
         "piece3",
         "piece4"
+      ],
+      "custom_css": [
+        ".cantinflas-journey article:last-of-type {background: linear-gradient( 180deg, rgba(255, 255, 255, 0) 20%, rgba(244, 237, 225, 1) 73% );}",
+        ".cantinflas-journey{padding-bottom:0px;}"
       ],
       "settings": {
         "heading": "De México para el Mundo",
