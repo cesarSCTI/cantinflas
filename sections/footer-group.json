@@ -52,7 +52,8 @@
       ],
       "custom_css": [
         ".wt-footer__block {padding-bottom: 0px !important;}",
-        ".wt-footer__image {margin-bottom: 0px !important;}"
+        ".wt-footer__image {margin-bottom: 0px !important;}",
+        ".cantinflas-footer__column.cantinflas-footer__column--newsletter h2 {font-family: 'baga';}"
       ],
       "settings": {
         "xd_footer_logo": "shopify://shop_images/Logo-Cantinflas_Footer.png",
