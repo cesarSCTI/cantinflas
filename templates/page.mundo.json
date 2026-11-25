@@ -51,9 +51,9 @@
         "vertical_alignment": "start",
         "stack_order": "heading_first",
         "heading_width": 54,
-        "heading_size": 64,
+        "heading_size": 52,
         "heading_mobile": 36,
-        "text_size": 18,
+        "text_size": 16,
         "text_mobile": 16,
         "content_width": 1740,
         "column_gap": 48,
@@ -357,7 +357,8 @@
         "video_pKUmhd"
       ],
       "custom_css": [
-        "h2 {font-size: 65px;}"
+        "h2 {font-size: 50px;}",
+        "p{font-size:16px !important;}"
       ],
       "name": "t:sections.benefits-video.name",
       "settings": {
