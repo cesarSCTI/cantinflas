@@ -473,7 +473,7 @@
           "type": "detail",
           "settings": {
             "heading": "¿Es agua mineral natural?",
-            "text": "<p>Es agua osmotizada con minerales esenciales y mineralización débil.</p>",
+            "text": "<p>No. Es agua osmotizada con minerales esenciales</p>",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "#ffffff",
@@ -484,7 +484,7 @@
           "type": "detail",
           "settings": {
             "heading": "¿El envase es reciclable?",
-            "text": "<p>Consulta si tu programa local de reciclaje recibe envases multicapa Tetra Prisma Aseptic.</p>",
+            "text": "<p>La información disponible indica que el envase es reciclable. Las posibilidades de reciclaje dependen de la infraestructura disponible en cada localidad.</p>",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "#ffffff",
@@ -495,7 +495,7 @@
           "type": "detail",
           "settings": {
             "heading": "¿Contiene BPA?",
-            "text": "<p>Para confirmar este dato, consulta la ficha técnica del producto.</p>",
+            "text": "<p>La información proporcionada indica que el envase está libre de BPA.</p>",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "#ffffff",
@@ -506,7 +506,7 @@
           "type": "detail",
           "settings": {
             "heading": "¿Cuál es su vida útil?",
-            "text": "<p>La vida útil indicada es de 24 meses.</p>",
+            "text": "<p>La vida útil indicada es de 24 meses. Revisa el etiquetado del producto para confirmar la fecha correspondiente</p>",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "#ffffff",
