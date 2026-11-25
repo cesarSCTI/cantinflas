@@ -81,7 +81,7 @@
       ],
       "custom_css": [
         "p strong {color: #2b3d8f;}",
-        ".cantinflas-editorial__item {align-items: flex-start; }",
+        ".cantinflas-editorial__item {align-items: flex-start;}",
         ".cantinflas-editorial__copy {display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;}"
       ],
       "settings": {
@@ -100,7 +100,7 @@
         "heading_align": "left",
         "intro_align": "left",
         "intro_color": "",
-        "heading_size": 60,
+        "heading_size": 52,
         "heading_mobile": 32,
         "hotspot_full_width": false,
         "hotspot_overlay_copy": false,
