@@ -17,7 +17,7 @@
 {% endif %}
 {%- capture editorial_copy -%}
     {% if section.settings.heading != blank %}
-      <h2 class="cantinflas-editorial__heading">{{ section.settings.heading | escape }}</h2>
+      <h2 class="cantinflas-editorial__heading">{{ section.settings.heading  }}</h2>
     {% endif %}
     {% if section.settings.intro != blank %}
       <div class="cantinflas-editorial__intro rte">{{ section.settings.intro }}</div>
