@@ -1,6 +1,24 @@
 {% if section.settings.xd_water_layout != blank and section.settings.xd_water_layout != 'none' %}
   {{ 'cantinflas-agua.css' | asset_url | stylesheet_tag }}
 {% endif %}
+{% liquid
+  assign water_process = false
+  assign process_step_opened = false
+  if section.settings.xd_water_layout == 'water-process' and section.settings.presentation == 'steps'
+    assign water_process = true
+  endif
+%}
+{% if water_process %}
+  {% style %}
+    {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+        #shopify-section-{{ section.id }}:has([data-water-stage="{{ forloop.index }}"][open]) [data-water-stage-image="{{ forloop.index }}"] {
+          display: block;
+        }
+      {% endif %}
+    {% endfor %}
+  {% endstyle %}
+{% endif %}
 <section class="cantinflas-details cantinflas-details--{{ section.settings.xd_water_layout }}"
   style="--cd-background: {{ section.settings.background }}; --cd-text: {{ section.settings.text_color }}; --cd-title: {{ section.settings.heading_color | default: section.settings.text_color }}; --cd-intro: {{ section.settings.intro_color | default: section.settings.text_color }}; --cd-head-align: {{ section.settings.heading_align }}; --cd-intro-align: {{ section.settings.intro_align }}; --cd-faq-bg: {{ section.settings.xd_faq_background | default: '#c22921' }};">
   <div class="cantinflas-details__inner">
@@ -13,9 +31,18 @@
         {% for block in section.blocks %}
           {% capture row_style %}--cd-row-title: {{ block.settings.heading_color | default: section.settings.text_color }}; --cd-row-text: {{ block.settings.body_color | default: section.settings.text_color }}; --cd-row-head-align: {{ block.settings.heading_align }}; --cd-row-text-align: {{ block.settings.text_align }};{% endcapture %}
           {% if section.settings.presentation == 'steps' and block.settings.text != blank or section.settings.presentation == 'steps' and block.settings.image != blank %}
-            <details class="cantinflas-details__row" style="{{ row_style }}" {% if forloop.first and section.settings.xd_water_layout != 'water-faq' %}open{% endif %} {% if section.settings.xd_water_layout == 'water-process' %}name="AguaProcess-{{ section.id }}"{% endif %} {{ block.shopify_attributes }}>
+            <details class="cantinflas-details__row" style="{{ row_style }}"
+              {% if water_process %}
+                name="AguaProcess-{{ section.id }}" data-water-stage="{{ forloop.index }}"
+                {% if block.settings.image != blank %}data-water-stage-has-image{% endif %}
+                {% unless process_step_opened %}open{% assign process_step_opened = true %}{% endunless %}
+              {% elsif forloop.first and section.settings.xd_water_layout != 'water-faq' %}
+                open
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
               <summary>{{ block.settings.heading | escape }}</summary>
-              {% if block.settings.image != blank %}
+              {% if block.settings.image != blank and water_process == false %}
                 {{ block.settings.image | image_url: width: 1080 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1080' }}
               {% endif %}
               <div class="rte">{{ block.settings.text }}</div>
@@ -28,7 +55,20 @@
           {% endif %}
         {% endfor %}
       </div>
-      {% if section.settings.xd_water_layout == 'water-process' or section.settings.xd_water_layout == 'water-faq' %}
+      {% if water_process %}
+        <div class="cantinflas-details__art">
+          {% for block in section.blocks %}
+            {% if block.settings.image != blank %}
+              <div data-water-stage-image="{{ forloop.index }}">
+                {% render 'cantinflas-agua-image', image: block.settings.image, alt: block.settings.heading, sizes: '(min-width: 800px) 50vw, 100vw' %}
+              </div>
+            {% endif %}
+          {% endfor %}
+          <div data-water-stage-fallback>
+            {% render 'cantinflas-agua-image', image: section.settings.image, artwork: section.settings.xd_artwork, alt: section.settings.heading, sizes: '(min-width: 800px) 50vw, 100vw' %}
+          </div>
+        </div>
+      {% elsif section.settings.xd_water_layout == 'water-process' or section.settings.xd_water_layout == 'water-faq' %}
         <div class="cantinflas-details__art">
           {% render 'cantinflas-agua-image', image: section.settings.image, artwork: section.settings.xd_artwork, alt: section.settings.heading, sizes: '(min-width: 800px) 50vw, 100vw' %}
         </div>
@@ -60,11 +100,24 @@
   .cantinflas-details__row .rte { color: var(--cd-row-text); text-align: var(--cd-row-text-align); }
   .cantinflas-details :is(.rte p,.rte li) { color: inherit; }
   .cantinflas-details__placeholder { width: 100%; aspect-ratio: 4 / 3; background: #f4ede1; }
+  .cantinflas-details--water-process [data-water-stage-image],
+  .cantinflas-details--water-process:has([data-water-stage-has-image][open]) [data-water-stage-fallback] {
+    display: none;
+  }
   @media (min-width: 900px) {
     .cantinflas-details__layout--left > :is(img, svg) { grid-row: 1; grid-column: 1; }
     .cantinflas-details__layout--left:has(> :is(img, svg)) > div { grid-row: 1; grid-column: 2; }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  if (window.Shopify?.designMode) {
+    document.addEventListener('shopify:block:select', (event) => {
+      const stage = event.target.closest('details[data-water-stage]');
+      if (stage) stage.open = true;
+    });
+  }
+{% endjavascript %}
 
 {% schema %}
 {
