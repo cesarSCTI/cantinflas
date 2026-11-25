@@ -21,6 +21,7 @@
         "autoplay": false,
         "alignment": "contact",
         "background": "#2b3d8f",
+        "background_gradient": "linear-gradient(180deg, rgba(43, 61, 143, 1), rgba(15, 22, 51, 1) 100%)",
         "text_color": "#f2b846",
         "overlay": 0,
         "heading_align": "center",
@@ -28,8 +29,7 @@
         "heading_color": "#f2b846",
         "subheading_color": "",
         "heading_size": 120,
-        "heading_mobile": 40,
-        "background_gradient": "linear-gradient(180deg, #2b3d8f 0%, #0f1633 100%)"
+        "heading_mobile": 40
       }
     },
     "main": {
@@ -49,17 +49,17 @@
     "form": {
       "type": "contact-form",
       "blocks": {
-        "form": {
-          "type": "email_form",
-          "settings": {
-            "button_select": "primary"
-          }
-        },
         "intro": {
           "type": "paragraph",
           "settings": {
             "paragraph": "<p>¿Tienes alguna pregunta sobre nuestros productos o tu pedido?<br>¡Aquí estamos para ayudarte!</p>",
             "text_disable_on_mobile": false
+          }
+        },
+        "form": {
+          "type": "email_form",
+          "settings": {
+            "button_select": "primary"
           }
         }
       },
@@ -67,7 +67,23 @@
         "intro",
         "form"
       ],
+      "custom_css": [
+        ".hero__text p {font-family: baga !important;}"
+      ],
       "settings": {
+        "xd_contact_layout": true,
+        "xd_name_label": "Nombre",
+        "xd_name_required": true,
+        "xd_phone_label": "Teléfono",
+        "xd_email_label": "Correo electrónico",
+        "xd_message_label": "Su mensaje",
+        "xd_submit_label": "Enviar",
+        "xd_contact_field_bg": "#f5f5f5",
+        "xd_contact_button_bg": "#ca3732",
+        "xd_contact_card_bg": "#ffffff",
+        "xd_contact_accent": "#f2b846",
+        "xd_contact_social": true,
+        "xd_contact_social_label": "Redes Sociales",
         "xd_text_controls": true,
         "xd_heading_color": "#252525",
         "xd_heading_align": "center",
@@ -82,16 +98,7 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "#ffffff",
         "margin-top": 0,
-        "margin-bottom": 100,
-        "xd_contact_layout": true,
-        "xd_name_required": true,
-        "xd_name_label": "Nombre",
-        "xd_phone_label": "Teléfono",
-        "xd_email_label": "Correo electrónico",
-        "xd_message_label": "Su mensaje",
-        "xd_submit_label": "Enviar",
-        "xd_contact_social": true,
-        "xd_contact_social_label": "Redes Sociales"
+        "margin-bottom": 100
       }
     }
   },
