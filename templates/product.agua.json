@@ -255,6 +255,8 @@
         "desktop_count": 0,
         "mobile_count": 0,
         "show_navigation": true,
+        "infinite_loop": true,
+        "autoplay": false,
         "navigation_color": "#252525",
         "navigation_background": "#f4ede1"
       }

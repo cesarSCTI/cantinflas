@@ -28,7 +28,10 @@
       </div>
     {% endif %}
   </header>
-  <cantinflas-gallery-track{% if section.settings.xd_centered %} data-centered="{{ section.settings.xd_initial_slide }}"{% endif %}>
+  <cantinflas-gallery-track{% if section.settings.xd_centered %} data-centered="{{ section.settings.xd_initial_slide }}"{% endif %}{% if section.settings.infinite_loop %} data-gallery-loop{% endif %}>
+    {% if section.settings.infinite_loop and section.settings.autoplay %}
+      <button type="button" class="cantinflas-gallery__rotation" data-gallery-rotation hidden>Pausar rotación</button>
+    {% endif %}
     <div class="cantinflas-gallery__track" data-gallery-track tabindex="0" role="region"
       {% if section.settings.heading != blank %}aria-labelledby="GalleryTitle-{{ section.id }}"{% else %}aria-label="Galería"{% endif %}>
       <ul role="list">
@@ -93,6 +96,7 @@
     overscroll-behavior-inline: contain;
   }
   .cantinflas-gallery__track ul { display: flex; width: max-content; min-width: 100%; justify-content: center; margin: 0; padding: 2.7rem var(--cg-gutter); box-sizing: border-box; gap: var(--cg-gap); list-style: none; }
+  [data-gallery-loop] .cantinflas-gallery__track { overflow-anchor: none; }
   .cantinflas-gallery__track li { flex: 0 0 var(--cg-basis); width: var(--cg-basis); scroll-snap-align: start; }
   .cantinflas-gallery figure { margin: 0; background: var(--cg-frame); padding: .9rem; box-shadow: 0 0.5rem 1.4rem rgb(0 0 0 / .18); transform: rotate(var(--cg-angle)); transition: transform .22s ease; }
   .cantinflas-gallery figure:focus-within, .cantinflas-gallery figure:hover { transform: rotate(0); }
@@ -114,6 +118,7 @@
   .cantinflas-gallery figcaption h3 { color: var(--cg-card-title); text-align: var(--cg-card-align); font-size: 1.1em; margin: 0; }
   .cantinflas-gallery__controls:not([hidden]) { display: flex; justify-content: center; gap: .7rem; }
   .cantinflas-gallery__controls button { border: 1px solid currentColor; border-radius: 50%; width: 44px; height: 44px; font: inherit; color: var(--cg-navigation-text); background: var(--cg-navigation-bg); }
+  .cantinflas-gallery__rotation:not([hidden]) { display: block; margin: 0 auto; padding: .55em 1em; border: 1px solid currentColor; border-radius: 2em; color: var(--cg-navigation-text); background: var(--cg-navigation-bg); }
   .cantinflas-gallery--centered .cantinflas-gallery__intro { position: relative; width: 90%; max-width: 1720px; padding-inline-end: min(16vw, 250px); }
   .cantinflas-gallery__decoration { position: absolute; inset: 0 7% auto auto; width: clamp(54px, 9vw, 175px); }
   .cantinflas-gallery__decoration img { display: block; width: 100%; height: auto; }
@@ -124,6 +129,7 @@
   .cantinflas-gallery--centered figure { padding: 0; box-shadow: none; background: transparent; }
   .cantinflas-gallery--centered .cantinflas-gallery__media { height: auto; aspect-ratio: 505 / 840; }
   .cantinflas-gallery--centered .cantinflas-gallery__media :is(img,video,svg) { border-radius: clamp(8px, 1.1vw, 20px); height: 81%; margin-block: 16% 0; transition: height .2s, margin .2s; }
+  .cantinflas-gallery--centered [data-gallery-rebasing] .cantinflas-gallery__media :is(img,video,svg) { transition: none; }
   .cantinflas-gallery--centered [data-active] .cantinflas-gallery__media :is(img,video,svg) { height: 100%; margin-block: 0; }
   .cantinflas-gallery--centered figcaption { visibility: hidden; }
   .cantinflas-gallery--centered [data-active] figcaption { visibility: visible; }
@@ -156,13 +162,18 @@
       connectedCallback() {
         const track = this.querySelector('[data-gallery-track]');
         const controls = this.querySelector('[data-gallery-controls]');
-        if (!track) return;
+        const list = track?.querySelector('ul');
+        if (!list) return;
         this.listeners = new AbortController();
         const { signal } = this.listeners;
+        const slides = [...list.children];
+        if (this.hasAttribute('data-gallery-loop') && slides.length > 1) {
+          this.connectLoop(track, list, controls, slides, signal);
+          return;
+        }
         this.addEventListener('shopify:block:select', (event) => {
           event.target.closest('li')?.scrollIntoView({ block: 'nearest', inline: 'center' });
         }, { signal });
-        const slides = [...track.querySelectorAll('li')];
         const centered = this.hasAttribute('data-centered');
         let active = Math.min(slides.length - 1, Math.max(0, (Number(this.dataset.centered) || 1) - 1));
         const update = () => { if (controls) controls.hidden = track.scrollWidth <= track.clientWidth + 2; };
@@ -199,14 +210,221 @@
             return;
           }
           const step = track.querySelector('li')?.getBoundingClientRect().width || track.clientWidth;
-          const gap = parseFloat(getComputedStyle(track.querySelector('ul')).columnGap) || 0;
+          const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
           track.scrollBy({ left: direction * (step + gap), behavior: motion ? 'auto' : 'smooth' });
         };
         controls?.querySelector('[data-gallery-prev]')?.addEventListener('click', () => move(-1), { signal });
         controls?.querySelector('[data-gallery-next]')?.addEventListener('click', () => move(1), { signal });
         this.resize = new ResizeObserver(update);
         this.resize.observe(track);
-        this.resize.observe(track.querySelector('ul'));
+        this.resize.observe(list);
+        update();
+      }
+
+      connectLoop(track, list, controls, slides, signal) {
+        const centered = this.hasAttribute('data-centered');
+        const motion = matchMedia('(prefers-reduced-motion: reduce)');
+        const slideSources = new Map(slides.map(slide => [slide, slide]));
+        let items = slides;
+        let active = slides[Math.min(slides.length - 1, Math.max(0, (Number(this.dataset.centered) || 1) - 1))];
+        let selected = active;
+        let destination;
+        let copies = 0;
+        let previousStep;
+        let previousWidth;
+        let settleTimer;
+        let rebaseFrame;
+
+        const offset = (slide, rtl) => {
+          const card = slide.getBoundingClientRect();
+          return centered ? card.left + card.width / 2 : rtl ? card.right : card.left;
+        };
+        const position = () => {
+          const style = getComputedStyle(track);
+          const bounds = track.getBoundingClientRect();
+          const rtl = style.direction === 'rtl';
+          const gutter = parseFloat(style.scrollPaddingInlineStart) || 0;
+          const anchor = centered ? bounds.left + bounds.width / 2 : rtl ? bounds.right - gutter : bounds.left + gutter;
+          return { rtl, anchor };
+        };
+        const nearest = () => {
+          const { rtl, anchor } = position();
+          let closest = active;
+          let distance = Infinity;
+          for (const slide of items) {
+            const delta = Math.abs(offset(slide, rtl) - anchor);
+            if (delta < distance) {
+              closest = slide;
+              distance = delta;
+            }
+          }
+          return closest;
+        };
+        const highlight = (slide) => {
+          if (active !== slide) active.removeAttribute('data-active');
+          active = slide;
+          active.setAttribute('data-active', '');
+        };
+        const align = (slide, behavior) => {
+          const { rtl, anchor } = position();
+          const distance = offset(slide, rtl) - anchor;
+          // Native scroll snap can interpret a subpixel adjustment as a request for the adjacent slide.
+          if (Math.abs(distance) > 1) track.scrollBy({ left: distance, behavior });
+        };
+        const rebase = (original) => {
+          track.setAttribute('data-gallery-rebasing', '');
+          align(original, 'instant');
+          highlight(original);
+          cancelAnimationFrame(rebaseFrame);
+          rebaseFrame = requestAnimationFrame(() => {
+            rebaseFrame = requestAnimationFrame(() => track.removeAttribute('data-gallery-rebasing'));
+          });
+        };
+        const settle = () => {
+          if (track.clientWidth !== previousWidth) return;
+          const shown = nearest();
+          selected = slideSources.get(shown);
+          destination = undefined;
+          if (shown !== selected) rebase(selected);
+          else highlight(selected);
+        };
+        const move = (direction) => {
+          if (!copies) return;
+          let from = destination || nearest();
+          if (!items[items.indexOf(from) + direction]) {
+            from = slideSources.get(from);
+            rebase(from);
+          }
+          destination = items[items.indexOf(from) + direction];
+          align(destination, motion.matches ? 'instant' : 'smooth');
+        };
+
+        const makeCopy = (original) => {
+          const copy = original.cloneNode(true);
+          copy.removeAttribute('data-active');
+          copy.removeAttribute('data-shopify-editor-block');
+          copy.setAttribute('aria-hidden', 'true');
+          copy.inert = true;
+          copy.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+          copy.querySelectorAll('video').forEach(video => {
+            const poster = document.createElement('img');
+            if (video.poster) poster.src = video.poster;
+            poster.alt = '';
+            poster.loading = 'lazy';
+            video.replaceWith(poster);
+          });
+          slideSources.set(copy, original);
+          return copy;
+        };
+        const removeCopies = () => {
+          for (const [slide, original] of slideSources) {
+            if (slide === original) continue;
+            slide.remove();
+            slideSources.delete(slide);
+          }
+        };
+        const refresh = () => {
+          const step = Math.abs(slides[1].getBoundingClientRect().left - slides[0].getBoundingClientRect().left);
+          const width = track.clientWidth;
+          if (!step || !width || (step === previousStep && width === previousWidth)) return;
+          previousStep = step;
+          previousWidth = width;
+          selected = destination ? slideSources.get(destination) : selected;
+          const needed = Math.max(1, Math.ceil(width / (step * slides.length)));
+          if (needed !== copies) {
+            removeCopies();
+            const before = document.createDocumentFragment();
+            const after = document.createDocumentFragment();
+            for (let cycle = 0; cycle < needed; cycle++) {
+              slides.forEach(slide => before.append(makeCopy(slide)));
+              slides.forEach(slide => after.append(makeCopy(slide)));
+            }
+            list.prepend(before);
+            list.append(after);
+            items = [...list.children];
+            copies = needed;
+          }
+          destination = undefined;
+          align(selected, 'instant');
+          highlight(selected);
+          if (controls) controls.hidden = false;
+        };
+
+        const hasScrollEnd = 'onscrollend' in track;
+        track.addEventListener('scroll', () => {
+          highlight(nearest());
+          if (!hasScrollEnd) {
+            clearTimeout(settleTimer);
+            settleTimer = setTimeout(settle, 140);
+          }
+        }, { signal, passive: true });
+        if (hasScrollEnd) track.addEventListener('scrollend', settle, { signal });
+        track.addEventListener('pointerdown', () => { destination = undefined; }, { signal });
+        track.addEventListener('keydown', (event) => {
+          if (event.target !== track || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+          event.preventDefault();
+          const rtl = getComputedStyle(track).direction === 'rtl';
+          move((event.key === 'ArrowRight') === rtl ? -1 : 1);
+        }, { signal });
+        this.addEventListener('shopify:block:select', (event) => {
+          const slide = event.target.closest('li');
+          if (!slides.includes(slide)) return;
+          destination = undefined;
+          selected = slide;
+          align(slide, 'instant');
+          highlight(slide);
+        }, { signal });
+        controls?.querySelector('[data-gallery-prev]')?.addEventListener('click', () => move(-1), { signal });
+        controls?.querySelector('[data-gallery-next]')?.addEventListener('click', () => move(1), { signal });
+        signal.addEventListener('abort', () => {
+          clearTimeout(settleTimer);
+          cancelAnimationFrame(rebaseFrame);
+          track.removeAttribute('data-gallery-rebasing');
+          removeCopies();
+        }, { once: true });
+        this.resize = new ResizeObserver(refresh);
+        this.resize.observe(track);
+        this.resize.observe(slides[0]);
+        refresh();
+        this.connectRotation(track, move, motion, signal);
+      }
+
+      connectRotation(track, move, motion, signal) {
+        const control = this.querySelector('[data-gallery-rotation]');
+        if (!control) return;
+        let playing = true;
+        let hovered = false;
+        let visible = false;
+        const update = () => {
+          control.hidden = motion.matches;
+          control.textContent = playing ? 'Pausar rotación' : 'Reanudar rotación';
+        };
+        const pause = () => {
+          playing = false;
+          update();
+        };
+        control.addEventListener('click', () => {
+          playing = !playing;
+          update();
+        }, { signal });
+        this.addEventListener('focusin', (event) => {
+          if (event.target.matches(':focus-visible')) pause();
+        }, { signal });
+        this.addEventListener('pointerenter', (event) => { hovered = event.pointerType === 'mouse'; }, { signal });
+        this.addEventListener('pointerleave', () => { hovered = false; }, { signal });
+        track.addEventListener('pointerdown', pause, { signal });
+        track.addEventListener('play', pause, { signal, capture: true });
+        this.addEventListener('shopify:block:select', pause, { signal });
+        motion.addEventListener('change', update, { signal });
+        const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
+        observer.observe(track);
+        const timer = setInterval(() => {
+          if (playing && visible && !hovered && !document.hidden && !motion.matches) move(1);
+        }, 4500);
+        signal.addEventListener('abort', () => {
+          observer.disconnect();
+          clearInterval(timer);
+        }, { once: true });
         update();
       }
 
@@ -395,6 +613,19 @@
       "id": "show_navigation",
       "label": "Mostrar flechas de navegación",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "infinite_loop",
+      "label": "Bucle infinito",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Rotación automática",
+      "info": "Avanza cada 4,5 segundos cuando el bucle infinito está activado.",
+      "default": false
     },
     {
       "type": "color",

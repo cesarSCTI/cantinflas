@@ -49,13 +49,18 @@
       --ca-intro-offset: clamp(28px, 8vw, 140px);
     }
 
-    .ca-intro :is(.ca-intro__portrait, .ca-intro__bottle) {
-      transition: opacity 550ms ease-out, translate 650ms ease-out;
-    }
-
     .ca-intro[data-intro-pending] :is(.ca-intro__portrait, .ca-intro__bottle) {
       opacity: 0;
       translate: var(--ca-intro-offset) 0;
+    }
+
+    .ca-intro[data-intro-revealed] :is(.ca-intro__portrait, .ca-intro__bottle) {
+      animation: agua-intro-reveal 650ms ease-out;
+    }
+
+    @keyframes agua-intro-reveal {
+      from { opacity: 0; translate: var(--ca-intro-offset) 0; }
+      to { opacity: 1; translate: 0; }
     }
   }
 {% endstylesheet %}
@@ -64,15 +69,15 @@
   if (!customElements.get('cantinflas-agua-intro')) {
     customElements.define('cantinflas-agua-intro', class extends HTMLElement {
       connectedCallback() {
-        if (this.revealed || window.Shopify?.designMode || !('IntersectionObserver' in window)) return;
+        if (this.hasAttribute('data-intro-revealed') || !('IntersectionObserver' in window)) return;
 
         this.setAttribute('data-intro-pending', '');
-        this.observer = new IntersectionObserver(([entry]) => {
+        this.observer = new IntersectionObserver(([entry], observer) => {
           if (!entry.isIntersecting) return;
 
-          this.revealed = true;
           this.removeAttribute('data-intro-pending');
-          this.observer.disconnect();
+          this.setAttribute('data-intro-revealed', '');
+          observer.disconnect();
         }, { rootMargin: '0px 0px -40px 0px' });
         this.observer.observe(this);
       }
