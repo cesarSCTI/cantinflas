@@ -461,6 +461,9 @@
         "aroma",
         "sabor"
       ],
+      "custom_css": [
+        "h3{font-family:baga !important;}"
+      ],
       "settings": {
         "heading": "Un perfil que se disfruta\nen cada sorbo",
         "heading_color": "#c22921",
