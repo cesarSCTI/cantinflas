@@ -449,6 +449,9 @@
         "piece3",
         "piece4"
       ],
+      "custom_css": [
+        "summary {font-size: 30px !important;}"
+      ],
       "settings": {
         "xd_water_layout": "water-process",
         "xd_artwork": "lab",
@@ -520,6 +523,7 @@
         "piece3",
         "piece4"
       ],
+      "custom_css": [],
       "settings": {
         "xd_water_layout": "water-faq",
         "xd_artwork": "bottle",
