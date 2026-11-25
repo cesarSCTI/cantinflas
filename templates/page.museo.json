@@ -243,7 +243,7 @@
           "type": "hotspot",
           "settings": {
             "heading": "El sombrero",
-            "text": "",
+            "text": "<p>Parte de su inconfundible apariencia.</p>",
             "label": "",
             "link": "",
             "title_color": "#2b3d8f",
@@ -259,8 +259,8 @@
         "voz": {
           "type": "hotspot",
           "settings": {
-            "heading": "La voz",
-            "text": "",
+            "heading": "La forma de hablar",
+            "text": "<p>Palabras, giros y frases que parecían no tener fin.</p>",
             "label": "",
             "link": "",
             "title_color": "#2b3d8f",
@@ -276,8 +276,8 @@
         "gestos": {
           "type": "hotspot",
           "settings": {
-            "heading": "Los gestos",
-            "text": "",
+            "heading": "El ingenio",
+            "text": "<p>Su manera de salir de cualquier situación.</p>",
             "label": "",
             "link": "",
             "title_color": "#2b3d8f",
@@ -293,8 +293,8 @@
         "sonrisa": {
           "type": "hotspot",
           "settings": {
-            "heading": "La sonrisa",
-            "text": "",
+            "heading": "El bigote",
+            "text": "<p>Una de sus caracteristicas más reconocibles.</p>",
             "label": "",
             "link": "",
             "title_color": "#2b3d8f",
@@ -327,8 +327,8 @@
         "cine": {
           "type": "hotspot",
           "settings": {
-            "heading": "El cine",
-            "text": "",
+            "heading": "CANTINFLEAR",
+            "text": "<p>Una forma de hablar que terminó convirtiéndose incluso en una palabra del idioma español.</p>",
             "label": "",
             "link": "",
             "title_color": "#2b3d8f",
