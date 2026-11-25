@@ -351,7 +351,7 @@
         {% render 'card-color-swatches', product: product, text_alignment: text_alignment, are_filters_active: are_filters_active %}
     {% endif %}
 
-    {% if enable_quick_add_button and catalog_card != true %}
+    {% if enable_quick_add_button and catalog_card != true and catalog_quick_add != true %}
       <div class="card__quick-add-container">
         {% render 'quick-add-button', card_product: product, product: card_product, product_variations: product_variations %}
       </div>

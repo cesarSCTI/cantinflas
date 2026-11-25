@@ -19,7 +19,11 @@
   {% endstyle %}
 {% endif %}
 
-<cantinflas-product-tabs class="cantinflas-product-tabs">
+{% if section.settings.enable_quick_add_button and request.design_mode == false %}
+  {% render 'catalog-quick-add-assets' %}
+{% endif %}
+
+<cantinflas-product-tabs class="cantinflas-product-tabs{% if section.settings.enable_quick_add_button %} cantinflas-catalog-buy{% endif %}">
   <h2>{{ section.settings.heading | escape }}</h2>
   {% if section.settings.xd_intro != blank %}<div class="cantinflas-tabs-intro rte">{{ section.settings.xd_intro }}</div>{% endif %}
   <div data-tab-list aria-label="{{ section.settings.heading | escape }}" hidden>
@@ -34,8 +38,17 @@
       <h3>{{ block.settings.title | escape }}</h3>
       <div class="cantinflas-product-tabs__grid">
         {% for product in block.settings.collection.products limit: section.settings.products_to_show %}
+          {% liquid
+            assign quick_add_product = nil
+            assign quick_add_form_id = nil
+            if section.settings.enable_quick_add_button
+              assign quick_add_product = product
+              assign quick_add_form_id = 'TabsForm-' | append: section.id | append: '-' | append: block.id | append: '-' | append: product.id
+            endif
+          %}
           {% render 'card',
             card_product: product,
+            product: quick_add_product,
             img: product.featured_media,
             title: product.title,
             price: product.price,
@@ -43,7 +56,11 @@
             variants: product.variants,
             product_options: product.options,
             image_ratio: 'square',
-            text_alignment: 'left'
+            text_alignment: 'left',
+            enable_quick_add_button: section.settings.enable_quick_add_button,
+            catalog_quick_add: true,
+            quick_add_label: 'Comprar',
+            product_form_id: quick_add_form_id
           %}
         {% else %}
           {% assign sample_titles = block.settings.sample_titles | newline_to_br | split: '<br />' %}
@@ -141,7 +158,13 @@
     {"type": "select", "id": "xd_cards_align", "label": "Alineación · Tarjetas", "default": "inherit", "options": [{"value": "inherit", "label": "Tema"}, {"value": "left", "label": "Izquierda"}, {"value": "center", "label": "Centro"}, {"value": "right", "label": "Derecha"}]},
     {"type": "richtext", "id": "xd_intro", "label": "Subtítulo editorial"},
     { "type": "text", "id": "heading", "label": "Título" },
-    { "type": "range", "id": "products_to_show", "label": "Productos por pestaña", "min": 2, "max": 8, "step": 1, "default": 4 }
+    { "type": "range", "id": "products_to_show", "label": "Productos por pestaña", "min": 2, "max": 8, "step": 1, "default": 4 },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add_button",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.enable_quick_add_button.label"
+    }
   ],
   "blocks": [
     {

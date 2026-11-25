@@ -70,6 +70,10 @@
     <script src="{{ 'drawer-select.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'model_element.js' | asset_url }}" defer="defer"></script>
 
+    {% if request.design_mode %}
+      {% render 'catalog-quick-add-assets' %}
+    {% endif %}
+
     {%- if template == 'product' -%}
       <script type="module" src="{{ 'gallery.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}

@@ -68,15 +68,13 @@
       --grid-gap-mobile: {{ section.settings.spacing_mobile }}px;
     }
   </style>
-  {% if section.settings.enable_quick_add_button %}
-    <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'variant-dropdown.js' | asset_url }}" defer="defer"></script>
+  {% if section.settings.enable_quick_add_button and request.design_mode == false %}
+    {% render 'catalog-quick-add-assets' %}
   {% endif %}
 
   <div
     data-section-id="{{ section.id }}"
-    class="wt-featured-collection wt-slider {% if section.settings.disable_on_mobile %}wt-featured-collection--disable-on-mobile{% endif %}"
+    class="wt-featured-collection wt-slider{% if section.settings.enable_quick_add_button %} cantinflas-catalog-buy{% endif %}{% if section.settings.disable_on_mobile %} wt-featured-collection--disable-on-mobile{% endif %}"
   >
     {% if section.settings.title != blank %}
       <div class="headline {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if section.settings.heading_disable_on_mobile == true %} hero__title--mobile{% endif %}  {% if section.settings.disable_on_mobile %}disable-on-mobile{% endif %}">
@@ -137,8 +135,7 @@
                           price: blank,
                           rating: section.settings.show_product_rating,
                           options: false,
-                          text_alignment: section.settings.text_alignment,
-                          enable_quick_add_button: section.settings.enable_quick_add_button
+                          text_alignment: section.settings.text_alignment
                         %}
                       </div>
                 </div>
@@ -160,6 +157,7 @@
                   class="wt-slider__card-wrapper"
                 {% endif %}
               >
+                {% assign quick_add_form_id = 'FeaturedForm-' | append: section.id | append: '-' | append: product.id %}
                 {% render 'card',
                   card_product: product,
                   img: product.featured_media,
@@ -177,6 +175,9 @@
                   product: product,
                   media_aspect_ratio: section.settings.image_ratio,
                   enable_quick_add_button: section.settings.enable_quick_add_button,
+                  catalog_quick_add: true,
+                  quick_add_label: 'Comprar',
+                  product_form_id: quick_add_form_id,
                   enable_vendor_link: section.settings.enable_vendor_link,
                   show_video: section.settings.show_video
                 %}

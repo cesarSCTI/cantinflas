@@ -207,7 +207,7 @@
       ],
       "custom_css": [
         "h2 {font-size: 60px; margin-bottom: 0px;}",
-        "button {font-weight: 600; letter-spacing: 1px; font-family: var(--font-headline) !important;}",
+        "[data-tab-list] > button {font-weight: 600; letter-spacing: 1px; font-family: var(--font-headline) !important;}",
         ".card__price {color: #2b3d8f !important;}",
         "img.card__img {aspect-ratio: 1; object-fit: contain;}",
         ".cantinflas-tabs-intro.rte {margin-bottom: 50px;}"
