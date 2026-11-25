@@ -207,9 +207,10 @@
       ],
       "custom_css": [
         "h2 {font-size: 60px; margin-bottom: 0px;}",
-        "button {font-weight: 700;}",
+        "button {font-weight: 700; letter-spacing: 1px;}",
         ".card__price {color: #2b3d8f !important;}",
-        "img.card__img {aspect-ratio: 1; object-fit: contain;}"
+        "img.card__img {aspect-ratio: 1; object-fit: contain;}",
+        ".cantinflas-tabs-intro.rte {margin-bottom: 50px;}"
       ],
       "settings": {
         "xd_text_controls": true,
