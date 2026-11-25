@@ -7,7 +7,7 @@
     assign bottle = 'intro-bottle'
   endif
 %}
-<div class="ca-agua ca-intro" style="--ca-background: {{ section.settings.background }};
+<cantinflas-agua-intro class="ca-agua ca-intro" style="--ca-background: {{ section.settings.background }};
     --ca-heading: {{ section.settings.heading_color }};
     --ca-text: {{ section.settings.body_color }};
     --ca-heading-align: {{ section.settings.heading_align }};
@@ -33,7 +33,57 @@
       {% render 'cantinflas-agua-image', image: section.settings.bottle, artwork: bottle, alt: 'Envase de la edición Museo Cantinflas', sizes: '45vw' %}
     </div>
   </div>
-</div>
+</cantinflas-agua-intro>
+
+{% stylesheet %}
+  cantinflas-agua-intro {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ca-intro__portrait {
+      --ca-intro-offset: calc(-1 * clamp(28px, 8vw, 140px));
+    }
+
+    .ca-intro__bottle {
+      --ca-intro-offset: clamp(28px, 8vw, 140px);
+    }
+
+    .ca-intro :is(.ca-intro__portrait, .ca-intro__bottle) {
+      transition: opacity 550ms ease-out, translate 650ms ease-out;
+    }
+
+    .ca-intro[data-intro-pending] :is(.ca-intro__portrait, .ca-intro__bottle) {
+      opacity: 0;
+      translate: var(--ca-intro-offset) 0;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('cantinflas-agua-intro')) {
+    customElements.define('cantinflas-agua-intro', class extends HTMLElement {
+      connectedCallback() {
+        if (this.revealed || window.Shopify?.designMode || !('IntersectionObserver' in window)) return;
+
+        this.setAttribute('data-intro-pending', '');
+        this.observer = new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+
+          this.revealed = true;
+          this.removeAttribute('data-intro-pending');
+          this.observer.disconnect();
+        }, { rootMargin: '0px 0px -40px 0px' });
+        this.observer.observe(this);
+      }
+
+      disconnectedCallback() {
+        this.observer?.disconnect();
+        this.removeAttribute('data-intro-pending');
+      }
+    });
+  }
+{% endjavascript %}
 
 {% schema %}
 {
