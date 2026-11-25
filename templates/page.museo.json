@@ -80,7 +80,9 @@
         "portrait"
       ],
       "custom_css": [
-        "p strong {color: #2b3d8f;}"
+        "p strong {color: #2b3d8f;}",
+        ".cantinflas-editorial__item {align-items: flex-start; }",
+        ".cantinflas-editorial__copy {display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;}"
       ],
       "settings": {
         "heading_in_copy": true,
