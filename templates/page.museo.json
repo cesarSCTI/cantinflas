@@ -1000,11 +1000,29 @@
             "button_link": "",
             "disable_on_mobile": false
           }
+        },
+        "image_g8rUxJ": {
+          "type": "image",
+          "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "",
+            "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/img-cantinflear-legado.png",
+            "heading": "En una palabra que pasó a formar parte del idioma.",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "",
+            "disable_on_mobile": false
+          }
         }
       },
       "block_order": [
         "piece1",
-        "piece2"
+        "piece2",
+        "image_g8rUxJ"
       ],
       "custom_css": [
         "h2.hero__title {font-family: \"Montserrat\" !important; font-size: 40px !important;}"
