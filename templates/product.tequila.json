@@ -365,6 +365,23 @@
             "button_link": "/",
             "disable_on_mobile": false
           }
+        },
+        "image_KhxYiJ": {
+          "type": "image",
+          "settings": {
+            "xd_process_photo": false,
+            "xd_step_text": "<p>Un tequila blanco de gran cuerpo, suavidadexcepcional y carácter definido.</p>",
+            "xd_step_color": "",
+            "desktop_image": "shopify://shop_images/6-resultado.png",
+            "heading": "6- RESULTADO",
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "button_select": "primary",
+            "button_label": "",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
         }
       },
       "block_order": [
@@ -372,7 +389,8 @@
         "molienda",
         "image_LyDNak",
         "image_ge6XR6",
-        "image_MXCa6q"
+        "image_MXCa6q",
+        "image_KhxYiJ"
       ],
       "settings": {
         "xd_process_design": true,
