@@ -244,7 +244,7 @@
         "intro_color": "#252525",
         "heading_align": "left",
         "intro_align": "left",
-        "heading_size": 80,
+        "heading_size": 50,
         "heading_mobile": 32,
         "layout": "film",
         "background": "#ffffff",
@@ -276,7 +276,7 @@
         "image": {
           "type": "marker",
           "settings": {
-            "title": "Ilustración de Cantinflas",
+            "title": "Libre de BPA",
             "body": "",
             "x": 62,
             "y": 30,
@@ -287,7 +287,7 @@
         "carton": {
           "type": "marker",
           "settings": {
-            "title": "Envase de cartón",
+            "title": "Cartón de origen renovable",
             "body": "",
             "x": 33,
             "y": 43,
@@ -298,7 +298,7 @@
         "design": {
           "type": "marker",
           "settings": {
-            "title": "Diseño Cantinflas",
+            "title": "Material reciclable",
             "body": "",
             "x": 64,
             "y": 58,
@@ -309,7 +309,7 @@
         "size": {
           "type": "marker",
           "settings": {
-            "title": "Contenido neto: 500 ml",
+            "title": "Menor huella de carbono frente a envases tradicionales",
             "body": "",
             "x": 41,
             "y": 69,
@@ -399,6 +399,7 @@
           "settings": {
             "heading": "1. Ósmosis",
             "text": "<p>El agua pasa por un proceso de ósmosis para reducir las sustancias disueltas presentes en ella.</p>",
+            "image": "shopify://shop_images/1-osmosis.png",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "",
@@ -409,7 +410,8 @@
           "type": "detail",
           "settings": {
             "heading": "2. Remineralización",
-            "text": "<p>Se incorporan minerales al agua tratada.</p>",
+            "text": "<p>Se incorporan minerales esenciales para obtener el perfil mineral del producto.</p>",
+            "image": "shopify://shop_images/2-remineralizacion.png",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "",
@@ -420,7 +422,8 @@
           "type": "detail",
           "settings": {
             "heading": "3. Microfiltrado",
-            "text": "<p>El agua pasa por un filtro para retirar partículas finas.</p>",
+            "text": "<p>El agua pasa por una etapa de filtración adicional.</p>",
+            "image": "shopify://shop_images/3-microfiltrado.png",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "",
@@ -431,7 +434,8 @@
           "type": "detail",
           "settings": {
             "heading": "4. Esterilización UV",
-            "text": "<p>Se utiliza luz ultravioleta como etapa final del tratamiento.</p>",
+            "text": "<p>Se utiliza luz ultravioleta como parte del proceso de tratamiento del agua.</p>",
+            "image": "shopify://shop_images/4-esterilizacion_uv.png",
             "heading_align": "left",
             "text_align": "left",
             "heading_color": "",
