@@ -11,17 +11,12 @@
   "sections": {
     "heading": {
       "type": "rich-text",
-      "settings": {
-        "desktop_text_horizontal_position": "center",
-        "xd_heading_color": "#c22921",
-        "xd_heading_align": "center",
-        "xd_body_align": "center"
-      },
       "blocks": {
         "piece1": {
           "type": "heading",
           "settings": {
             "heading": "Tienda Oficial Cantinflas",
+            "disable_on_mobile": false,
             "size_heading": 230,
             "size_heading_mobile": 110
           }
@@ -29,21 +24,56 @@
         "piece2": {
           "type": "text",
           "settings": {
-            "text": "<p>Productos inspirados en el universo de Cantinflas, para disfrutar, compartir y llevar contigo.</p>"
+            "text": "<p>Productos inspirados en el universo de Cantinflas, para disfrutar, compartir y llevar contigo.</p>",
+            "disable_on_mobile": false
           }
         }
       },
       "block_order": [
         "piece1",
         "piece2"
-      ]
+      ],
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "xd_heading_color": "#c22921",
+        "xd_heading_align": "center",
+        "xd_body_color": "",
+        "xd_body_align": "center",
+        "xd_button_color": "",
+        "xd_button_align": "inherit"
+      }
     },
     "grid": {
       "type": "main-collection-product-grid",
+      "blocks": {
+        "agua_catalog_image": {
+          "type": "catalog_image",
+          "settings": {
+            "product": "agua-cantinflas",
+            "reference_art": "agua"
+          }
+        }
+      },
+      "block_order": [
+        "agua_catalog_image"
+      ],
       "custom_css": [
         ".collection__counter:not(.collection__empty-collection) {display: none !important;}"
       ],
       "settings": {
+        "xd_text_controls": true,
+        "xd_cards_color": "#252525",
+        "xd_cards_align": "center",
+        "xd_catalog_cards": true,
+        "xd_price_color": "#2b3d8f",
+        "xd_buy_label": "Comprar",
+        "xd_buy_background": "#c22921",
+        "xd_buy_color": "#ffffff",
         "products_per_page": 24,
         "columns_mobile": "2",
         "columns_desktop": "4",
@@ -64,28 +94,8 @@
         "enable_filtering": true,
         "filter_position": "drawer",
         "margin-top": 32,
-        "margin-bottom": 0,
-        "xd_text_controls": true,
-        "xd_cards_align": "center",
-        "xd_cards_color": "#252525",
-        "xd_catalog_cards": true,
-        "xd_price_color": "#2b3d8f",
-        "xd_buy_label": "Comprar",
-        "xd_buy_background": "#c22921",
-        "xd_buy_color": "#ffffff"
-      },
-      "blocks": {
-        "agua_catalog_image": {
-          "type": "catalog_image",
-          "settings": {
-            "product": "agua-cantinflas",
-            "reference_art": "agua"
-          }
-        }
-      },
-      "block_order": [
-        "agua_catalog_image"
-      ]
+        "margin-bottom": 0
+      }
     },
     "benefits": {
       "type": "features-banner",
@@ -139,9 +149,15 @@
       ],
       "custom_css": [
         ".wt-keys__title {font-weight: 800; font-size: 17px !important;}",
-        ".wt-keys {border-top: 1px solid #eeeeee; padding-top: 24px;}"
+        ".wt-keys {border-top: 1px solid #eeeeee; padding-top: 24px;}",
+        "p{font-size:16px !important;}"
       ],
       "settings": {
+        "xd_text_controls": true,
+        "xd_heading_color": "",
+        "xd_heading_align": "left",
+        "xd_body_color": "",
+        "xd_body_align": "left",
         "heading": "",
         "size_heading_mobile": 80,
         "size_heading": 70,
@@ -155,10 +171,7 @@
         "color_body_text": "#363636",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 40,
-        "margin-bottom": 40,
-        "xd_text_controls": true,
-        "xd_heading_align": "left",
-        "xd_body_align": "left"
+        "margin-bottom": 40
       }
     }
   },
