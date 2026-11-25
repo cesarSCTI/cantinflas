@@ -525,7 +525,9 @@
         "piece3",
         "piece4"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "p{margin:15px 0px;}"
+      ],
       "settings": {
         "xd_water_layout": "water-faq",
         "xd_artwork": "bottle",
