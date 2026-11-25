@@ -225,7 +225,7 @@
         "xd_intro": "<p>Lo que más se antoja de cada rincón del mundo Cantinflas.</p>",
         "heading": "Los consentidos de la casa",
         "products_to_show": 4,
-        "enable_quick_add_button": false
+        "enable_quick_add_button": true
       }
     },
     "universe": {
