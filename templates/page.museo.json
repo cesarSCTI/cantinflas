@@ -352,7 +352,7 @@
       ],
       "custom_css": [
         "h3 {text-transform: uppercase; font-size: 18px; text-align: center;}",
-        "p{font-size: 14px; text-align: center;}"
+        "p {font-size: 14px; text-align: center;}"
       ],
       "settings": {
         "heading_in_copy": false,
@@ -914,7 +914,7 @@
         "film_use_default_background": true,
         "film_heading_line": "",
         "film_kicker_color": "#c22921",
-        "card_purchase_buttons": false,
+        "card_purchase_buttons": true,
         "card_purchase_bg": "#c22921",
         "heading": "Cantinflas había dejado de ser solamente un personaje mexicano",
         "intro": "<p>Su humor, su imagen y su manera de interpretar trascendieron fronteras, llevando una parte de la cultura popular mexicana a millones de espectadores y demostrando hasta dónde puede llegar un personaje cuando conecta con públicos de todo el mundo.</p>",
